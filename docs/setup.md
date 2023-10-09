@@ -5,7 +5,7 @@
 Add the plugin to your backend app:
 
 ```bash
-cd packages/backend && yarn add @kurtaking/backstage-plugin-announcements-backend
+cd packages/backend && yarn add @procore-oss/backstage-plugin-announcements-backend
 ```
 
 Create a file in `packages/backend/src/plugins/announcements.ts`:
@@ -14,7 +14,7 @@ Create a file in `packages/backend/src/plugins/announcements.ts`:
 import {
   buildAnnouncementsContext,
   createRouter,
-} from '@kurtaking/backstage-plugin-announcements-backend';
+} from '@procore-oss/backstage-plugin-announcements-backend';
 import { Router } from 'express';
 import { PluginEnvironment } from '../types';
 
@@ -56,14 +56,14 @@ async function main() {
 Add the plugin to your frontend app:
 
 ```bash
-cd packages/app && yarn add @kurtaking/backstage-plugin-announcements
+cd packages/app && yarn add @procore-oss/backstage-plugin-announcements
 ```
 
 Expose the announcements page:
 
 ```ts
 // packages/app/src/App.tsx
-import { AnnouncementsPage } from '@kurtaking/backstage-plugin-announcements';
+import { AnnouncementsPage } from '@procore-oss/backstage-plugin-announcements';
 
 // ...
 

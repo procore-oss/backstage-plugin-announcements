@@ -4,7 +4,7 @@ import { RequirePermission } from '@backstage/plugin-permission-react';
 import {
   announcementCreatePermission,
   announcementUpdatePermission,
-} from '@kurtaking/backstage-plugin-announcements-common';
+} from '@procore-oss/backstage-plugin-announcements-common';
 import {
   announcementCreateRouteRef,
   announcementEditRouteRef,

@@ -1,4 +1,4 @@
-# @kurtaking/backstage-plugin-announcements-backend
+# @procore-oss/backstage-plugin-announcements-backend
 
 ## 0.2.0
 
@@ -13,7 +13,7 @@
 - b8c5c87: Paginate results in the announcements page
 - Updated dependencies [793d5b9]
 - Updated dependencies [ab3813f]
-  - @kurtaking/backstage-plugin-announcements-common@0.0.7
+  - @procore-oss/backstage-plugin-announcements-common@0.0.7
 
 ## 0.1.4
 
@@ -21,7 +21,7 @@
 
 - 7d25e84: Bump Backstage-related dependencies
 - Updated dependencies [7d25e84]
-  - @kurtaking/backstage-plugin-announcements-common@0.0.6
+  - @procore-oss/backstage-plugin-announcements-common@0.0.6
 
 ## 0.1.3
 
@@ -31,21 +31,21 @@
 - 56d5e6d: Try and setup release pipeline to replace 'workspace:\*' version constraints
 - Updated dependencies [0e1d000]
 - Updated dependencies [56d5e6d]
-  - @kurtaking/backstage-plugin-announcements-common@0.0.5
+  - @procore-oss/backstage-plugin-announcements-common@0.0.5
 
 ## 0.1.2
 
 ### Patch Changes
 
 - Updated dependencies [9bdc37d]
-  - @kurtaking/backstage-plugin-announcements-common@0.0.4
+  - @procore-oss/backstage-plugin-announcements-common@0.0.4
 
 ## 0.1.1
 
 ### Patch Changes
 
 - Updated dependencies [6c9bf32]
-  - @kurtaking/backstage-plugin-announcements-common@0.0.3
+  - @procore-oss/backstage-plugin-announcements-common@0.0.3
 
 ## 0.1.0
 
@@ -58,7 +58,7 @@
 - 0c12eea: Bump Backstage dependencies
 - Updated dependencies [062aca5]
 - Updated dependencies [0c12eea]
-  - @kurtaking/backstage-plugin-announcements-common@0.0.2
+  - @procore-oss/backstage-plugin-announcements-common@0.0.2
 
 ## 0.0.5
 

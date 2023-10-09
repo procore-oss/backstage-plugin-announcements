@@ -1,4 +1,4 @@
-# @kurtaking/backstage-plugin-announcements-common
+# @procore-oss/backstage-plugin-announcements-common
 
 ## 0.0.7
 

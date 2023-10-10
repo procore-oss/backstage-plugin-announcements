@@ -5465,7 +5465,7 @@ __metadata:
     "@types/supertest": ^2.0.8
     "@types/uuid": ^8.3.4
     better-sqlite3: ^8.0.0
-    cross-fetch: ^3.1.5
+    cross-fetch: ^4.0.0
     express: ^4.17.1
     express-promise-router: ^4.1.0
     knex: ^2.0.0
@@ -5516,7 +5516,7 @@ __metadata:
     "@types/luxon": ^3.3.2
     "@types/node": ^16.11.26
     "@uiw/react-md-editor": ^3.19.5
-    cross-fetch: ^3.1.5
+    cross-fetch: ^4.0.0
     luxon: ^3.4.3
     msw: ^1.0.0
     react-use: ^17.2.4
@@ -10098,6 +10098,15 @@ __metadata:
   dependencies:
     node-fetch: ^2.6.12
   checksum: 78f993fa099eaaa041122ab037fe9503ecbbcb9daef234d1d2e0b9230a983f64d645d088c464e21a247b825a08dc444a6e7064adfa93536d3a9454b4745b3632
+  languageName: node
+  linkType: hard
+
+"cross-fetch@npm:^4.0.0":
+  version: 4.0.0
+  resolution: "cross-fetch@npm:4.0.0"
+  dependencies:
+    node-fetch: ^2.6.12
+  checksum: ecca4f37ffa0e8283e7a8a590926b66713a7ef7892757aa36c2d20ffa27b0ac5c60dcf453119c809abe5923fc0bae3702a4d896bfb406ef1077b0d0018213e24
   languageName: node
   linkType: hard
 

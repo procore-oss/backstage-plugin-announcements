@@ -2530,6 +2530,30 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@backstage/backend-test-utils@npm:^0.2.6":
+  version: 0.2.6
+  resolution: "@backstage/backend-test-utils@npm:0.2.6"
+  dependencies:
+    "@backstage/backend-app-api": ^0.5.5
+    "@backstage/backend-common": ^0.19.7
+    "@backstage/backend-plugin-api": ^0.6.5
+    "@backstage/config": ^1.1.0
+    "@backstage/plugin-auth-node": ^0.3.2
+    "@backstage/types": ^1.1.1
+    better-sqlite3: ^8.0.0
+    express: ^4.17.1
+    knex: ^2.0.0
+    msw: ^1.0.0
+    mysql2: ^2.2.5
+    pg: ^8.3.0
+    testcontainers: ^8.1.2
+    uuid: ^8.0.0
+  peerDependencies:
+    "@types/jest": "*"
+  checksum: 27a05e6b99e32d00c01517a5e8f0b695a25f95a3dd09ccc1fffebcc1a4325f2b244b79a1f686978ba3501397521d88b820ef4f291f39dd611e5033bb6d64343c
+  languageName: node
+  linkType: hard
+
 "@backstage/catalog-client@npm:^1.4.4":
   version: 1.4.4
   resolution: "@backstage/catalog-client@npm:1.4.4"
@@ -5452,6 +5476,7 @@ __metadata:
   resolution: "@procore-oss/backstage-plugin-announcements-backend@workspace:plugins/announcements-backend"
   dependencies:
     "@backstage/backend-common": ^0.19.7
+    "@backstage/backend-test-utils": ^0.2.6
     "@backstage/cli": ^0.22.13
     "@backstage/config": ^1.1.0
     "@backstage/core-plugin-api": ^1.6.0
@@ -6714,6 +6739,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/archiver@npm:^5.3.1":
+  version: 5.3.3
+  resolution: "@types/archiver@npm:5.3.3"
+  dependencies:
+    "@types/readdir-glob": "*"
+  checksum: e660465ac9a622570ddbad86a306c7234c3272cb28eafe9c3ad7229f06e499dfadae9f0cb0caf41443318eea559b75ef662ea276ae64f19695e72018dae37ee7
+  languageName: node
+  linkType: hard
+
 "@types/aria-query@npm:^5.0.1":
   version: 5.0.2
   resolution: "@types/aria-query@npm:5.0.2"
@@ -6863,7 +6897,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/dockerode@npm:^3.3.0":
+"@types/dockerode@npm:^3.3.0, @types/dockerode@npm:^3.3.8":
   version: 3.3.20
   resolution: "@types/dockerode@npm:3.3.20"
   dependencies:
@@ -7290,6 +7324,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/readdir-glob@npm:*":
+  version: 1.1.2
+  resolution: "@types/readdir-glob@npm:1.1.2"
+  dependencies:
+    "@types/node": "*"
+  checksum: 3d218cd56310138e561a5b9a27f61ab1a80d3d1936b14f5c00fe736cc37d6fcc23311d54da4bf1bf20dc40d7a7d6886566056540ff68a884f627f9ae0e425d55
+  languageName: node
+  linkType: hard
+
 "@types/request@npm:^2.47.1":
   version: 2.48.9
   resolution: "@types/request@npm:2.48.9"
@@ -7380,12 +7423,31 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/ssh2-streams@npm:*":
+  version: 0.1.10
+  resolution: "@types/ssh2-streams@npm:0.1.10"
+  dependencies:
+    "@types/node": "*"
+  checksum: 5864daf438605ba58095fb3f31a601896383283d8347ec56cea273a300f970ae12a82fd125de45196b6121c0d2ee53edb26a0e0da4a7e88ada0cd63160aa7c9e
+  languageName: node
+  linkType: hard
+
 "@types/ssh2@npm:*":
   version: 1.11.14
   resolution: "@types/ssh2@npm:1.11.14"
   dependencies:
     "@types/node": ^18.11.18
   checksum: c2826c551a85438808f65c365e7fddd95ee1a547962827b287b8c4f9b9b81e6bd0355f87a68c9bed20353921fde1c578ea40f16d18fffd2e47018877f09fe4e9
+  languageName: node
+  linkType: hard
+
+"@types/ssh2@npm:^0.5.48":
+  version: 0.5.52
+  resolution: "@types/ssh2@npm:0.5.52"
+  dependencies:
+    "@types/node": "*"
+    "@types/ssh2-streams": "*"
+  checksum: bc1c76ac727ad73ddd59ba849cf0ea3ed2e930439e7a363aff24f04f29b74f9b1976369b869dc9a018223c9fb8ad041c09a0f07aea8cf46a8c920049188cddae
   languageName: node
   linkType: hard
 
@@ -8199,7 +8261,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"archiver@npm:^5.0.2":
+"archiver@npm:^5.0.2, archiver@npm:^5.3.1":
   version: 5.3.2
   resolution: "archiver@npm:5.3.2"
   dependencies:
@@ -10907,6 +10969,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"docker-compose@npm:^0.23.17":
+  version: 0.23.19
+  resolution: "docker-compose@npm:0.23.19"
+  dependencies:
+    yaml: ^1.10.2
+  checksum: 1704825954ec8645e4b099cc2641531955eef5a8a9729c885fab7067ae4d7935c663252e51b49878397e51cd5a3efcf2f13c8460e252aa39d14a0722c0bacfe5
+  languageName: node
+  linkType: hard
+
 "docker-modem@npm:^3.0.0":
   version: 3.0.8
   resolution: "docker-modem@npm:3.0.8"
@@ -12925,6 +12996,13 @@ __metadata:
   version: 0.1.0
   resolution: "get-package-type@npm:0.1.0"
   checksum: bba0811116d11e56d702682ddef7c73ba3481f114590e705fc549f4d868972263896af313c57a25c076e3c0d567e11d919a64ba1b30c879be985fc9d44f96148
+  languageName: node
+  linkType: hard
+
+"get-port@npm:^5.1.1":
+  version: 5.1.1
+  resolution: "get-port@npm:5.1.1"
+  checksum: 0162663ffe5c09e748cd79d97b74cd70e5a5c84b760a475ce5767b357fb2a57cb821cee412d646aa8a156ed39b78aab88974eddaa9e5ee926173c036c0713787
   languageName: node
   linkType: hard
 
@@ -17337,7 +17415,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"mkdirp@npm:^1.0.3":
+"mkdirp@npm:^1.0.3, mkdirp@npm:^1.0.4":
   version: 1.0.4
   resolution: "mkdirp@npm:1.0.4"
   bin:
@@ -19230,6 +19308,15 @@ __metadata:
     object-assign: ^4.1.1
     react-is: ^16.13.1
   checksum: c056d3f1c057cb7ff8344c645450e14f088a915d078dcda795041765047fa080d38e5d626560ccaac94a4e16e3aa15f3557c1a9a8d1174530955e992c675e459
+  languageName: node
+  linkType: hard
+
+"properties-reader@npm:^2.2.0":
+  version: 2.3.0
+  resolution: "properties-reader@npm:2.3.0"
+  dependencies:
+    mkdirp: ^1.0.4
+  checksum: cbf59e862dc507f8ce1f8d7641ed9737119f16a1d4dad8e79f17b303aaca1c6af7d36ddfef0f649cab4d200ba4334ac159af0b238f6978a085f5b1b5126b6cc3
   languageName: node
   linkType: hard
 
@@ -21360,7 +21447,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ssh2@npm:^1.11.0":
+"ssh-remote-port-forward@npm:^1.0.4":
+  version: 1.0.4
+  resolution: "ssh-remote-port-forward@npm:1.0.4"
+  dependencies:
+    "@types/ssh2": ^0.5.48
+    ssh2: ^1.4.0
+  checksum: c6c04c5ddfde7cb06e9a8655a152bd28fe6771c6fe62ff0bc08be229491546c410f30b153c968b8d6817a57d38678a270c228f30143ec0fe1be546efc4f6b65a
+  languageName: node
+  linkType: hard
+
+"ssh2@npm:^1.11.0, ssh2@npm:^1.4.0":
   version: 1.14.0
   resolution: "ssh2@npm:1.14.0"
   dependencies:
@@ -21998,7 +22095,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tar-fs@npm:^2.0.0":
+"tar-fs@npm:^2.0.0, tar-fs@npm:^2.1.1":
   version: 2.1.1
   resolution: "tar-fs@npm:2.1.1"
   dependencies:
@@ -22120,6 +22217,26 @@ __metadata:
     glob: ^7.1.4
     minimatch: ^3.0.4
   checksum: 3b34a3d77165a2cb82b34014b3aba93b1c4637a5011807557dc2f3da826c59975a5ccad765721c4648b39817e3472789f9b0fa98fc854c5c1c7a1e632aacdc28
+  languageName: node
+  linkType: hard
+
+"testcontainers@npm:^8.1.2":
+  version: 8.16.0
+  resolution: "testcontainers@npm:8.16.0"
+  dependencies:
+    "@balena/dockerignore": ^1.0.2
+    "@types/archiver": ^5.3.1
+    "@types/dockerode": ^3.3.8
+    archiver: ^5.3.1
+    byline: ^5.0.0
+    debug: ^4.3.4
+    docker-compose: ^0.23.17
+    dockerode: ^3.3.1
+    get-port: ^5.1.1
+    properties-reader: ^2.2.0
+    ssh-remote-port-forward: ^1.0.4
+    tar-fs: ^2.1.1
+  checksum: 2fb8250591691a4bd86640b53e13236ad507ba9e03ac3043683de5e9dd632bc29d52827c22ccfe2b0d28dec6896cbaa56dcb153ce65f7f74212ddefc204e8d6a
   languageName: node
   linkType: hard
 

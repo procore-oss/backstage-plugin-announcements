@@ -1,6 +1,6 @@
 # Contributing Guidelines
 
-`backstage-plugin-announcements` is [MIT licensed](LICENSE) and accepts contributions via
+`backstage-plugin-announcements` is [MIT licensed](LICENSE.md) and accepts contributions via
 GitHub pull requests. This document outlines some of the conventions on
 development workflow, commit message formatting, contact points, and other
 resources to make it easier to get your contribution accepted.

@@ -61,7 +61,6 @@
     "@testing-library/user-event": "^14.5.1",
     "@types/luxon": "^3.3.2",
     "@types/node": "^16.11.26",
-    "cross-fetch": "^3.1.5",
     "msw": "^1.0.0"
   },
   "files": [

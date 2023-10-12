@@ -208,7 +208,7 @@ const AnnouncementsGrid = ({
   return (
     <>
       <ItemCardGrid>
-        {announcementsList?.results!.map((announcement, index) => (
+        {announcementsList?.results.map((announcement, index) => (
           <AnnouncementCard
             key={index}
             announcement={announcement}

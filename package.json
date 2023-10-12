@@ -3,13 +3,13 @@
   "version": "1.0.0",
   "private": true,
   "engines": {
-    "node": "16 || 18"
+    "node": "18 || 20"
   },
   "scripts": {
     "dev": "concurrently \"yarn start\" \"yarn start-backend\"",
     "start": "yarn workspace @procore-oss/backstage-plugin-announcements start",
     "start-backend": "yarn workspace @procore-oss/backstage-plugin-announcements-backend start",
-    "start:ci": "concurrently \"yarn start\" \"yarn start-backend:ci\"",
+    "start:ci": "concurrently \"yarn start\" \"yarn start-backend\"",
     "build": "backstage-cli repo build --all",
     "tsc": "tsc",
     "tsc:full": "tsc --skipLibCheck false --incremental false",

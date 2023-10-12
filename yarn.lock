@@ -5488,7 +5488,7 @@ __metadata:
     "@procore-oss/backstage-plugin-announcements-common": ^0.0.7
     "@types/express": ^4.17.19
     "@types/supertest": ^2.0.8
-    "@types/uuid": ^8.3.4
+    "@types/uuid": ^9.0.5
     better-sqlite3: ^8.0.0
     express: ^4.17.1
     express-promise-router: ^4.1.0
@@ -7528,10 +7528,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/uuid@npm:^8.3.4":
-  version: 8.3.4
-  resolution: "@types/uuid@npm:8.3.4"
-  checksum: 6f11f3ff70f30210edaa8071422d405e9c1d4e53abbe50fdce365150d3c698fe7bbff65c1e71ae080cbfb8fded860dbb5e174da96fdbbdfcaa3fb3daa474d20f
+"@types/uuid@npm:^9.0.5":
+  version: 9.0.5
+  resolution: "@types/uuid@npm:9.0.5"
+  checksum: 7577940949619768303c0bf0a7cc235fac3cfae1c0bb4a2e85bfb87b2eb1024955ab446f775394d259442cd769b663b6ce43c39bdfc955d946bf833804ddb421
   languageName: node
   linkType: hard
 

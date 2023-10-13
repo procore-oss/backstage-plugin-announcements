@@ -6,7 +6,7 @@ import { IndexableDocument } from '@backstage/plugin-search-common';
 import { AnnouncementsClient } from './api';
 import { Announcement } from '@procore-oss/backstage-plugin-announcements-common';
 
-export type IndexableAnnouncementDocument = IndexableDocument & {
+type IndexableAnnouncementDocument = IndexableDocument & {
   excerpt: string;
   createdAt: string;
 };

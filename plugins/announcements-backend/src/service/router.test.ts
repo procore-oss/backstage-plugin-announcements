@@ -3,7 +3,7 @@ import express from 'express';
 import { DateTime } from 'luxon';
 import request from 'supertest';
 import { AnnouncementsContext } from './announcementsContextBuilder';
-import { Announcement } from './model';
+import { Announcement } from '@procore-oss/backstage-plugin-announcements-common';
 import { AnnouncementsDatabase } from './persistence/AnnouncementsDatabase';
 import { PersistenceContext } from './persistence/persistenceContext';
 import { createRouter } from './router';
@@ -72,7 +72,7 @@ describe('createRouter', () => {
           publisher: 'user:default/name',
           created_at: DateTime.fromISO('2022-11-02T15:28:08.539Z'),
         },
-      ] as Announcement[]);
+      ] as any as Announcement[]);
 
       const response = await request(app).get('/announcements');
 

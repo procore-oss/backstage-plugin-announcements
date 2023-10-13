@@ -28,7 +28,7 @@ type DbAnnouncement = {
   title: string;
   excerpt: string;
   body: string;
-  created_at: DateTime;
+  created_at: string;
 };
 
 type DbAnnouncementWithCategory = DbAnnouncement & {
@@ -69,7 +69,7 @@ const announcementUpsertToDB = (
     excerpt: announcement.excerpt,
     body: announcement.body,
     publisher: announcement.publisher,
-    created_at: announcement.created_at,
+    created_at: announcement.created_at.toSQL()!,
   };
 };
 
@@ -91,8 +91,7 @@ const DBToAnnouncementWithCategory = (
     excerpt: announcementDb.excerpt,
     body: announcementDb.body,
     publisher: announcementDb.publisher,
-    // TODO: need to revisit how created_at is stored and referenced across the plugins
-    created_at: announcementDb.created_at.toISO()!,
+    created_at: announcementDb.created_at,
   };
 };
 

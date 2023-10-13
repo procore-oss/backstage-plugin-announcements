@@ -1,6 +1,9 @@
+import {
+  Announcement,
+  AnnouncementsList,
+} from '@procore-oss/backstage-plugin-announcements-common';
 import { Knex } from 'knex';
 import { DateTime } from 'luxon';
-import { Announcement } from '../model';
 
 const announcementsTable = 'announcements';
 
@@ -16,7 +19,7 @@ type AnnouncementUpsert = {
   created_at: DateTime;
 };
 
-export type DbAnnouncement = {
+type DbAnnouncement = {
   id: string;
   type?: 'info' | 'warning' | 'error';
   category?: string;
@@ -28,7 +31,7 @@ export type DbAnnouncement = {
   created_at: string;
 };
 
-export type DbAnnouncementWithCategory = DbAnnouncement & {
+type DbAnnouncementWithCategory = DbAnnouncement & {
   category_slug?: string;
   category_title?: string;
 };
@@ -37,26 +40,6 @@ type AnnouncementsFilters = {
   max?: number;
   offset?: number;
   category?: string;
-};
-
-type AnnouncementsList = {
-  count: number;
-  results: Announcement[];
-};
-
-const timestampToDateTime = (input: Date | string): DateTime => {
-  if (typeof input === 'object') {
-    return DateTime.fromJSDate(input).toUTC();
-  }
-
-  const result = input.includes(' ')
-    ? DateTime.fromSQL(input, { zone: 'utc' })
-    : DateTime.fromISO(input, { zone: 'utc' });
-  if (!result.isValid) {
-    throw new TypeError('Not valid');
-  }
-
-  return result;
 };
 
 const announcementUpsertToDB = (
@@ -93,7 +76,7 @@ const DBToAnnouncementWithCategory = (
     excerpt: announcementDb.excerpt,
     body: announcementDb.body,
     publisher: announcementDb.publisher,
-    created_at: timestampToDateTime(announcementDb.created_at),
+    created_at: announcementDb.created_at,
   };
 };
 

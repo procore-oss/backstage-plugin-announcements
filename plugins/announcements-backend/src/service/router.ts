@@ -18,6 +18,7 @@ import {
 } from '@procore-oss/backstage-plugin-announcements-common';
 import { AnnouncementsContext } from './announcementsContextBuilder';
 import { createPermissionIntegrationRouter } from '@backstage/plugin-permission-node';
+import { timestampToDateTime } from './utils';
 
 interface AnnouncementRequest {
   publisher: string;
@@ -63,10 +64,9 @@ export async function createRouter(
   router.use(express.json());
   router.use(permissionIntegrationRouter);
 
-  // eslint-disable-next-line spaced-comment
-  /*****************
-   * Announcements *
-   ****************/
+  /**
+   * Announcements
+   */
   router.get(
     '/announcements',
     async (
@@ -157,6 +157,7 @@ export async function createRouter(
       const announcement =
         await persistenceContext.announcementsStore.updateAnnouncement({
           ...initialAnnouncement,
+          created_at: timestampToDateTime(initialAnnouncement.created_at),
           ...{
             title: req.body.title,
             excerpt: req.body.excerpt,
@@ -170,10 +171,9 @@ export async function createRouter(
     },
   );
 
-  // eslint-disable-next-line spaced-comment
-  /**************
-   * Categories *
-   **************/
+  /**
+   * Categories
+   */
   router.get('/categories', async (_req, res) => {
     const results = await persistenceContext.categoriesStore.categories();
 

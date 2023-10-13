@@ -1,19 +1,9 @@
 import { DiscoveryApi, FetchApi } from '@backstage/core-plugin-api';
 import { ResponseError } from '@backstage/errors';
-
-export type Announcement = {
-  id: string;
-  publisher: string;
-  title: string;
-  excerpt: string;
-  body: string;
-  created_at: string;
-};
-
-export type AnnouncementsList = {
-  count: number;
-  results: Announcement[];
-};
+import {
+  Announcement,
+  AnnouncementsList,
+} from '@procore-oss/backstage-plugin-announcements-common';
 
 export class AnnouncementsClient {
   private readonly discoveryApi: DiscoveryApi;

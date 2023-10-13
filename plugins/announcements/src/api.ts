@@ -8,30 +8,13 @@ import {
 } from '@backstage/core-plugin-api';
 import { ResponseError } from '@backstage/errors';
 import { FetchApi } from '@backstage/core-plugin-api';
+import {
+  Announcement,
+  AnnouncementsList,
+  Category,
+} from '@procore-oss/backstage-plugin-announcements-common';
 
 const lastSeenKey = 'user_last_seen_date';
-
-export type Category = {
-  slug: string;
-  title: string;
-};
-
-export type Announcement = {
-  id: string;
-  type?: 'info' | 'warning' | 'error';
-  category?: Category;
-  sticky?: boolean;
-  publisher: string;
-  title: string;
-  excerpt: string;
-  body: string;
-  created_at: string;
-};
-
-export type AnnouncementsList = {
-  count: number;
-  results: Announcement[];
-};
 
 export type CreateAnnouncementRequest = Omit<
   Announcement,

@@ -19,7 +19,7 @@ type AnnouncementUpsert = {
   created_at: DateTime;
 };
 
-export type DbAnnouncement = {
+type DbAnnouncement = {
   id: string;
   type?: 'info' | 'warning' | 'error';
   category?: string;
@@ -31,7 +31,7 @@ export type DbAnnouncement = {
   created_at: string;
 };
 
-export type DbAnnouncementWithCategory = DbAnnouncement & {
+type DbAnnouncementWithCategory = DbAnnouncement & {
   category_slug?: string;
   category_title?: string;
 };

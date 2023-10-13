@@ -28,7 +28,7 @@ type DbAnnouncement = {
   title: string;
   excerpt: string;
   body: string;
-  created_at: string;
+  created_at: DateTime;
 };
 
 type DbAnnouncementWithCategory = DbAnnouncement & {
@@ -42,20 +42,20 @@ type AnnouncementsFilters = {
   category?: string;
 };
 
-const timestampToDateTime = (input: Date | string): DateTime => {
-  if (typeof input === 'object') {
-    return DateTime.fromJSDate(input).toUTC();
-  }
+// const timestampToDateTime = (input: Date | string): DateTime => {
+//   if (typeof input === 'object') {
+//     return DateTime.fromJSDate(input).toUTC();
+//   }
 
-  const result = input.includes(' ')
-    ? DateTime.fromSQL(input, { zone: 'utc' })
-    : DateTime.fromISO(input, { zone: 'utc' });
-  if (!result.isValid) {
-    throw new TypeError('Not valid');
-  }
+//   const result = input.includes(' ')
+//     ? DateTime.fromSQL(input, { zone: 'utc' })
+//     : DateTime.fromISO(input, { zone: 'utc' });
+//   if (!result.isValid) {
+//     throw new TypeError('Not valid');
+//   }
 
-  return result;
-};
+//   return result;
+// };
 
 const announcementUpsertToDB = (
   announcement: AnnouncementUpsert,
@@ -69,7 +69,7 @@ const announcementUpsertToDB = (
     excerpt: announcement.excerpt,
     body: announcement.body,
     publisher: announcement.publisher,
-    created_at: announcement.created_at.toSQL()!,
+    created_at: announcement.created_at,
   };
 };
 
@@ -91,7 +91,8 @@ const DBToAnnouncementWithCategory = (
     excerpt: announcementDb.excerpt,
     body: announcementDb.body,
     publisher: announcementDb.publisher,
-    created_at: timestampToDateTime(announcementDb.created_at),
+    // TODO: need to revisit how created_at is stored and referenced across the plugins
+    created_at: announcementDb.created_at.toISO()!,
   };
 };
 

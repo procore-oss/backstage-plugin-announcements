@@ -42,21 +42,6 @@ type AnnouncementsFilters = {
   category?: string;
 };
 
-// const timestampToDateTime = (input: Date | string): DateTime => {
-//   if (typeof input === 'object') {
-//     return DateTime.fromJSDate(input).toUTC();
-//   }
-
-//   const result = input.includes(' ')
-//     ? DateTime.fromSQL(input, { zone: 'utc' })
-//     : DateTime.fromISO(input, { zone: 'utc' });
-//   if (!result.isValid) {
-//     throw new TypeError('Not valid');
-//   }
-
-//   return result;
-// };
-
 const announcementUpsertToDB = (
   announcement: AnnouncementUpsert,
 ): DbAnnouncement => {

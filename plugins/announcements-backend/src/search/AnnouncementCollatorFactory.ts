@@ -3,7 +3,8 @@ import { Logger } from 'winston';
 import { DiscoveryApi, FetchApi } from '@backstage/core-plugin-api';
 import { DocumentCollatorFactory } from '@backstage/plugin-search-common';
 import { IndexableDocument } from '@backstage/plugin-search-common';
-import { Announcement, AnnouncementsClient } from './api';
+import { AnnouncementsClient } from './api';
+import { Announcement } from '@procore-oss/backstage-plugin-announcements-common';
 
 export type IndexableAnnouncementDocument = IndexableDocument & {
   excerpt: string;

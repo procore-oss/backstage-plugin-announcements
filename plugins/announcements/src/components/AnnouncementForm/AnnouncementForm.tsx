@@ -14,14 +14,11 @@ import {
   Switch,
   TextField,
 } from '@material-ui/core';
-import {
-  Announcement,
-  announcementsApiRef,
-  CreateAnnouncementRequest,
-} from '../../api';
+import { announcementsApiRef, CreateAnnouncementRequest } from '../../api';
 import { Autocomplete } from '@material-ui/lab';
 import { useAsync } from 'react-use';
 import MenuItem from '@material-ui/core/MenuItem';
+import { Announcement } from '@procore-oss/backstage-plugin-announcements-common';
 
 const useStyles = makeStyles(theme => ({
   formRoot: {

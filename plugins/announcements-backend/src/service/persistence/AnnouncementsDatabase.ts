@@ -1,6 +1,9 @@
+import {
+  Announcement,
+  AnnouncementsList,
+} from '@procore-oss/backstage-plugin-announcements-common';
 import { Knex } from 'knex';
 import { DateTime } from 'luxon';
-import { Announcement } from '../model';
 
 const announcementsTable = 'announcements';
 
@@ -37,11 +40,6 @@ type AnnouncementsFilters = {
   max?: number;
   offset?: number;
   category?: string;
-};
-
-type AnnouncementsList = {
-  count: number;
-  results: Announcement[];
 };
 
 const timestampToDateTime = (input: Date | string): DateTime => {

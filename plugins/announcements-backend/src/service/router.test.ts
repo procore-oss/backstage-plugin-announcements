@@ -3,7 +3,10 @@ import express from 'express';
 import { DateTime } from 'luxon';
 import request from 'supertest';
 import { AnnouncementsContext } from './announcementsContextBuilder';
-import { Announcement } from '@procore-oss/backstage-plugin-announcements-common';
+import {
+  Announcement,
+  Category,
+} from '@procore-oss/backstage-plugin-announcements-common';
 import { AnnouncementsDatabase } from './persistence/AnnouncementsDatabase';
 import { PersistenceContext } from './persistence/persistenceContext';
 import { createRouter } from './router';
@@ -22,6 +25,9 @@ describe('createRouter', () => {
   const insertAnnouncementMock = jest.fn();
   const updateAnnouncementMock = jest.fn();
 
+  const categoriesMock = jest.fn();
+  const insertCatagoryMock = jest.fn();
+
   const mockPersistenceContext: PersistenceContext = {
     announcementsStore: {
       announcements: announcementsMock,
@@ -30,7 +36,10 @@ describe('createRouter', () => {
       insertAnnouncement: insertAnnouncementMock,
       updateAnnouncement: updateAnnouncementMock,
     } as unknown as AnnouncementsDatabase,
-    categoriesStore: {} as unknown as CategoriesDatabase,
+    categoriesStore: {
+      categories: categoriesMock,
+      insert: insertCatagoryMock,
+    } as unknown as CategoriesDatabase,
   };
 
   const mockedAuthorize: jest.MockedFunction<PermissionEvaluator['authorize']> =
@@ -267,6 +276,37 @@ describe('createRouter', () => {
       const response = await request(app).delete('/announcements/uuid1');
 
       expect(response.status).toEqual(403);
+    });
+  });
+
+  describe('GET /categories', () => {
+    it('returns ok', async () => {
+      const response = await request(app).get('/categories');
+
+      expect(response.status).toEqual(200);
+      expect(categoriesMock).toHaveBeenCalledTimes(1);
+    });
+  });
+
+  describe('POST /categories', () => {
+    it('returns ok', async () => {
+      const response = await request(app).post('/categories').send({
+        title: 'Title',
+      });
+
+      expect(response.status).toEqual(201);
+      expect(insertCatagoryMock).toHaveBeenCalledWith({
+        slug: 'title',
+        title: 'Title',
+      });
+    });
+
+    it('returns 500 when title is missing', async () => {
+      const response = await request(app).post('/categories').send({
+        anythingElseButTitle: 'something',
+      });
+
+      expect(response.status).toEqual(500);
     });
   });
 });

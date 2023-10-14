@@ -78,7 +78,7 @@ describe('AnnouncementCollatorFactory', () => {
       const pipeline = TestPipeline.fromCollator(collator);
       const { documents } = await pipeline.execute();
       expect(mockDiscoveryApi.getBaseUrl).toHaveBeenCalledWith('announcements');
-      expect(documents).not.toHaveLength(mockAnnouncements.results.length);
+      expect(documents).toHaveLength(mockAnnouncements.results.length);
     });
   });
 });

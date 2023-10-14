@@ -7,7 +7,10 @@ import { Announcement } from '@procore-oss/backstage-plugin-announcements-common
 import { AnnouncementsDatabase } from './persistence/AnnouncementsDatabase';
 import { PersistenceContext } from './persistence/persistenceContext';
 import { createRouter } from './router';
-import { PermissionEvaluator } from '@backstage/plugin-permission-common';
+import {
+  AuthorizeResult,
+  PermissionEvaluator,
+} from '@backstage/plugin-permission-common';
 import { CategoriesDatabase } from './persistence/CategoriesDatabase';
 
 describe('createRouter', () => {
@@ -88,6 +91,182 @@ describe('createRouter', () => {
           created_at: '2022-11-02T15:28:08.539+00:00',
         },
       ]);
+    });
+
+    it('returns announcement for a given id', async () => {
+      announcementByIDMock.mockReturnValueOnce({
+        id: 'uuid2',
+        title: 'title2',
+        excerpt: 'excerpt2',
+        body: 'body2',
+        publisher: 'user:default/name2',
+        created_at: DateTime.fromISO('2022-11-02T15:28:08.539Z'),
+      });
+
+      const response = await request(app).get('/announcements/uuid2');
+
+      expect(response.status).toEqual(200);
+      expect(response.body).toEqual({
+        id: 'uuid2',
+        title: 'title2',
+        excerpt: 'excerpt2',
+        body: 'body2',
+        publisher: 'user:default/name2',
+        created_at: '2022-11-02T15:28:08.539+00:00',
+      });
+    });
+  });
+
+  describe('POST /announcements', () => {
+    it('returns ok', async () => {
+      mockedAuthorize.mockResolvedValueOnce([
+        {
+          result: AuthorizeResult.ALLOW,
+        },
+      ]);
+
+      const response = await request(app).post('/announcements').send({
+        title: 'title',
+        excerpt: 'excerpt',
+        body: 'body',
+        publisher: 'user:default/name',
+      });
+
+      expect(
+        mockPersistenceContext.announcementsStore.insertAnnouncement,
+      ).toHaveBeenCalledWith({
+        title: 'title',
+        excerpt: 'excerpt',
+        body: 'body',
+        publisher: 'user:default/name',
+        id: expect.any(String),
+        created_at: expect.any(DateTime),
+      });
+
+      expect(response.status).toEqual(201);
+    });
+
+    it('returns 403 when not authorized', async () => {
+      mockedAuthorize.mockResolvedValueOnce([
+        {
+          result: AuthorizeResult.DENY,
+        },
+      ]);
+
+      const response = await request(app).post('/announcements').send({
+        title: 'title',
+        excerpt: 'excerpt',
+        body: 'body',
+        publisher: 'user:default/name',
+      });
+
+      expect(response.status).toEqual(403);
+    });
+  });
+
+  describe('PUT /announcements/:id', () => {
+    it('returns ok', async () => {
+      mockedAuthorize.mockResolvedValueOnce([
+        {
+          result: AuthorizeResult.ALLOW,
+        },
+      ]);
+
+      announcementByIDMock.mockReturnValueOnce({
+        id: 'uuid',
+        title: 'title',
+        excerpt: 'excerpt',
+        body: 'body',
+        publisher: 'user:default/name',
+        created_at: DateTime.fromISO('2022-11-02T15:28:08.539Z'),
+      });
+
+      const response = await request(app).put('/announcements/uuid1').send({
+        title: 'updatedTitle',
+        excerpt: 'excerpt',
+        body: 'body',
+        publisher: 'user:default/name',
+      });
+
+      expect(
+        mockPersistenceContext.announcementsStore.updateAnnouncement,
+      ).toHaveBeenCalledWith({
+        id: 'uuid',
+        title: 'updatedTitle',
+        excerpt: 'excerpt',
+        body: 'body',
+        publisher: 'user:default/name',
+        category: undefined,
+        created_at: expect.any(DateTime),
+      });
+
+      expect(response.status).toEqual(200);
+    });
+
+    it('returns 403 when not authorized', async () => {
+      mockedAuthorize.mockResolvedValueOnce([
+        {
+          result: AuthorizeResult.DENY,
+        },
+      ]);
+
+      const response = await request(app).put('/announcements/uuid1').send({
+        title: 'title',
+        excerpt: 'excerpt',
+        body: 'body',
+        publisher: 'user:default/name',
+      });
+
+      expect(response.status).toEqual(403);
+    });
+
+    it('returns 404 when announcement not found', async () => {
+      mockedAuthorize.mockResolvedValueOnce([
+        {
+          result: AuthorizeResult.ALLOW,
+        },
+      ]);
+
+      announcementByIDMock.mockReturnValueOnce(undefined);
+
+      const response = await request(app).put('/announcements/uuid2').send({
+        title: 'title',
+        excerpt: 'excerpt',
+        body: 'body',
+        publisher: 'user:default/name',
+      });
+
+      expect(response.status).toEqual(404);
+    });
+  });
+
+  describe('DELETE /announcements/:id', () => {
+    it('returns ok', async () => {
+      mockedAuthorize.mockResolvedValueOnce([
+        {
+          result: AuthorizeResult.ALLOW,
+        },
+      ]);
+
+      const response = await request(app).delete('/announcements/uuid');
+
+      expect(
+        mockPersistenceContext.announcementsStore.deleteAnnouncementByID,
+      ).toHaveBeenCalledWith('uuid');
+
+      expect(response.status).toEqual(204);
+    });
+
+    it('returns 403 when not authorized', async () => {
+      mockedAuthorize.mockResolvedValueOnce([
+        {
+          result: AuthorizeResult.DENY,
+        },
+      ]);
+
+      const response = await request(app).delete('/announcements/uuid1');
+
+      expect(response.status).toEqual(403);
     });
   });
 });

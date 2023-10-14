@@ -3,10 +3,7 @@ import express from 'express';
 import { DateTime } from 'luxon';
 import request from 'supertest';
 import { AnnouncementsContext } from './announcementsContextBuilder';
-import {
-  Announcement,
-  Category,
-} from '@procore-oss/backstage-plugin-announcements-common';
+import { Announcement } from '@procore-oss/backstage-plugin-announcements-common';
 import { AnnouncementsDatabase } from './persistence/AnnouncementsDatabase';
 import { PersistenceContext } from './persistence/persistenceContext';
 import { createRouter } from './router';
@@ -122,6 +119,50 @@ describe('createRouter', () => {
         body: 'body2',
         publisher: 'user:default/name2',
         created_at: '2022-11-02T15:28:08.539+00:00',
+      });
+    });
+
+    it('returns announcements for a given category', async () => {
+      mockPersistenceContext.categoriesStore.insert({
+        slug: 'category',
+        title: 'Category',
+      });
+
+      mockPersistenceContext.announcementsStore.insertAnnouncement({
+        title: 'title',
+        excerpt: 'excerpt',
+        body: 'without category',
+        publisher: 'user:default/name',
+        id: 'uuid',
+        created_at: DateTime.fromISO('2022-11-02T15:28:08.539Z'),
+      });
+
+      mockPersistenceContext.announcementsStore.insertAnnouncement({
+        title: 'title',
+        category: 'category',
+        excerpt: 'excerpt',
+        body: 'with category',
+        publisher: 'user:default/name',
+        id: 'uuid',
+        created_at: DateTime.fromISO('2022-11-02T15:28:08.539Z'),
+      });
+
+      const response = await request(app).get(
+        '/announcements?category=category',
+      );
+
+      expect(response.status).toEqual(200);
+    });
+
+    it('returns announcements for a provided offset', async () => {
+      const response = await request(app).get('/announcements?page=2');
+
+      expect(response.status).toEqual(200);
+      expect(announcementsMock).toHaveBeenCalledWith({
+        offset: 10,
+        category: undefined,
+        max: undefined,
+        page: undefined,
       });
     });
   });

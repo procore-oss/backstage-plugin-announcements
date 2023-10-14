@@ -3090,6 +3090,27 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@backstage/plugin-search-backend-node@npm:^1.2.9":
+  version: 1.2.9
+  resolution: "@backstage/plugin-search-backend-node@npm:1.2.9"
+  dependencies:
+    "@backstage/backend-common": ^0.19.7
+    "@backstage/backend-plugin-api": ^0.6.5
+    "@backstage/backend-tasks": ^0.5.10
+    "@backstage/config": ^1.1.0
+    "@backstage/errors": ^1.2.2
+    "@backstage/plugin-permission-common": ^0.7.8
+    "@backstage/plugin-search-common": ^1.2.6
+    "@types/lunr": ^2.3.3
+    lodash: ^4.17.21
+    lunr: ^2.3.9
+    ndjson: ^2.0.0
+    uuid: ^8.3.2
+    winston: ^3.2.1
+  checksum: 5a2b1d7b46b34a95c826d9a173af9970999f0f837534a7a83e04452cbb39b5c8273b3f3524a78473a31ab0ddc64d0e90a49cecd799f4b763264936706ecb4826
+  languageName: node
+  linkType: hard
+
 "@backstage/plugin-search-common@npm:^1.2.6":
   version: 1.2.6
   resolution: "@backstage/plugin-search-common@npm:1.2.6"
@@ -5484,6 +5505,7 @@ __metadata:
     "@backstage/plugin-auth-node": ^0.3.2
     "@backstage/plugin-permission-common": ^0.7.8
     "@backstage/plugin-permission-node": ^0.7.16
+    "@backstage/plugin-search-backend-node": ^1.2.9
     "@backstage/plugin-search-common": ^1.2.6
     "@backstage/test-utils": ^1.4.3
     "@procore-oss/backstage-plugin-announcements-common": ^0.0.7
@@ -7132,6 +7154,13 @@ __metadata:
   version: 4.14.199
   resolution: "@types/lodash@npm:4.14.199"
   checksum: e68d1fcbbfce953ed87b296a628573f62939227bcda0c934954e862b421e8a34c5e71cad6fea27b9980567909e6a4698f09025692958e36d64ea9ed99ec6fb2e
+  languageName: node
+  linkType: hard
+
+"@types/lunr@npm:^2.3.3":
+  version: 2.3.5
+  resolution: "@types/lunr@npm:2.3.5"
+  checksum: c68c2bdb0af765e05ebb67ac773e98423080bbe5f7c7456ade9259dbb6bd808bd50d2c91e61ca216c4f36dc799d3058e97d514b76cdeb221b3fb20799fe266fa
   languageName: node
   linkType: hard
 
@@ -16436,6 +16465,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"lunr@npm:^2.3.9":
+  version: 2.3.9
+  resolution: "lunr@npm:2.3.9"
+  checksum: 176719e24fcce7d3cf1baccce9dd5633cd8bdc1f41ebe6a180112e5ee99d80373fe2454f5d4624d437e5a8319698ca6837b9950566e15d2cae5f2a543a3db4b8
+  languageName: node
+  linkType: hard
+
 "luxon@npm:^3.0.0, luxon@npm:^3.4.3":
   version: 3.4.3
   resolution: "luxon@npm:3.4.3"
@@ -17629,6 +17665,21 @@ __metadata:
   version: 1.4.0
   resolution: "natural-compare@npm:1.4.0"
   checksum: 23ad088b08f898fc9b53011d7bb78ec48e79de7627e01ab5518e806033861bef68d5b0cd0e2205c2f36690ac9571ff6bcb05eb777ced2eeda8d4ac5b44592c3d
+  languageName: node
+  linkType: hard
+
+"ndjson@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "ndjson@npm:2.0.0"
+  dependencies:
+    json-stringify-safe: ^5.0.1
+    minimist: ^1.2.5
+    readable-stream: ^3.6.0
+    split2: ^3.0.0
+    through2: ^4.0.0
+  bin:
+    ndjson: cli.js
+  checksum: f847a51a2275b8a6a1bfdb24095183836b71c3085670161678c9922bc59644f04e53ced385e549a5565fdc44c28e206bd3f2199d12525028f843a86b680c4446
   languageName: node
   linkType: hard
 
@@ -19976,6 +20027,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"readable-stream@npm:3, readable-stream@npm:^3.0.0, readable-stream@npm:^3.0.2, readable-stream@npm:^3.0.6, readable-stream@npm:^3.1.1, readable-stream@npm:^3.4.0, readable-stream@npm:^3.5.0, readable-stream@npm:^3.6.0":
+  version: 3.6.2
+  resolution: "readable-stream@npm:3.6.2"
+  dependencies:
+    inherits: ^2.0.3
+    string_decoder: ^1.1.1
+    util-deprecate: ^1.0.1
+  checksum: bdcbe6c22e846b6af075e32cf8f4751c2576238c5043169a1c221c92ee2878458a816a4ea33f4c67623c0b6827c8a400409bfb3cf0bf3381392d0b1dfb52ac8d
+  languageName: node
+  linkType: hard
+
 "readable-stream@npm:^2.0.0, readable-stream@npm:^2.0.1, readable-stream@npm:^2.0.2, readable-stream@npm:^2.0.5, readable-stream@npm:^2.3.3, readable-stream@npm:^2.3.6":
   version: 2.3.8
   resolution: "readable-stream@npm:2.3.8"
@@ -19988,17 +20050,6 @@ __metadata:
     string_decoder: ~1.1.1
     util-deprecate: ~1.0.1
   checksum: 65645467038704f0c8aaf026a72fbb588a9e2ef7a75cd57a01702ee9db1c4a1e4b03aaad36861a6a0926546a74d174149c8c207527963e0c2d3eee2f37678a42
-  languageName: node
-  linkType: hard
-
-"readable-stream@npm:^3.0.2, readable-stream@npm:^3.0.6, readable-stream@npm:^3.1.1, readable-stream@npm:^3.4.0, readable-stream@npm:^3.5.0, readable-stream@npm:^3.6.0":
-  version: 3.6.2
-  resolution: "readable-stream@npm:3.6.2"
-  dependencies:
-    inherits: ^2.0.3
-    string_decoder: ^1.1.1
-    util-deprecate: ^1.0.1
-  checksum: bdcbe6c22e846b6af075e32cf8f4751c2576238c5043169a1c221c92ee2878458a816a4ea33f4c67623c0b6827c8a400409bfb3cf0bf3381392d0b1dfb52ac8d
   languageName: node
   linkType: hard
 
@@ -21441,6 +21492,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"split2@npm:^3.0.0":
+  version: 3.2.2
+  resolution: "split2@npm:3.2.2"
+  dependencies:
+    readable-stream: ^3.0.0
+  checksum: 8127ddbedd0faf31f232c0e9192fede469913aa8982aa380752e0463b2e31c2359ef6962eb2d24c125bac59eeec76873678d723b1c7ff696216a1cd071e3994a
+  languageName: node
+  linkType: hard
+
 "split2@npm:^4.1.0":
   version: 4.2.0
   resolution: "split2@npm:4.2.0"
@@ -22298,6 +22358,15 @@ __metadata:
   version: 3.0.1
   resolution: "throttle-debounce@npm:3.0.1"
   checksum: e34ef638e8df3a9154249101b68afcbf2652a139c803415ef8a2f6a8bc577bcd4d79e4bb914ad3cd206523ac78b9fb7e80885bfa049f64fbb1927f99d98b5736
+  languageName: node
+  linkType: hard
+
+"through2@npm:^4.0.0":
+  version: 4.0.2
+  resolution: "through2@npm:4.0.2"
+  dependencies:
+    readable-stream: 3
+  checksum: ac7430bd54ccb7920fd094b1c7ff3e1ad6edd94202e5528331253e5fde0cc56ceaa690e8df9895de2e073148c52dfbe6c4db74cacae812477a35660090960cc0
   languageName: node
   linkType: hard
 

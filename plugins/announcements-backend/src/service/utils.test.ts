@@ -14,4 +14,8 @@ describe('timestampToDateTime', () => {
     expect(timestampToDateTime(sql).toISO()).toBe('2021-08-20T10:11:12.000Z');
     expect(timestampToDateTime(iso).toISO()).toBe('2021-08-20T10:11:12.000Z');
   });
+
+  it('throws error', () => {
+    expect(() => timestampToDateTime('foo')).toThrow('Not valid');
+  });
 });

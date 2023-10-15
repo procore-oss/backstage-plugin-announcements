@@ -16,6 +16,7 @@ import { AnnouncementPage } from './AnnouncementPage';
 import { CreateAnnouncementContent } from './Announcements/CreateAnnouncementContent';
 import { EditAnnouncementContent } from './Announcements/EditAnnouncementContent';
 import { CategoriesPage } from './CategoriesPage';
+import { AnnouncementsAdminPage } from './Announcements/AnnouncementsAdminPage';
 
 type RouterProps = {
   themeId?: string;
@@ -33,6 +34,10 @@ export const Router = (props: RouterProps) => {
   return (
     <Routes>
       <Route path="/" element={<AnnouncementsPage {...propsWithDefaults} />} />
+      <Route
+        path="/admin"
+        element={<AnnouncementsAdminPage {...propsWithDefaults} />}
+      />
       <Route
         path={`${announcementViewRouteRef.path}`}
         element={<AnnouncementPage {...propsWithDefaults} />}

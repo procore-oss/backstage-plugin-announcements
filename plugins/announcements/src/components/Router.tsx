@@ -15,7 +15,7 @@ import { AnnouncementsPage } from './AnnouncementsPage';
 import { AnnouncementPage } from './AnnouncementPage';
 import { CreateAnnouncementContent } from './Announcements/CreateAnnouncementContent';
 import { EditAnnouncementContent } from './Announcements/EditAnnouncementContent';
-import { CategoriesPage } from './CategoriesPage';
+import { CategoriesPage } from './Category/CategoriesPage';
 import { AnnouncementsAdminPage } from './Announcements/AnnouncementsAdminPage';
 
 type RouterProps = {

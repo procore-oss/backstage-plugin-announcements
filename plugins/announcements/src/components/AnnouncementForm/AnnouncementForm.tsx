@@ -96,7 +96,7 @@ export const AnnouncementForm = ({
           fullWidth
           required
         />
-        <FormControl className={classes.formRoot}>
+        {/* <FormControl className={classes.formRoot}>
           <Select
             id="type"
             name="type"
@@ -111,7 +111,7 @@ export const AnnouncementForm = ({
             <MenuItem value="error">Error</MenuItem>
           </Select>
           <FormHelperText>Announcement type</FormHelperText>
-        </FormControl>
+        </FormControl> */}
         <Autocomplete
           fullWidth
           getOptionSelected={(option, value) => option.slug === value.slug}

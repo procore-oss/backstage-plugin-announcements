@@ -18,6 +18,7 @@ import {
   AnnouncementsCard,
   NewAnnouncementBanner,
 } from '../src/plugin';
+import { AnnouncementsAdminPage } from '../src/components/Announcements/AnnouncementsAdminPage';
 
 const mockCatalogApi = {
   getEntityByRef: async (entityRef: string) => {
@@ -66,13 +67,18 @@ createDevApp()
   .registerPlugin(announcementsPlugin)
   .addPage({
     element: <AnnouncementsPage />,
-    title: 'Root Page',
+    title: 'Announcements',
     path: '/announcements',
   })
   .addPage({
     element: <CatalogEntityPage />,
     title: 'Catalog Entity Page',
     path: '/catalog',
+  })
+  .addPage({
+    element: <AnnouncementsAdminPage themeId="" title="Admin" />,
+    title: 'Admin',
+    path: '/admin',
   })
   .addPage({
     element: (

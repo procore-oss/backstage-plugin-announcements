@@ -38,7 +38,12 @@ export const AnnouncementList = ({
   }
 
   const items = announcements.results.map(announcement => (
-    <ListItem alignItems="flex-start" key={announcement.id}>
+    <ListItem
+      alignItems="flex-start"
+      key={announcement.id}
+      button
+      onClick={async () => handleClick(announcement)}
+    >
       <ListItemText
         primary={announcement.title}
         secondary={
@@ -48,16 +53,15 @@ export const AnnouncementList = ({
             </Typography>
             <Typography variant="body2">{announcement.excerpt}</Typography>
 
-            <ListItemSecondaryAction>
-              <IconButton edge="end" aria-label="update">
-                <Button
-                  type="button"
-                  onClick={async () => handleClick(announcement)}
-                >
-                  <EditIcon />
-                </Button>
-              </IconButton>
-            </ListItemSecondaryAction>
+            {/* TODO: No need to delete. Add this back when working on the editing view */}
+            {/* <ListItemSecondaryAction>
+              <Button
+                type="button"
+                onClick={async () => handleClick(announcement)}
+              >
+                <EditIcon />
+              </Button>
+            </ListItemSecondaryAction> */}
           </React.Fragment>
         }
       />

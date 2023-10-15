@@ -19,6 +19,7 @@ import {
   NewAnnouncementBanner,
 } from '../src/plugin';
 import { AnnouncementsAdminPage } from '../src/components/Announcements/AnnouncementsAdminPage';
+import { AdminPageLayout } from '../src/components/Admin';
 
 const mockCatalogApi = {
   getEntityByRef: async (entityRef: string) => {
@@ -79,6 +80,11 @@ createDevApp()
     element: <AnnouncementsAdminPage themeId="" title="Admin" />,
     title: 'Admin',
     path: '/admin',
+  })
+  .addPage({
+    element: <AdminPageLayout />,
+    title: 'New Admin',
+    path: '/new-admin',
   })
   .addPage({
     element: (

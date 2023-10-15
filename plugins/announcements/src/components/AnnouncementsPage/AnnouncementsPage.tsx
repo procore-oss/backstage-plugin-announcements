@@ -35,6 +35,7 @@ import {
   CardActions,
   CardContent,
   CardMedia,
+  Typography,
   makeStyles,
 } from '@material-ui/core';
 import {
@@ -189,6 +190,14 @@ const AnnouncementsGrid = ({
     return <Alert severity="error">{error.message}</Alert>;
   }
 
+  if (!announcementsList) {
+    return (
+      <>
+        <Typography>No announcements to display</Typography>
+      </>
+    );
+  }
+
   const onCancelDelete = () => {
     closeDeleteDialog();
   };
@@ -209,9 +218,9 @@ const AnnouncementsGrid = ({
   return (
     <>
       <ItemCardGrid>
-        {announcementsList?.results.map((announcement, index) => (
+        {announcementsList?.results.map(announcement => (
           <AnnouncementCard
-            key={index}
+            key={announcement.id}
             announcement={announcement}
             onDelete={() => openDeleteDialog(announcement)}
           />

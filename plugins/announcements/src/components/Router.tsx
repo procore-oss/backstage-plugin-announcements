@@ -13,8 +13,8 @@ import {
 } from '../routes';
 import { AnnouncementsPage } from './AnnouncementsPage';
 import { AnnouncementPage } from './AnnouncementPage';
-import { CreateAnnouncementPage } from './CreateAnnouncementPage';
-import { EditAnnouncementPage } from './EditAnnouncementPage';
+import { CreateAnnouncementContent } from './Announcements/CreateAnnouncementContent';
+import { EditAnnouncementContent } from './Announcements/EditAnnouncementContent';
 import { CategoriesPage } from './CategoriesPage';
 
 type RouterProps = {
@@ -41,7 +41,7 @@ export const Router = (props: RouterProps) => {
         path={`${announcementCreateRouteRef.path}`}
         element={
           <RequirePermission permission={announcementCreatePermission}>
-            <CreateAnnouncementPage {...propsWithDefaults} />
+            <CreateAnnouncementContent />
           </RequirePermission>
         }
       />
@@ -49,7 +49,7 @@ export const Router = (props: RouterProps) => {
         path={`${announcementEditRouteRef.path}`}
         element={
           <RequirePermission permission={announcementUpdatePermission}>
-            <EditAnnouncementPage {...propsWithDefaults} />
+            <EditAnnouncementContent />
           </RequirePermission>
         }
       />

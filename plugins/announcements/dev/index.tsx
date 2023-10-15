@@ -18,6 +18,9 @@ import {
   AnnouncementsCard,
   NewAnnouncementBanner,
 } from '../src/plugin';
+import { Newsfeed } from '../src/components/Newsfeed';
+import { Form } from '../src/components/Announcements';
+import { Announcement } from '@procore-oss/backstage-plugin-announcements-common';
 
 const mockCatalogApi = {
   getEntityByRef: async (entityRef: string) => {
@@ -66,13 +69,24 @@ createDevApp()
   .registerPlugin(announcementsPlugin)
   .addPage({
     element: <AnnouncementsPage />,
-    title: 'Root Page',
+    title: 'Announcements',
     path: '/announcements',
   })
   .addPage({
     element: <CatalogEntityPage />,
     title: 'Catalog Entity Page',
     path: '/catalog',
+  })
+  .addPage({
+    element: (
+      <Form
+        announcement={{} as Announcement}
+        // eslint-disable-next-line no-console
+        onSubmit={data => console.log(data)}
+      />
+    ),
+    title: 'Form',
+    path: '/form',
   })
   .addPage({
     element: (

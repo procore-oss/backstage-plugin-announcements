@@ -1,0 +1,72 @@
+import { Content, InfoCard } from '@backstage/core-components';
+import {
+  Grid,
+  Card,
+  Typography,
+  CardContent,
+  Container,
+  makeStyles,
+} from '@material-ui/core';
+import { AnnouncementsList } from '@procore-oss/backstage-plugin-announcements-common';
+import React from 'react';
+
+const useStyles = makeStyles({
+  feedContainer: {
+    margin: 'auto',
+    height: '80vh',
+    maxHeight: '80vh',
+    overflow: 'scroll',
+  },
+  announcementCard: {
+    marginBottom: '25px',
+    borderRadius: '16px',
+  },
+});
+
+export const Newsfeed = ({
+  announcements,
+}: {
+  announcements: AnnouncementsList;
+}) => {
+  const classes = useStyles();
+  if (announcements.count === 0) {
+    return (
+      <InfoCard title="Newsfeed">
+        <Content>
+          <Typography variant="h3">No announcements to display.</Typography>
+        </Content>
+      </InfoCard>
+    );
+  }
+
+  return (
+    <Container maxWidth="md">
+      <Content className={classes.feedContainer}>
+        <Grid container>
+          <Grid item>
+            {announcements.results.map(announcement => {
+              return (
+                <Card
+                  variant="outlined"
+                  key={announcement.id}
+                  className={classes.announcementCard}
+                >
+                  <CardContent>
+                    <Typography variant="h6">{announcement.title}</Typography>
+                    <Typography variant="body1">{announcement.body}</Typography>
+                    <Typography variant="body1">
+                      {announcement.category?.title}
+                    </Typography>
+                    {/* <CardActions>
+                      <Button size="small">Read More</Button>
+                    </CardActions> */}
+                  </CardContent>
+                </Card>
+              );
+            })}
+          </Grid>
+        </Grid>
+      </Content>
+    </Container>
+  );
+};

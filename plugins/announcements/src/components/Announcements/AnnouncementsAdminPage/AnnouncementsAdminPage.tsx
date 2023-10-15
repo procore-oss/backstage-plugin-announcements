@@ -49,7 +49,6 @@ import { DeleteAnnouncementDialog } from './DeleteAnnouncementDialog';
 import { useDeleteAnnouncementDialogState } from './useDeleteAnnouncementDialogState';
 import { Pagination } from '@material-ui/lab';
 import { ContextMenu } from './ContextMenu';
-import { Newsfeed } from '../../Newsfeed';
 
 export type AnnouncementsStylePickerClassKey =
   | 'itemCardHeader'

@@ -116,7 +116,7 @@ export const AnnouncementForm = ({
           <Controller
             name="body"
             render={({ field }) => (
-              <MDEditor {...field} style={{ minHeight: '30rem' }} />
+              <MDEditor {...field} style={{ minHeight: '25rem' }} />
             )}
             control={control}
           />

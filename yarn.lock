@@ -5565,6 +5565,7 @@ __metadata:
     "@uiw/react-md-editor": ^3.19.5
     luxon: ^3.4.3
     msw: ^1.0.0
+    react-hook-form: ^7.47.0
     react-use: ^17.2.4
   peerDependencies:
     react: ^16.13.1 || ^17.0.0
@@ -19743,7 +19744,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-hook-form@npm:^7.12.2":
+"react-hook-form@npm:^7.12.2, react-hook-form@npm:^7.47.0":
   version: 7.47.0
   resolution: "react-hook-form@npm:7.47.0"
   peerDependencies:

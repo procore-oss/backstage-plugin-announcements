@@ -1,7 +1,12 @@
-import React from 'react';
-import { Button, Grid } from '@material-ui/core';
+import React, { useState } from 'react';
+import { Button, Grid, Paper, Typography } from '@material-ui/core';
 import { AnnouncementList } from '../../AnnouncementList';
-import { Content, Header, Progress } from '@backstage/core-components';
+import {
+  Content,
+  ContentHeader,
+  Header,
+  Progress,
+} from '@backstage/core-components';
 import useAsyncRetry from 'react-use/lib/useAsyncRetry';
 import { CreateAnnouncementRequest, announcementsApiRef } from '../../../api';
 import {
@@ -10,17 +15,22 @@ import {
   useApi,
 } from '@backstage/core-plugin-api';
 import { Announcement } from '@procore-oss/backstage-plugin-announcements-common';
-import { AnnouncementForm } from '../../Announcements';
 import { SubmitHandler } from 'react-hook-form';
-import { AnnouncementFormInputs } from '../../Announcements/AnnouncementForm/AnnouncementForm';
+import {
+  AnnouncementForm,
+  AnnouncementFormInputs,
+} from '../../Announcements/AnnouncementForm/AnnouncementForm';
+import { ViewAnnouncementContent } from '../../Announcements/ViewAnnouncementContent';
+import { ContextMenu } from '../../AnnouncementsPage/ContextMenu';
 
 export const AdminPageLayout = () => {
   const announcementsApi = useApi(announcementsApiRef);
   const identityApi = useApi(identityApiRef);
-  const alertApi = useApi(alertApiRef);
   const [announcement, setAnnouncement] = React.useState<Announcement>(
     {} as Announcement,
   );
+
+  const [creatingNew, isCreatingNew] = useState(true);
 
   const {
     value: announcementsList,
@@ -36,11 +46,13 @@ export const AdminPageLayout = () => {
   }
 
   const handleClick = async (next: Announcement) => {
+    isCreatingNew(false);
     const selected = await announcementsApi.announcementByID(next.id);
     setAnnouncement(selected);
   };
 
   const onSubmit: SubmitHandler<AnnouncementFormInputs> = async formData => {
+    isCreatingNew(false);
     const { userEntityRef } = await identityApi.getBackstageIdentity();
 
     const newAnnouncement: CreateAnnouncementRequest = {
@@ -49,18 +61,20 @@ export const AdminPageLayout = () => {
       publisher: userEntityRef,
     };
     await announcementsApi.createAnnouncement(newAnnouncement);
-    alertApi.post({ message: 'Announcement created', severity: 'success' });
+    // alertApi.post({ message: 'Announcement created', severity: 'success' });
   };
 
   return (
     <>
-      <Header title="Admin" />
+      <Header title="Admin">
+        <ContextMenu />
+      </Header>
       <Content>
         <Grid container>
           <Grid item xs={4}>
             <Button
               onClick={() => {
-                setAnnouncement({} as Announcement);
+                isCreatingNew(true);
               }}
               color="primary"
               variant="contained"
@@ -77,7 +91,21 @@ export const AdminPageLayout = () => {
             />
           </Grid>
           <Grid item xs={8}>
-            <AnnouncementForm announcement={announcement} onSubmit={onSubmit} />
+            {creatingNew && (
+              <Paper elevation={2}>
+                <Content>
+                  <ContentHeader title="New Announcement" />
+                  <AnnouncementForm
+                    announcement={{} as Announcement}
+                    onSubmit={onSubmit}
+                  />
+                </Content>
+              </Paper>
+            )}
+
+            {!creatingNew && (
+              <ViewAnnouncementContent announcement={announcement} />
+            )}
           </Grid>
         </Grid>
       </Content>

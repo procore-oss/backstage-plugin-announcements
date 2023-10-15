@@ -1,12 +1,9 @@
 import React from 'react';
-import { InfoCard, LinkButton } from '@backstage/core-components';
+import { InfoCard } from '@backstage/core-components';
 import {
-  Button,
   Divider,
-  IconButton,
   List,
   ListItem,
-  ListItemSecondaryAction,
   ListItemText,
   Typography,
 } from '@material-ui/core';
@@ -14,9 +11,6 @@ import {
   Announcement,
   AnnouncementsList,
 } from '@procore-oss/backstage-plugin-announcements-common';
-import { useRouteRef } from '@backstage/core-plugin-api';
-import { announcementEditRouteRef } from '../../routes';
-import EditIcon from '@material-ui/icons/Edit';
 
 export const AnnouncementList = ({
   announcements,

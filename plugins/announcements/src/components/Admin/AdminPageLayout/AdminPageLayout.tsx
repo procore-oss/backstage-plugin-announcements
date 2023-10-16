@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Grid, Paper, Typography } from '@material-ui/core';
+import { Button, Grid, Paper } from '@material-ui/core';
 import { AnnouncementList } from '../../AnnouncementList';
 import {
   Content,
@@ -26,6 +26,7 @@ import { ContextMenu } from '../../AnnouncementsPage/ContextMenu';
 export const AdminPageLayout = () => {
   const announcementsApi = useApi(announcementsApiRef);
   const identityApi = useApi(identityApiRef);
+  const alertApi = useApi(alertApiRef);
   const [announcement, setAnnouncement] = React.useState<Announcement>(
     {} as Announcement,
   );
@@ -61,7 +62,7 @@ export const AdminPageLayout = () => {
       publisher: userEntityRef,
     };
     await announcementsApi.createAnnouncement(newAnnouncement);
-    // alertApi.post({ message: 'Announcement created', severity: 'success' });
+    alertApi.post({ message: 'Announcement created', severity: 'success' });
   };
 
   return (

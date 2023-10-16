@@ -21,14 +21,16 @@ export const ViewAnnouncementContent = ({
           </Typography>
         </Grid>
 
-        <Grid item xs={12}>
-          <Typography variant="h6" align="left" paragraph>
-            Categories
-          </Typography>
-          <Typography variant="body1" align="left" paragraph>
-            <Chip label={announcement.category?.title} />
-          </Typography>
-        </Grid>
+        {announcement.category && (
+          <Grid item xs={12}>
+            <Typography variant="h6" align="left" paragraph>
+              Categories
+            </Typography>
+            <Typography variant="body1" align="left" paragraph>
+              <Chip label={announcement.category?.title} />
+            </Typography>
+          </Grid>
+        )}
 
         <Grid item xs={12}>
           <Typography variant="h6" align="left" paragraph>

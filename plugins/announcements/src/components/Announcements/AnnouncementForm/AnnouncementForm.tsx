@@ -77,6 +77,7 @@ export const AnnouncementForm = ({
                 getOptionLabel={option => option.title}
                 options={categoriesValue ?? []}
                 loading={categoriesLoading}
+                onChange={(_, value) => field.onChange(value)}
                 renderInput={params => (
                   <TextField
                     {...params}

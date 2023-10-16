@@ -44,7 +44,7 @@
     "@material-ui/icons": "^4.9.1",
     "@material-ui/lab": "4.0.0-alpha.61",
     "@procore-oss/backstage-plugin-announcements-common": "^0.0.7",
-    "@uiw/react-md-editor": "^3.19.5",
+    "@uiw/react-md-editor": "^3.24.0",
     "luxon": "^3.4.3",
     "react-hook-form": "^7.47.0",
     "react-use": "^17.2.4"

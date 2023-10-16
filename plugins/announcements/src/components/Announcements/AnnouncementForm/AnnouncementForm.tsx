@@ -77,6 +77,7 @@ export const AnnouncementForm = ({
                 getOptionLabel={option => option.title}
                 options={categoriesValue ?? []}
                 loading={categoriesLoading}
+                onChange={(_, value) => field.onChange(value)}
                 renderInput={params => (
                   <TextField
                     {...params}
@@ -116,7 +117,7 @@ export const AnnouncementForm = ({
           <Controller
             name="body"
             render={({ field }) => (
-              <MDEditor {...field} style={{ minHeight: '30rem' }} />
+              <MDEditor {...field} style={{ minHeight: '25rem' }} />
             )}
             control={control}
           />

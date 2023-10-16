@@ -43,7 +43,7 @@ export const Newsfeed = ({
     <Container maxWidth="md">
       <Content className={classes.feedContainer}>
         <Grid container>
-          <Grid item>
+          <Grid item style={{ width: '100%' }}>
             {announcements.results.map(announcement => {
               return (
                 <Card
@@ -57,9 +57,6 @@ export const Newsfeed = ({
                     <Typography variant="body1">
                       {announcement.category?.title}
                     </Typography>
-                    {/* <CardActions>
-                      <Button size="small">Read More</Button>
-                    </CardActions> */}
                   </CardContent>
                 </Card>
               );

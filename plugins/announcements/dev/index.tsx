@@ -67,9 +67,19 @@ createDevApp()
   .registerPlugin(fakeCatalogPlugin)
   .registerPlugin(announcementsPlugin)
   .addPage({
-    element: <AnnouncementsPage />,
+    element: <AnnouncementsAdminPage themeId="" title="Announcements" />,
     title: 'Announcements',
     path: '/announcements',
+  })
+  .addPage({
+    element: <AnnouncementsPage />,
+    title: 'Newsfeed',
+    path: '/newsfeed',
+  })
+  .addPage({
+    element: <AdminPageLayout />,
+    title: 'Admin',
+    path: '/admin',
   })
   .addPage({
     element: <CatalogEntityPage />,
@@ -77,19 +87,9 @@ createDevApp()
     path: '/catalog',
   })
   .addPage({
-    element: <AnnouncementsAdminPage themeId="" title="Admin" />,
-    title: 'Admin',
-    path: '/admin',
-  })
-  .addPage({
-    element: <AdminPageLayout />,
-    title: 'New Admin',
-    path: '/new-admin',
-  })
-  .addPage({
     element: (
       <Page themeId="home">
-        <Header title="AnnouncementsCard" />
+        <Header title="Announcement Components" />
 
         <Content>
           <Grid container>
@@ -107,7 +107,7 @@ createDevApp()
         </Content>
       </Page>
     ),
-    title: 'AnnouncementsCard',
+    title: 'Announcement Components',
     path: '/announcements/card',
   })
   .render();

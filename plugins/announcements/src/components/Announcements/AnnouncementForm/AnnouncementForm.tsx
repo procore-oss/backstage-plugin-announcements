@@ -23,6 +23,7 @@ export type AnnouncementFormInputs = {
     title: string;
     slug: string;
   };
+  publisher: string;
   body: string;
   sticky?: boolean;
 };

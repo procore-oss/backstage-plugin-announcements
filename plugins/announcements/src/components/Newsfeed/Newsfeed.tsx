@@ -1,4 +1,4 @@
-import { Content, InfoCard } from '@backstage/core-components';
+import { Content, ContentHeader, InfoCard } from '@backstage/core-components';
 import {
   Grid,
   Card,
@@ -42,6 +42,7 @@ export const Newsfeed = ({
   return (
     <Container maxWidth="md">
       <Content className={classes.feedContainer}>
+        <ContentHeader title="Newsfeed" />
         <Grid container>
           <Grid item style={{ width: '100%' }}>
             {announcements.results.map(announcement => {

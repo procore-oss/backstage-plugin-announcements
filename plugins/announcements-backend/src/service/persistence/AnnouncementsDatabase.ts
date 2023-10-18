@@ -9,7 +9,6 @@ const announcementsTable = 'announcements';
 
 type AnnouncementUpsert = {
   id: string;
-  type?: 'info' | 'warning' | 'error';
   category?: string;
   sticky?: boolean;
   publisher: string;
@@ -21,7 +20,6 @@ type AnnouncementUpsert = {
 
 type DbAnnouncement = {
   id: string;
-  type?: 'info' | 'warning' | 'error';
   category?: string;
   sticky?: boolean;
   publisher: string;
@@ -47,7 +45,6 @@ const announcementUpsertToDB = (
 ): DbAnnouncement => {
   return {
     id: announcement.id,
-    type: announcement.type,
     category: announcement.category,
     title: announcement.title,
     sticky: announcement.sticky,
@@ -63,7 +60,6 @@ const DBToAnnouncementWithCategory = (
 ): Announcement => {
   return {
     id: announcementDb.id,
-    type: announcementDb.type,
     category:
       announcementDb.category && announcementDb.category_title
         ? {

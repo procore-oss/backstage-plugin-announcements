@@ -44,7 +44,7 @@ export const EditAnnouncementContent = (props: EditAnnouncementPageProps) => {
   } else if (error) {
     content = <Alert severity="error">{error.message}</Alert>;
   } else {
-    title = `Edit "${value.title}" – ${title}`;
+    title = `Edit "${value?.title}" – ${title}`;
     content = <AnnouncementForm announcement={value} onSubmit={onSubmit} />;
   }
 

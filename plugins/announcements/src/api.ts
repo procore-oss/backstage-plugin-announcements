@@ -13,6 +13,7 @@ import {
   AnnouncementsList,
   Category,
 } from '@procore-oss/backstage-plugin-announcements-common';
+import { AnnouncementFormInputs } from './components/Announcements/AnnouncementForm/AnnouncementForm';
 
 const lastSeenKey = 'user_last_seen_date';
 
@@ -38,7 +39,7 @@ export interface AnnouncementsApi {
   createAnnouncement(request: CreateAnnouncementRequest): Promise<Announcement>;
   updateAnnouncement(
     id: string,
-    request: CreateAnnouncementRequest,
+    request: AnnouncementFormInputs,
   ): Promise<Announcement>;
   deleteAnnouncementByID(id: string): Promise<void>;
 
@@ -156,7 +157,7 @@ export class DefaultAnnouncementsApi implements AnnouncementsApi {
 
   async updateAnnouncement(
     id: string,
-    request: CreateAnnouncementRequest,
+    request: AnnouncementFormInputs,
   ): Promise<Announcement> {
     return this.fetch<Announcement>(`/announcements/${id}`, {
       method: 'PUT',

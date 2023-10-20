@@ -11,9 +11,9 @@ import {
 } from '@material-ui/core';
 import { Alert } from '@material-ui/lab';
 import Close from '@material-ui/icons/Close';
-import { announcementsApiRef } from '../../api';
 import { announcementViewRouteRef } from '../../routes';
-import { Announcement } from '@procore-oss/backstage-plugin-announcements-common';
+import { announcementsApiRef } from '../../api';
+import { AnnouncementFe } from '@procore-oss/backstage-plugin-announcements-common';
 
 const useStyles = makeStyles(theme => ({
   // showing on top, as a block
@@ -30,26 +30,25 @@ const useStyles = makeStyles(theme => ({
     fontSize: 20,
   },
   bannerIcon: {
+    fontSize: 20,
     marginRight: '0.5rem',
   },
   content: {
     width: '100%',
     maxWidth: 'inherit',
-    '& > div': {
-      display: 'flex',
-      flexWrap: 'nowrap',
-      alignItems: 'center',
-      justifyContent: 'center',
-      color: theme.palette.banner.text,
-      '& a': {
-        color: theme.palette.banner.link,
-      },
+    flexWrap: 'nowrap',
+    backgroundColor: theme.palette.banner.info,
+    display: 'flex',
+    alignItems: 'center',
+    color: theme.palette.banner.text,
+    '& a': {
+      color: theme.palette.banner.link,
     },
   },
 }));
 
 type AnnouncementBannerProps = {
-  announcement: Announcement;
+  announcement: AnnouncementFe;
   variant?: 'block' | 'floating';
 };
 
@@ -62,9 +61,6 @@ const AnnouncementBanner = (props: AnnouncementBannerProps) => {
   const announcement = props.announcement;
 
   const handleClick = () => {
-    if (announcement.sticky) {
-      return;
-    }
     announcementsApi.markLastSeenDate(
       DateTime.fromISO(announcement.created_at),
     );
@@ -95,16 +91,14 @@ const AnnouncementBanner = (props: AnnouncementBannerProps) => {
         className={classes.content}
         message={message}
         action={[
-          !announcement.sticky && (
-            <IconButton
-              key="dismiss"
-              title="Mark as seen"
-              color="inherit"
-              onClick={handleClick}
-            >
-              <Close className={classes.icon} />
-            </IconButton>
-          ),
+          <IconButton
+            key="dismiss"
+            title="Mark as seen"
+            color="inherit"
+            onClick={handleClick}
+          >
+            <Close className={classes.icon} />
+          </IconButton>,
         ]}
       />
     </Snackbar>
@@ -143,10 +137,7 @@ export const NewAnnouncementBanner = (props: NewAnnouncementBannerProps) => {
 
   const unseenAnnouncements = (announcements?.results || []).filter(
     announcement => {
-      return (
-        announcement.sticky ||
-        lastSeen < DateTime.fromISO(announcement.created_at)
-      );
+      return lastSeen < DateTime.fromISO(announcement.created_at);
     },
   );
 

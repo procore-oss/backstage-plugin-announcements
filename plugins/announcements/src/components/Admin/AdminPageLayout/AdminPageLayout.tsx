@@ -14,7 +14,7 @@ import {
   identityApiRef,
   useApi,
 } from '@backstage/core-plugin-api';
-import { Announcement } from '@procore-oss/backstage-plugin-announcements-common';
+import { AnnouncementFe } from '@procore-oss/backstage-plugin-announcements-common';
 import { SubmitHandler } from 'react-hook-form';
 import {
   AnnouncementForm,
@@ -27,8 +27,8 @@ export const AdminPageLayout = () => {
   const announcementsApi = useApi(announcementsApiRef);
   const identityApi = useApi(identityApiRef);
   const alertApi = useApi(alertApiRef);
-  const [announcement, setAnnouncement] = React.useState<Announcement>(
-    {} as Announcement,
+  const [announcement, setAnnouncement] = React.useState<AnnouncementFe>(
+    {} as AnnouncementFe,
   );
 
   const [creatingNew, isCreatingNew] = useState(true);
@@ -46,7 +46,7 @@ export const AdminPageLayout = () => {
     return <Progress />;
   }
 
-  const handleClick = async (next: Announcement) => {
+  const handleClick = async (next: AnnouncementFe) => {
     isCreatingNew(false);
     const selected = await announcementsApi.announcementByID(next.id);
     setAnnouncement(selected);
@@ -97,7 +97,7 @@ export const AdminPageLayout = () => {
                 <Content>
                   <ContentHeader title="New Announcement" />
                   <AnnouncementForm
-                    announcement={{} as Announcement}
+                    announcement={{} as AnnouncementFe}
                     onSubmit={onSubmit}
                   />
                 </Content>

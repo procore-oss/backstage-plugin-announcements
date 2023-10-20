@@ -9,8 +9,8 @@ import {
 } from '@backstage/core-plugin-api';
 import { ResponseError } from '@backstage/errors';
 import {
-  Announcement,
-  AnnouncementsList,
+  AnnouncementFe,
+  AnnouncementsListFe,
   Category,
 } from '@procore-oss/backstage-plugin-announcements-common';
 import { AnnouncementFormInputs } from './components/Announcements/AnnouncementForm/AnnouncementForm';
@@ -18,7 +18,7 @@ import { AnnouncementFormInputs } from './components/Announcements/AnnouncementF
 const lastSeenKey = 'user_last_seen_date';
 
 export type CreateAnnouncementRequest = Omit<
-  Announcement,
+  AnnouncementFe,
   'id' | 'category' | 'created_at'
 > & {
   category?: string;
@@ -33,14 +33,16 @@ export interface AnnouncementsApi {
     max?: number;
     page?: number;
     category?: string;
-  }): Promise<AnnouncementsList>;
-  announcementByID(id: string): Promise<Announcement>;
+  }): Promise<AnnouncementsListFe>;
+  announcementByID(id: string): Promise<AnnouncementFe>;
 
-  createAnnouncement(request: CreateAnnouncementRequest): Promise<Announcement>;
+  createAnnouncement(
+    request: CreateAnnouncementRequest,
+  ): Promise<AnnouncementFe>;
   updateAnnouncement(
     id: string,
     request: AnnouncementFormInputs,
-  ): Promise<Announcement>;
+  ): Promise<AnnouncementFe>;
   deleteAnnouncementByID(id: string): Promise<void>;
 
   categories(): Promise<Category[]>;
@@ -126,7 +128,7 @@ export class DefaultAnnouncementsApi implements AnnouncementsApi {
     max?: number;
     page?: number;
     category?: string;
-  }): Promise<AnnouncementsList> {
+  }): Promise<AnnouncementsListFe> {
     const params = new URLSearchParams();
     if (category) {
       params.append('category', category);
@@ -138,17 +140,19 @@ export class DefaultAnnouncementsApi implements AnnouncementsApi {
       params.append('page', page.toString());
     }
 
-    return this.fetch<AnnouncementsList>(`/announcements?${params.toString()}`);
+    return this.fetch<AnnouncementsListFe>(
+      `/announcements?${params.toString()}`,
+    );
   }
 
-  async announcementByID(id: string): Promise<Announcement> {
-    return this.fetch<Announcement>(`/announcements/${id}`);
+  async announcementByID(id: string): Promise<AnnouncementFe> {
+    return this.fetch<AnnouncementFe>(`/announcements/${id}`);
   }
 
   async createAnnouncement(
     request: CreateAnnouncementRequest,
-  ): Promise<Announcement> {
-    return await this.fetch<Announcement>(`/announcements`, {
+  ): Promise<AnnouncementFe> {
+    return await this.fetch<AnnouncementFe>(`/announcements`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(request),
@@ -158,8 +162,8 @@ export class DefaultAnnouncementsApi implements AnnouncementsApi {
   async updateAnnouncement(
     id: string,
     request: AnnouncementFormInputs,
-  ): Promise<Announcement> {
-    return this.fetch<Announcement>(`/announcements/${id}`, {
+  ): Promise<AnnouncementFe> {
+    return this.fetch<AnnouncementFe>(`/announcements/${id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(request),
@@ -184,6 +188,7 @@ export class DefaultAnnouncementsApi implements AnnouncementsApi {
 
   lastSeenDate(): DateTime {
     const lastSeen = this.webStorage.get<string>(lastSeenKey);
+
     if (!lastSeen) {
       // magic default date, probably enough in the past to consider every announcement as "not seen"
       return DateTime.fromISO('1990-01-01');

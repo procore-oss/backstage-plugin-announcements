@@ -10,7 +10,7 @@ import {
 
 import { AnnouncementForm } from '../AnnouncementForm';
 import { CreateAnnouncementRequest, announcementsApiRef } from '../../../api';
-import { Announcement } from '@procore-oss/backstage-plugin-announcements-common';
+import { AnnouncementFe } from '@procore-oss/backstage-plugin-announcements-common';
 import { rootRouteRef } from '../../../routes';
 import { SubmitHandler } from 'react-hook-form';
 import { AnnouncementFormInputs } from '../AnnouncementForm/AnnouncementForm';
@@ -54,7 +54,7 @@ export const CreateAnnouncementContent = (
 
       <Content>
         <AnnouncementForm
-          announcement={{} as Announcement}
+          announcement={{} as AnnouncementFe}
           onSubmit={onSubmit}
         />
       </Content>

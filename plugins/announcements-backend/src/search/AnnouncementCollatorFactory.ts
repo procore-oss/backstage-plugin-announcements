@@ -1,10 +1,12 @@
 import { Readable } from 'stream';
 import { Logger } from 'winston';
 import { DiscoveryApi, FetchApi } from '@backstage/core-plugin-api';
-import { DocumentCollatorFactory } from '@backstage/plugin-search-common';
-import { IndexableDocument } from '@backstage/plugin-search-common';
+import {
+  DocumentCollatorFactory,
+  IndexableDocument,
+} from '@backstage/plugin-search-common';
 import { AnnouncementsClient } from './api';
-import { Announcement } from '@procore-oss/backstage-plugin-announcements-common';
+import { AnnouncementFe } from '@procore-oss/backstage-plugin-announcements-common';
 
 type IndexableAnnouncementDocument = IndexableDocument & {
   excerpt: string;
@@ -52,7 +54,7 @@ export class AnnouncementCollatorFactory implements DocumentCollatorFactory {
   }
 
   private getDocumentInfo(
-    announcement: Announcement,
+    announcement: AnnouncementFe,
   ): IndexableAnnouncementDocument {
     this.logger.debug(
       `mapping announcement ${announcement.id} to indexable document`,

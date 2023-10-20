@@ -46,7 +46,7 @@ export const Router = (props: RouterProps) => {
         path={`${announcementCreateRouteRef.path}`}
         element={
           <RequirePermission permission={announcementCreatePermission}>
-            <CreateAnnouncementContent />
+            <CreateAnnouncementContent themeId="" title="Create Announcement" />
           </RequirePermission>
         }
       />
@@ -54,7 +54,7 @@ export const Router = (props: RouterProps) => {
         path={`${announcementEditRouteRef.path}`}
         element={
           <RequirePermission permission={announcementUpdatePermission}>
-            <EditAnnouncementContent />
+            <EditAnnouncementContent themeId="" title="Edit Announcement" />
           </RequirePermission>
         }
       />

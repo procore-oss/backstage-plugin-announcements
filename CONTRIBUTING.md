@@ -2,7 +2,7 @@
 
 `backstage-plugin-announcements` is [MIT licensed](LICENSE.md) and accepts contributions via
 GitHub pull requests. This document outlines some of the conventions on
-development workflow, commit message formatting, contact points, and other
+the development workflow, commit message formatting, contact points, and other
 resources to make it easier to get your contribution accepted.
 
 Contributions are welcome, and they are greatly appreciated! Every little bit helps, and credit will always be given. ❤️
@@ -23,7 +23,7 @@ Pull Requests (PRs) are the main and exclusive way to contribute to the project.
 
 [Fork][fork], then clone the repository:
 
-```
+```bash
 git clone git@github.com:your_github_username/backstage-plugin-announcements.git
 cd backstage-plugin-announcements
 git remote add upstream https://github.com/procore-oss/backstage-plugin-announcements.git
@@ -32,7 +32,7 @@ git fetch upstream
 
 ### Install dependencies
 
-```
+```bash
 yarn install
 ```
 
@@ -41,7 +41,7 @@ yarn install
 A standalone development version of both the frontend and backend plugins are included in this repository.
 They can be started as follows:
 
-```
+```bash
 yarn dev # starts both the frontend and the backend in parallel
 yarn start # starts the frontend only
 yarn start-backend # starts the backend only
@@ -51,7 +51,7 @@ yarn start-backend # starts the backend only
 
 Start by creating a new branch for your changes:
 
-```
+```bash
 git checkout main
 git fetch upstream
 git rebase upstream/main
@@ -60,7 +60,7 @@ git checkout -b new-feature
 
 Make your changes, then ensure that `yarn lint` and `yarn test` still pass. If you're satisfied with your changes, push them to your fork.
 
-```
+```bash
 git push origin new-feature
 ```
 

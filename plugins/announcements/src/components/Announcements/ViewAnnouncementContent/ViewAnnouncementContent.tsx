@@ -1,12 +1,12 @@
 import React from 'react';
 import { InfoCard } from '@backstage/core-components';
-import { Announcement } from '@procore-oss/backstage-plugin-announcements-common';
+import { AnnouncementFe } from '@procore-oss/backstage-plugin-announcements-common';
 import { Chip, Grid, Typography } from '@material-ui/core';
 
 export const ViewAnnouncementContent = ({
   announcement,
 }: {
-  announcement: Announcement;
+  announcement: AnnouncementFe;
 }) => {
   return (
     <InfoCard title={announcement.title}>

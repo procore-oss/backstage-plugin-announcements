@@ -4,12 +4,12 @@ import {
 } from '@procore-oss/backstage-plugin-announcements-common';
 import { Knex } from 'knex';
 import { DateTime } from 'luxon';
+import { timestampToDateTime } from '../utils';
 
 const announcementsTable = 'announcements';
 
 type AnnouncementUpsert = {
   id: string;
-  type?: 'info' | 'warning' | 'error';
   category?: string;
   sticky?: boolean;
   publisher: string;
@@ -21,7 +21,6 @@ type AnnouncementUpsert = {
 
 type DbAnnouncement = {
   id: string;
-  type?: 'info' | 'warning' | 'error';
   category?: string;
   sticky?: boolean;
   publisher: string;
@@ -47,7 +46,6 @@ const announcementUpsertToDB = (
 ): DbAnnouncement => {
   return {
     id: announcement.id,
-    type: announcement.type,
     category: announcement.category,
     title: announcement.title,
     sticky: announcement.sticky,
@@ -63,7 +61,6 @@ const DBToAnnouncementWithCategory = (
 ): Announcement => {
   return {
     id: announcementDb.id,
-    type: announcementDb.type,
     category:
       announcementDb.category && announcementDb.category_title
         ? {
@@ -76,7 +73,7 @@ const DBToAnnouncementWithCategory = (
     excerpt: announcementDb.excerpt,
     body: announcementDb.body,
     publisher: announcementDb.publisher,
-    created_at: announcementDb.created_at,
+    created_at: timestampToDateTime(announcementDb.created_at),
   };
 };
 
@@ -135,7 +132,6 @@ export class AnnouncementsDatabase {
     )
       .select(
         'id',
-        'type',
         'publisher',
         'announcements.title',
         'excerpt',

@@ -18,7 +18,6 @@ import {
 } from '@procore-oss/backstage-plugin-announcements-common';
 import { AnnouncementsContext } from './announcementsContextBuilder';
 import { createPermissionIntegrationRouter } from '@backstage/plugin-permission-node';
-import { timestampToDateTime } from './utils';
 
 interface AnnouncementRequest {
   publisher: string;
@@ -27,7 +26,6 @@ interface AnnouncementRequest {
   title: string;
   excerpt: string;
   body: string;
-  type?: 'info' | 'warning' | 'error';
 }
 
 interface CategoryRequest {
@@ -157,7 +155,6 @@ export async function createRouter(
       const announcement =
         await persistenceContext.announcementsStore.updateAnnouncement({
           ...initialAnnouncement,
-          created_at: timestampToDateTime(initialAnnouncement.created_at),
           ...{
             title: req.body.title,
             excerpt: req.body.excerpt,

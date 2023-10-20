@@ -3,6 +3,7 @@ import { AnnouncementsDatabase } from './AnnouncementsDatabase';
 import { Knex } from 'knex';
 import { initializePersistenceContext } from './persistenceContext';
 import { DateTime } from 'luxon';
+import { timestampToDateTime } from '../utils';
 
 function createDatabaseManager(client: Knex, skipMigrations: boolean = false) {
   return {
@@ -57,8 +58,7 @@ describe('AnnouncementsDatabase', () => {
       body: 'body',
       category: undefined,
       sticky: null,
-      type: null,
-      created_at: '2023-10-13 15:28:08.539 +00:00',
+      created_at: timestampToDateTime('2023-10-13T15:28:08.539'),
     });
   });
 
@@ -85,8 +85,7 @@ describe('AnnouncementsDatabase', () => {
           body: 'body',
           category: undefined,
           sticky: null,
-          type: null,
-          created_at: '2023-10-13 15:28:08.539 +00:00',
+          created_at: timestampToDateTime('2023-10-13T15:28:08.539'),
         },
       ],
     });
@@ -108,7 +107,7 @@ describe('AnnouncementsDatabase', () => {
       title: 'title2',
       excerpt: 'excerpt2',
       body: 'body2',
-      created_at: DateTime.fromISO('2023-10-13T15:28:08.539'),
+      created_at: timestampToDateTime('2023-10-13T15:28:08.539'),
     });
 
     const announcements = await store.announcements({});
@@ -124,8 +123,7 @@ describe('AnnouncementsDatabase', () => {
           body: 'body2',
           category: undefined,
           sticky: null,
-          type: null,
-          created_at: '2023-10-13 15:28:08.539 +00:00',
+          created_at: timestampToDateTime('2023-10-13T15:28:08.539'),
         },
       ],
     });
@@ -221,8 +219,7 @@ describe('AnnouncementsDatabase', () => {
               title: 'Category',
             },
             sticky: null,
-            type: null,
-            created_at: '2023-10-13 15:28:08.539 +00:00',
+            created_at: timestampToDateTime('2023-10-13T15:28:08.539'),
           },
           {
             id: 'id2',
@@ -235,8 +232,7 @@ describe('AnnouncementsDatabase', () => {
               title: 'Category',
             },
             sticky: null,
-            type: null,
-            created_at: '2023-10-13 15:28:08.539 +00:00',
+            created_at: timestampToDateTime('2023-10-13T15:28:08.539'),
           },
         ],
       });
@@ -276,8 +272,7 @@ describe('AnnouncementsDatabase', () => {
             body: 'body2',
             category: undefined,
             sticky: null,
-            type: null,
-            created_at: '2023-10-13 15:28:08.539 +00:00',
+            created_at: timestampToDateTime('2023-10-13T15:28:08.539'),
           },
         ],
       });
@@ -317,8 +312,7 @@ describe('AnnouncementsDatabase', () => {
             body: 'body',
             category: undefined,
             sticky: null,
-            type: null,
-            created_at: '2023-10-13 15:28:08.539 +00:00',
+            created_at: timestampToDateTime('2023-10-13T15:28:08.539'),
           },
         ],
       });

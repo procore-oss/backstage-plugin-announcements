@@ -8,7 +8,7 @@ import {
   Switch,
 } from '@material-ui/core';
 import { Autocomplete } from '@material-ui/lab';
-import { Announcement } from '@procore-oss/backstage-plugin-announcements-common';
+import { AnnouncementFe } from '@procore-oss/backstage-plugin-announcements-common';
 import MDEditor from '@uiw/react-md-editor';
 import React from 'react';
 import { useForm, SubmitHandler, Controller } from 'react-hook-form';
@@ -23,6 +23,7 @@ export type AnnouncementFormInputs = {
     title: string;
     slug: string;
   };
+  publisher: string;
   body: string;
   sticky?: boolean;
 };
@@ -31,7 +32,7 @@ export const AnnouncementForm = ({
   announcement,
   onSubmit,
 }: {
-  announcement?: Announcement;
+  announcement?: AnnouncementFe;
   onSubmit: SubmitHandler<AnnouncementFormInputs>;
 }) => {
   const { handleSubmit, control } = useForm<AnnouncementFormInputs>({

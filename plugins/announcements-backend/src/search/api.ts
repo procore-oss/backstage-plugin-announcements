@@ -1,8 +1,8 @@
 import { DiscoveryApi, FetchApi } from '@backstage/core-plugin-api';
 import { ResponseError } from '@backstage/errors';
 import {
-  Announcement,
-  AnnouncementsList,
+  AnnouncementFe,
+  AnnouncementsListFe,
 } from '@procore-oss/backstage-plugin-announcements-common';
 
 export class AnnouncementsClient {
@@ -25,8 +25,8 @@ export class AnnouncementsClient {
     });
   }
 
-  async announcements(): Promise<Announcement[]> {
-    const result = await this.fetch<AnnouncementsList>('/announcements');
+  async announcements(): Promise<AnnouncementFe[]> {
+    const result = await this.fetch<AnnouncementsListFe>('/announcements');
     return result?.results;
   }
 }

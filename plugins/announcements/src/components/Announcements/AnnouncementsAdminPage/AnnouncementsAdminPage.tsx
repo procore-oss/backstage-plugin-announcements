@@ -6,7 +6,7 @@ import {
   announcementCreatePermission,
   announcementUpdatePermission,
   announcementDeletePermission,
-  Announcement,
+  AnnouncementFe,
 } from '@procore-oss/backstage-plugin-announcements-common';
 import { DateTime } from 'luxon';
 import {
@@ -77,7 +77,7 @@ const AnnouncementCard = ({
   announcement,
   onDelete,
 }: {
-  announcement: Announcement;
+  announcement: AnnouncementFe;
   onDelete: () => void;
 }) => {
   const classes = useStyles();

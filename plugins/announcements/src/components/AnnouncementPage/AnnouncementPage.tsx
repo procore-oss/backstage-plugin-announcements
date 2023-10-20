@@ -24,12 +24,12 @@ import Alert from '@material-ui/lab/Alert';
 import { Grid } from '@material-ui/core';
 import { announcementsApiRef } from '../../api';
 import { announcementViewRouteRef, rootRouteRef } from '../../routes';
-import { Announcement } from '@procore-oss/backstage-plugin-announcements-common';
+import { AnnouncementFe } from '@procore-oss/backstage-plugin-announcements-common';
 
 const AnnouncementDetails = ({
   announcement,
 }: {
-  announcement: Announcement;
+  announcement: AnnouncementFe;
 }) => {
   const announcementsLink = useRouteRef(rootRouteRef);
   const entityLink = useRouteRef(entityRouteRef);

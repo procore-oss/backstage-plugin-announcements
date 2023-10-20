@@ -1,5 +1,18 @@
 # @procore-oss/backstage-plugin-announcements
 
+## 0.2.0
+
+### Minor Changes
+
+- 1114ad6: publish 0.1.0 version
+- 0205bcf: publishing working version
+
+### Patch Changes
+
+- Updated dependencies [1114ad6]
+- Updated dependencies [0205bcf]
+  - @procore-oss/backstage-plugin-announcements-common@0.1.0
+
 ## 0.1.0
 
 ### Minor Changes

@@ -1,22 +1,22 @@
 import { useCallback, useState } from 'react';
-import { AnnouncementFe } from '@procore-oss/backstage-plugin-announcements-common';
+import { Announcement } from '@procore-oss/backstage-plugin-announcements-common';
 
 export type DeleteAnnouncementDialogState = {
-  open: (a: AnnouncementFe) => void;
+  open: (a: Announcement) => void;
   close: () => void;
 
   isOpen: boolean;
-  announcement?: AnnouncementFe;
+  announcement?: Announcement;
 };
 
 export function useDeleteAnnouncementDialogState(): DeleteAnnouncementDialogState {
   const [state, setState] = useState<{
     open: boolean;
-    announcement?: AnnouncementFe;
+    announcement?: Announcement;
   }>({ open: false });
 
   const setOpen = useCallback(
-    (a: AnnouncementFe) => {
+    (a: Announcement) => {
       setState({
         open: true,
         announcement: a,

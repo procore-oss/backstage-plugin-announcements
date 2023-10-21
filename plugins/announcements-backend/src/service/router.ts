@@ -155,6 +155,7 @@ export async function createRouter(
       const announcement =
         await persistenceContext.announcementsStore.updateAnnouncement({
           ...initialAnnouncement,
+          created_at: DateTime.fromISO(initialAnnouncement.created_at),
           ...{
             title: req.body.title,
             excerpt: req.body.excerpt,

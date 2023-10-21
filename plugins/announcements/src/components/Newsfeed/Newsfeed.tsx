@@ -7,7 +7,7 @@ import {
   Container,
   makeStyles,
 } from '@material-ui/core';
-import { AnnouncementsListFe } from '@procore-oss/backstage-plugin-announcements-common';
+import { AnnouncementsList } from '@procore-oss/backstage-plugin-announcements-common';
 import React from 'react';
 
 const useStyles = makeStyles({
@@ -26,7 +26,7 @@ const useStyles = makeStyles({
 export const Newsfeed = ({
   announcements,
 }: {
-  announcements: AnnouncementsListFe;
+  announcements: AnnouncementsList;
 }) => {
   const classes = useStyles();
   if (announcements.count === 0) {

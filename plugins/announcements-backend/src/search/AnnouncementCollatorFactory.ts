@@ -6,7 +6,7 @@ import {
   IndexableDocument,
 } from '@backstage/plugin-search-common';
 import { AnnouncementsClient } from './api';
-import { AnnouncementFe } from '@procore-oss/backstage-plugin-announcements-common';
+import { Announcement } from '@procore-oss/backstage-plugin-announcements-common';
 
 type IndexableAnnouncementDocument = IndexableDocument & {
   excerpt: string;
@@ -54,7 +54,7 @@ export class AnnouncementCollatorFactory implements DocumentCollatorFactory {
   }
 
   private getDocumentInfo(
-    announcement: AnnouncementFe,
+    announcement: Announcement,
   ): IndexableAnnouncementDocument {
     this.logger.debug(
       `mapping announcement ${announcement.id} to indexable document`,

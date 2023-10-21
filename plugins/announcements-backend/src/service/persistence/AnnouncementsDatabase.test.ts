@@ -2,7 +2,6 @@ import { TestDatabases } from '@backstage/backend-test-utils';
 import { AnnouncementsDatabase } from './AnnouncementsDatabase';
 import { Knex } from 'knex';
 import { initializePersistenceContext } from './persistenceContext';
-import { DateTime } from 'luxon';
 import { timestampToDateTime } from '../utils';
 
 function createDatabaseManager(client: Knex, skipMigrations: boolean = false) {
@@ -45,7 +44,7 @@ describe('AnnouncementsDatabase', () => {
       title: 'title',
       excerpt: 'excerpt',
       body: 'body',
-      created_at: DateTime.fromISO('2023-10-13T15:28:08.539'),
+      created_at: timestampToDateTime('2023-10-13T15:28:08.539'),
     });
 
     const announcement = await store.announcementByID('id');
@@ -58,7 +57,7 @@ describe('AnnouncementsDatabase', () => {
       body: 'body',
       category: undefined,
       sticky: null,
-      created_at: timestampToDateTime('2023-10-13T15:28:08.539'),
+      created_at: '2023-10-13 15:28:08.539 Z',
     });
   });
 
@@ -69,7 +68,7 @@ describe('AnnouncementsDatabase', () => {
       title: 'title',
       excerpt: 'excerpt',
       body: 'body',
-      created_at: DateTime.fromISO('2023-10-13T15:28:08.539'),
+      created_at: timestampToDateTime('2023-10-13T15:28:08.539'),
     });
 
     const announcements = await store.announcements({});
@@ -85,7 +84,7 @@ describe('AnnouncementsDatabase', () => {
           body: 'body',
           category: undefined,
           sticky: null,
-          created_at: timestampToDateTime('2023-10-13T15:28:08.539'),
+          created_at: '2023-10-13 15:28:08.539 Z',
         },
       ],
     });
@@ -98,7 +97,7 @@ describe('AnnouncementsDatabase', () => {
       title: 'title',
       excerpt: 'excerpt',
       body: 'body',
-      created_at: DateTime.fromISO('2023-10-13T15:28:08.539'),
+      created_at: timestampToDateTime('2023-10-13T15:28:08.539'),
     });
 
     await store.updateAnnouncement({
@@ -123,7 +122,7 @@ describe('AnnouncementsDatabase', () => {
           body: 'body2',
           category: undefined,
           sticky: null,
-          created_at: timestampToDateTime('2023-10-13T15:28:08.539'),
+          created_at: '2023-10-13 15:28:08.539 Z',
         },
       ],
     });
@@ -136,7 +135,7 @@ describe('AnnouncementsDatabase', () => {
       title: 'title',
       excerpt: 'excerpt',
       body: 'body',
-      created_at: DateTime.fromISO('2023-10-13T15:28:08.539'),
+      created_at: timestampToDateTime('2023-10-13T15:28:08.539'),
     });
 
     expect((await store.announcements({})).count).toBe(1);
@@ -178,7 +177,7 @@ describe('AnnouncementsDatabase', () => {
         excerpt: 'excerpt',
         body: 'body',
         category: 'category',
-        created_at: DateTime.fromISO('2023-10-13T15:28:08.539'),
+        created_at: timestampToDateTime('2023-10-13T15:28:08.539'),
       });
 
       await store.insertAnnouncement({
@@ -188,7 +187,7 @@ describe('AnnouncementsDatabase', () => {
         excerpt: 'excerpt2',
         body: 'body2',
         category: 'category',
-        created_at: DateTime.fromISO('2023-10-13T15:28:08.539'),
+        created_at: timestampToDateTime('2023-10-13T15:28:08.539'),
       });
 
       await store.insertAnnouncement({
@@ -198,7 +197,7 @@ describe('AnnouncementsDatabase', () => {
         excerpt: 'excerpt3',
         body: 'body3',
         category: 'different',
-        created_at: DateTime.fromISO('2023-10-13T15:28:08.539'),
+        created_at: timestampToDateTime('2023-10-13T15:28:08.539'),
       });
 
       const announcements = await store.announcements({
@@ -219,7 +218,7 @@ describe('AnnouncementsDatabase', () => {
               title: 'Category',
             },
             sticky: null,
-            created_at: timestampToDateTime('2023-10-13T15:28:08.539'),
+            created_at: '2023-10-13 15:28:08.539 Z',
           },
           {
             id: 'id2',
@@ -232,7 +231,7 @@ describe('AnnouncementsDatabase', () => {
               title: 'Category',
             },
             sticky: null,
-            created_at: timestampToDateTime('2023-10-13T15:28:08.539'),
+            created_at: '2023-10-13 15:28:08.539 Z',
           },
         ],
       });
@@ -245,7 +244,7 @@ describe('AnnouncementsDatabase', () => {
         title: 'title',
         excerpt: 'excerpt',
         body: 'body',
-        created_at: DateTime.fromISO('2023-10-13T15:28:08.539'),
+        created_at: timestampToDateTime('2023-10-13T15:28:08.539'),
       });
 
       await store.insertAnnouncement({
@@ -254,7 +253,7 @@ describe('AnnouncementsDatabase', () => {
         title: 'title2',
         excerpt: 'excerpt2',
         body: 'body2',
-        created_at: DateTime.fromISO('2023-10-13T15:28:08.539'),
+        created_at: timestampToDateTime('2023-10-13T15:28:08.539'),
       });
 
       const announcements = await store.announcements({
@@ -272,7 +271,7 @@ describe('AnnouncementsDatabase', () => {
             body: 'body2',
             category: undefined,
             sticky: null,
-            created_at: timestampToDateTime('2023-10-13T15:28:08.539'),
+            created_at: '2023-10-13 15:28:08.539 Z',
           },
         ],
       });
@@ -285,7 +284,7 @@ describe('AnnouncementsDatabase', () => {
         title: 'title',
         excerpt: 'excerpt',
         body: 'body',
-        created_at: DateTime.fromISO('2023-10-13T15:28:08.539'),
+        created_at: timestampToDateTime('2023-10-13T15:28:08.539'),
       });
 
       await store.insertAnnouncement({
@@ -294,7 +293,7 @@ describe('AnnouncementsDatabase', () => {
         title: 'title2',
         excerpt: 'excerpt2',
         body: 'body2',
-        created_at: DateTime.fromISO('2023-10-13T15:28:08.539'),
+        created_at: timestampToDateTime('2023-10-13T15:28:08.539'),
       });
 
       const announcements = await store.announcements({
@@ -312,7 +311,7 @@ describe('AnnouncementsDatabase', () => {
             body: 'body',
             category: undefined,
             sticky: null,
-            created_at: timestampToDateTime('2023-10-13T15:28:08.539'),
+            created_at: '2023-10-13 15:28:08.539 Z',
           },
         ],
       });

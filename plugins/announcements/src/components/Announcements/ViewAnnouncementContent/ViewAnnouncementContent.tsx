@@ -1,12 +1,13 @@
 import React from 'react';
 import { InfoCard } from '@backstage/core-components';
-import { AnnouncementFe } from '@procore-oss/backstage-plugin-announcements-common';
+import { Announcement } from '@procore-oss/backstage-plugin-announcements-common';
 import { Chip, Grid, Typography } from '@material-ui/core';
+import { DateTime } from 'luxon';
 
 export const ViewAnnouncementContent = ({
   announcement,
 }: {
-  announcement: AnnouncementFe;
+  announcement: Announcement;
 }) => {
   return (
     <InfoCard title={announcement.title}>
@@ -17,7 +18,7 @@ export const ViewAnnouncementContent = ({
           </Typography>
           <Typography variant="body1" align="left" paragraph>
             Publisher: {announcement.publisher} <br />
-            Created: {announcement.created_at}
+            Created: {DateTime.fromSQL(announcement.created_at).toRelative()}
           </Typography>
         </Grid>
 

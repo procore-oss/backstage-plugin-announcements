@@ -5,10 +5,10 @@
 Add the plugin to your backend app:
 
 ```bash
-cd packages/backend && yarn add @procore-oss/backstage-plugin-announcements-backend
+yarn add --cwd packages/backend @procore-oss/backstage-plugin-announcements-backend
 ```
 
-Create a file in `packages/backend/src/plugins/announcements.ts`:
+Create `packages/backend/src/plugins/announcements.ts`:
 
 ```ts
 import {
@@ -56,7 +56,7 @@ async function main() {
 Add the plugin to your frontend app:
 
 ```bash
-cd packages/app && yarn add @procore-oss/backstage-plugin-announcements
+yarn add --cwd packages/app @procore-oss/backstage-plugin-announcements
 ```
 
 Expose the announcements page:

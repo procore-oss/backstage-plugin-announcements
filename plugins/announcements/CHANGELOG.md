@@ -1,5 +1,11 @@
 # @procore-oss/backstage-plugin-announcements
 
+## 0.2.1
+
+### Patch Changes
+
+- f932cbd: restores original page /announcements take end user to
+
 ## 0.2.0
 
 ### Minor Changes

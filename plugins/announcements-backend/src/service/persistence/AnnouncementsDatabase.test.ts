@@ -57,7 +57,7 @@ describe('AnnouncementsDatabase', () => {
       body: 'body',
       category: undefined,
       sticky: null,
-      created_at: '2023-10-13 15:28:08.539 Z',
+      created_at: timestampToDateTime('2023-10-13T15:28:08.539Z'),
     });
   });
 
@@ -84,7 +84,7 @@ describe('AnnouncementsDatabase', () => {
           body: 'body',
           category: undefined,
           sticky: null,
-          created_at: '2023-10-13 15:28:08.539 Z',
+          created_at: timestampToDateTime('2023-10-13T15:28:08.539Z'),
         },
       ],
     });
@@ -122,7 +122,7 @@ describe('AnnouncementsDatabase', () => {
           body: 'body2',
           category: undefined,
           sticky: null,
-          created_at: '2023-10-13 15:28:08.539 Z',
+          created_at: timestampToDateTime('2023-10-13T15:28:08.539Z'),
         },
       ],
     });
@@ -176,7 +176,10 @@ describe('AnnouncementsDatabase', () => {
         title: 'title',
         excerpt: 'excerpt',
         body: 'body',
-        category: 'category',
+        category: {
+          slug: 'category',
+          title: 'Category',
+        },
         created_at: timestampToDateTime('2023-10-13T15:28:08.539'),
       });
 
@@ -186,7 +189,10 @@ describe('AnnouncementsDatabase', () => {
         title: 'title2',
         excerpt: 'excerpt2',
         body: 'body2',
-        category: 'category',
+        category: {
+          slug: 'category',
+          title: 'Category',
+        },
         created_at: timestampToDateTime('2023-10-13T15:28:08.539'),
       });
 
@@ -196,7 +202,10 @@ describe('AnnouncementsDatabase', () => {
         title: 'title3',
         excerpt: 'excerpt3',
         body: 'body3',
-        category: 'different',
+        category: {
+          slug: 'different',
+          title: 'Different',
+        },
         created_at: timestampToDateTime('2023-10-13T15:28:08.539'),
       });
 
@@ -218,7 +227,7 @@ describe('AnnouncementsDatabase', () => {
               title: 'Category',
             },
             sticky: null,
-            created_at: '2023-10-13 15:28:08.539 Z',
+            created_at: timestampToDateTime('2023-10-13T15:28:08.539Z'),
           },
           {
             id: 'id2',
@@ -231,7 +240,7 @@ describe('AnnouncementsDatabase', () => {
               title: 'Category',
             },
             sticky: null,
-            created_at: '2023-10-13 15:28:08.539 Z',
+            created_at: timestampToDateTime('2023-10-13T15:28:08.539Z'),
           },
         ],
       });
@@ -271,7 +280,7 @@ describe('AnnouncementsDatabase', () => {
             body: 'body2',
             category: undefined,
             sticky: null,
-            created_at: '2023-10-13 15:28:08.539 Z',
+            created_at: timestampToDateTime('2023-10-13T15:28:08.539Z'),
           },
         ],
       });
@@ -311,7 +320,7 @@ describe('AnnouncementsDatabase', () => {
             body: 'body',
             category: undefined,
             sticky: null,
-            created_at: '2023-10-13 15:28:08.539 Z',
+            created_at: timestampToDateTime('2023-10-13T15:28:08.539Z'),
           },
         ],
       });

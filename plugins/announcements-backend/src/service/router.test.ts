@@ -139,7 +139,10 @@ describe('createRouter', () => {
 
       mockPersistenceContext.announcementsStore.insertAnnouncement({
         title: 'title',
-        category: 'category',
+        category: {
+          slug: 'category',
+          title: 'Category',
+        },
         excerpt: 'excerpt',
         body: 'with category',
         publisher: 'user:default/name',

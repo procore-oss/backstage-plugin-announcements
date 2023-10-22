@@ -124,9 +124,17 @@ export async function createRouter(
         throw new NotAllowedError('Unauthorized');
       }
 
+      const category = req.body.category
+        ? {
+            slug: req.body.category,
+            title: req.body.category,
+          }
+        : undefined;
+
       const announcement =
         await persistenceContext.announcementsStore.insertAnnouncement({
           ...req.body,
+          category: category,
           ...{
             id: uuid(),
             created_at: DateTime.now(),
@@ -152,16 +160,23 @@ export async function createRouter(
         return res.status(404).end();
       }
 
+      const category = req.body.category
+        ? {
+            slug: req.body.category,
+            title: req.body.category,
+          }
+        : undefined;
+
       const announcement =
         await persistenceContext.announcementsStore.updateAnnouncement({
           ...initialAnnouncement,
-          created_at: DateTime.fromISO(initialAnnouncement.created_at),
+          // created_at: DateTime.fromISO(initialAnnouncement.created_at),
           ...{
             title: req.body.title,
             excerpt: req.body.excerpt,
             body: req.body.body,
             publisher: req.body.publisher,
-            category: req.body.category,
+            category: category,
           },
         });
 

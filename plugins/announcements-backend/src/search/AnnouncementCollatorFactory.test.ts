@@ -6,6 +6,7 @@ import { MockFetchApi, setupRequestMockHandlers } from '@backstage/test-utils';
 import { AnnouncementsList } from '@procore-oss/backstage-plugin-announcements-common';
 import { setupServer } from 'msw/node';
 import { rest } from 'msw';
+import { timestampToDateTime } from '../service/utils';
 
 const mockAnnouncements: AnnouncementsList = {
   count: 3,
@@ -16,7 +17,7 @@ const mockAnnouncements: AnnouncementsList = {
       publisher: 'publisher1',
       body: 'body',
       excerpt: 'excerpt',
-      created_at: 'created_at',
+      created_at: timestampToDateTime('2023-10-13T15:28:08.539'),
     },
     {
       id: '2',
@@ -24,7 +25,7 @@ const mockAnnouncements: AnnouncementsList = {
       publisher: 'publisher2',
       body: 'body',
       excerpt: 'excerpt',
-      created_at: 'created_at',
+      created_at: timestampToDateTime('2023-10-13T15:28:08.539'),
     },
     {
       id: '3',
@@ -32,7 +33,7 @@ const mockAnnouncements: AnnouncementsList = {
       publisher: 'publisher3',
       body: 'body',
       excerpt: 'excerpt',
-      created_at: 'created_at',
+      created_at: timestampToDateTime('2023-10-13T15:28:08.539'),
     },
   ],
 };

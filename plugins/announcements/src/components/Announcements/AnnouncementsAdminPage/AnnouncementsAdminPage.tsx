@@ -8,7 +8,6 @@ import {
   announcementDeletePermission,
   Announcement,
 } from '@procore-oss/backstage-plugin-announcements-common';
-import { DateTime } from 'luxon';
 import {
   Page,
   Header,
@@ -114,7 +113,7 @@ const AnnouncementCard = ({
           </Link>
         </>
       )}
-      , {DateTime.fromSQL(announcement.created_at).toRelative()}
+      {/* , {announcement.created_at.toRelative()} */}
     </>
   );
   const { loading: loadingDeletePermission, allowed: canDelete } =

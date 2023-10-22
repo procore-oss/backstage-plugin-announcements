@@ -1,6 +1,5 @@
 import React, { ReactNode } from 'react';
 import useAsync from 'react-use/lib/useAsync';
-import { DateTime } from 'luxon';
 import {
   Progress,
   Page,
@@ -45,7 +44,7 @@ const AnnouncementDetails = ({
       <EntityPeekAheadPopover entityRef={announcement.publisher}>
         <Link to={entityLink(publisherRef)}>{publisherRef.name}</Link>
       </EntityPeekAheadPopover>
-      , {DateTime.fromISO(announcement.created_at).toRelative()}
+      , {announcement.created_at}
     </span>
   );
 
@@ -80,12 +79,14 @@ export const AnnouncementPage = (props: AnnouncementPageProps) => {
     content = <Progress />;
   } else if (error) {
     content = <Alert severity="error">{error.message}</Alert>;
+  } else if (!value) {
+    content = <Alert severity="error">Unable to load announcement</Alert>;
   } else {
-    title = `${value!.title} – ${title}`;
-    content = <AnnouncementDetails announcement={value!} />;
+    title = `${value.title} – ${title}`;
+    content = <AnnouncementDetails announcement={value} />;
 
     const lastSeen = announcementsApi.lastSeenDate();
-    const announcementCreatedAt = DateTime.fromISO(value!.created_at);
+    const announcementCreatedAt = value.created_at;
 
     if (announcementCreatedAt > lastSeen) {
       announcementsApi.markLastSeenDate(announcementCreatedAt);

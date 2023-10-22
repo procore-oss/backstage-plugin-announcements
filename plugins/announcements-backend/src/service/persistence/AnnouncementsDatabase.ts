@@ -3,20 +3,9 @@ import {
   AnnouncementsList,
 } from '@procore-oss/backstage-plugin-announcements-common';
 import { Knex } from 'knex';
-import { DateTime } from 'luxon';
+import { timestampToDateTime } from '../utils';
 
 const announcementsTable = 'announcements';
-
-type AnnouncementUpsert = {
-  id: string;
-  category?: string;
-  sticky?: boolean;
-  publisher: string;
-  title: string;
-  excerpt: string;
-  body: string;
-  created_at: DateTime;
-};
 
 type DbAnnouncement = {
   id: string;
@@ -34,18 +23,10 @@ type DbAnnouncementWithCategory = DbAnnouncement & {
   category_title?: string;
 };
 
-type AnnouncementsFilters = {
-  max?: number;
-  offset?: number;
-  category?: string;
-};
-
-const announcementUpsertToDB = (
-  announcement: AnnouncementUpsert,
-): DbAnnouncement => {
+const AnnouncementToDB = (announcement: Announcement): DbAnnouncement => {
   return {
     id: announcement.id,
-    category: announcement.category,
+    category: announcement.category?.slug,
     title: announcement.title,
     sticky: announcement.sticky,
     excerpt: announcement.excerpt,
@@ -72,10 +53,15 @@ const DBToAnnouncementWithCategory = (
     excerpt: announcementDb.excerpt,
     body: announcementDb.body,
     publisher: announcementDb.publisher,
-    created_at: announcementDb.created_at,
+    created_at: timestampToDateTime(announcementDb.created_at),
   };
 };
 
+type AnnouncementsFilters = {
+  max?: number;
+  offset?: number;
+  category?: string;
+};
 export class AnnouncementsDatabase {
   constructor(private readonly db: Knex) {}
 
@@ -154,22 +140,18 @@ export class AnnouncementsDatabase {
     return this.db<DbAnnouncement>(announcementsTable).where('id', id).delete();
   }
 
-  async insertAnnouncement(
-    announcement: AnnouncementUpsert,
-  ): Promise<Announcement> {
+  async insertAnnouncement(announcement: Announcement): Promise<Announcement> {
     await this.db<DbAnnouncement>(announcementsTable).insert(
-      announcementUpsertToDB(announcement),
+      AnnouncementToDB(announcement),
     );
 
     return (await this.announcementByID(announcement.id))!;
   }
 
-  async updateAnnouncement(
-    announcement: AnnouncementUpsert,
-  ): Promise<Announcement> {
+  async updateAnnouncement(announcement: Announcement): Promise<Announcement> {
     await this.db<DbAnnouncement>(announcementsTable)
       .where('id', announcement.id)
-      .update(announcementUpsertToDB(announcement));
+      .update(AnnouncementToDB(announcement));
 
     return (await this.announcementByID(announcement.id))!;
   }

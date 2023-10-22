@@ -64,7 +64,7 @@ export class AnnouncementCollatorFactory implements DocumentCollatorFactory {
       title: announcement.title,
       text: announcement.body,
       excerpt: announcement.excerpt,
-      createdAt: announcement.created_at,
+      createdAt: announcement.created_at.toLocaleString(),
       // TODO this might not be correct
       location: `/announcements/view/${announcement.id}`,
     };

@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useAsync } from 'react-use';
-import { DateTime } from 'luxon';
 import { Link } from '@backstage/core-components';
 import { useApi, useRouteRef } from '@backstage/core-plugin-api';
 import {
@@ -61,9 +60,7 @@ const AnnouncementBanner = (props: AnnouncementBannerProps) => {
   const announcement = props.announcement;
 
   const handleClick = () => {
-    announcementsApi.markLastSeenDate(
-      DateTime.fromSQL(announcement.created_at),
-    );
+    announcementsApi.markLastSeenDate(announcement.created_at);
     setBannerOpen(false);
   };
 
@@ -137,7 +134,7 @@ export const NewAnnouncementBanner = (props: NewAnnouncementBannerProps) => {
 
   const unseenAnnouncements = (announcements?.results || []).filter(
     announcement => {
-      return lastSeen < DateTime.fromSQL(announcement.created_at);
+      return lastSeen < announcement.created_at;
     },
   );
 

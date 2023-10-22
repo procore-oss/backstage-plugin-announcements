@@ -20,19 +20,3 @@ export type Announcement = {
   body: string;
   created_at: DateTime;
 };
-
-export type DbAnnouncement = {
-  id: string;
-  category?: string; // category slug
-  sticky?: boolean;
-  publisher: string;
-  title: string;
-  excerpt: string;
-  body: string;
-  created_at: string;
-};
-
-export type DbAnnouncementWithCategory = DbAnnouncement & {
-  category_slug?: string;
-  category_title?: string;
-};

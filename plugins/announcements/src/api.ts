@@ -12,6 +12,7 @@ import {
   Announcement,
   AnnouncementsList,
   Category,
+  timestampToDateTime,
 } from '@procore-oss/backstage-plugin-announcements-common';
 import { AnnouncementFormInputs } from './components/Announcements/AnnouncementForm/AnnouncementForm';
 
@@ -187,10 +188,10 @@ export class DefaultAnnouncementsApi implements AnnouncementsApi {
 
     if (!lastSeen) {
       // magic default date, probably enough in the past to consider every announcement as "not seen"
-      return DateTime.fromISO('1990-01-01');
+      return timestampToDateTime('1990-01-01');
     }
 
-    return DateTime.fromISO(lastSeen);
+    return timestampToDateTime(lastSeen);
   }
 
   markLastSeenDate(date: DateTime): void {

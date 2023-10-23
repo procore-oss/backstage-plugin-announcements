@@ -3,10 +3,12 @@ import { Readable } from 'stream';
 import { getVoidLogger } from '@backstage/backend-common';
 import { TestPipeline } from '@backstage/plugin-search-backend-node';
 import { MockFetchApi, setupRequestMockHandlers } from '@backstage/test-utils';
-import { AnnouncementsList } from '@procore-oss/backstage-plugin-announcements-common';
+import {
+  AnnouncementsList,
+  timestampToDateTime,
+} from '@procore-oss/backstage-plugin-announcements-common';
 import { setupServer } from 'msw/node';
 import { rest } from 'msw';
-import { timestampToDateTime } from '../service/utils';
 
 const mockAnnouncements: AnnouncementsList = {
   count: 3,

@@ -1,9 +1,9 @@
 import {
   Announcement,
   AnnouncementsList,
+  timestampToDateTime,
 } from '@procore-oss/backstage-plugin-announcements-common';
 import { Knex } from 'knex';
-import { timestampToDateTime } from '../utils';
 
 const announcementsTable = 'announcements';
 

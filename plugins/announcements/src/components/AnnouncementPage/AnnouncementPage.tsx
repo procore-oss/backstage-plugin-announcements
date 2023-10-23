@@ -24,6 +24,7 @@ import { Grid } from '@material-ui/core';
 import { announcementsApiRef } from '../../api';
 import { announcementViewRouteRef, rootRouteRef } from '../../routes';
 import { Announcement } from '@procore-oss/backstage-plugin-announcements-common';
+import { DateTime } from 'luxon';
 
 const AnnouncementDetails = ({
   announcement,
@@ -44,7 +45,10 @@ const AnnouncementDetails = ({
       <EntityPeekAheadPopover entityRef={announcement.publisher}>
         <Link to={entityLink(publisherRef)}>{publisherRef.name}</Link>
       </EntityPeekAheadPopover>
-      , {announcement.created_at}
+      ,{' '}
+      {DateTime.fromISO(
+        announcement.created_at as unknown as string,
+      ).toRelative()}
     </span>
   );
 

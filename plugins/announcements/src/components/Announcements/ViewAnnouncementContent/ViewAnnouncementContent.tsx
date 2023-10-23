@@ -2,6 +2,7 @@ import React from 'react';
 import { InfoCard } from '@backstage/core-components';
 import { Announcement } from '@procore-oss/backstage-plugin-announcements-common';
 import { Chip, Grid, Typography } from '@material-ui/core';
+import { DateTime } from 'luxon';
 
 export const ViewAnnouncementContent = ({
   announcement,
@@ -17,7 +18,10 @@ export const ViewAnnouncementContent = ({
           </Typography>
           <Typography variant="body1" align="left" paragraph>
             Publisher: {announcement.publisher} <br />
-            Created: {announcement.created_at}
+            Created:{' '}
+            {DateTime.fromISO(
+              announcement.created_at as unknown as string,
+            ).toRelative()}
           </Typography>
         </Grid>
 

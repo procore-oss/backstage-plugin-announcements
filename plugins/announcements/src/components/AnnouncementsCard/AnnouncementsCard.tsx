@@ -1,5 +1,6 @@
 import React from 'react';
 import { useAsync } from 'react-use';
+import { DateTime } from 'luxon';
 import { usePermission } from '@backstage/plugin-permission-react';
 import { InfoCard, Link, Progress } from '@backstage/core-components';
 import { useApi, useRouteRef } from '@backstage/core-plugin-api';
@@ -19,7 +20,6 @@ import {
   announcementViewRouteRef,
   rootRouteRef,
 } from '../../routes';
-import { DateTime } from 'luxon';
 
 const useStyles = makeStyles({
   newAnnouncementIcon: {
@@ -71,6 +71,21 @@ export const AnnouncementsCard = ({
     title: 'See all',
   };
 
+  const timestampToDateTime = (input: Date | string): DateTime => {
+    if (typeof input === 'object') {
+      return DateTime.fromJSDate(input).toUTC();
+    }
+
+    const result = input.includes(' ')
+      ? DateTime.fromSQL(input, { zone: 'utc' })
+      : DateTime.fromISO(input, { zone: 'utc' });
+    if (!result.isValid) {
+      throw new TypeError('Not valid');
+    }
+
+    return result;
+  };
+
   return (
     <InfoCard
       title={title || 'Announcements'}
@@ -98,9 +113,9 @@ export const AnnouncementsCard = ({
                 }
                 secondary={
                   <>
-                    {announcement.created_at}
-                    {/* {DateTime.fromISO(announcement.created_at).toRelative()} */}
-                    {/* {announcement.created_at.toRelative()} */}
+                    {timestampToDateTime(
+                      announcement.created_at as unknown as string,
+                    ).toRelative()}
                     {announcement.category && (
                       <>
                         {' '}

@@ -2,7 +2,7 @@ import { TestDatabases } from '@backstage/backend-test-utils';
 import { AnnouncementsDatabase } from './AnnouncementsDatabase';
 import { Knex } from 'knex';
 import { initializePersistenceContext } from './persistenceContext';
-import { timestampToDateTime } from '../utils';
+import { timestampToDateTime } from '@procore-oss/backstage-plugin-announcements-common';
 
 function createDatabaseManager(client: Knex, skipMigrations: boolean = false) {
   return {

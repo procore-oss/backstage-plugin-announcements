@@ -48,6 +48,7 @@ import { DeleteAnnouncementDialog } from './DeleteAnnouncementDialog';
 import { useDeleteAnnouncementDialogState } from './useDeleteAnnouncementDialogState';
 import { Pagination } from '@material-ui/lab';
 import { ContextMenu } from './ContextMenu';
+import { DateTime } from 'luxon';
 
 export type AnnouncementsStylePickerClassKey =
   | 'itemCardHeader'
@@ -113,7 +114,10 @@ const AnnouncementCard = ({
           </Link>
         </>
       )}
-      {/* , {announcement.created_at.toRelative()} */}
+      ,{' '}
+      {DateTime.fromISO(
+        announcement.created_at as unknown as string,
+      ).toRelative()}
     </>
   );
   const { loading: loadingDeletePermission, allowed: canDelete } =

@@ -51,7 +51,7 @@
     "yn": "^4.0.0"
   },
   "devDependencies": {
-    "@backstage/backend-test-utils": "^0.2.6",
+    "@backstage/backend-test-utils": "^0.2.7",
     "@backstage/cli": "^0.22.13",
     "@backstage/plugin-search-backend-node": "^1.2.9",
     "@backstage/test-utils": "^1.4.3",

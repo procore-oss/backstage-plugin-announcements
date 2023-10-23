@@ -1,4 +1,4 @@
-import { MockFetchApi, setupRequestMockHandlers } from '@backstage/test-utils';
+import { setupRequestMockHandlers } from '@backstage/test-utils';
 import { AnnouncementsClient } from './api';
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
@@ -9,11 +9,10 @@ describe('AnnouncementsClient', () => {
   const discoveryApi = { getBaseUrl: async () => mockBaseUrl };
 
   setupRequestMockHandlers(server);
-  const fetchApi = new MockFetchApi();
 
   let client: AnnouncementsClient;
   beforeEach(() => {
-    client = new AnnouncementsClient({ discoveryApi, fetchApi });
+    client = new AnnouncementsClient({ discoveryApi });
     server.listen();
   });
 

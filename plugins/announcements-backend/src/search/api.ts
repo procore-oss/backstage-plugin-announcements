@@ -1,4 +1,4 @@
-import { DiscoveryApi, FetchApi } from '@backstage/core-plugin-api';
+import { DiscoveryApi } from '@backstage/core-plugin-api';
 import { ResponseError } from '@backstage/errors';
 import {
   Announcement,
@@ -7,17 +7,15 @@ import {
 
 export class AnnouncementsClient {
   private readonly discoveryApi: DiscoveryApi;
-  private readonly fetchApi: FetchApi;
 
-  constructor(opts: { discoveryApi: DiscoveryApi; fetchApi: FetchApi }) {
+  constructor(opts: { discoveryApi: DiscoveryApi }) {
     this.discoveryApi = opts.discoveryApi;
-    this.fetchApi = opts.fetchApi;
   }
 
   private async fetch<T = any>(input: string): Promise<T> {
     const baseApiUrl = await this.discoveryApi.getBaseUrl('announcements');
 
-    return this.fetchApi.fetch(`${baseApiUrl}${input}`).then(async response => {
+    return fetch(`${baseApiUrl}${input}`).then(async response => {
       if (!response.ok) {
         throw await ResponseError.fromResponse(response);
       }

@@ -2,7 +2,7 @@ import { AnnouncementCollatorFactory } from './AnnouncementCollatorFactory';
 import { Readable } from 'stream';
 import { getVoidLogger } from '@backstage/backend-common';
 import { TestPipeline } from '@backstage/plugin-search-backend-node';
-import { MockFetchApi, setupRequestMockHandlers } from '@backstage/test-utils';
+import { setupRequestMockHandlers } from '@backstage/test-utils';
 import { AnnouncementsList } from '@procore-oss/backstage-plugin-announcements-common';
 import { setupServer } from 'msw/node';
 import { rest } from 'msw';
@@ -39,7 +39,6 @@ const mockAnnouncements: AnnouncementsList = {
 
 describe('AnnouncementCollatorFactory', () => {
   const logger = getVoidLogger();
-  const mockFetchApi = new MockFetchApi();
   const mockDiscoveryApi = {
     getBaseUrl: jest.fn().mockReturnValue('http://localhost:7007/api'),
   };
@@ -47,7 +46,6 @@ describe('AnnouncementCollatorFactory', () => {
   const factory = AnnouncementCollatorFactory.fromConfig({
     logger,
     discoveryApi: mockDiscoveryApi,
-    fetchApi: mockFetchApi,
   });
 
   it('has expected type', () => {

@@ -1,6 +1,6 @@
 import { Readable } from 'stream';
 import { Logger } from 'winston';
-import { DiscoveryApi, FetchApi } from '@backstage/core-plugin-api';
+import { DiscoveryApi } from '@backstage/core-plugin-api';
 import {
   DocumentCollatorFactory,
   IndexableDocument,
@@ -16,7 +16,6 @@ type IndexableAnnouncementDocument = IndexableDocument & {
 type AnnouncementCollatorOptions = {
   logger: Logger;
   discoveryApi: DiscoveryApi;
-  fetchApi: FetchApi;
 };
 
 export class AnnouncementCollatorFactory implements DocumentCollatorFactory {
@@ -33,7 +32,6 @@ export class AnnouncementCollatorFactory implements DocumentCollatorFactory {
     this.logger = options.logger;
     this.announcementsClient = new AnnouncementsClient({
       discoveryApi: options.discoveryApi,
-      fetchApi: options.fetchApi,
     });
   }
 

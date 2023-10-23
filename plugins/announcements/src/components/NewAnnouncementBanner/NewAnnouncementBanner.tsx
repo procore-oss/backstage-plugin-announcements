@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useAsync } from 'react-use';
-import { DateTime } from 'luxon';
 import { Link } from '@backstage/core-components';
 import { useApi, useRouteRef } from '@backstage/core-plugin-api';
 import {
@@ -13,7 +12,10 @@ import { Alert } from '@material-ui/lab';
 import Close from '@material-ui/icons/Close';
 import { announcementViewRouteRef } from '../../routes';
 import { announcementsApiRef } from '../../api';
-import { AnnouncementFe } from '@procore-oss/backstage-plugin-announcements-common';
+import {
+  Announcement,
+  timestampToDateTime,
+} from '@procore-oss/backstage-plugin-announcements-common';
 
 const useStyles = makeStyles(theme => ({
   // showing on top, as a block
@@ -48,7 +50,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 type AnnouncementBannerProps = {
-  announcement: AnnouncementFe;
+  announcement: Announcement;
   variant?: 'block' | 'floating';
 };
 
@@ -62,7 +64,7 @@ const AnnouncementBanner = (props: AnnouncementBannerProps) => {
 
   const handleClick = () => {
     announcementsApi.markLastSeenDate(
-      DateTime.fromISO(announcement.created_at),
+      timestampToDateTime(announcement.created_at),
     );
     setBannerOpen(false);
   };
@@ -137,7 +139,7 @@ export const NewAnnouncementBanner = (props: NewAnnouncementBannerProps) => {
 
   const unseenAnnouncements = (announcements?.results || []).filter(
     announcement => {
-      return lastSeen < DateTime.fromISO(announcement.created_at);
+      return lastSeen < timestampToDateTime(announcement.created_at);
     },
   );
 

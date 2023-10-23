@@ -6,9 +6,9 @@ import {
   announcementCreatePermission,
   announcementUpdatePermission,
   announcementDeletePermission,
-  AnnouncementFe,
+  Announcement,
+  timestampToDateTime,
 } from '@procore-oss/backstage-plugin-announcements-common';
-import { DateTime } from 'luxon';
 import {
   Page,
   Header,
@@ -77,7 +77,7 @@ const AnnouncementCard = ({
   announcement,
   onDelete,
 }: {
-  announcement: AnnouncementFe;
+  announcement: Announcement;
   onDelete: () => void;
 }) => {
   const classes = useStyles();
@@ -114,7 +114,7 @@ const AnnouncementCard = ({
           </Link>
         </>
       )}
-      , {DateTime.fromISO(announcement.created_at).toRelative()}
+      , {timestampToDateTime(announcement.created_at).toRelative()}
     </>
   );
   const { loading: loadingDeletePermission, allowed: canDelete } =

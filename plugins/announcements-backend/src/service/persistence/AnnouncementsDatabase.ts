@@ -4,7 +4,6 @@ import {
 } from '@procore-oss/backstage-plugin-announcements-common';
 import { Knex } from 'knex';
 import { DateTime } from 'luxon';
-import { timestampToDateTime } from '../utils';
 
 const announcementsTable = 'announcements';
 
@@ -73,7 +72,7 @@ const DBToAnnouncementWithCategory = (
     excerpt: announcementDb.excerpt,
     body: announcementDb.body,
     publisher: announcementDb.publisher,
-    created_at: timestampToDateTime(announcementDb.created_at),
+    created_at: announcementDb.created_at,
   };
 };
 

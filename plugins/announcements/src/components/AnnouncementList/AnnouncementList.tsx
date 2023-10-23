@@ -8,16 +8,16 @@ import {
   Typography,
 } from '@material-ui/core';
 import {
-  AnnouncementFe,
-  AnnouncementsListFe,
+  Announcement,
+  AnnouncementsList,
 } from '@procore-oss/backstage-plugin-announcements-common';
 
 export const AnnouncementList = ({
   announcements,
   handleClick,
 }: {
-  announcements: AnnouncementsListFe | undefined;
-  handleClick: (next: AnnouncementFe) => void;
+  announcements: AnnouncementsList | undefined;
+  handleClick: (next: Announcement) => void;
 }) => {
   if (!announcements) {
     return (

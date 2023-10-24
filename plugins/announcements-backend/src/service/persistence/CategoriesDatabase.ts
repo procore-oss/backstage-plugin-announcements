@@ -1,5 +1,5 @@
 import { Knex } from 'knex';
-import { Category } from '@procore-oss/backstage-plugin-announcements-common';
+import { Category } from '../model';
 
 const categoriesTable = 'categories';
 

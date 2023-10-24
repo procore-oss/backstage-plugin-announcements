@@ -1,9 +1,15 @@
+import crossFetch from 'cross-fetch';
 import { DiscoveryApi } from '@backstage/core-plugin-api';
 import { ResponseError } from '@backstage/errors';
-import {
-  Announcement,
-  AnnouncementsList,
-} from '@procore-oss/backstage-plugin-announcements-common';
+
+export type Announcement = {
+  id: string;
+  publisher: string;
+  title: string;
+  excerpt: string;
+  body: string;
+  created_at: string;
+};
 
 export class AnnouncementsClient {
   private readonly discoveryApi: DiscoveryApi;
@@ -15,7 +21,7 @@ export class AnnouncementsClient {
   private async fetch<T = any>(input: string): Promise<T> {
     const baseApiUrl = await this.discoveryApi.getBaseUrl('announcements');
 
-    return fetch(`${baseApiUrl}${input}`).then(async response => {
+    return crossFetch(`${baseApiUrl}${input}`).then(async response => {
       if (!response.ok) {
         throw await ResponseError.fromResponse(response);
       }
@@ -24,7 +30,6 @@ export class AnnouncementsClient {
   }
 
   async announcements(): Promise<Announcement[]> {
-    const result = await this.fetch<AnnouncementsList>('/announcements');
-    return result?.results;
+    return await this.fetch<Announcement[]>('/');
   }
 }

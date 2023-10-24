@@ -1,24 +1,5 @@
 # @procore-oss/backstage-plugin-announcements-backend
 
-## 0.3.1
-
-### Patch Changes
-
-- 5af6bab: Collator uses native fetch instead of backstage fetchApi
-
-## 0.3.0
-
-### Minor Changes
-
-- 1114ad6: publish 0.1.0 version
-- 0205bcf: publishing working version
-
-### Patch Changes
-
-- Updated dependencies [1114ad6]
-- Updated dependencies [0205bcf]
-  - @procore-oss/backstage-plugin-announcements-common@0.1.0
-
 ## 0.2.0
 
 ### Minor Changes

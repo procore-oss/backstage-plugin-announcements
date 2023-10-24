@@ -13,11 +13,9 @@ import {
 } from '../routes';
 import { AnnouncementsPage } from './AnnouncementsPage';
 import { AnnouncementPage } from './AnnouncementPage';
-import { CreateAnnouncementContent } from './Announcements/CreateAnnouncementContent';
-import { EditAnnouncementContent } from './Announcements/EditAnnouncementContent';
-import { CategoriesPage } from './Category/CategoriesPage';
-import { AnnouncementsAdminPage } from './Announcements/AnnouncementsAdminPage';
-import { AdminPageLayout } from './Admin';
+import { CreateAnnouncementPage } from './CreateAnnouncementPage';
+import { EditAnnouncementPage } from './EditAnnouncementPage';
+import { CategoriesPage } from './CategoriesPage';
 
 type RouterProps = {
   themeId?: string;
@@ -34,15 +32,7 @@ export const Router = (props: RouterProps) => {
 
   return (
     <Routes>
-      <Route
-        path="/"
-        element={<AnnouncementsAdminPage {...propsWithDefaults} />}
-      />
-      <Route
-        path="/newsfeed"
-        element={<AnnouncementsPage {...propsWithDefaults} />}
-      />
-      <Route path="/admin" element={<AdminPageLayout />} />
+      <Route path="/" element={<AnnouncementsPage {...propsWithDefaults} />} />
       <Route
         path={`${announcementViewRouteRef.path}`}
         element={<AnnouncementPage {...propsWithDefaults} />}
@@ -51,7 +41,7 @@ export const Router = (props: RouterProps) => {
         path={`${announcementCreateRouteRef.path}`}
         element={
           <RequirePermission permission={announcementCreatePermission}>
-            <CreateAnnouncementContent themeId="" title="Create Announcement" />
+            <CreateAnnouncementPage {...propsWithDefaults} />
           </RequirePermission>
         }
       />
@@ -59,7 +49,7 @@ export const Router = (props: RouterProps) => {
         path={`${announcementEditRouteRef.path}`}
         element={
           <RequirePermission permission={announcementUpdatePermission}>
-            <EditAnnouncementContent themeId="" title="Edit Announcement" />
+            <EditAnnouncementPage {...propsWithDefaults} />
           </RequirePermission>
         }
       />

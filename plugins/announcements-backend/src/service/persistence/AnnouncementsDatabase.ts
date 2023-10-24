@@ -1,16 +1,12 @@
-import {
-  Announcement,
-  AnnouncementsList,
-} from '@procore-oss/backstage-plugin-announcements-common';
 import { Knex } from 'knex';
 import { DateTime } from 'luxon';
+import { Announcement } from '../model';
 
 const announcementsTable = 'announcements';
 
 type AnnouncementUpsert = {
   id: string;
   category?: string;
-  sticky?: boolean;
   publisher: string;
   title: string;
   excerpt: string;
@@ -18,10 +14,9 @@ type AnnouncementUpsert = {
   created_at: DateTime;
 };
 
-type DbAnnouncement = {
+export type DbAnnouncement = {
   id: string;
   category?: string;
-  sticky?: boolean;
   publisher: string;
   title: string;
   excerpt: string;
@@ -29,7 +24,7 @@ type DbAnnouncement = {
   created_at: string;
 };
 
-type DbAnnouncementWithCategory = DbAnnouncement & {
+export type DbAnnouncementWithCategory = DbAnnouncement & {
   category_slug?: string;
   category_title?: string;
 };
@@ -40,6 +35,26 @@ type AnnouncementsFilters = {
   category?: string;
 };
 
+type AnnouncementsList = {
+  count: number;
+  results: Announcement[];
+};
+
+const timestampToDateTime = (input: Date | string): DateTime => {
+  if (typeof input === 'object') {
+    return DateTime.fromJSDate(input).toUTC();
+  }
+
+  const result = input.includes(' ')
+    ? DateTime.fromSQL(input, { zone: 'utc' })
+    : DateTime.fromISO(input, { zone: 'utc' });
+  if (!result.isValid) {
+    throw new TypeError('Not valid');
+  }
+
+  return result;
+};
+
 const announcementUpsertToDB = (
   announcement: AnnouncementUpsert,
 ): DbAnnouncement => {
@@ -47,7 +62,6 @@ const announcementUpsertToDB = (
     id: announcement.id,
     category: announcement.category,
     title: announcement.title,
-    sticky: announcement.sticky,
     excerpt: announcement.excerpt,
     body: announcement.body,
     publisher: announcement.publisher,
@@ -67,12 +81,11 @@ const DBToAnnouncementWithCategory = (
             title: announcementDb.category_title,
           }
         : undefined,
-    sticky: announcementDb.sticky,
     title: announcementDb.title,
     excerpt: announcementDb.excerpt,
     body: announcementDb.body,
     publisher: announcementDb.publisher,
-    created_at: announcementDb.created_at,
+    created_at: timestampToDateTime(announcementDb.created_at),
   };
 };
 
@@ -95,17 +108,14 @@ export class AnnouncementsDatabase {
     const queryBuilder = this.db<DbAnnouncementWithCategory>(announcementsTable)
       .select(
         'id',
-        'type',
         'publisher',
         'announcements.title',
         'excerpt',
         'body',
         'category',
-        'sticky',
         'created_at',
         'categories.title as category_title',
       )
-      .orderBy('sticky', 'desc')
       .orderBy('created_at', 'desc')
       .leftJoin('categories', 'announcements.category', 'categories.slug');
 
@@ -136,7 +146,6 @@ export class AnnouncementsDatabase {
         'excerpt',
         'body',
         'category',
-        'sticky',
         'created_at',
         'categories.title as category_title',
       )

@@ -6,7 +6,7 @@ import {
   useHotMemoize,
   ServerTokenManager,
   loadBackendConfig,
-  HostDiscovery,
+  SingleHostDiscovery,
 } from '@backstage/backend-common';
 import { buildAnnouncementsContext } from './announcementsContextBuilder';
 import { createRouter } from './router';
@@ -25,7 +25,7 @@ export async function startStandaloneServer(
     service: 'announcements-backend-backend',
   });
   const config = await loadBackendConfig({ logger, argv: process.argv });
-  const discovery = HostDiscovery.fromConfig(config);
+  const discovery = SingleHostDiscovery.fromConfig(config);
   const tokenManager = ServerTokenManager.fromConfig(config, { logger });
   const permissions = ServerPermissionClient.fromConfig(config, {
     discovery,

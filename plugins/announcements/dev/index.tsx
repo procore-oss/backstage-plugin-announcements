@@ -18,8 +18,6 @@ import {
   AnnouncementsCard,
   NewAnnouncementBanner,
 } from '../src/plugin';
-import { AnnouncementsAdminPage } from '../src/components/Announcements/AnnouncementsAdminPage';
-import { AdminPageLayout } from '../src/components/Admin';
 
 const mockCatalogApi = {
   getEntityByRef: async (entityRef: string) => {
@@ -67,19 +65,9 @@ createDevApp()
   .registerPlugin(fakeCatalogPlugin)
   .registerPlugin(announcementsPlugin)
   .addPage({
-    element: <AnnouncementsAdminPage themeId="" title="Announcements" />,
-    title: 'Announcements',
-    path: '/announcements',
-  })
-  .addPage({
     element: <AnnouncementsPage />,
-    title: 'Newsfeed',
-    path: '/newsfeed',
-  })
-  .addPage({
-    element: <AdminPageLayout />,
-    title: 'Admin',
-    path: '/admin',
+    title: 'Root Page',
+    path: '/announcements',
   })
   .addPage({
     element: <CatalogEntityPage />,
@@ -89,7 +77,7 @@ createDevApp()
   .addPage({
     element: (
       <Page themeId="home">
-        <Header title="Announcement Components" />
+        <Header title="AnnouncementsCard" />
 
         <Content>
           <Grid container>
@@ -107,7 +95,7 @@ createDevApp()
         </Content>
       </Page>
     ),
-    title: 'Announcement Components',
+    title: 'AnnouncementsCard',
     path: '/announcements/card',
   })
   .render();

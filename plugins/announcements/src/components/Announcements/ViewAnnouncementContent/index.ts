@@ -1,1 +1,0 @@
-export { ViewAnnouncementContent } from './ViewAnnouncementContent';

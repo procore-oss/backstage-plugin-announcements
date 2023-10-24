@@ -31,7 +31,7 @@
   },
   "dependencies": {
     "@backstage/catalog-model": "^1.4.0",
-    "@backstage/core-app-api": "^1.8.1",
+    "@backstage/core-app-api": "^1.11.0",
     "@backstage/core-components": "^0.13.2",
     "@backstage/core-plugin-api": "^1.5.2",
     "@backstage/errors": "^1.2.0",

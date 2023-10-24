@@ -30,6 +30,6 @@ export class AnnouncementsClient {
   }
 
   async announcements(): Promise<Announcement[]> {
-    return await this.fetch<Announcement[]>('/');
+    return await this.fetch<Announcement[]>('/announcements');
   }
 }

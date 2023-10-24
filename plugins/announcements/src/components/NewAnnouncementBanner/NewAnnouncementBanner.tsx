@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useAsync } from 'react-use';
+import { DateTime } from 'luxon';
 import { Link } from '@backstage/core-components';
 import { useApi, useRouteRef } from '@backstage/core-plugin-api';
 import {
@@ -10,12 +11,8 @@ import {
 } from '@material-ui/core';
 import { Alert } from '@material-ui/lab';
 import Close from '@material-ui/icons/Close';
+import { Announcement, announcementsApiRef } from '../../api';
 import { announcementViewRouteRef } from '../../routes';
-import { announcementsApiRef } from '../../api';
-import {
-  Announcement,
-  timestampToDateTime,
-} from '@procore-oss/backstage-plugin-announcements-common';
 
 const useStyles = makeStyles(theme => ({
   // showing on top, as a block
@@ -64,7 +61,7 @@ const AnnouncementBanner = (props: AnnouncementBannerProps) => {
 
   const handleClick = () => {
     announcementsApi.markLastSeenDate(
-      timestampToDateTime(announcement.created_at),
+      DateTime.fromISO(announcement.created_at),
     );
     setBannerOpen(false);
   };
@@ -139,7 +136,7 @@ export const NewAnnouncementBanner = (props: NewAnnouncementBannerProps) => {
 
   const unseenAnnouncements = (announcements?.results || []).filter(
     announcement => {
-      return lastSeen < timestampToDateTime(announcement.created_at);
+      return lastSeen < DateTime.fromISO(announcement.created_at);
     },
   );
 

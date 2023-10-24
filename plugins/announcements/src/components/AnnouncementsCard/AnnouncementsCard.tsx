@@ -1,12 +1,10 @@
 import React from 'react';
 import { useAsync } from 'react-use';
+import { DateTime } from 'luxon';
 import { usePermission } from '@backstage/plugin-permission-react';
 import { InfoCard, Link, Progress } from '@backstage/core-components';
 import { useApi, useRouteRef } from '@backstage/core-plugin-api';
-import {
-  announcementEntityPermissions,
-  timestampToDateTime,
-} from '@procore-oss/backstage-plugin-announcements-common';
+import { announcementEntityPermissions } from '@procore-oss/backstage-plugin-announcements-common';
 import {
   List,
   ListItem,
@@ -83,7 +81,7 @@ export const AnnouncementsCard = ({
         {announcements?.results.map(announcement => (
           <ListItem key={announcement.id}>
             <ListItem>
-              {lastSeen < timestampToDateTime(announcement.created_at) && (
+              {lastSeen < DateTime.fromISO(announcement.created_at) && (
                 <ListItemIcon
                   className={classes.newAnnouncementIcon}
                   title="New"
@@ -100,7 +98,7 @@ export const AnnouncementsCard = ({
                 }
                 secondary={
                   <>
-                    {timestampToDateTime(announcement.created_at).toRelative()}
+                    {DateTime.fromISO(announcement.created_at).toRelative()}
                     {announcement.category && (
                       <>
                         {' '}

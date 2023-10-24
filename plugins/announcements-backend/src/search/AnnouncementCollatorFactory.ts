@@ -1,14 +1,11 @@
 import { Readable } from 'stream';
 import { Logger } from 'winston';
 import { DiscoveryApi } from '@backstage/core-plugin-api';
-import {
-  DocumentCollatorFactory,
-  IndexableDocument,
-} from '@backstage/plugin-search-common';
-import { AnnouncementsClient } from './api';
-import { Announcement } from '@procore-oss/backstage-plugin-announcements-common';
+import { DocumentCollatorFactory } from '@backstage/plugin-search-common';
+import { IndexableDocument } from '@backstage/plugin-search-common';
+import { Announcement, AnnouncementsClient } from './api';
 
-type IndexableAnnouncementDocument = IndexableDocument & {
+export type IndexableAnnouncementDocument = IndexableDocument & {
   excerpt: string;
   createdAt: string;
 };

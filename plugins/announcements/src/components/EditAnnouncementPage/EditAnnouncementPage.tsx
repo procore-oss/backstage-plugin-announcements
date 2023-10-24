@@ -8,10 +8,8 @@ import {
 } from '@backstage/core-plugin-api';
 import { Alert } from '@material-ui/lab';
 import { AnnouncementForm } from '../AnnouncementForm';
-import { announcementEditRouteRef } from '../../../routes';
-import { announcementsApiRef } from '../../../api';
-import { SubmitHandler } from 'react-hook-form';
-import { AnnouncementFormInputs } from '../AnnouncementForm/AnnouncementForm';
+import { announcementEditRouteRef } from '../../routes';
+import { announcementsApiRef, CreateAnnouncementRequest } from '../../api';
 
 type EditAnnouncementPageProps = {
   themeId: string;
@@ -19,7 +17,7 @@ type EditAnnouncementPageProps = {
   subtitle?: ReactNode;
 };
 
-export const EditAnnouncementContent = (props: EditAnnouncementPageProps) => {
+export const EditAnnouncementPage = (props: EditAnnouncementPageProps) => {
   const announcementsApi = useApi(announcementsApiRef);
   const alertApi = useApi(alertApiRef);
   const { id } = useRouteRefParams(announcementEditRouteRef);
@@ -30,7 +28,7 @@ export const EditAnnouncementContent = (props: EditAnnouncementPageProps) => {
   let title = props.title;
   let content: React.ReactNode = <Progress />;
 
-  const onSubmit: SubmitHandler<AnnouncementFormInputs> = async request => {
+  const onSubmit = async (request: CreateAnnouncementRequest) => {
     try {
       await announcementsApi.updateAnnouncement(id, request);
       alertApi.post({ message: 'Announcement updated.', severity: 'success' });
@@ -44,8 +42,8 @@ export const EditAnnouncementContent = (props: EditAnnouncementPageProps) => {
   } else if (error) {
     content = <Alert severity="error">{error.message}</Alert>;
   } else {
-    title = `Edit "${value?.title}" – ${title}`;
-    content = <AnnouncementForm announcement={value} onSubmit={onSubmit} />;
+    title = `Edit "${value!.title}" – ${title}`;
+    content = <AnnouncementForm initialData={value!} onSubmit={onSubmit} />;
   }
 
   return (

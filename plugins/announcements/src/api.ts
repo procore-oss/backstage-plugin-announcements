@@ -5,18 +5,30 @@ import {
   DiscoveryApi,
   ErrorApi,
   IdentityApi,
-  FetchApi,
 } from '@backstage/core-plugin-api';
 import { ResponseError } from '@backstage/errors';
-import {
-  Announcement,
-  AnnouncementsList,
-  Category,
-  timestampToDateTime,
-} from '@procore-oss/backstage-plugin-announcements-common';
-import { AnnouncementFormInputs } from './components/Announcements/AnnouncementForm/AnnouncementForm';
 
 const lastSeenKey = 'user_last_seen_date';
+
+export type Category = {
+  slug: string;
+  title: string;
+};
+
+export type Announcement = {
+  id: string;
+  category?: Category;
+  publisher: string;
+  title: string;
+  excerpt: string;
+  body: string;
+  created_at: string;
+};
+
+export type AnnouncementsList = {
+  count: number;
+  results: Announcement[];
+};
 
 export type CreateAnnouncementRequest = Omit<
   Announcement,
@@ -40,7 +52,7 @@ export interface AnnouncementsApi {
   createAnnouncement(request: CreateAnnouncementRequest): Promise<Announcement>;
   updateAnnouncement(
     id: string,
-    request: AnnouncementFormInputs,
+    request: CreateAnnouncementRequest,
   ): Promise<Announcement>;
   deleteAnnouncementByID(id: string): Promise<void>;
 
@@ -59,20 +71,17 @@ type Options = {
   discoveryApi: DiscoveryApi;
   identityApi: IdentityApi;
   errorApi: ErrorApi;
-  fetchApi: FetchApi;
 };
 
 export class DefaultAnnouncementsApi implements AnnouncementsApi {
   private readonly discoveryApi: DiscoveryApi;
   private readonly identityApi: IdentityApi;
   private readonly webStorage: WebStorage;
-  private readonly fetchApi: FetchApi;
 
   constructor(opts: Options) {
     this.discoveryApi = opts.discoveryApi;
     this.identityApi = opts.identityApi;
     this.webStorage = new WebStorage('announcements', opts.errorApi);
-    this.fetchApi = opts.fetchApi;
   }
 
   private async fetch<T = any>(input: string, init?: RequestInit): Promise<T> {
@@ -84,18 +93,18 @@ export class DefaultAnnouncementsApi implements AnnouncementsApi {
       headers.set('authorization', `Bearer ${token}`);
     }
 
-    return this.fetchApi
-      .fetch(`${baseApiUrl}${input}`, {
-        ...init,
-        headers,
-      })
-      .then(async response => {
-        if (!response.ok) {
-          throw await ResponseError.fromResponse(response);
-        }
+    const request = new Request(`${baseApiUrl}${input}`, {
+      ...init,
+      headers,
+    });
 
-        return response.json() as Promise<T>;
-      });
+    return fetch(request).then(async response => {
+      if (!response.ok) {
+        throw await ResponseError.fromResponse(response);
+      }
+
+      return response.json() as Promise<T>;
+    });
   }
 
   private async delete(input: string, init?: RequestInit): Promise<void> {
@@ -107,16 +116,16 @@ export class DefaultAnnouncementsApi implements AnnouncementsApi {
       headers.set('authorization', `Bearer ${token}`);
     }
 
-    return this.fetchApi
-      .fetch(`${baseApiUrl}${input}`, {
-        ...{ method: 'DELETE' },
-        headers,
-      })
-      .then(async response => {
-        if (!response.ok) {
-          throw await ResponseError.fromResponse(response);
-        }
-      });
+    const request = new Request(`${baseApiUrl}${input}`, {
+      ...{ method: 'DELETE' },
+      headers,
+    });
+
+    return fetch(request).then(async response => {
+      if (!response.ok) {
+        throw await ResponseError.fromResponse(response);
+      }
+    });
   }
 
   async announcements({
@@ -158,7 +167,7 @@ export class DefaultAnnouncementsApi implements AnnouncementsApi {
 
   async updateAnnouncement(
     id: string,
-    request: AnnouncementFormInputs,
+    request: CreateAnnouncementRequest,
   ): Promise<Announcement> {
     return this.fetch<Announcement>(`/announcements/${id}`, {
       method: 'PUT',
@@ -185,13 +194,12 @@ export class DefaultAnnouncementsApi implements AnnouncementsApi {
 
   lastSeenDate(): DateTime {
     const lastSeen = this.webStorage.get<string>(lastSeenKey);
-
     if (!lastSeen) {
       // magic default date, probably enough in the past to consider every announcement as "not seen"
-      return timestampToDateTime('1990-01-01');
+      return DateTime.fromISO('1990-01-01');
     }
 
-    return timestampToDateTime(lastSeen);
+    return DateTime.fromISO(lastSeen);
   }
 
   markLastSeenDate(date: DateTime): void {

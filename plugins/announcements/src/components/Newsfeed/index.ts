@@ -1,1 +1,0 @@
-export { Newsfeed } from './Newsfeed';

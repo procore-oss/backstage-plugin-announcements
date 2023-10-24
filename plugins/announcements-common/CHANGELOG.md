@@ -1,5 +1,11 @@
 # @procore-oss/backstage-plugin-announcements-common
 
+## 0.1.1
+
+### Patch Changes
+
+- 4f7a351: bump all packages
+
 ## 0.0.7
 
 ### Patch Changes

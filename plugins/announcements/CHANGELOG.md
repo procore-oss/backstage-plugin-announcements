@@ -1,5 +1,15 @@
 # @procore-oss/backstage-plugin-announcements
 
+## 0.2.3
+
+### Patch Changes
+
+- 90a19ec: upgrade backstage to v1.18.0
+- c3c379d: bump backstage to v1.16.0
+- Updated dependencies [90a19ec]
+- Updated dependencies [c3c379d]
+  - @procore-oss/backstage-plugin-announcements-common@0.1.2
+
 ## 0.2.2
 
 ### Patch Changes

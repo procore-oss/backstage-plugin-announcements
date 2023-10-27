@@ -1,8 +1,8 @@
 # Contributing Guidelines
 
-`backstage-plugin-announcements` is [MIT licensed](LICENSE) and accepts contributions via
+`backstage-plugin-announcements` is [MIT licensed](LICENSE.md) and accepts contributions via
 GitHub pull requests. This document outlines some of the conventions on
-development workflow, commit message formatting, contact points, and other
+the development workflow, commit message formatting, contact points, and other
 resources to make it easier to get your contribution accepted.
 
 Contributions are welcome, and they are greatly appreciated! Every little bit helps, and credit will always be given. ❤️
@@ -11,7 +11,7 @@ Contributions are welcome, and they are greatly appreciated! Every little bit he
 
 The official support channels, for both users and contributors, are:
 
-- GitHub [issues](https://github.com/K-Phoen/backstage-plugin-announcements/issues)
+- GitHub [issues](https://github.com/procore-oss/backstage-plugin-announcements/issues)
 
 ## How to Contribute
 
@@ -23,16 +23,18 @@ Pull Requests (PRs) are the main and exclusive way to contribute to the project.
 
 [Fork][fork], then clone the repository:
 
-```
+```bash
 git clone git@github.com:your_github_username/backstage-plugin-announcements.git
 cd backstage-plugin-announcements
-git remote add upstream https://github.com/K-Phoen/backstage-plugin-announcements.git
+git remote add upstream https://github.com/procore-oss/backstage-plugin-announcements.git
 git fetch upstream
 ```
 
 ### Install dependencies
 
-```
+```bash
+cp env.sample .env
+
 yarn install
 ```
 
@@ -41,7 +43,7 @@ yarn install
 A standalone development version of both the frontend and backend plugins are included in this repository.
 They can be started as follows:
 
-```
+```bash
 yarn dev # starts both the frontend and the backend in parallel
 yarn start # starts the frontend only
 yarn start-backend # starts the backend only
@@ -51,7 +53,7 @@ yarn start-backend # starts the backend only
 
 Start by creating a new branch for your changes:
 
-```
+```bash
 git checkout main
 git fetch upstream
 git rebase upstream/main
@@ -60,7 +62,7 @@ git checkout -b new-feature
 
 Make your changes, then ensure that `yarn lint` and `yarn test` still pass. If you're satisfied with your changes, push them to your fork.
 
-```
+```bash
 git push origin new-feature
 ```
 
@@ -92,5 +94,5 @@ In general, changesets are not needed for the documentation, build utilities or 
 
 For more information, checkout [adding a changeset](https://github.com/atlassian/changesets/blob/master/docs/adding-a-changeset.md) documentation in the changesets repository.
 
-[fork]: https://github.com/K-Phoen/backstage-plugin-announcements/fork
+[fork]: https://github.com/procore-oss/backstage-plugin-announcements/fork
 [commit-message]: http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html

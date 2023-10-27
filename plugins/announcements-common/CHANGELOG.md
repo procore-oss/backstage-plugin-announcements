@@ -1,4 +1,17 @@
-# @k-phoen/backstage-plugin-announcements-common
+# @procore-oss/backstage-plugin-announcements-common
+
+## 0.1.2
+
+### Patch Changes
+
+- 90a19ec: upgrade backstage to v1.18.0
+- c3c379d: bump backstage to v1.16.0
+
+## 0.1.1
+
+### Patch Changes
+
+- 4f7a351: bump all packages
 
 ## 0.0.7
 

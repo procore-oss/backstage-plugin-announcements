@@ -5,29 +5,15 @@
  */
 exports.up = async function up(knex) {
   await knex.schema.createTable('announcements', table => {
-    table.comment(
-      'The table for announcements.',
-    );
-    table
-      .text('id')
-      .notNullable()
-      .primary()
-      .comment('Announcement ID');
+    table.comment('The table for announcements.');
+    table.text('id').notNullable().primary().comment('Announcement ID');
     table
       .string('publisher')
       .notNullable()
       .comment('A catalog reference to the team publishing the announcement.');
-    table
-      .text('title')
-      .notNullable()
-      .comment('Title of the announcement.');
-    table
-      .text('excerpt')
-      .notNullable()
-      .comment('Short summary (one-liner).');
-    table
-      .text('body')
-      .notNullable();
+    table.text('title').notNullable().comment('Title of the announcement.');
+    table.text('excerpt').notNullable().comment('Short summary (one-liner).');
+    table.text('body').notNullable();
     table
       .timestamp('created_at')
       .notNullable()

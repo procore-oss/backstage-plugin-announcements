@@ -1,10 +1,6 @@
 {
   "extends": "@backstage/cli/config/tsconfig.json",
-  "include": [
-    "plugins/*/src",
-    "plugins/*/dev",
-    "plugins/*/migrations"
-  ],
+  "include": ["plugins/*/src", "plugins/*/dev", "plugins/*/migrations"],
   "exclude": ["node_modules"],
   "compilerOptions": {
     "outDir": "dist-types",

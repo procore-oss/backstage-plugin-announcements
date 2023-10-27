@@ -40,7 +40,7 @@ type AnnouncementsList = {
   results: Announcement[];
 };
 
-const timestampToDateTime = (input: Date | string): DateTime => {
+export const timestampToDateTime = (input: Date | string): DateTime => {
   if (typeof input === 'object') {
     return DateTime.fromJSDate(input).toUTC();
   }

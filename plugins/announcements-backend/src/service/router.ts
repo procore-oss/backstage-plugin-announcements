@@ -14,8 +14,10 @@ import {
   announcementCreatePermission,
   announcementDeletePermission,
   announcementUpdatePermission,
-} from '@k-phoen/backstage-plugin-announcements-common';
+  announcementEntityPermissions,
+} from '@procore-oss/backstage-plugin-announcements-common';
 import { AnnouncementsContext } from './announcementsContextBuilder';
+import { createPermissionIntegrationRouter } from '@backstage/plugin-permission-node';
 
 interface AnnouncementRequest {
   publisher: string;
@@ -33,6 +35,10 @@ export async function createRouter(
   options: AnnouncementsContext,
 ): Promise<express.Router> {
   const { persistenceContext, permissions } = options;
+
+  const permissionIntegrationRouter = createPermissionIntegrationRouter({
+    permissions: Object.values(announcementEntityPermissions),
+  });
 
   const isRequestAuthorized = async (
     req: Request,
@@ -53,6 +59,7 @@ export async function createRouter(
 
   const router = Router();
   router.use(express.json());
+  router.use(permissionIntegrationRouter);
 
   // eslint-disable-next-line spaced-comment
   /*****************

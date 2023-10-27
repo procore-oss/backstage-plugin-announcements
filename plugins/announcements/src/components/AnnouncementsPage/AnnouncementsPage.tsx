@@ -17,7 +17,6 @@ import {
   Progress,
   ContentHeader,
   LinkButton,
-  InfoCard,
 } from '@backstage/core-components';
 import { alertApiRef, useApi, useRouteRef } from '@backstage/core-plugin-api';
 import { parseEntityRef } from '@backstage/catalog-model';
@@ -28,10 +27,15 @@ import {
 import Alert from '@material-ui/lab/Alert';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
+import MoreVertIcon from '@material-ui/icons/MoreVert';
 import {
-  Button,
-  CardActions,
+  Card,
   CardContent,
+  CardHeader,
+  IconButton,
+  ListItemIcon,
+  Menu,
+  MenuItem,
   makeStyles,
 } from '@material-ui/core';
 import {
@@ -49,6 +53,7 @@ import { ContextMenu } from './ContextMenu';
 const useStyles = makeStyles(theme => ({
   cardHeader: {
     color: theme.palette.text.primary,
+    fontSize: '1.5rem',
   },
   pagination: {
     display: 'flex',
@@ -79,8 +84,8 @@ const AnnouncementCard = ({
       {announcement.title}
     </Link>
   );
-  const subHeader = (
-    <span>
+  const subTitle = (
+    <>
       By{' '}
       <EntityPeekAheadPopover entityRef={announcement.publisher}>
         <Link to={entityLink(publisherRef)}>{publisherRef.name}</Link>
@@ -97,32 +102,72 @@ const AnnouncementCard = ({
         </>
       )}
       , {DateTime.fromISO(announcement.created_at).toRelative()}
-    </span>
+    </>
   );
   const { loading: loadingDeletePermission, allowed: canDelete } =
     usePermission({ permission: announcementDeletePermission });
   const { loading: loadingUpdatePermission, allowed: canUpdate } =
     usePermission({ permission: announcementUpdatePermission });
 
+  const AnnouncementEditMenu = () => {
+    const [open, setOpen] = React.useState(false);
+    const [anchorEl, setAnchorEl] = React.useState<undefined | HTMLElement>(
+      undefined,
+    );
+
+    const handleOpenEditMenu = (event: React.MouseEvent<HTMLButtonElement>) => {
+      setAnchorEl(event.currentTarget);
+      setOpen(true);
+    };
+
+    const handleCloseEditClose = () => {
+      setAnchorEl(undefined);
+      setOpen(false);
+    };
+    return (
+      <>
+        <IconButton
+          data-testid="announcement-edit-menu"
+          aria-label="more"
+          onClick={handleOpenEditMenu}
+        >
+          <MoreVertIcon />
+        </IconButton>
+        <Menu anchorEl={anchorEl} open={open} onClose={handleCloseEditClose}>
+          {!loadingUpdatePermission && canUpdate && (
+            <MenuItem
+              data-testid="edit-announcement"
+              component={LinkButton}
+              to={editAnnouncementLink({ id: announcement.id })}
+            >
+              <ListItemIcon>
+                <EditIcon />
+              </ListItemIcon>
+              EDIT
+            </MenuItem>
+          )}
+          {!loadingDeletePermission && canDelete && (
+            <MenuItem onClick={onDelete}>
+              <ListItemIcon>
+                <DeleteIcon />
+              </ListItemIcon>
+              DELETE
+            </MenuItem>
+          )}
+        </Menu>
+      </>
+    );
+  };
+
   return (
-    <InfoCard title={title} subheader={subHeader}>
+    <Card>
+      <CardHeader
+        action={<AnnouncementEditMenu />}
+        title={title}
+        subheader={subTitle}
+      />
       <CardContent>{announcement.excerpt}</CardContent>
-      <CardActions>
-        {!loadingUpdatePermission && canUpdate && (
-          <LinkButton
-            to={editAnnouncementLink({ id: announcement.id })}
-            color="default"
-          >
-            <EditIcon />
-          </LinkButton>
-        )}
-        {!loadingDeletePermission && canDelete && (
-          <Button onClick={onDelete} color="default">
-            <DeleteIcon />
-          </Button>
-        )}
-      </CardActions>
-    </InfoCard>
+    </Card>
   );
 };
 

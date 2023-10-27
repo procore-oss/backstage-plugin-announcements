@@ -15,9 +15,9 @@ import {
   Link,
   ItemCardGrid,
   Progress,
-  ItemCardHeader,
   ContentHeader,
   LinkButton,
+  InfoCard,
 } from '@backstage/core-components';
 import { alertApiRef, useApi, useRouteRef } from '@backstage/core-plugin-api';
 import { parseEntityRef } from '@backstage/catalog-model';
@@ -30,10 +30,8 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import {
   Button,
-  Card,
   CardActions,
   CardContent,
-  CardMedia,
   makeStyles,
 } from '@material-ui/core';
 import {
@@ -81,8 +79,8 @@ const AnnouncementCard = ({
       {announcement.title}
     </Link>
   );
-  const subTitle = (
-    <>
+  const subHeader = (
+    <span>
       By{' '}
       <EntityPeekAheadPopover entityRef={announcement.publisher}>
         <Link to={entityLink(publisherRef)}>{publisherRef.name}</Link>
@@ -99,7 +97,7 @@ const AnnouncementCard = ({
         </>
       )}
       , {DateTime.fromISO(announcement.created_at).toRelative()}
-    </>
+    </span>
   );
   const { loading: loadingDeletePermission, allowed: canDelete } =
     usePermission({ permission: announcementDeletePermission });
@@ -107,10 +105,7 @@ const AnnouncementCard = ({
     usePermission({ permission: announcementUpdatePermission });
 
   return (
-    <Card>
-      <CardMedia>
-        <ItemCardHeader title={title} subtitle={subTitle} />
-      </CardMedia>
+    <InfoCard title={title} subheader={subHeader}>
       <CardContent>{announcement.excerpt}</CardContent>
       <CardActions>
         {!loadingUpdatePermission && canUpdate && (
@@ -127,7 +122,7 @@ const AnnouncementCard = ({
           </Button>
         )}
       </CardActions>
-    </Card>
+    </InfoCard>
   );
 };
 

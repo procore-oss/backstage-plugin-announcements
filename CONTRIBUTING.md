@@ -33,6 +33,8 @@ git fetch upstream
 ### Install dependencies
 
 ```bash
+cp env.sample .env
+
 yarn install
 ```
 

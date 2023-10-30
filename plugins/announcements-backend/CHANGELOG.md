@@ -1,5 +1,17 @@
 # @procore-oss/backstage-plugin-announcements-backend
 
+## 0.4.0
+
+### Minor Changes
+
+- 43e6b6a: Exposes the announcements plugin's permissions in a metadata endpoint
+
+### Patch Changes
+
+- bce49e0: Improves test coverage significantly for the backend plugin
+- 24df174: chore: bump dev dependencies where possible
+- c81ae81: Fix AnnouncementCollatorApi iterable error
+
 ## 0.3.5
 
 ### Patch Changes

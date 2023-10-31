@@ -1,5 +1,15 @@
 # @procore-oss/backstage-plugin-announcements
 
+## 0.3.0
+
+### Minor Changes
+
+- 668636c: This change modifies the announcements plugin to use the backstage fetch api, making it compatible with any backstage implementation using any fetch api customization.
+
+### Patch Changes
+
+- 24df174: chore: bump dev dependencies where possible
+
 ## 0.2.3
 
 ### Patch Changes

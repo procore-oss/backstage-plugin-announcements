@@ -10,12 +10,14 @@ import {
   announcementEditRouteRef,
   announcementViewRouteRef,
   categoriesListRouteRef,
+  adminRouteRef,
 } from '../routes';
 import { AnnouncementsPage } from './AnnouncementsPage';
 import { AnnouncementPage } from './AnnouncementPage';
 import { CreateAnnouncementPage } from './CreateAnnouncementPage';
 import { EditAnnouncementPage } from './EditAnnouncementPage';
 import { CategoriesPage } from './CategoriesPage';
+import { AdminPage } from './AdminPage/AdminPage';
 
 type RouterProps = {
   themeId?: string;
@@ -30,9 +32,19 @@ export const Router = (props: RouterProps) => {
     ...props,
   };
 
+  const adminPropsWithDefaults = {
+    themeId: 'home',
+    title: 'Admin Portal',
+    ...props,
+  };
+
   return (
     <Routes>
       <Route path="/" element={<AnnouncementsPage {...propsWithDefaults} />} />
+      <Route
+        path={adminRouteRef.path}
+        element={<AdminPage {...adminPropsWithDefaults} />}
+      />
       <Route
         path={`${announcementViewRouteRef.path}`}
         element={<AnnouncementPage {...propsWithDefaults} />}

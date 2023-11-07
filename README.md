@@ -17,7 +17,7 @@ This plugin provides:
 - integration with the [`@backstage/plugin-search`](https://github.com/backstage/backstage/tree/master/plugins/search) plugin
 - integration with the [`@backstage/plugin-permission-backend`](https://github.com/backstage/backstage/tree/master/plugins/permission-backend) plugin
 
-## Setup
+## Installation
 
 Find [installation instructions](./docs/index.md#installation) in our documentation.
 

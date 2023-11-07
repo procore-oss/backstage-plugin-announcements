@@ -1,15 +1,12 @@
-# Announcements plugin for Backstage
+# backstage-plugin-announcements
 
-The Announcements plugin is a frontend, backend, and common plugin that manages and displays announcements within Backstage.
+This is the frontend for the Announcements plugin. This plugin provides:
 
-This plugin provides:
-
-- a component to display the latest announcements, for example on a homepage
 - a component to display the latest announcements, for example on a homepage
 - pages to list, view, create, edit and delete announcements
-- integration with the [`@backstage/plugin-search`](https://github.com/backstage/backstage/tree/master/plugins/search) plugin
-- integration with the [`@backstage/plugin-permission-backend`](https://github.com/backstage/backstage/tree/master/plugins/permission-backend) plugin
 
-## Setup
+## Installation
 
 See [the project's README](../../README.md).
+
+Are you looking to install the announcements plugin? See the project's [installation guide](../../docs/setup.md).

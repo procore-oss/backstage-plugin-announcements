@@ -1,15 +1,67 @@
-# Announcements plugin for Backstage
+# backstage-plugin-announcements-backend
 
-The Announcements plugin is both a frontend and a backend plugin that manages and displays announcements within Backstage.
+This is the backend for the Announcements plugin. This plugin provides:
 
-This plugin provides:
+- REST APIs for managing announcements and categories
+- Integration with the [`@backstage/plugin-search`](https://github.com/backstage/backstage/tree/master/plugins/search) plugin
+- Integration with the [`@backstage/plugin-permission-backend`](https://github.com/backstage/backstage/tree/master/plugins/permission-backend) plugin
 
-- a component to display the latest announcement as a banner, if there is one
-- a component to display the latest announcements, for example on a homepage
-- pages to list, view, create, edit and delete announcements
-- integration with the [`@backstage/plugin-search`](https://github.com/backstage/backstage/tree/master/plugins/search) plugin
-- integration with the [`@backstage/plugin-permission-backend`](https://github.com/backstage/backstage/tree/master/plugins/permission-backend) plugin
+## Installation
 
-## Setup
+Are you looking to install the announcements plugin? See the project's [installation guide](../../docs/index.md).
 
-See [the project's README](../../README.md).
+## Local development
+
+### Setup
+
+```sh
+# install dependencies
+yarn install
+
+# start the backend
+yarn start
+```
+
+### Database
+
+The plugin includes a better-sqlite3 database seeded with categories and announcements.
+
+With the backend running,
+
+```sh
+# runs migrations and seeds the database
+yarn db:setup
+```
+
+This will create a `local.sqlite` file under the `db/` directory.
+
+#### Other commands
+
+```sh
+# run migrations
+yarn db:migrations
+
+# seed the database
+yarn db:seed
+```
+
+Visit [knexjs](https://knexjs.org/guide/migrations.html) to learn more about the database migrations and seeding.
+
+### API Examples
+
+```sh
+# get all announcements
+curl http://localhost:7007/api/announcements/announcements
+
+# get all categories
+curl http://localhost:7007/api/categories
+```
+
+```ts
+// get all announcements
+const response = await fetch(
+  'http://localhost:7007/api/announcements/announcements',
+);
+const data = await response.json();
+return data;
+```

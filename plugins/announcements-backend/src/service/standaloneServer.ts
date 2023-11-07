@@ -37,7 +37,9 @@ export async function startStandaloneServer(
   const database = useHotMemoize(module, () => {
     return Knex({
       client: 'better-sqlite3',
-      connection: ':memory:',
+      connection: {
+        filename: 'db/local.sqlite',
+      },
       useNullAsDefault: true,
     });
   });

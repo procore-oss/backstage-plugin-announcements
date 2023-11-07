@@ -7,7 +7,7 @@ import { CategoriesDatabase } from './CategoriesDatabase';
 
 const migrationsDir = resolvePackagePath(
   '@procore-oss/backstage-plugin-announcements-backend',
-  'migrations',
+  'db/migrations',
 );
 
 /**

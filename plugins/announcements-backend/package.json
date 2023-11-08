@@ -67,6 +67,6 @@
   },
   "files": [
     "dist",
-    "migrations/**/*.{js,d.ts}"
+    "db/migrations/**/*.{js,d.ts}"
   ]
 }

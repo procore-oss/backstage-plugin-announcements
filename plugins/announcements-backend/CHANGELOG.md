@@ -1,5 +1,11 @@
 # @procore-oss/backstage-plugin-announcements-backend
 
+## 0.5.1
+
+### Patch Changes
+
+- 857c323: set correct build database migrations folder path
+
 ## 0.5.0
 
 ### Minor Changes

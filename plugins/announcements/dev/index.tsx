@@ -18,7 +18,7 @@ import {
   AnnouncementsCard,
   NewAnnouncementBanner,
 } from '../src/plugin';
-import { AdminPage } from '../src/components/AdminPage/AdminPage';
+import { AdminPage } from '../src/components/admin/AdminPage/AdminPage';
 
 const mockCatalogApi = {
   getEntityByRef: async (entityRef: string) => {

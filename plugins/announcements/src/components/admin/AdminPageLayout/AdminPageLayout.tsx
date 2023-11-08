@@ -3,7 +3,7 @@ import { Button, Grid } from '@material-ui/core';
 import { Content, Progress } from '@backstage/core-components';
 import useAsyncRetry from 'react-use/lib/useAsyncRetry';
 import { useApi } from '@backstage/core-plugin-api';
-import { Announcement, announcementsApiRef } from '../../api';
+import { Announcement, announcementsApiRef } from '../../../api';
 import { AdminAnnouncementList } from '../AdminAnnouncementList';
 import { AdminEditAnnouncement } from '../AdminEditAnnouncement';
 import { AdminCreateAnnouncement } from '../AdminCreateAnnouncement';
@@ -15,6 +15,7 @@ export const AdminPageLayout = ({ allowed }: { allowed: boolean }) => {
   );
 
   const [creatingNew, setCreatingNew] = useState(true);
+  const [isFormSubmitted, setIsFormSubmitted] = useState(false);
 
   const {
     value: announcementsList,
@@ -22,8 +23,12 @@ export const AdminPageLayout = ({ allowed }: { allowed: boolean }) => {
     error,
   } = useAsyncRetry(
     async () => announcementsApi.announcements({}),
-    [announcementsApi],
+    [announcementsApi, isFormSubmitted],
   );
+
+  const handleFormSubmitted = () => {
+    setIsFormSubmitted(!isFormSubmitted);
+  };
 
   const handleClick = (next: Announcement) => {
     setCreatingNew(false);
@@ -58,8 +63,17 @@ export const AdminPageLayout = ({ allowed }: { allowed: boolean }) => {
           />
         </Grid>
         <Grid item xs={8}>
-          {creatingNew && <AdminCreateAnnouncement />}
-          {!creatingNew && <AdminEditAnnouncement id={announcement.id} />}
+          {creatingNew && (
+            <AdminCreateAnnouncement
+              handleFormSubmitted={handleFormSubmitted}
+            />
+          )}
+          {!creatingNew && (
+            <AdminEditAnnouncement
+              handleFormSubmitted={handleFormSubmitted}
+              id={announcement.id}
+            />
+          )}
         </Grid>
       </Grid>
     </Content>

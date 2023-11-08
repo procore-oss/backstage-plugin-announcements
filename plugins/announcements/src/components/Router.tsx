@@ -17,7 +17,7 @@ import { AnnouncementPage } from './AnnouncementPage';
 import { CreateAnnouncementPage } from './CreateAnnouncementPage';
 import { EditAnnouncementPage } from './EditAnnouncementPage';
 import { CategoriesPage } from './CategoriesPage';
-import { AdminPage } from './AdminPage/AdminPage';
+import { AdminPage } from './admin/AdminPage/AdminPage';
 
 type RouterProps = {
   themeId?: string;

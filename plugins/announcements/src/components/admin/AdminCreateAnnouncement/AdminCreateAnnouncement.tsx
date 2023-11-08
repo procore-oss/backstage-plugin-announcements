@@ -5,11 +5,15 @@ import {
   Announcement,
   announcementsApiRef,
   CreateAnnouncementRequest,
-} from '../../api';
-import { adminRouteRef } from '../../routes';
-import { AnnouncementForm } from '../AnnouncementForm';
+} from '../../../api';
+import { adminRouteRef } from '../../../routes';
+import { AnnouncementForm } from '../../AnnouncementForm';
 
-export const AdminCreateAnnouncement = () => {
+export const AdminCreateAnnouncement = ({
+  handleFormSubmitted,
+}: {
+  handleFormSubmitted: () => void;
+}) => {
   const announcementsApi = useApi(announcementsApiRef);
   const adminPage = useRouteRef(adminRouteRef);
   const alertApi = useApi(alertApiRef);
@@ -19,6 +23,7 @@ export const AdminCreateAnnouncement = () => {
     try {
       await announcementsApi.createAnnouncement(request);
       alertApi.post({ message: 'Announcement created.', severity: 'success' });
+      handleFormSubmitted();
 
       navigate(adminPage());
     } catch (err) {

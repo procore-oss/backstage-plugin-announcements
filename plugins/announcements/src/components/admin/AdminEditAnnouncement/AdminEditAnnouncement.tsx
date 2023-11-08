@@ -1,18 +1,20 @@
 import React from 'react';
 import { useAsync } from 'react-use';
 import { Progress } from '@backstage/core-components';
-import { alertApiRef, useApi, useRouteRef } from '@backstage/core-plugin-api';
+import { alertApiRef, useApi } from '@backstage/core-plugin-api';
 import { Alert } from '@material-ui/lab';
-import { AnnouncementForm } from '../AnnouncementForm';
-import { announcementsApiRef, CreateAnnouncementRequest } from '../../api';
-import { useNavigate } from 'react-router-dom';
-import { adminRouteRef } from '../../routes';
+import { AnnouncementForm } from '../../AnnouncementForm';
+import { announcementsApiRef, CreateAnnouncementRequest } from '../../../api';
 
-export const AdminEditAnnouncement = ({ id }: { id: string }) => {
+export const AdminEditAnnouncement = ({
+  id,
+  handleFormSubmitted,
+}: {
+  id: string;
+  handleFormSubmitted: () => void;
+}) => {
   const announcementsApi = useApi(announcementsApiRef);
   const alertApi = useApi(alertApiRef);
-  const adminPage = useRouteRef(adminRouteRef);
-  const navigate = useNavigate();
 
   const {
     value: announcement,
@@ -24,7 +26,7 @@ export const AdminEditAnnouncement = ({ id }: { id: string }) => {
     try {
       await announcementsApi.updateAnnouncement(id, request);
       alertApi.post({ message: 'Announcement updated.', severity: 'success' });
-      navigate(adminPage());
+      handleFormSubmitted();
     } catch (err) {
       alertApi.post({ message: (err as Error).message, severity: 'error' });
     }

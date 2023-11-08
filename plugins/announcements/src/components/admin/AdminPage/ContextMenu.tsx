@@ -10,7 +10,7 @@ import Popover from '@material-ui/core/Popover';
 import { makeStyles } from '@material-ui/core/styles';
 import Description from '@material-ui/icons/Description';
 import MoreVert from '@material-ui/icons/MoreVert';
-import { categoriesListRouteRef } from '../../routes';
+import { categoriesListRouteRef } from '../../../routes';
 
 const useStyles = makeStyles({
   button: {

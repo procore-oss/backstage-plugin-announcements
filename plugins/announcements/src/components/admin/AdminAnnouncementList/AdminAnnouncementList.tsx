@@ -7,7 +7,7 @@ import {
   ListItemText,
   Typography,
 } from '@material-ui/core';
-import { Announcement, AnnouncementsList } from '../../api';
+import { Announcement, AnnouncementsList } from '../../../api';
 
 export const AdminAnnouncementList = ({
   announcements,

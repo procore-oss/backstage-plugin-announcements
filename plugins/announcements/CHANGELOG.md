@@ -1,5 +1,11 @@
 # @procore-oss/backstage-plugin-announcements
 
+## 0.4.0
+
+### Minor Changes
+
+- 95c94c0: Update announcement card layout. That fixes color font that was incorrect with light theme
+
 ## 0.3.1
 
 ### Patch Changes

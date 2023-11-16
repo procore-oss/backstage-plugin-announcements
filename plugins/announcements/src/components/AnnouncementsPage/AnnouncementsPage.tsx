@@ -15,7 +15,6 @@ import {
   Link,
   ItemCardGrid,
   Progress,
-  ItemCardHeader,
   ContentHeader,
   LinkButton,
 } from '@backstage/core-components';
@@ -28,12 +27,15 @@ import {
 import Alert from '@material-ui/lab/Alert';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
+import MoreVertIcon from '@material-ui/icons/MoreVert';
 import {
-  Button,
   Card,
-  CardActions,
   CardContent,
-  CardMedia,
+  CardHeader,
+  IconButton,
+  ListItemIcon,
+  Menu,
+  MenuItem,
   makeStyles,
 } from '@material-ui/core';
 import {
@@ -51,6 +53,7 @@ import { ContextMenu } from './ContextMenu';
 const useStyles = makeStyles(theme => ({
   cardHeader: {
     color: theme.palette.text.primary,
+    fontSize: '1.5rem',
   },
   pagination: {
     display: 'flex',
@@ -106,27 +109,64 @@ const AnnouncementCard = ({
   const { loading: loadingUpdatePermission, allowed: canUpdate } =
     usePermission({ permission: announcementUpdatePermission });
 
+  const AnnouncementEditMenu = () => {
+    const [open, setOpen] = React.useState(false);
+    const [anchorEl, setAnchorEl] = React.useState<undefined | HTMLElement>(
+      undefined,
+    );
+
+    const handleOpenEditMenu = (event: React.MouseEvent<HTMLButtonElement>) => {
+      setAnchorEl(event.currentTarget);
+      setOpen(true);
+    };
+
+    const handleCloseEditClose = () => {
+      setAnchorEl(undefined);
+      setOpen(false);
+    };
+    return (
+      <>
+        <IconButton
+          data-testid="announcement-edit-menu"
+          aria-label="more"
+          onClick={handleOpenEditMenu}
+        >
+          <MoreVertIcon />
+        </IconButton>
+        <Menu anchorEl={anchorEl} open={open} onClose={handleCloseEditClose}>
+          {!loadingUpdatePermission && canUpdate && (
+            <MenuItem
+              data-testid="edit-announcement"
+              component={LinkButton}
+              to={editAnnouncementLink({ id: announcement.id })}
+            >
+              <ListItemIcon>
+                <EditIcon />
+              </ListItemIcon>
+              EDIT
+            </MenuItem>
+          )}
+          {!loadingDeletePermission && canDelete && (
+            <MenuItem onClick={onDelete}>
+              <ListItemIcon>
+                <DeleteIcon />
+              </ListItemIcon>
+              DELETE
+            </MenuItem>
+          )}
+        </Menu>
+      </>
+    );
+  };
+
   return (
     <Card>
-      <CardMedia>
-        <ItemCardHeader title={title} subtitle={subTitle} />
-      </CardMedia>
+      <CardHeader
+        action={<AnnouncementEditMenu />}
+        title={title}
+        subheader={subTitle}
+      />
       <CardContent>{announcement.excerpt}</CardContent>
-      <CardActions>
-        {!loadingUpdatePermission && canUpdate && (
-          <LinkButton
-            to={editAnnouncementLink({ id: announcement.id })}
-            color="default"
-          >
-            <EditIcon />
-          </LinkButton>
-        )}
-        {!loadingDeletePermission && canDelete && (
-          <Button onClick={onDelete} color="default">
-            <DeleteIcon />
-          </Button>
-        )}
-      </CardActions>
     </Card>
   );
 };

@@ -1,6 +1,6 @@
 {
   "name": "@procore-oss/backstage-plugin-announcements-backend",
-  "version": "0.4.0",
+  "version": "0.5.1",
   "main": "src/index.ts",
   "types": "src/index.ts",
   "license": "MIT",
@@ -67,6 +67,6 @@
   },
   "files": [
     "dist",
-    "migrations/**/*.{js,d.ts}"
+    "db/migrations/**/*.{js,d.ts}"
   ]
 }

@@ -1,5 +1,11 @@
 # @procore-oss/backstage-plugin-announcements
 
+## 0.3.1
+
+### Patch Changes
+
+- 4968543: The backend now contains a local seeded database with announcements and categories. The README file was updated to include instructions on how to set things up. Minor documentation edits were made across the project to align with the format updates in the backend's readme.
+
 ## 0.3.0
 
 ### Minor Changes

@@ -36,6 +36,7 @@ import {
   ListItemIcon,
   Menu,
   MenuItem,
+  Tooltip,
   makeStyles,
 } from '@material-ui/core';
 import {
@@ -62,6 +63,16 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
+/**
+ * Truncate text to a given length and add ellipsis
+ * @param text the text to truncate
+ * @param length the length to truncate to
+ * @returns the truncated text
+ */
+const truncate = (text: string, length: number) => {
+  return text.length > length ? `${text.substring(0, length)}...` : text;
+};
+
 const AnnouncementCard = ({
   announcement,
   onDelete,
@@ -79,12 +90,18 @@ const AnnouncementCard = ({
 
   const publisherRef = parseEntityRef(announcement.publisher);
   const title = (
-    <Link
-      className={classes.cardHeader}
-      to={viewAnnouncementLink({ id: announcement.id })}
+    <Tooltip
+      title={announcement.title}
+      disableFocusListener
+      data-testid="announcement-card-title-tooltip"
     >
-      {announcement.title.substring(0, titleLength)}
-    </Link>
+      <Link
+        className={classes.cardHeader}
+        to={viewAnnouncementLink({ id: announcement.id })}
+      >
+        {truncate(announcement.title, titleLength)}
+      </Link>
+    </Tooltip>
   );
   const subTitle = (
     <>

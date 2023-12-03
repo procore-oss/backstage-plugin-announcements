@@ -21,6 +21,9 @@ type RouterProps = {
   themeId?: string;
   title?: string;
   subtitle?: string;
+  cardOptions?: {
+    titleLength: number | undefined;
+  };
 };
 
 export const Router = (props: RouterProps) => {

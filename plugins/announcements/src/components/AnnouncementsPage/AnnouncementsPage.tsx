@@ -65,9 +65,11 @@ const useStyles = makeStyles(theme => ({
 const AnnouncementCard = ({
   announcement,
   onDelete,
+  options: { titleLength = 50 },
 }: {
   announcement: Announcement;
   onDelete: () => void;
+  options: AnnouncementCardProps;
 }) => {
   const classes = useStyles();
   const announcementsLink = useRouteRef(rootRouteRef);
@@ -81,7 +83,7 @@ const AnnouncementCard = ({
       className={classes.cardHeader}
       to={viewAnnouncementLink({ id: announcement.id })}
     >
-      {announcement.title}
+      {announcement.title.substring(0, titleLength)}
     </Link>
   );
   const subTitle = (
@@ -174,9 +176,11 @@ const AnnouncementCard = ({
 const AnnouncementsGrid = ({
   maxPerPage,
   category,
+  cardTitleLength,
 }: {
   maxPerPage: number;
   category?: string;
+  cardTitleLength?: number;
 }) => {
   const classes = useStyles();
   const announcementsApi = useApi(announcementsApiRef);
@@ -230,11 +234,12 @@ const AnnouncementsGrid = ({
   return (
     <>
       <ItemCardGrid>
-        {announcementsList?.results!.map((announcement, index) => (
+        {announcementsList?.results!.map(announcement => (
           <AnnouncementCard
-            key={index}
+            key={announcement.id}
             announcement={announcement}
             onDelete={() => openDeleteDialog(announcement)}
+            options={{ titleLength: cardTitleLength }}
           />
         ))}
       </ItemCardGrid>
@@ -258,12 +263,17 @@ const AnnouncementsGrid = ({
   );
 };
 
+type AnnouncementCardProps = {
+  titleLength?: number;
+};
+
 type AnnouncementsPageProps = {
   themeId: string;
   title: string;
   subtitle?: ReactNode;
   maxPerPage?: number;
   category?: string;
+  cardOptions?: AnnouncementCardProps;
 };
 
 export const AnnouncementsPage = (props: AnnouncementsPageProps) => {
@@ -296,6 +306,7 @@ export const AnnouncementsPage = (props: AnnouncementsPageProps) => {
         <AnnouncementsGrid
           maxPerPage={props.maxPerPage ?? 10}
           category={props.category ?? queryParams.get('category') ?? undefined}
+          cardTitleLength={props.cardOptions?.titleLength}
         />
       </Content>
     </Page>

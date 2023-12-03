@@ -65,7 +65,7 @@ createDevApp()
   .registerPlugin(fakeCatalogPlugin)
   .registerPlugin(announcementsPlugin)
   .addPage({
-    element: <AnnouncementsPage />,
+    element: <AnnouncementsPage cardOptions={{ titleLength: 50 }} />,
     title: 'Root Page',
     path: '/announcements',
   })

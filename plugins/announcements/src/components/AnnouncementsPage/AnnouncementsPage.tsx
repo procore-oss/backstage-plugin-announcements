@@ -90,12 +90,18 @@ const AnnouncementCard = ({
 
   const publisherRef = parseEntityRef(announcement.publisher);
   const title = (
-    <Link
-      className={classes.cardHeader}
-      to={viewAnnouncementLink({ id: announcement.id })}
+    <Tooltip
+      title={announcement.title}
+      disableFocusListener
+      data-testid="announcement-card-title-tooltip"
     >
-      {truncate(announcement.title, titleLength)}
-    </Link>
+      <Link
+        className={classes.cardHeader}
+        to={viewAnnouncementLink({ id: announcement.id })}
+      >
+        {truncate(announcement.title, titleLength)}
+      </Link>
+    </Tooltip>
   );
   const subTitle = (
     <>

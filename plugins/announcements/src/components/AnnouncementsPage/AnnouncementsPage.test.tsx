@@ -9,6 +9,7 @@ import { rootRouteRef } from '../../routes';
 import { permissionApiRef } from '@backstage/plugin-permission-react';
 import { announcementsApiRef } from '../../api';
 import { catalogApiRef, entityRouteRef } from '@backstage/plugin-catalog-react';
+import { fireEvent } from '@testing-library/react';
 
 const mockAnnouncements = [
   {
@@ -103,7 +104,12 @@ describe('AnnouncementsPage', () => {
       );
       expect(rendered.getByText('Announcements')).toBeInTheDocument();
       expect(rendered.queryByText('announcement-title')).toBeNull();
-      expect(rendered.getByText('announcement-')).toBeInTheDocument();
+      expect(rendered.getByText('announcement-...')).toBeInTheDocument();
+
+      fireEvent.mouseOver(rendered.getByText('announcement-...'));
+      expect(
+        await rendered.findByText('announcement-title'),
+      ).toBeInTheDocument();
     });
   });
 });

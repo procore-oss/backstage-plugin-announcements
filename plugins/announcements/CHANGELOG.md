@@ -1,5 +1,12 @@
 # @procore-oss/backstage-plugin-announcements
 
+## 0.4.1
+
+### Patch Changes
+
+- ee9984f: Allows a user to specify the title length for the list of Announcement cards. This is useful if you would like to truncate all titles to keep cards consistent
+- 38eab72: Announcement cards will now display truncated titles with an ellipsis. Hovering over the title will display a tooltip with the full title.
+
 ## 0.4.0
 
 ### Minor Changes

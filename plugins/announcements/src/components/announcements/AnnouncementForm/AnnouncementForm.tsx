@@ -12,7 +12,7 @@ import {
   Announcement,
   announcementsApiRef,
   CreateAnnouncementRequest,
-} from '../../api';
+} from '../../../api';
 import { Autocomplete } from '@material-ui/lab';
 import { useAsync } from 'react-use';
 

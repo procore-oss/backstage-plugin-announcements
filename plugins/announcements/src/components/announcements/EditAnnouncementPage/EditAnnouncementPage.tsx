@@ -8,8 +8,8 @@ import {
 } from '@backstage/core-plugin-api';
 import { Alert } from '@material-ui/lab';
 import { AnnouncementForm } from '../AnnouncementForm';
-import { announcementEditRouteRef } from '../../routes';
-import { announcementsApiRef, CreateAnnouncementRequest } from '../../api';
+import { announcementEditRouteRef } from '../../../routes';
+import { announcementsApiRef, CreateAnnouncementRequest } from '../../../api';
 
 type EditAnnouncementPageProps = {
   themeId: string;

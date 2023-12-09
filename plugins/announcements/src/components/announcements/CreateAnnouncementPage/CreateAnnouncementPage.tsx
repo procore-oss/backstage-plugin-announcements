@@ -6,8 +6,8 @@ import {
   Announcement,
   announcementsApiRef,
   CreateAnnouncementRequest,
-} from '../../api';
-import { rootRouteRef } from '../../routes';
+} from '../../../api';
+import { rootRouteRef } from '../../../routes';
 import { AnnouncementForm } from '../AnnouncementForm';
 
 type CreateAnnouncementPageProps = {

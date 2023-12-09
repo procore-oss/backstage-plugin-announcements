@@ -13,7 +13,7 @@ import {
   SearchResultListItemExtensionProps,
 } from '@backstage/plugin-search-react';
 import { announcementsApiRef, DefaultAnnouncementsApi } from './api';
-import { AnnouncementSearchResultProps } from './components/AnnouncementSearchResultListItem';
+import { AnnouncementSearchResultProps } from './components/announcements/AnnouncementSearchResultListItem';
 import { rootRouteRef } from './routes';
 
 export const announcementsPlugin = createPlugin({
@@ -67,7 +67,7 @@ export const NewAnnouncementBanner = announcementsPlugin.provide(
     name: 'NewAnnouncementBanner',
     component: {
       lazy: () =>
-        import('./components/NewAnnouncementBanner').then(
+        import('./components/announcements/NewAnnouncementBanner').then(
           m => m.NewAnnouncementBanner,
         ),
     },
@@ -80,9 +80,9 @@ export const AnnouncementSearchResultListItem: (
   createSearchResultListItemExtension({
     name: 'AnnouncementSearchResultListItem',
     component: () =>
-      import('./components/AnnouncementSearchResultListItem').then(
-        m => m.AnnouncementSearchResultListItem,
-      ),
+      import(
+        './components/announcements/AnnouncementSearchResultListItem'
+      ).then(m => m.AnnouncementSearchResultListItem),
     predicate: result => result.type === 'announcements',
   }),
 );

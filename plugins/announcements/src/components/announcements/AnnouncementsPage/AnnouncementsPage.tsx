@@ -44,8 +44,8 @@ import {
   announcementEditRouteRef,
   announcementViewRouteRef,
   rootRouteRef,
-} from '../../routes';
-import { Announcement, announcementsApiRef } from '../../api';
+} from '../../../routes';
+import { Announcement, announcementsApiRef } from '../../../api';
 import { DeleteAnnouncementDialog } from './DeleteAnnouncementDialog';
 import { useDeleteAnnouncementDialogState } from './useDeleteAnnouncementDialogState';
 import { Pagination } from '@material-ui/lab';

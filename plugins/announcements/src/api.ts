@@ -5,9 +5,9 @@ import {
   DiscoveryApi,
   ErrorApi,
   IdentityApi,
+  FetchApi,
 } from '@backstage/core-plugin-api';
 import { ResponseError } from '@backstage/errors';
-import { FetchApi } from '@backstage/core-plugin-api';
 
 const lastSeenKey = 'user_last_seen_date';
 

@@ -55,7 +55,9 @@ export const AnnouncementsCard = announcementsPlugin.provide(
     name: 'AnnouncementsCard',
     component: {
       lazy: () =>
-        import('./components/AnnouncementsCard').then(m => m.AnnouncementsCard),
+        import('./components/homeComponents/AnnouncementsCard').then(
+          m => m.AnnouncementsCard,
+        ),
     },
   }),
 );

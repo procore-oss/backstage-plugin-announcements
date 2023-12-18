@@ -21,6 +21,7 @@ import {
 import { alertApiRef, useApi, useRouteRef } from '@backstage/core-plugin-api';
 import { parseEntityRef } from '@backstage/catalog-model';
 import {
+  EntityDisplayName,
   EntityPeekAheadPopover,
   entityRouteRef,
 } from '@backstage/plugin-catalog-react';
@@ -107,7 +108,9 @@ const AnnouncementCard = ({
     <>
       By{' '}
       <EntityPeekAheadPopover entityRef={announcement.publisher}>
-        <Link to={entityLink(publisherRef)}>{publisherRef.name}</Link>
+        <Link to={entityLink(publisherRef)}>
+          <EntityDisplayName entityRef={announcement.publisher} hideIcon />
+        </Link>
       </EntityPeekAheadPopover>
       {announcement.category && (
         <>

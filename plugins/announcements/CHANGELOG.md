@@ -1,5 +1,11 @@
 # @procore-oss/backstage-plugin-announcements
 
+## 0.4.2
+
+### Patch Changes
+
+- b4827fa: export announcementsApiRef
+
 ## 0.4.1
 
 ### Patch Changes

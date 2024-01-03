@@ -14,12 +14,12 @@ import {
 } from '@material-ui/core';
 import { Alert } from '@material-ui/lab';
 import NewReleasesIcon from '@material-ui/icons/NewReleases';
-import { announcementsApiRef } from '../../api';
+import { announcementsApiRef } from '../../../api';
 import {
   announcementCreateRouteRef,
   announcementViewRouteRef,
   rootRouteRef,
-} from '../../routes';
+} from '../../../routes';
 
 const useStyles = makeStyles({
   newAnnouncementIcon: {
@@ -93,7 +93,7 @@ export const AnnouncementsCard = ({
               <ListItemText
                 primary={
                   <Link to={viewAnnouncementLink({ id: announcement.id })}>
-                    {announcement.title}
+                    aaaaaa{announcement.title}
                   </Link>
                 }
                 secondary={

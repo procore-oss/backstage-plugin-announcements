@@ -11,11 +11,11 @@ import {
   announcementViewRouteRef,
   categoriesListRouteRef,
 } from '../routes';
-import { AnnouncementsPage } from './AnnouncementsPage';
-import { AnnouncementPage } from './AnnouncementPage';
-import { CreateAnnouncementPage } from './CreateAnnouncementPage';
-import { EditAnnouncementPage } from './EditAnnouncementPage';
-import { CategoriesPage } from './CategoriesPage';
+import { AnnouncementsPage } from './announcements/AnnouncementsPage';
+import { AnnouncementPage } from './announcements/AnnouncementPage';
+import { CreateAnnouncementPage } from './announcements/CreateAnnouncementPage';
+import { EditAnnouncementPage } from './announcements/EditAnnouncementPage';
+import { CategoriesPage } from './categories';
 
 type RouterProps = {
   themeId?: string;

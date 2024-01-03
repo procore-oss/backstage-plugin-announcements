@@ -1,5 +1,5 @@
 import { useCallback, useState } from 'react';
-import { Announcement } from '../../api';
+import { Announcement } from '../../../api';
 
 export type DeleteAnnouncementDialogState = {
   open: (a: Announcement) => void;

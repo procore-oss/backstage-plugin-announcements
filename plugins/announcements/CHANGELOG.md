@@ -1,5 +1,11 @@
 # @procore-oss/backstage-plugin-announcements
 
+## 0.4.3
+
+### Patch Changes
+
+- ff9753d: Use Entity display name
+
 ## 0.4.2
 
 ### Patch Changes

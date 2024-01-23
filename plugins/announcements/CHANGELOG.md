@@ -1,5 +1,13 @@
 # @procore-oss/backstage-plugin-announcements
 
+## 0.4.4
+
+### Patch Changes
+
+- 35670f3: Upgrade Backstage to 1.22.1
+- Updated dependencies [35670f3]
+  - @procore-oss/backstage-plugin-announcements-common@0.1.3
+
 ## 0.4.3
 
 ### Patch Changes

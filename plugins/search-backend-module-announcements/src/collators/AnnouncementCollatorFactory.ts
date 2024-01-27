@@ -1,9 +1,11 @@
 import { Readable } from 'stream';
 import { Logger } from 'winston';
 import { DiscoveryApi } from '@backstage/core-plugin-api';
-import { DocumentCollatorFactory } from '@backstage/plugin-search-common';
-import { IndexableDocument } from '@backstage/plugin-search-common';
-import { Announcement, AnnouncementsClient } from './api';
+import {
+  DocumentCollatorFactory,
+  IndexableDocument,
+} from '@backstage/plugin-search-common';
+import { Announcement, AnnouncementsClient } from '../api';
 
 export type IndexableAnnouncementDocument = IndexableDocument & {
   excerpt: string;

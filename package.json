@@ -13,6 +13,7 @@
     "build": "backstage-cli repo build --all",
     "tsc": "tsc",
     "tsc:full": "tsc --skipLibCheck false --incremental false",
+    "new": "backstage-cli new --scope internal",
     "clean": "backstage-cli repo clean",
     "test": "backstage-cli repo test",
     "test:all": "backstage-cli repo test --coverage",

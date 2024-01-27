@@ -5,7 +5,10 @@ import {
   DocumentCollatorFactory,
   IndexableDocument,
 } from '@backstage/plugin-search-common';
-import { Announcement, AnnouncementsClient } from '../api';
+import {
+  Announcement,
+  AnnouncementsClient,
+} from '@procore-oss/backstage-plugin-announcements-backend';
 
 export type IndexableAnnouncementDocument = IndexableDocument & {
   excerpt: string;

@@ -44,6 +44,10 @@
     "react-router-dom": "^6.3.0",
     "typescript": "~5.2.2"
   },
+  "resolutions": {
+    "@types/react": "^18",
+    "@types/react-dom": "^18"
+  },
   "prettier": "@spotify/prettier-config",
   "lint-staged": {
     "*.{js,jsx,ts,tsx,mjs,cjs}": [

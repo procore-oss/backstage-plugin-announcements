@@ -10,7 +10,7 @@ import {
   AnnouncementsClient,
 } from '@procore-oss/backstage-plugin-announcements-backend';
 
-export type IndexableAnnouncementDocument = IndexableDocument & {
+type IndexableAnnouncementDocument = IndexableDocument & {
   excerpt: string;
   createdAt: string;
 };

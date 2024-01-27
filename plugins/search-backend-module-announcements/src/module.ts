@@ -7,7 +7,7 @@ import { AnnouncementCollatorFactory } from './collators/AnnouncementCollatorFac
 import { loggerToWinstonLogger } from '@backstage/backend-common';
 import { searchIndexRegistryExtensionPoint } from '@backstage/plugin-search-backend-node/alpha';
 
-export const searchModuleAnnouncements = createBackendModule({
+export const searchModuleAnnouncementsCollator = createBackendModule({
   pluginId: 'search',
   moduleId: 'announcements',
   register(reg) {

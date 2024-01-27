@@ -5,4 +5,4 @@
  * @packageDocumentation
  */
 
-export { searchModuleAnnouncements } from './module';
+export { searchModuleAnnouncementsCollator } from './module';

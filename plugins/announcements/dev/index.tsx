@@ -18,6 +18,7 @@ import {
   AnnouncementsCard,
   NewAnnouncementBanner,
 } from '../src/plugin';
+import { AnnouncementsTimeline } from '../src/components/AnnouncementsTimeline';
 
 const mockCatalogApi = {
   getEntityByRef: async (entityRef: string) => {
@@ -68,6 +69,11 @@ createDevApp()
     element: <AnnouncementsPage cardOptions={{ titleLength: 50 }} />,
     title: 'Root Page',
     path: '/announcements',
+  })
+  .addPage({
+    element: <AnnouncementsTimeline />,
+    title: 'Timeline',
+    path: '/timeline',
   })
   .addPage({
     element: <CatalogEntityPage />,

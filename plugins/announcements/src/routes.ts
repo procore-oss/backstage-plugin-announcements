@@ -22,6 +22,12 @@ export const announcementViewRouteRef = createSubRouteRef({
   parent: rootRouteRef,
 });
 
+export const announcementTimelineViewRouteRef = createSubRouteRef({
+  id: 'announcements/timeline',
+  path: '/timeline',
+  parent: rootRouteRef,
+});
+
 export const categoriesListRouteRef = createSubRouteRef({
   id: 'announcements/categories',
   path: '/categories',

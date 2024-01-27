@@ -8,6 +8,7 @@ import {
 import {
   announcementCreateRouteRef,
   announcementEditRouteRef,
+  announcementTimelineViewRouteRef,
   announcementViewRouteRef,
   categoriesListRouteRef,
 } from '../routes';
@@ -16,6 +17,7 @@ import { AnnouncementPage } from './AnnouncementPage';
 import { CreateAnnouncementPage } from './CreateAnnouncementPage';
 import { EditAnnouncementPage } from './EditAnnouncementPage';
 import { CategoriesPage } from './CategoriesPage';
+import { AnnouncementsTimeline } from './AnnouncementsTimeline';
 
 type RouterProps = {
   themeId?: string;
@@ -39,6 +41,10 @@ export const Router = (props: RouterProps) => {
       <Route
         path={`${announcementViewRouteRef.path}`}
         element={<AnnouncementPage {...propsWithDefaults} />}
+      />
+      <Route
+        path={`${announcementTimelineViewRouteRef.path}`}
+        element={<AnnouncementsTimeline />}
       />
       <Route
         path={`${announcementCreateRouteRef.path}`}

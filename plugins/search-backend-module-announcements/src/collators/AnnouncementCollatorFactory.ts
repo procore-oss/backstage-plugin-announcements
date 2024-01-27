@@ -1,9 +1,14 @@
 import { Readable } from 'stream';
 import { Logger } from 'winston';
 import { DiscoveryApi } from '@backstage/core-plugin-api';
-import { DocumentCollatorFactory } from '@backstage/plugin-search-common';
-import { IndexableDocument } from '@backstage/plugin-search-common';
-import { Announcement, AnnouncementsClient } from '../api';
+import {
+  DocumentCollatorFactory,
+  IndexableDocument,
+} from '@backstage/plugin-search-common';
+import {
+  Announcement,
+  AnnouncementsClient,
+} from '@procore-oss/backstage-plugin-announcements-backend';
 
 type IndexableAnnouncementDocument = IndexableDocument & {
   excerpt: string;
@@ -15,9 +20,6 @@ type AnnouncementCollatorOptions = {
   discoveryApi: DiscoveryApi;
 };
 
-/**
- * @deprecated Import from `@procore-oss/plugin-search-backend-module-announcements` instead
- */
 export class AnnouncementCollatorFactory implements DocumentCollatorFactory {
   public readonly type: string = 'announcements';
 

@@ -42,7 +42,7 @@
     "react-dom": "^18.0.2",
     "react-router": "^6.3.0",
     "react-router-dom": "^6.3.0",
-    "typescript": "~5.2.2"
+    "typescript": "~5.3.3"
   },
   "resolutions": {
     "@types/react": "^18",

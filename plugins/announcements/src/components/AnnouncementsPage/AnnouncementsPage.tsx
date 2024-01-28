@@ -51,8 +51,6 @@ import { DeleteAnnouncementDialog } from './DeleteAnnouncementDialog';
 import { useDeleteAnnouncementDialogState } from './useDeleteAnnouncementDialogState';
 import { Pagination } from '@material-ui/lab';
 import { ContextMenu } from './ContextMenu';
-import { AnnouncementsTimeline } from '../AnnouncementsTimeline';
-import { AnnouncementsTimelineProps } from '../AnnouncementsTimeline/AnnouncementsTimeline';
 
 const useStyles = makeStyles(theme => ({
   cardHeader: {
@@ -296,40 +294,18 @@ type AnnouncementsPageProps = {
   maxPerPage?: number;
   category?: string;
   cardOptions?: AnnouncementCardProps;
-  displayResults?: 'grid' | 'timeline';
-  timelineOptions?: AnnouncementsTimelineProps;
 };
 
 export const AnnouncementsPage = (props: AnnouncementsPageProps) => {
-  const {
-    themeId,
-    title,
-    subtitle,
-    displayResults = 'grid',
-    cardOptions,
-    timelineOptions,
-  } = props;
-
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const newAnnouncementLink = useRouteRef(announcementCreateRouteRef);
   const { loading: loadingCreatePermission, allowed: canCreate } =
     usePermission({ permission: announcementCreatePermission });
 
-  const endUserView =
-    displayResults === 'timeline' ? (
-      <AnnouncementsTimeline {...timelineOptions} />
-    ) : (
-      <AnnouncementsGrid
-        maxPerPage={props.maxPerPage ?? 10}
-        category={props.category ?? queryParams.get('category') ?? undefined}
-        cardTitleLength={cardOptions?.titleLength}
-      />
-    );
-
   return (
-    <Page themeId={themeId}>
-      <Header title={title} subtitle={subtitle}>
+    <Page themeId={props.themeId}>
+      <Header title={props.title} subtitle={props.subtitle}>
         <ContextMenu />
       </Header>
 
@@ -347,7 +323,11 @@ export const AnnouncementsPage = (props: AnnouncementsPageProps) => {
           )}
         </ContentHeader>
 
-        {endUserView}
+        <AnnouncementsGrid
+          maxPerPage={props.maxPerPage ?? 10}
+          category={props.category ?? queryParams.get('category') ?? undefined}
+          cardTitleLength={props.cardOptions?.titleLength}
+        />
       </Content>
     </Page>
   );

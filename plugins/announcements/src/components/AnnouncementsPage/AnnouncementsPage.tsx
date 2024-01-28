@@ -51,6 +51,7 @@ import { DeleteAnnouncementDialog } from './DeleteAnnouncementDialog';
 import { useDeleteAnnouncementDialogState } from './useDeleteAnnouncementDialogState';
 import { Pagination } from '@material-ui/lab';
 import { ContextMenu } from './ContextMenu';
+import { AnnouncementsTimeline } from '../AnnouncementsTimeline';
 
 const useStyles = makeStyles(theme => ({
   cardHeader: {
@@ -294,18 +295,38 @@ type AnnouncementsPageProps = {
   maxPerPage?: number;
   category?: string;
   cardOptions?: AnnouncementCardProps;
+  displayResults?: 'grid' | 'timeline';
 };
 
 export const AnnouncementsPage = (props: AnnouncementsPageProps) => {
+  const {
+    themeId,
+    title,
+    subtitle,
+    displayResults = 'grid',
+    cardOptions,
+  } = props;
+
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const newAnnouncementLink = useRouteRef(announcementCreateRouteRef);
   const { loading: loadingCreatePermission, allowed: canCreate } =
     usePermission({ permission: announcementCreatePermission });
 
+  const endUserView =
+    displayResults === 'grid' ? (
+      <AnnouncementsGrid
+        maxPerPage={props.maxPerPage ?? 10}
+        category={props.category ?? queryParams.get('category') ?? undefined}
+        cardTitleLength={cardOptions?.titleLength}
+      />
+    ) : (
+      <AnnouncementsTimeline />
+    );
+
   return (
-    <Page themeId={props.themeId}>
-      <Header title={props.title} subtitle={props.subtitle}>
+    <Page themeId={themeId}>
+      <Header title={title} subtitle={subtitle}>
         <ContextMenu />
       </Header>
 
@@ -323,11 +344,7 @@ export const AnnouncementsPage = (props: AnnouncementsPageProps) => {
           )}
         </ContentHeader>
 
-        <AnnouncementsGrid
-          maxPerPage={props.maxPerPage ?? 10}
-          category={props.category ?? queryParams.get('category') ?? undefined}
-          cardTitleLength={props.cardOptions?.titleLength}
-        />
+        {endUserView}
       </Content>
     </Page>
   );

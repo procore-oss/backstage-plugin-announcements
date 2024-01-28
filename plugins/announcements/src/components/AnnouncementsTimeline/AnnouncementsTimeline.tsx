@@ -15,22 +15,60 @@ import { Announcement, announcementsApiRef } from '../../api';
 import Stack from '@mui/material/Stack';
 import { DateTime } from 'luxon';
 
+/**
+ * Props for the AnnouncementsTimeline component.
+ */
 export type AnnouncementsTimelineProps = {
+  /**
+   * Options for configuring the results of the timeline.
+   */
   options?: {
+    /**
+     * Options for configuring the number of results to display.
+     */
     results?: {
+      /**
+       * The maximum number of results to display.
+       */
       max?: number;
     };
+    /**
+     * Options for configuring the alignment and width of the timeline.
+     */
     timeline?: {
+      /**
+       * The alignment of the timeline items. Can be 'left', 'right', or 'alternate'.
+       */
       align?: 'left' | 'right' | 'alternate';
+      /**
+       * The minimum width of the timeline.
+       */
       minWidth?: string;
     };
   };
 };
 
+/**
+ * Default alignment for the timeline.
+ */
 const DEFAULT_TIMELINE_ALIGNMENT = 'alternate';
+
+/**
+ * Default width for the timeline.
+ */
 const DEFAULT_TIMELINE_WIDTH = '425px';
+
+/**
+ * Default maximum number of results to display.
+ */
 const DEFAULT_RESULTS_MAX = 10;
 
+/**
+ * Renders a timeline of announcements.
+ *
+ * @param options - The options for the announcements timeline.
+ * @returns The rendered announcements timeline.
+ */
 export const AnnouncementsTimeline = ({
   options,
 }: AnnouncementsTimelineProps) => {

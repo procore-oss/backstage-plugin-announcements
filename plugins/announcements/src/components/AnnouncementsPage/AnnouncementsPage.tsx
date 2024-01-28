@@ -52,6 +52,7 @@ import { useDeleteAnnouncementDialogState } from './useDeleteAnnouncementDialogS
 import { Pagination } from '@material-ui/lab';
 import { ContextMenu } from './ContextMenu';
 import { AnnouncementsTimeline } from '../AnnouncementsTimeline';
+import { AnnouncementsTimelineProps } from '../AnnouncementsTimeline/AnnouncementsTimeline';
 
 const useStyles = makeStyles(theme => ({
   cardHeader: {
@@ -296,6 +297,7 @@ type AnnouncementsPageProps = {
   category?: string;
   cardOptions?: AnnouncementCardProps;
   displayResults?: 'grid' | 'timeline';
+  timelineOptions?: AnnouncementsTimelineProps;
 };
 
 export const AnnouncementsPage = (props: AnnouncementsPageProps) => {
@@ -305,6 +307,7 @@ export const AnnouncementsPage = (props: AnnouncementsPageProps) => {
     subtitle,
     displayResults = 'grid',
     cardOptions,
+    timelineOptions,
   } = props;
 
   const location = useLocation();
@@ -314,14 +317,14 @@ export const AnnouncementsPage = (props: AnnouncementsPageProps) => {
     usePermission({ permission: announcementCreatePermission });
 
   const endUserView =
-    displayResults === 'grid' ? (
+    displayResults === 'timeline' ? (
+      <AnnouncementsTimeline {...timelineOptions} />
+    ) : (
       <AnnouncementsGrid
         maxPerPage={props.maxPerPage ?? 10}
         category={props.category ?? queryParams.get('category') ?? undefined}
         cardTitleLength={cardOptions?.titleLength}
       />
-    ) : (
-      <AnnouncementsTimeline />
     );
 
   return (

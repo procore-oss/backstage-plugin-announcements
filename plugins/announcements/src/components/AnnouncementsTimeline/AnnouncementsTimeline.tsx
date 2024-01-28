@@ -15,7 +15,7 @@ import { Announcement, announcementsApiRef } from '../../api';
 import Stack from '@mui/material/Stack';
 import { DateTime } from 'luxon';
 
-type AnnouncementsTimelineProps = {
+export type AnnouncementsTimelineProps = {
   options?: {
     results?: {
       max?: number;

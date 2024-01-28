@@ -5612,7 +5612,7 @@ __metadata:
     "@testing-library/jest-dom": ^6.3.0
     "@testing-library/react": ^14.0.0
     "@testing-library/user-event": ^14.5.1
-    "@types/luxon": ^3.3.3
+    "@types/luxon": ^3.4.2
     "@types/node": ^18.18.7
     "@uiw/react-md-editor": ^4.0.3
     cross-fetch: ^3.1.8
@@ -7214,10 +7214,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/luxon@npm:^3.0.0, @types/luxon@npm:^3.3.3, @types/luxon@npm:~3.3.0":
+"@types/luxon@npm:^3.0.0, @types/luxon@npm:~3.3.0":
   version: 3.3.6
   resolution: "@types/luxon@npm:3.3.6"
   checksum: 44fd3e617fb5d9e370a8d5529de3e703b295bfe225936e786e0b5e7fce662ef82012a6ec29cd2763afbd59bf9a9ab43186bad5c51aa552d963cd5e8c8f4e1d4f
+  languageName: node
+  linkType: hard
+
+"@types/luxon@npm:^3.4.2":
+  version: 3.4.2
+  resolution: "@types/luxon@npm:3.4.2"
+  checksum: 6f92d5bd02e89f310395753506bcd9cef3a56f5940f7a50db2a2b9822bce753553ac767d143cb5b4f9ed5ddd4a84e64f89ff538082ceb4d18739af7781b56925
   languageName: node
   linkType: hard
 

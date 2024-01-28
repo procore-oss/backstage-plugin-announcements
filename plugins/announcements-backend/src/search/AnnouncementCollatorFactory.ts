@@ -16,7 +16,8 @@ type AnnouncementCollatorOptions = {
 };
 
 /**
- * @deprecated Import from `@procore-oss/plugin-search-backend-module-announcements` instead
+ * @remark This can replaced by the module `@procore-oss/plugin-search-backend-module-announcements` if using
+ * the new backend system. Note the module does not export the `AnnouncementCollatorFactory` class directly.
  */
 export class AnnouncementCollatorFactory implements DocumentCollatorFactory {
   public readonly type: string = 'announcements';

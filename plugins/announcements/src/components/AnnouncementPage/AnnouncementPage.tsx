@@ -17,6 +17,7 @@ import {
 } from '@backstage/core-plugin-api';
 import { parseEntityRef } from '@backstage/catalog-model';
 import {
+  EntityDisplayName,
   EntityPeekAheadPopover,
   entityRouteRef,
 } from '@backstage/plugin-catalog-react';
@@ -42,7 +43,9 @@ const AnnouncementDetails = ({
     <span>
       By{' '}
       <EntityPeekAheadPopover entityRef={announcement.publisher}>
-        <Link to={entityLink(publisherRef)}>{publisherRef.name}</Link>
+        <Link to={entityLink(publisherRef)}>
+          <EntityDisplayName entityRef={announcement.publisher} hideIcon />
+        </Link>
       </EntityPeekAheadPopover>
       , {DateTime.fromISO(announcement.created_at).toRelative()}
     </span>

@@ -1,5 +1,13 @@
 # @procore-oss/backstage-plugin-announcements-backend
 
+## 0.5.3
+
+### Patch Changes
+
+- b6c3890: Add support for Backstage New Backend System
+- 2896e85: It was a mistake to remove the AnnouncementsCollatorFactory. Users can only migrate to the new search module for annoucements if they are leveraging the new backend system.
+- 2c733e7: Add deprecation warning for AnnouncementCollatorFactory. Users should import from the new search module instead (@procore-oss/plugin-search-backend-module-announcements).
+
 ## 0.5.2
 
 ### Patch Changes

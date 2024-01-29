@@ -2,6 +2,8 @@
 
 ## Backend
 
+### Old Backend System Setup
+
 Add the plugin to your backend app:
 
 ```bash
@@ -49,6 +51,26 @@ async function main() {
   apiRouter.use('/announcements', await announcements(announcementsEnv));
   // ...
 }
+```
+
+### New Backend System Setup
+
+> If you are migrating from the old backend system, you can delete `packages/backend/src/plugins/announcements.ts` and follow the instructions below
+
+Add the plugin to your backend app:
+
+```bash
+yarn add --cwd packages/backend @procore-oss/backstage-plugin-announcements-backend
+```
+
+Update `packages/backend/src/index.ts` to import announcements plugin package and register it in your backend using:
+
+```ts
+// ...
+const backend = createBackend();
+
+backend.add(import('@procore-oss/backstage-plugin-announcements-backend'));
+// ...
 ```
 
 ## Frontend

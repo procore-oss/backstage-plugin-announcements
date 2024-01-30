@@ -5,7 +5,7 @@
 Add the new module to your backend app:
 
 ```bash
-yarn add --cwd packages/backend @procore-oss/plugin-search-backend-module-announcements
+yarn add --cwd packages/backend @procore-oss/backstage-plugin-search-backend-module-announcements
 ```
 
 Update `packages/backend/src/index.ts` to import announcements search module and register it with the backend:
@@ -17,7 +17,9 @@ const backend = createBackend();
 // ...
 
 backend.add(import('@procore-oss/backstage-plugin-announcements-backend'));
-backend.add(import('@procore-oss/plugin-search-backend-module-announcements'));
+backend.add(
+  import('@procore-oss/backstage-plugin-search-backend-module-announcements'),
+);
 // ...
 ```
 

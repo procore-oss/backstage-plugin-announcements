@@ -1,5 +1,5 @@
 {
-  "name": "@procore-oss/plugin-search-backend-module-announcements",
+  "name": "@procore-oss/backstage-plugin-search-backend-module-announcements",
   "description": "The announcements backend module for the search plugin.",
   "version": "0.1.0",
   "main": "src/index.ts",

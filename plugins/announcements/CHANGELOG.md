@@ -1,5 +1,12 @@
 # @procore-oss/backstage-plugin-announcements
 
+## 0.4.5
+
+### Patch Changes
+
+- 4a050ac: Support for React 18
+- 7f3e663: bump @uiw/react-md-editor to latest version
+
 ## 0.4.4
 
 ### Patch Changes

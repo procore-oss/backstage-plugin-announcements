@@ -5,9 +5,17 @@ import { identityApiRef, useApi } from '@backstage/core-plugin-api';
 import {
   Button,
   CircularProgress,
+  ListItemIcon,
   makeStyles,
+  MenuItem,
+  Select,
   TextField,
 } from '@material-ui/core';
+import LoopIcon from '@material-ui/icons/Loop';
+import BuildIcon from '@material-ui/icons/Build';
+import AnnouncementIcon from '@material-ui/icons/Announcement';
+import ErrorIcon from '@material-ui/icons/Error';
+import WarningIcon from '@material-ui/icons/Warning';
 import {
   Announcement,
   announcementsApiRef,
@@ -38,7 +46,9 @@ export const AnnouncementForm = ({
   const [form, setForm] = React.useState({
     ...initialData,
     category: initialData.category?.slug,
+    severity: 'info',
   });
+  const [selectedOption, setSelectedOption] = React.useState('info');
   const [loading, setLoading] = React.useState(false);
 
   const announcementsApi = useApi(announcementsApiRef);
@@ -52,6 +62,10 @@ export const AnnouncementForm = ({
       ...form,
       [event.target.id]: event.target.value,
     });
+  };
+
+  const handleSelectChange = (event: React.ChangeEvent<{ value: unknown }>) => {
+    setSelectedOption(event.target.value as string);
   };
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -116,6 +130,44 @@ export const AnnouncementForm = ({
             />
           )}
         />
+        <Select
+          value={selectedOption}
+          onChange={handleSelectChange}
+          labelId="demo-simple-select-placeholder-label-label"
+          variant="outlined"
+          fullWidth
+        >
+          <MenuItem value="info">
+            <ListItemIcon>
+              <AnnouncementIcon />
+            </ListItemIcon>
+            Info
+          </MenuItem>
+          <MenuItem value="important">
+            <ListItemIcon>
+              <ErrorIcon />
+            </ListItemIcon>
+            Important
+          </MenuItem>
+          <MenuItem value="critical">
+            <ListItemIcon>
+              <WarningIcon />
+            </ListItemIcon>
+            Critical
+          </MenuItem>
+          <MenuItem value="upgrade">
+            <ListItemIcon>
+              <LoopIcon />
+            </ListItemIcon>
+            Upgrade
+          </MenuItem>
+          <MenuItem value="maintenance">
+            <ListItemIcon>
+              <BuildIcon />
+            </ListItemIcon>
+            Maintenance
+          </MenuItem>
+        </Select>
         <TextField
           id="excerpt"
           type="text"

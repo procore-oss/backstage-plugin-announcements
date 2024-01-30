@@ -36,6 +36,7 @@ export type CreateAnnouncementRequest = Omit<
   'id' | 'category' | 'created_at'
 > & {
   category?: string;
+  severity: string;
 };
 
 export type CreateCategoryRequest = {

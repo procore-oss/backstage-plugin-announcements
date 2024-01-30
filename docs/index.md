@@ -7,8 +7,12 @@
 ## Usage
 
 - [Integration with `@backstage/plugin-search`](search.md)
+
+## Components
+
 - [Display latest announcements on a page](latest-announcements-on-page.md)
 - [Display a banner for the latest announcement](latest-announcement-banner.md)
+- [Display announcements in a timeline](announcement-timeline.md)
 
 ## Customization
 

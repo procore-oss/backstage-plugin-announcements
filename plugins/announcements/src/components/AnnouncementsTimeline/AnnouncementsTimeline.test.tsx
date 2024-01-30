@@ -10,6 +10,7 @@ import {
   AnnouncementsApi,
   AnnouncementsList,
 } from '../../api';
+import { rootRouteRef } from '../../routes';
 
 const renderMockTimelineComponent = async ({
   announcements,
@@ -28,6 +29,11 @@ const renderMockTimelineComponent = async ({
     <TestApiProvider apis={[[announcementsApiRef, mockedAnnouncementsApi]]}>
       <AnnouncementsTimeline {...{ options }} />
     </TestApiProvider>,
+    {
+      mountedRoutes: {
+        '/view': rootRouteRef,
+      },
+    },
   );
 };
 

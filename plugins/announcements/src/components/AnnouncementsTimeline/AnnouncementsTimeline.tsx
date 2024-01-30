@@ -1,4 +1,4 @@
-import { useApi } from '@backstage/core-plugin-api';
+import { useApi, useRouteRef } from '@backstage/core-plugin-api';
 import { Typography, Box } from '@material-ui/core';
 import {
   Timeline,
@@ -14,6 +14,7 @@ import { Link } from 'react-router-dom';
 import { Announcement, announcementsApiRef } from '../../api';
 import Stack from '@mui/material/Stack';
 import { DateTime } from 'luxon';
+import { announcementViewRouteRef } from '../../routes';
 
 /**
  * Props for the AnnouncementsTimeline component.
@@ -74,6 +75,7 @@ export const AnnouncementsTimeline = ({
 }: AnnouncementsTimelineProps) => {
   const [announcements, setAnnouncements] = useState<Announcement[]>([]);
   const announcementsApi = useApi(announcementsApiRef);
+  const viewAnnouncementLink = useRouteRef(announcementViewRouteRef);
 
   useEffect(() => {
     async function fetchData() {
@@ -118,14 +120,14 @@ export const AnnouncementsTimeline = ({
               </TimelineSeparator>
 
               <TimelineContent key={`tc-${a.id}`}>
-                <Link to={`/announcements/view/${a.id}`}>
+                <Link to={viewAnnouncementLink({ id: a.id })}>
                   <Typography key={`th6-${a.id}`} variant="h6" component="span">
                     {a.title}
                   </Typography>
-                  <Typography key={`te-${a.id}`} variant="body2">
-                    {a.excerpt}
-                  </Typography>
                 </Link>
+                <Typography key={`te-${a.id}`} variant="body2">
+                  {a.excerpt}
+                </Typography>
               </TimelineContent>
             </TimelineItem>
           ))}

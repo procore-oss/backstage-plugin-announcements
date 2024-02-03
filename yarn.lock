@@ -5450,6 +5450,23 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@procore-oss/backstage-plugin-announcements-react@workspace:plugins/announcements-react":
+  version: 0.0.0-use.local
+  resolution: "@procore-oss/backstage-plugin-announcements-react@workspace:plugins/announcements-react"
+  dependencies:
+    "@backstage/cli": ^0.25.1
+    "@backstage/core-app-api": ^1.11.3
+    "@backstage/core-plugin-api": ^1.8.2
+    "@backstage/errors": ^1.2.3
+    "@material-ui/core": ^4.12.2
+    "@testing-library/jest-dom": ^5.10.1
+    "@testing-library/react": ^12.1.3
+    luxon: ^3.4.4
+  peerDependencies:
+    react: ^16.13.1 || ^17.0.0 || ^18.0.0
+  languageName: unknown
+  linkType: soft
+
 "@procore-oss/backstage-plugin-announcements@workspace:plugins/announcements":
   version: 0.0.0-use.local
   resolution: "@procore-oss/backstage-plugin-announcements@workspace:plugins/announcements"
@@ -5505,23 +5522,6 @@ __metadata:
     cross-fetch: ^4.0.0
     msw: ^1.3.2
     winston: ^3.11.0
-  languageName: unknown
-  linkType: soft
-
-"@procore-oss/plugin-announcements-react@workspace:plugins/announcements-react":
-  version: 0.0.0-use.local
-  resolution: "@procore-oss/plugin-announcements-react@workspace:plugins/announcements-react"
-  dependencies:
-    "@backstage/cli": ^0.25.1
-    "@backstage/core-app-api": ^1.11.3
-    "@backstage/core-plugin-api": ^1.8.2
-    "@backstage/errors": ^1.2.3
-    "@material-ui/core": ^4.12.2
-    "@testing-library/jest-dom": ^5.10.1
-    "@testing-library/react": ^12.1.3
-    luxon: ^3.4.4
-  peerDependencies:
-    react: ^16.13.1 || ^17.0.0 || ^18.0.0
   languageName: unknown
   linkType: soft
 

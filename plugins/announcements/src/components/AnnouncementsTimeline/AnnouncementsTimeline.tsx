@@ -86,7 +86,7 @@ export const AnnouncementsTimeline = ({
     }
 
     fetchData();
-  }, [announcements, announcementsApi, options?.results?.max]);
+  }, [announcementsApi, options?.results?.max]);
 
   if (!announcements || announcements.length === 0)
     return <>No announcements</>;

@@ -1,3 +1,4 @@
+import { Category } from '@procore-oss/backstage-plugin-announcements-common';
 import { DateTime } from 'luxon';
 
 export type Announcement = {
@@ -8,9 +9,4 @@ export type Announcement = {
   excerpt: string;
   body: string;
   created_at: DateTime;
-};
-
-export type Category = {
-  slug: string;
-  title: string;
 };

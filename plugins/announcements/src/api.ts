@@ -12,28 +12,13 @@ import {
   CreateCategoryRequest,
   AnnouncementsApi,
 } from '@procore-oss/backstage-plugin-announcements-react';
+import {
+  Announcement,
+  AnnouncementsList,
+  Category,
+} from '@procore-oss/backstage-plugin-announcements-common';
 
 const lastSeenKey = 'user_last_seen_date';
-
-export type Category = {
-  slug: string;
-  title: string;
-};
-
-export type Announcement = {
-  id: string;
-  category?: Category;
-  publisher: string;
-  title: string;
-  excerpt: string;
-  body: string;
-  created_at: string;
-};
-
-export type AnnouncementsList = {
-  count: number;
-  results: Announcement[];
-};
 
 type AnnouncementsClientOptions = {
   discoveryApi: DiscoveryApi;

@@ -1,5 +1,4 @@
 export * from './service/router';
-export { AnnouncementsClient } from './api';
 export { announcementsPlugin as default } from './plugin';
 export { buildAnnouncementsContext } from './service/announcementsContextBuilder';
 

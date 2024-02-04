@@ -17,5 +17,8 @@ exports.seed = async function (knex) {
     { slug: 'micro-service', title: 'Micro Service' },
     { slug: 'engineering-community', title: 'Engineering Community' },
     { slug: 'product-updates', title: 'Product Updates' },
+    { slug: 'security', title: 'Security' },
+    { slug: 'documentation', title: 'Documenation' },
+    { slug: 'events', title: 'Events' },
   ]);
 };

@@ -6,6 +6,7 @@ import {
   announcementCreatePermission,
   announcementUpdatePermission,
   announcementDeletePermission,
+  Announcement,
 } from '@procore-oss/backstage-plugin-announcements-common';
 import { DateTime } from 'luxon';
 import {
@@ -46,7 +47,6 @@ import {
   announcementViewRouteRef,
   rootRouteRef,
 } from '../../routes';
-import { Announcement } from '../../api';
 import { DeleteAnnouncementDialog } from './DeleteAnnouncementDialog';
 import { useDeleteAnnouncementDialogState } from './useDeleteAnnouncementDialogState';
 import { Pagination } from '@material-ui/lab';

@@ -1,12 +1,11 @@
 import { DateTime } from 'luxon';
 import { createApiRef } from '@backstage/core-plugin-api';
+import { CreateAnnouncementRequest, CreateCategoryRequest } from './types';
 import {
-  AnnouncementsList,
   Announcement,
-  CreateAnnouncementRequest,
+  AnnouncementsList,
   Category,
-  CreateCategoryRequest,
-} from './types';
+} from '@procore-oss/backstage-plugin-announcements-common';
 
 export const announcementsApiRef = createApiRef<AnnouncementsApi>({
   id: 'plugin.announcements.service',

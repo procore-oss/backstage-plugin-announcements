@@ -11,9 +11,9 @@ import {
 } from '@material-ui/core';
 import { Alert } from '@material-ui/lab';
 import Close from '@material-ui/icons/Close';
-import { Announcement } from '../../api';
 import { announcementViewRouteRef } from '../../routes';
 import { announcementsApiRef } from '@procore-oss/backstage-plugin-announcements-react';
+import { Announcement } from '@procore-oss/backstage-plugin-announcements-common';
 
 const useStyles = makeStyles(theme => ({
   // showing on top, as a block

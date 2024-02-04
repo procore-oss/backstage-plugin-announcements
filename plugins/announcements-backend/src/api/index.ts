@@ -1,1 +1,1 @@
-export { AnnouncementsClient, type Announcement } from './api';
+export { AnnouncementsClient } from './api';

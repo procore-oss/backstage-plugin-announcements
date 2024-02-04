@@ -5459,6 +5459,7 @@ __metadata:
     "@backstage/core-plugin-api": ^1.8.2
     "@backstage/errors": ^1.2.3
     "@material-ui/core": ^4.12.2
+    "@procore-oss/backstage-plugin-announcements-common": "workspace:^"
     "@testing-library/jest-dom": ^5.10.1
     "@testing-library/react": ^12.1.3
     luxon: ^3.4.4
@@ -5520,6 +5521,7 @@ __metadata:
     "@backstage/plugin-search-common": ^1.2.10
     "@backstage/test-utils": ^1.4.7
     "@procore-oss/backstage-plugin-announcements-backend": "workspace:^"
+    "@procore-oss/backstage-plugin-announcements-common": "workspace:^"
     cross-fetch: ^4.0.0
     msw: ^1.3.2
     winston: ^3.11.0

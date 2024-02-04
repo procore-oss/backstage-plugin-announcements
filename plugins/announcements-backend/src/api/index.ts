@@ -1,1 +1,0 @@
-export { AnnouncementsClient } from './api';

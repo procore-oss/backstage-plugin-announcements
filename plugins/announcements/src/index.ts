@@ -1,11 +1,17 @@
 export * from './plugin';
 
-/**
- * @deprecated import from `announcementsApiRef` from `@procore-oss/backstage-plugin-announcements-react` instead
- */
-export { announcementsApiRef } from '@procore-oss/backstage-plugin-announcements-react';
+import {
+  announcementsApiRef as announcementsApiRef_,
+  AnnouncementsApi as AnnouncementsApi_,
+} from '@procore-oss/backstage-plugin-announcements-react';
 
 /**
- * @deprecated import from `AnnouncementsApi` from `@procore-oss/backstage-plugin-announcements-react` instead
+ * @deprecated Use `AnnouncementsApi` from `@procore-oss/backstage-plugin-announcements-react` instead
  */
-export { type AnnouncementsApi } from '@procore-oss/backstage-plugin-announcements-react';
+export type AnnouncementsApi = AnnouncementsApi_;
+
+/**
+ * @public
+ * @deprecated Use `announcementsApiRef` from `@procore-oss/backstage-plugin-announcements-react` instead
+ */
+export const announcementsApiRef = announcementsApiRef_;

@@ -22,32 +22,20 @@ import { Announcement } from '@procore-oss/backstage-plugin-announcements-common
  */
 export type AnnouncementsTimelineProps = {
   /**
-   * Options for configuring the results of the timeline.
+   * The maximum number of results to display.
+   * Default: 10
    */
-  options?: {
-    /**
-     * Options for configuring the number of results to display.
-     */
-    results?: {
-      /**
-       * The maximum number of results to display.
-       */
-      max?: number;
-    };
-    /**
-     * Options for configuring the alignment and width of the timeline.
-     */
-    timeline?: {
-      /**
-       * The alignment of the timeline items. Can be 'left', 'right', or 'alternate'.
-       */
-      align?: 'left' | 'right' | 'alternate';
-      /**
-       * The minimum width of the timeline.
-       */
-      minWidth?: string;
-    };
-  };
+  maxResults?: number;
+  /**
+   * The alignment of the timeline items. Can be 'left', 'right', or 'alternate'.
+   * Default: 'alternate'
+   */
+  timelineAlignment?: 'left' | 'right' | 'alternate';
+  /**
+   * The minimum width of the timeline.
+   * Default: '425px'
+   */
+  timelineMinWidth?: string;
 };
 
 /**
@@ -66,13 +54,15 @@ const DEFAULT_TIMELINE_WIDTH = '425px';
 const DEFAULT_RESULTS_MAX = 10;
 
 /**
- * Renders a timeline of announcements.
+ * Timeline of most recent announcements.
  *
  * @param options - The options for the announcements timeline.
  * @returns The rendered announcements timeline.
  */
 export const AnnouncementsTimeline = ({
-  options,
+  maxResults = DEFAULT_RESULTS_MAX,
+  timelineAlignment = DEFAULT_TIMELINE_ALIGNMENT,
+  timelineMinWidth = DEFAULT_TIMELINE_WIDTH,
 }: AnnouncementsTimelineProps) => {
   const [announcements, setAnnouncements] = useState<Announcement[]>([]);
   const announcementsApi = useApi(announcementsApiRef);
@@ -81,13 +71,13 @@ export const AnnouncementsTimeline = ({
   useEffect(() => {
     async function fetchData() {
       const { results } = await announcementsApi.announcements({
-        max: options?.results?.max ?? DEFAULT_RESULTS_MAX,
+        max: maxResults,
       });
       setAnnouncements(results);
     }
 
     fetchData();
-  }, [announcementsApi, options?.results?.max]);
+  }, [announcementsApi, maxResults]);
 
   if (!announcements || announcements.length === 0)
     return <>No announcements</>;
@@ -99,12 +89,8 @@ export const AnnouncementsTimeline = ({
       alignItems="center"
       spacing={0}
     >
-      <Box
-        sx={{ minWidth: options?.timeline?.minWidth ?? DEFAULT_TIMELINE_WIDTH }}
-      >
-        <Timeline
-          align={options?.timeline?.align ?? DEFAULT_TIMELINE_ALIGNMENT}
-        >
+      <Box sx={{ minWidth: timelineMinWidth }}>
+        <Timeline align={timelineAlignment}>
           {announcements.map(a => (
             <TimelineItem key={`ti-${a.id}`}>
               <TimelineOppositeContent

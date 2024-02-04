@@ -17,7 +17,7 @@ const renderMockTimelineComponent = async ({
   options,
 }: {
   announcements: AnnouncementsList;
-  options?: AnnouncementsTimelineProps['options'];
+  options?: AnnouncementsTimelineProps;
 }) => {
   const mockedAnnouncementsApi: Partial<AnnouncementsApi> = {
     announcements: jest.fn().mockImplementation(() => {
@@ -27,7 +27,7 @@ const renderMockTimelineComponent = async ({
 
   await renderInTestApp(
     <TestApiProvider apis={[[announcementsApiRef, mockedAnnouncementsApi]]}>
-      <AnnouncementsTimeline {...{ options }} />
+      <AnnouncementsTimeline {...options} />
     </TestApiProvider>,
     {
       mountedRoutes: {

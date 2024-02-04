@@ -5422,6 +5422,7 @@ __metadata:
     "@backstage/plugin-search-common": ^1.2.10
     "@backstage/test-utils": ^1.4.7
     "@procore-oss/backstage-plugin-announcements-common": "workspace:^"
+    "@procore-oss/backstage-plugin-search-backend-module-announcements": "workspace:^"
     "@types/express": ^4.17.6
     "@types/supertest": ^2.0.15
     "@types/uuid": ^8.3.4
@@ -5520,7 +5521,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@procore-oss/backstage-plugin-search-backend-module-announcements@workspace:plugins/search-backend-module-announcements":
+"@procore-oss/backstage-plugin-search-backend-module-announcements@workspace:^, @procore-oss/backstage-plugin-search-backend-module-announcements@workspace:plugins/search-backend-module-announcements":
   version: 0.0.0-use.local
   resolution: "@procore-oss/backstage-plugin-search-backend-module-announcements@workspace:plugins/search-backend-module-announcements"
   dependencies:

@@ -14,12 +14,12 @@ import {
 } from '@material-ui/core';
 import { Alert } from '@material-ui/lab';
 import NewReleasesIcon from '@material-ui/icons/NewReleases';
-import { announcementsApiRef } from '../../api';
 import {
   announcementCreateRouteRef,
   announcementViewRouteRef,
   rootRouteRef,
 } from '../../routes';
+import { announcementsApiRef } from '@procore-oss/backstage-plugin-announcements-react';
 
 const useStyles = makeStyles({
   newAnnouncementIcon: {

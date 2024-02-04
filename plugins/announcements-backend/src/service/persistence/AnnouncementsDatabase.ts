@@ -1,27 +1,20 @@
 import { Knex } from 'knex';
 import { DateTime } from 'luxon';
-import { Announcement } from '../model';
+import { AnnouncementModel } from '../model';
+import {
+  AnnouncementsFilters,
+  Announcement,
+} from '@procore-oss/backstage-plugin-announcements-common';
 
 const announcementsTable = 'announcements';
 
-type AnnouncementUpsert = {
-  id: string;
+type AnnouncementUpsert = Omit<Announcement, 'category' | 'created_at'> & {
   category?: string;
-  publisher: string;
-  title: string;
-  excerpt: string;
-  body: string;
   created_at: DateTime;
 };
 
-export type DbAnnouncement = {
-  id: string;
+export type DbAnnouncement = Omit<Announcement, 'category'> & {
   category?: string;
-  publisher: string;
-  title: string;
-  excerpt: string;
-  body: string;
-  created_at: string;
 };
 
 export type DbAnnouncementWithCategory = DbAnnouncement & {
@@ -29,15 +22,9 @@ export type DbAnnouncementWithCategory = DbAnnouncement & {
   category_title?: string;
 };
 
-type AnnouncementsFilters = {
-  max?: number;
-  offset?: number;
-  category?: string;
-};
-
-type AnnouncementsList = {
+type AnnouncementModelsList = {
   count: number;
-  results: Announcement[];
+  results: AnnouncementModel[];
 };
 
 export const timestampToDateTime = (input: Date | string): DateTime => {
@@ -71,7 +58,7 @@ const announcementUpsertToDB = (
 
 const DBToAnnouncementWithCategory = (
   announcementDb: DbAnnouncementWithCategory,
-): Announcement => {
+): AnnouncementModel => {
   return {
     id: announcementDb.id,
     category:
@@ -94,7 +81,7 @@ export class AnnouncementsDatabase {
 
   async announcements(
     request: AnnouncementsFilters,
-  ): Promise<AnnouncementsList> {
+  ): Promise<AnnouncementModelsList> {
     const countQueryBuilder = this.db<DbAnnouncement>(announcementsTable).count<
       Record<string, number>
     >('id', { as: 'total' });
@@ -135,7 +122,7 @@ export class AnnouncementsDatabase {
     };
   }
 
-  async announcementByID(id: string): Promise<Announcement | undefined> {
+  async announcementByID(id: string): Promise<AnnouncementModel | undefined> {
     const dbAnnouncement = await this.db<DbAnnouncementWithCategory>(
       announcementsTable,
     )
@@ -165,7 +152,7 @@ export class AnnouncementsDatabase {
 
   async insertAnnouncement(
     announcement: AnnouncementUpsert,
-  ): Promise<Announcement> {
+  ): Promise<AnnouncementModel> {
     await this.db<DbAnnouncement>(announcementsTable).insert(
       announcementUpsertToDB(announcement),
     );
@@ -175,7 +162,7 @@ export class AnnouncementsDatabase {
 
   async updateAnnouncement(
     announcement: AnnouncementUpsert,
-  ): Promise<Announcement> {
+  ): Promise<AnnouncementModel> {
     await this.db<DbAnnouncement>(announcementsTable)
       .where('id', announcement.id)
       .update(announcementUpsertToDB(announcement));

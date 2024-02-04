@@ -5,12 +5,12 @@ import {
 } from './AnnouncementsTimeline';
 import React from 'react';
 import { TestApiProvider, renderInTestApp } from '@backstage/test-utils';
-import {
-  announcementsApiRef,
-  AnnouncementsApi,
-  AnnouncementsList,
-} from '../../api';
 import { rootRouteRef } from '../../routes';
+import { AnnouncementsList } from '@procore-oss/backstage-plugin-announcements-common';
+import {
+  AnnouncementsApi,
+  announcementsApiRef,
+} from '@procore-oss/backstage-plugin-announcements-react';
 
 const renderMockTimelineComponent = async ({
   announcements,

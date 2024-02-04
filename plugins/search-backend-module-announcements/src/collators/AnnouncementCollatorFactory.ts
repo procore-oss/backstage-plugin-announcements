@@ -5,10 +5,8 @@ import {
   DocumentCollatorFactory,
   IndexableDocument,
 } from '@backstage/plugin-search-common';
-import {
-  Announcement,
-  AnnouncementsClient,
-} from '@procore-oss/backstage-plugin-announcements-backend';
+import { DefaultAnnouncementsService } from '@procore-oss/backstage-plugin-announcements-node';
+import { Announcement } from '@procore-oss/backstage-plugin-announcements-common';
 
 type IndexableAnnouncementDocument = IndexableDocument & {
   excerpt: string;
@@ -24,7 +22,7 @@ export class AnnouncementCollatorFactory implements DocumentCollatorFactory {
   public readonly type: string = 'announcements';
 
   private logger: Logger;
-  private announcementsClient: AnnouncementsClient;
+  private announcementsClient: DefaultAnnouncementsService;
 
   static fromConfig(options: AnnouncementCollatorOptions) {
     return new AnnouncementCollatorFactory(options);
@@ -32,7 +30,7 @@ export class AnnouncementCollatorFactory implements DocumentCollatorFactory {
 
   private constructor(options: AnnouncementCollatorOptions) {
     this.logger = options.logger;
-    this.announcementsClient = new AnnouncementsClient({
+    this.announcementsClient = new DefaultAnnouncementsService({
       discoveryApi: options.discoveryApi,
     });
   }

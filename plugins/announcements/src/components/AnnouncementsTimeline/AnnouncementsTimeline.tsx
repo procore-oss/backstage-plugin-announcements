@@ -11,10 +11,11 @@ import {
 } from '@material-ui/lab';
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Announcement, announcementsApiRef } from '../../api';
 import Stack from '@mui/material/Stack';
 import { DateTime } from 'luxon';
 import { announcementViewRouteRef } from '../../routes';
+import { announcementsApiRef } from '@procore-oss/backstage-plugin-announcements-react';
+import { Announcement } from '@procore-oss/backstage-plugin-announcements-common';
 
 /**
  * Props for the AnnouncementsTimeline component.

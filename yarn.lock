@@ -5521,6 +5521,7 @@ __metadata:
     "@backstage/plugin-search-common": ^1.2.10
     "@backstage/test-utils": ^1.4.7
     "@procore-oss/backstage-plugin-announcements-backend": "workspace:^"
+    "@procore-oss/backstage-plugin-announcements-common": "workspace:^"
     cross-fetch: ^4.0.0
     msw: ^1.3.2
     winston: ^3.11.0

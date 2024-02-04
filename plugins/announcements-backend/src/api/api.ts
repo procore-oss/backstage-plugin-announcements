@@ -1,15 +1,7 @@
 import crossFetch from 'cross-fetch';
 import { DiscoveryApi } from '@backstage/core-plugin-api';
 import { ResponseError } from '@backstage/errors';
-
-export type Announcement = {
-  id: string;
-  publisher: string;
-  title: string;
-  excerpt: string;
-  body: string;
-  created_at: string;
-};
+import { Announcement } from '@procore-oss/backstage-plugin-announcements-common';
 
 export type AnnouncementsList = {
   count: number;

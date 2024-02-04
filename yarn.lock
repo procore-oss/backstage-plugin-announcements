@@ -5404,7 +5404,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@procore-oss/backstage-plugin-announcements-backend@workspace:^, @procore-oss/backstage-plugin-announcements-backend@workspace:plugins/announcements-backend":
+"@procore-oss/backstage-plugin-announcements-backend@workspace:plugins/announcements-backend":
   version: 0.0.0-use.local
   resolution: "@procore-oss/backstage-plugin-announcements-backend@workspace:plugins/announcements-backend"
   dependencies:
@@ -5450,7 +5450,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@procore-oss/backstage-plugin-announcements-node@workspace:plugins/announcements-node":
+"@procore-oss/backstage-plugin-announcements-node@workspace:^, @procore-oss/backstage-plugin-announcements-node@workspace:plugins/announcements-node":
   version: 0.0.0-use.local
   resolution: "@procore-oss/backstage-plugin-announcements-node@workspace:plugins/announcements-node"
   dependencies:
@@ -5534,8 +5534,8 @@ __metadata:
     "@backstage/plugin-search-backend-node": ^1.2.13
     "@backstage/plugin-search-common": ^1.2.10
     "@backstage/test-utils": ^1.4.7
-    "@procore-oss/backstage-plugin-announcements-backend": "workspace:^"
     "@procore-oss/backstage-plugin-announcements-common": "workspace:^"
+    "@procore-oss/backstage-plugin-announcements-node": "workspace:^"
     cross-fetch: ^4.0.0
     msw: ^1.3.2
     winston: ^3.11.0

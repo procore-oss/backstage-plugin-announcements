@@ -13,12 +13,12 @@ type AnnouncementsServiceOptions = {
 export class DefaultAnnouncementsService implements AnnouncementsService {
   private readonly discoveryApi: DiscoveryApi;
 
-  constructor(opts: AnnouncementsServiceOptions) {
-    this.discoveryApi = opts.discoveryApi;
-  }
-
   static create(opts: AnnouncementsServiceOptions) {
     return new DefaultAnnouncementsService(opts);
+  }
+
+  constructor(opts: AnnouncementsServiceOptions) {
+    this.discoveryApi = opts.discoveryApi;
   }
 
   private async fetch<T = any>(input: string): Promise<T> {
@@ -33,7 +33,7 @@ export class DefaultAnnouncementsService implements AnnouncementsService {
   }
 
   async announcements(): Promise<Announcement[]> {
-    const result = await this.fetch<AnnouncementsList>('/announcements');
-    return result?.results;
+    const { results } = await this.fetch<AnnouncementsList>('/announcements');
+    return results;
   }
 }

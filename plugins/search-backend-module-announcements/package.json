@@ -30,8 +30,8 @@
     "@backstage/errors": "^1.2.3",
     "@backstage/plugin-search-backend-node": "^1.2.13",
     "@backstage/plugin-search-common": "^1.2.10",
-    "@procore-oss/backstage-plugin-announcements-backend": "workspace:^",
     "@procore-oss/backstage-plugin-announcements-common": "workspace:^",
+    "@procore-oss/backstage-plugin-announcements-node": "workspace:^",
     "cross-fetch": "^4.0.0",
     "winston": "^3.11.0"
   },

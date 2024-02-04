@@ -6,6 +6,7 @@ import {
   announcementCreatePermission,
   announcementUpdatePermission,
   announcementDeletePermission,
+  Announcement,
 } from '@procore-oss/backstage-plugin-announcements-common';
 import { DateTime } from 'luxon';
 import {
@@ -46,11 +47,11 @@ import {
   announcementViewRouteRef,
   rootRouteRef,
 } from '../../routes';
-import { Announcement, announcementsApiRef } from '../../api';
 import { DeleteAnnouncementDialog } from './DeleteAnnouncementDialog';
 import { useDeleteAnnouncementDialogState } from './useDeleteAnnouncementDialogState';
 import { Pagination } from '@material-ui/lab';
 import { ContextMenu } from './ContextMenu';
+import { announcementsApiRef } from '@procore-oss/backstage-plugin-announcements-react';
 
 const useStyles = makeStyles(theme => ({
   cardHeader: {

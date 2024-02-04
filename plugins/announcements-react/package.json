@@ -1,18 +1,19 @@
 {
-  "name": "@procore-oss/backstage-plugin-search-backend-module-announcements",
-  "description": "The announcements backend module for the search plugin.",
-  "version": "0.1.0",
+  "name": "@procore-oss/backstage-plugin-announcements-react",
+  "description": "Web library for the announcements plugin",
+  "version": "0.1.1",
   "main": "src/index.ts",
   "types": "src/index.ts",
   "license": "MIT",
   "publishConfig": {
     "access": "public",
-    "main": "dist/index.cjs.js",
+    "main": "dist/index.esm.js",
     "types": "dist/index.d.ts"
   },
   "backstage": {
-    "role": "backend-plugin-module"
+    "role": "web-library"
   },
+  "sideEffects": false,
   "scripts": {
     "start": "backstage-cli package start",
     "build": "backstage-cli package build",
@@ -23,23 +24,20 @@
     "postpack": "backstage-cli package postpack"
   },
   "dependencies": {
-    "@backstage/backend-common": "^0.20.1",
-    "@backstage/backend-plugin-api": "^0.6.9",
-    "@backstage/backend-tasks": "^0.5.14",
+    "@backstage/core-app-api": "^1.11.3",
     "@backstage/core-plugin-api": "^1.8.2",
     "@backstage/errors": "^1.2.3",
-    "@backstage/plugin-search-backend-node": "^1.2.13",
-    "@backstage/plugin-search-common": "^1.2.10",
+    "@material-ui/core": "^4.12.2",
     "@procore-oss/backstage-plugin-announcements-common": "workspace:^",
-    "@procore-oss/backstage-plugin-announcements-node": "workspace:^",
-    "cross-fetch": "^4.0.0",
-    "winston": "^3.11.0"
+    "luxon": "^3.4.4"
+  },
+  "peerDependencies": {
+    "react": "^16.13.1 || ^17.0.0 || ^18.0.0"
   },
   "devDependencies": {
-    "@backstage/backend-test-utils": "^0.2.10",
     "@backstage/cli": "^0.25.1",
-    "@backstage/test-utils": "^1.4.7",
-    "msw": "^1.3.2"
+    "@testing-library/jest-dom": "^5.10.1",
+    "@testing-library/react": "^12.1.3"
   },
   "files": [
     "dist"

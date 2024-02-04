@@ -1,5 +1,11 @@
 # @procore-oss/backstage-plugin-announcements
 
+## 0.4.6
+
+### Patch Changes
+
+- d29a587: Use display name in Announcement Card
+
 ## 0.4.5
 
 ### Patch Changes

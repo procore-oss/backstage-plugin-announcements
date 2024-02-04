@@ -8,7 +8,7 @@ import {
   TextField,
 } from '@material-ui/core';
 import { alertApiRef, useApi } from '@backstage/core-plugin-api';
-import { announcementsApiRef } from '../../api';
+import { announcementsApiRef } from '@procore-oss/backstage-plugin-announcements-react';
 
 export type NewCategoryDialogProps = {
   open: boolean;

@@ -17,3 +17,9 @@ export type AnnouncementsList = {
   count: number;
   results: Announcement[];
 };
+
+export type AnnouncementsFilters = {
+  max?: number;
+  offset?: number;
+  category?: string;
+};

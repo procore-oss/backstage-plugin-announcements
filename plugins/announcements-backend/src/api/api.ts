@@ -1,12 +1,10 @@
 import crossFetch from 'cross-fetch';
 import { DiscoveryApi } from '@backstage/core-plugin-api';
 import { ResponseError } from '@backstage/errors';
-import { Announcement } from '@procore-oss/backstage-plugin-announcements-common';
-
-export type AnnouncementsList = {
-  count: number;
-  results: Announcement[];
-};
+import {
+  Announcement,
+  AnnouncementsList,
+} from '@procore-oss/backstage-plugin-announcements-common';
 
 export class AnnouncementsClient {
   private readonly discoveryApi: DiscoveryApi;

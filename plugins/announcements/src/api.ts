@@ -1,13 +1,17 @@
 import { DateTime } from 'luxon';
 import { WebStorage } from '@backstage/core-app-api';
 import {
-  createApiRef,
   DiscoveryApi,
   ErrorApi,
   IdentityApi,
   FetchApi,
 } from '@backstage/core-plugin-api';
 import { ResponseError } from '@backstage/errors';
+import {
+  CreateAnnouncementRequest,
+  CreateCategoryRequest,
+  AnnouncementsApi,
+} from '@procore-oss/backstage-plugin-announcements-react';
 
 const lastSeenKey = 'user_last_seen_date';
 
@@ -31,57 +35,20 @@ export type AnnouncementsList = {
   results: Announcement[];
 };
 
-export type CreateAnnouncementRequest = Omit<
-  Announcement,
-  'id' | 'category' | 'created_at'
-> & {
-  category?: string;
-};
-
-export type CreateCategoryRequest = {
-  title: string;
-};
-
-export interface AnnouncementsApi {
-  announcements(opts: {
-    max?: number;
-    page?: number;
-    category?: string;
-  }): Promise<AnnouncementsList>;
-  announcementByID(id: string): Promise<Announcement>;
-
-  createAnnouncement(request: CreateAnnouncementRequest): Promise<Announcement>;
-  updateAnnouncement(
-    id: string,
-    request: CreateAnnouncementRequest,
-  ): Promise<Announcement>;
-  deleteAnnouncementByID(id: string): Promise<void>;
-
-  categories(): Promise<Category[]>;
-  createCategory(request: CreateCategoryRequest): Promise<void>;
-
-  lastSeenDate(): DateTime;
-  markLastSeenDate(date: DateTime): void;
-}
-
-export const announcementsApiRef = createApiRef<AnnouncementsApi>({
-  id: 'plugin.announcements.service',
-});
-
-type Options = {
+type AnnouncementsClientOptions = {
   discoveryApi: DiscoveryApi;
   identityApi: IdentityApi;
   errorApi: ErrorApi;
   fetchApi: FetchApi;
 };
 
-export class DefaultAnnouncementsApi implements AnnouncementsApi {
+export class AnnouncementsClient implements AnnouncementsApi {
   private readonly discoveryApi: DiscoveryApi;
   private readonly identityApi: IdentityApi;
   private readonly webStorage: WebStorage;
   private readonly fetchApi: FetchApi;
 
-  constructor(opts: Options) {
+  constructor(opts: AnnouncementsClientOptions) {
     this.discoveryApi = opts.discoveryApi;
     this.identityApi = opts.identityApi;
     this.webStorage = new WebStorage('announcements', opts.errorApi);

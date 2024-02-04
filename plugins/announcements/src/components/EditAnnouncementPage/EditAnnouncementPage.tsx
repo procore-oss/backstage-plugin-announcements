@@ -9,7 +9,10 @@ import {
 import { Alert } from '@material-ui/lab';
 import { AnnouncementForm } from '../AnnouncementForm';
 import { announcementEditRouteRef } from '../../routes';
-import { announcementsApiRef, CreateAnnouncementRequest } from '../../api';
+import {
+  announcementsApiRef,
+  CreateAnnouncementRequest,
+} from '@procore-oss/backstage-plugin-announcements-react';
 
 type EditAnnouncementPageProps = {
   themeId: string;

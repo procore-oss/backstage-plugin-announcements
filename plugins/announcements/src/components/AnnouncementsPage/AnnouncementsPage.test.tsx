@@ -7,9 +7,9 @@ import {
 import { AnnouncementsPage } from './AnnouncementsPage';
 import { rootRouteRef } from '../../routes';
 import { permissionApiRef } from '@backstage/plugin-permission-react';
-import { announcementsApiRef } from '../../api';
 import { catalogApiRef, entityRouteRef } from '@backstage/plugin-catalog-react';
 import { fireEvent } from '@testing-library/react';
+import { announcementsApiRef } from '@procore-oss/backstage-plugin-announcements-react';
 
 const mockAnnouncements = [
   {

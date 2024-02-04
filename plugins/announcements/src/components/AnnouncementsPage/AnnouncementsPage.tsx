@@ -46,11 +46,12 @@ import {
   announcementViewRouteRef,
   rootRouteRef,
 } from '../../routes';
-import { Announcement, announcementsApiRef } from '../../api';
+import { Announcement } from '../../api';
 import { DeleteAnnouncementDialog } from './DeleteAnnouncementDialog';
 import { useDeleteAnnouncementDialogState } from './useDeleteAnnouncementDialogState';
 import { Pagination } from '@material-ui/lab';
 import { ContextMenu } from './ContextMenu';
+import { announcementsApiRef } from '@procore-oss/backstage-plugin-announcements-react';
 
 const useStyles = makeStyles(theme => ({
   cardHeader: {

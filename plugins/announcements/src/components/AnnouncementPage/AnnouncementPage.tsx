@@ -23,8 +23,9 @@ import {
 } from '@backstage/plugin-catalog-react';
 import Alert from '@material-ui/lab/Alert';
 import { Grid } from '@material-ui/core';
-import { Announcement, announcementsApiRef } from '../../api';
+import { Announcement } from '../../api';
 import { announcementViewRouteRef, rootRouteRef } from '../../routes';
+import { announcementsApiRef } from '@procore-oss/backstage-plugin-announcements-react';
 
 const AnnouncementDetails = ({
   announcement,

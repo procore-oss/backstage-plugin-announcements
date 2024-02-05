@@ -1,5 +1,22 @@
 # @procore-oss/backstage-plugin-announcements
 
+## 0.5.0
+
+### Minor Changes
+
+- 4a76b6c: Introducing the <AnnouncementsTimeline /> component, a different way to display announcements to your end users.
+
+### Patch Changes
+
+- 2b03aeb: Consolidate duplicated types into the common package.
+- f7b3b0b: Migrate to `announcementsApiRef` and `AnnouncementApi` interface from `@procore-oss/backstage-plugin-announcements-react` and mark existing exports as deprecated.
+
+  Users should now import both `announcementsApiRef` and `AnnouncementApi` from `@procore-oss/backstage-plugin-announcements-react`. Existing exports will be removed in a future release.
+
+- Updated dependencies [2b03aeb]
+  - @procore-oss/backstage-plugin-announcements-common@0.1.4
+  - @procore-oss/backstage-plugin-announcements-react@0.1.2
+
 ## 0.4.6
 
 ### Patch Changes

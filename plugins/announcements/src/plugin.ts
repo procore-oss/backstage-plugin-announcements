@@ -51,6 +51,15 @@ export const AnnouncementsPage = announcementsPlugin.provide(
   }),
 );
 
+export const AnnouncementsTimeline = announcementsPlugin.provide(
+  createComponentExtension({
+    name: 'AnnouncementsTimeline',
+    component: {
+      lazy: () => import('./components').then(m => m.AnnouncementsTimeline),
+    },
+  }),
+);
+
 export const AnnouncementsCard = announcementsPlugin.provide(
   createComponentExtension({
     name: 'AnnouncementsCard',

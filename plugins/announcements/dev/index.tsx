@@ -18,6 +18,7 @@ import {
   AnnouncementsCard,
   NewAnnouncementBanner,
 } from '../src/plugin';
+import { AnnouncementsTimeline } from '../src/components/AnnouncementsTimeline';
 
 const mockCatalogApi = {
   getEntityByRef: async (entityRef: string) => {
@@ -66,7 +67,7 @@ createDevApp()
   .registerPlugin(announcementsPlugin)
   .addPage({
     element: <AnnouncementsPage cardOptions={{ titleLength: 50 }} />,
-    title: 'Root Page',
+    title: 'Announcements',
     path: '/announcements',
   })
   .addPage({
@@ -77,25 +78,27 @@ createDevApp()
   .addPage({
     element: (
       <Page themeId="home">
-        <Header title="AnnouncementsCard" />
+        <Header title="Announcement components" />
 
         <Content>
-          <Grid container>
-            <Grid item xs={12} md={12}>
-              <Typography variant="h4">Test homepage</Typography>
-            </Grid>
-
+          <Grid container spacing={8} direction="column">
             <Grid item md={12}>
+              <Typography variant="h4">Banner</Typography>
               <NewAnnouncementBanner max={2} />
             </Grid>
-            <Grid item md={6}>
+            <Grid item md={12}>
+              <Typography variant="h4">Homepage component</Typography>
               <AnnouncementsCard max={2} />
+            </Grid>
+            <Grid item md={12}>
+              <Typography variant="h4">Timeline</Typography>
+              <AnnouncementsTimeline />
             </Grid>
           </Grid>
         </Content>
       </Page>
     ),
-    title: 'AnnouncementsCard',
+    title: 'Components',
     path: '/announcements/card',
   })
   .render();

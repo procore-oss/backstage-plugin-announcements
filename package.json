@@ -13,6 +13,7 @@
     "build": "backstage-cli repo build --all",
     "tsc": "tsc",
     "tsc:full": "tsc --skipLibCheck false --incremental false",
+    "new": "backstage-cli new --scope internal",
     "clean": "backstage-cli repo clean",
     "test": "backstage-cli repo test",
     "test:all": "backstage-cli repo test --coverage",
@@ -29,19 +30,23 @@
     ]
   },
   "devDependencies": {
-    "@backstage/cli": "^0.23.1",
+    "@backstage/cli": "^0.25.1",
     "@changesets/cli": "^2.26.2",
     "@spotify/prettier-config": "^15.0.0",
     "@types/webpack": "^5.28.4",
     "concurrently": "^8.2.2",
     "husky": "^8.0.3",
-    "lint-staged": "^13.0.3",
+    "lint-staged": "^15.2.0",
     "prettier": "^2.8.8",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
+    "react": "^18.0.2",
+    "react-dom": "^18.0.2",
     "react-router": "^6.3.0",
     "react-router-dom": "^6.3.0",
     "typescript": "~5.2.2"
+  },
+  "resolutions": {
+    "@types/react": "^18",
+    "@types/react-dom": "^18"
   },
   "prettier": "@spotify/prettier-config",
   "lint-staged": {

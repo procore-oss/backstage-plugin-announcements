@@ -1,5 +1,34 @@
 # @procore-oss/backstage-plugin-announcements-backend
 
+## 0.5.4
+
+### Patch Changes
+
+- 2b03aeb: Consolidate duplicated types into the common package.
+- ee57cf2: Export collators from search backend module and deprecate the collators coming from `announcements-backend`. Users are recommended to update their imports to use `@procore-oss/backstage-plugin-search-backend-module-announcements`.
+- a0cf0a2: Remove unused api code now that service has been migrated to `announcements-node` and collator has been migrated to `search-backend-module-announcements`
+- Updated dependencies [2b03aeb]
+- Updated dependencies [e5c0685]
+- Updated dependencies [ee57cf2]
+  - @procore-oss/backstage-plugin-search-backend-module-announcements@0.1.1
+  - @procore-oss/backstage-plugin-announcements-common@0.1.4
+
+## 0.5.3
+
+### Patch Changes
+
+- b6c3890: Add support for Backstage New Backend System
+- 2896e85: It was a mistake to remove the AnnouncementsCollatorFactory. Users can only migrate to the new search module for annoucements if they are leveraging the new backend system.
+- 2c733e7: Add deprecation warning for AnnouncementCollatorFactory. Users should import from the new search module instead (@procore-oss/plugin-search-backend-module-announcements).
+
+## 0.5.2
+
+### Patch Changes
+
+- 35670f3: Upgrade Backstage to 1.22.1
+- Updated dependencies [35670f3]
+  - @procore-oss/backstage-plugin-announcements-common@0.1.3
+
 ## 0.5.1
 
 ### Patch Changes

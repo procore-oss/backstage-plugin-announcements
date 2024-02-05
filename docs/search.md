@@ -1,5 +1,30 @@
 # Integration with `@backstage/plugin-search`
 
+## New Backend System Setup
+
+Add the new module to your backend app:
+
+```bash
+yarn add --cwd packages/backend @procore-oss/backstage-plugin-search-backend-module-announcements
+```
+
+Update `packages/backend/src/index.ts` to import announcements search module and register it with the backend:
+
+```ts
+// ...
+const backend = createBackend();
+
+// ...
+
+backend.add(import('@procore-oss/backstage-plugin-announcements-backend'));
+backend.add(
+  import('@procore-oss/backstage-plugin-search-backend-module-announcements'),
+);
+// ...
+```
+
+## Old Backend System Setup
+
 Enable announcements indexing in the search engine:
 
 ```typescript

@@ -12,9 +12,10 @@ import {
   createSearchResultListItemExtension,
   SearchResultListItemExtensionProps,
 } from '@backstage/plugin-search-react';
-import { announcementsApiRef, DefaultAnnouncementsApi } from './api';
+import { AnnouncementsClient } from './api';
 import { AnnouncementSearchResultProps } from './components/AnnouncementSearchResultListItem';
 import { rootRouteRef } from './routes';
+import { announcementsApiRef } from '@procore-oss/backstage-plugin-announcements-react';
 
 export const announcementsPlugin = createPlugin({
   id: 'announcements',
@@ -31,7 +32,7 @@ export const announcementsPlugin = createPlugin({
         fetchApi: fetchApiRef,
       },
       factory: ({ discoveryApi, identityApi, errorApi, fetchApi }) => {
-        return new DefaultAnnouncementsApi({
+        return new AnnouncementsClient({
           discoveryApi: discoveryApi,
           identityApi: identityApi,
           errorApi: errorApi,
@@ -47,6 +48,15 @@ export const AnnouncementsPage = announcementsPlugin.provide(
     name: 'AnnouncementsPage',
     component: () => import('./components/Router').then(m => m.Router),
     mountPoint: rootRouteRef,
+  }),
+);
+
+export const AnnouncementsTimeline = announcementsPlugin.provide(
+  createComponentExtension({
+    name: 'AnnouncementsTimeline',
+    component: {
+      lazy: () => import('./components').then(m => m.AnnouncementsTimeline),
+    },
   }),
 );
 

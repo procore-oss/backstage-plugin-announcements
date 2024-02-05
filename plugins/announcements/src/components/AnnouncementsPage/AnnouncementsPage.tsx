@@ -6,6 +6,7 @@ import {
   announcementCreatePermission,
   announcementUpdatePermission,
   announcementDeletePermission,
+  Announcement,
 } from '@procore-oss/backstage-plugin-announcements-common';
 import { DateTime } from 'luxon';
 import {
@@ -21,6 +22,7 @@ import {
 import { alertApiRef, useApi, useRouteRef } from '@backstage/core-plugin-api';
 import { parseEntityRef } from '@backstage/catalog-model';
 import {
+  EntityDisplayName,
   EntityPeekAheadPopover,
   entityRouteRef,
 } from '@backstage/plugin-catalog-react';
@@ -36,6 +38,7 @@ import {
   ListItemIcon,
   Menu,
   MenuItem,
+  Tooltip,
   makeStyles,
 } from '@material-ui/core';
 import {
@@ -44,11 +47,11 @@ import {
   announcementViewRouteRef,
   rootRouteRef,
 } from '../../routes';
-import { Announcement, announcementsApiRef } from '../../api';
 import { DeleteAnnouncementDialog } from './DeleteAnnouncementDialog';
 import { useDeleteAnnouncementDialogState } from './useDeleteAnnouncementDialogState';
 import { Pagination } from '@material-ui/lab';
 import { ContextMenu } from './ContextMenu';
+import { announcementsApiRef } from '@procore-oss/backstage-plugin-announcements-react';
 
 const useStyles = makeStyles(theme => ({
   cardHeader: {
@@ -62,12 +65,24 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
+/**
+ * Truncate text to a given length and add ellipsis
+ * @param text the text to truncate
+ * @param length the length to truncate to
+ * @returns the truncated text
+ */
+const truncate = (text: string, length: number) => {
+  return text.length > length ? `${text.substring(0, length)}...` : text;
+};
+
 const AnnouncementCard = ({
   announcement,
   onDelete,
+  options: { titleLength = 50 },
 }: {
   announcement: Announcement;
   onDelete: () => void;
+  options: AnnouncementCardProps;
 }) => {
   const classes = useStyles();
   const announcementsLink = useRouteRef(rootRouteRef);
@@ -77,18 +92,26 @@ const AnnouncementCard = ({
 
   const publisherRef = parseEntityRef(announcement.publisher);
   const title = (
-    <Link
-      className={classes.cardHeader}
-      to={viewAnnouncementLink({ id: announcement.id })}
+    <Tooltip
+      title={announcement.title}
+      disableFocusListener
+      data-testid="announcement-card-title-tooltip"
     >
-      {announcement.title}
-    </Link>
+      <Link
+        className={classes.cardHeader}
+        to={viewAnnouncementLink({ id: announcement.id })}
+      >
+        {truncate(announcement.title, titleLength)}
+      </Link>
+    </Tooltip>
   );
   const subTitle = (
     <>
       By{' '}
       <EntityPeekAheadPopover entityRef={announcement.publisher}>
-        <Link to={entityLink(publisherRef)}>{publisherRef.name}</Link>
+        <Link to={entityLink(publisherRef)}>
+          <EntityDisplayName entityRef={announcement.publisher} hideIcon />
+        </Link>
       </EntityPeekAheadPopover>
       {announcement.category && (
         <>
@@ -174,9 +197,11 @@ const AnnouncementCard = ({
 const AnnouncementsGrid = ({
   maxPerPage,
   category,
+  cardTitleLength,
 }: {
   maxPerPage: number;
   category?: string;
+  cardTitleLength?: number;
 }) => {
   const classes = useStyles();
   const announcementsApi = useApi(announcementsApiRef);
@@ -230,11 +255,12 @@ const AnnouncementsGrid = ({
   return (
     <>
       <ItemCardGrid>
-        {announcementsList?.results!.map((announcement, index) => (
+        {announcementsList?.results!.map(announcement => (
           <AnnouncementCard
-            key={index}
+            key={announcement.id}
             announcement={announcement}
             onDelete={() => openDeleteDialog(announcement)}
+            options={{ titleLength: cardTitleLength }}
           />
         ))}
       </ItemCardGrid>
@@ -258,12 +284,17 @@ const AnnouncementsGrid = ({
   );
 };
 
+type AnnouncementCardProps = {
+  titleLength?: number;
+};
+
 type AnnouncementsPageProps = {
   themeId: string;
   title: string;
   subtitle?: ReactNode;
   maxPerPage?: number;
   category?: string;
+  cardOptions?: AnnouncementCardProps;
 };
 
 export const AnnouncementsPage = (props: AnnouncementsPageProps) => {
@@ -296,6 +327,7 @@ export const AnnouncementsPage = (props: AnnouncementsPageProps) => {
         <AnnouncementsGrid
           maxPerPage={props.maxPerPage ?? 10}
           category={props.category ?? queryParams.get('category') ?? undefined}
+          cardTitleLength={props.cardOptions?.titleLength}
         />
       </Content>
     </Page>

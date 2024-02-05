@@ -1,5 +1,17 @@
 # @procore-oss/backstage-plugin-announcements-common
 
+## 0.1.4
+
+### Patch Changes
+
+- 2b03aeb: Consolidate duplicated types into the common package.
+
+## 0.1.3
+
+### Patch Changes
+
+- 35670f3: Upgrade Backstage to 1.22.1
+
 ## 0.1.2
 
 ### Patch Changes

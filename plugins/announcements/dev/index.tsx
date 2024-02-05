@@ -19,6 +19,7 @@ import {
   NewAnnouncementBanner,
 } from '../src/plugin';
 import { AdminPage } from '../src/components/admin/AdminPage/AdminPage';
+import { AnnouncementsTimeline } from '../src/components/AnnouncementsTimeline';
 
 const mockCatalogApi = {
   getEntityByRef: async (entityRef: string) => {
@@ -66,7 +67,7 @@ createDevApp()
   .registerPlugin(fakeCatalogPlugin)
   .registerPlugin(announcementsPlugin)
   .addPage({
-    element: <AnnouncementsPage />,
+    element: <AnnouncementsPage cardOptions={{ titleLength: 50 }} />,
     title: 'Announcements',
     path: '/announcements',
   })
@@ -83,19 +84,21 @@ createDevApp()
   .addPage({
     element: (
       <Page themeId="home">
-        <Header title="Components" />
+        <Header title="Announcement components" />
 
         <Content>
-          <Grid container>
-            <Grid item xs={12} md={12}>
-              <Typography variant="h4">Test homepage</Typography>
-            </Grid>
-
+          <Grid container spacing={8} direction="column">
             <Grid item md={12}>
+              <Typography variant="h4">Banner</Typography>
               <NewAnnouncementBanner max={2} />
             </Grid>
-            <Grid item md={6}>
+            <Grid item md={12}>
+              <Typography variant="h4">Homepage component</Typography>
               <AnnouncementsCard max={2} />
+            </Grid>
+            <Grid item md={12}>
+              <Typography variant="h4">Timeline</Typography>
+              <AnnouncementsTimeline />
             </Grid>
           </Grid>
         </Content>

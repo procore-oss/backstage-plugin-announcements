@@ -1,5 +1,62 @@
 # @procore-oss/backstage-plugin-announcements
 
+## 0.5.0
+
+### Minor Changes
+
+- 4a76b6c: Introducing the <AnnouncementsTimeline /> component, a different way to display announcements to your end users.
+
+### Patch Changes
+
+- 2b03aeb: Consolidate duplicated types into the common package.
+- f7b3b0b: Migrate to `announcementsApiRef` and `AnnouncementApi` interface from `@procore-oss/backstage-plugin-announcements-react` and mark existing exports as deprecated.
+
+  Users should now import both `announcementsApiRef` and `AnnouncementApi` from `@procore-oss/backstage-plugin-announcements-react`. Existing exports will be removed in a future release.
+
+- Updated dependencies [2b03aeb]
+  - @procore-oss/backstage-plugin-announcements-common@0.1.4
+  - @procore-oss/backstage-plugin-announcements-react@0.1.2
+
+## 0.4.6
+
+### Patch Changes
+
+- d29a587: Use display name in Announcement Card
+
+## 0.4.5
+
+### Patch Changes
+
+- 4a050ac: Support for React 18
+- 7f3e663: bump @uiw/react-md-editor to latest version
+
+## 0.4.4
+
+### Patch Changes
+
+- 35670f3: Upgrade Backstage to 1.22.1
+- Updated dependencies [35670f3]
+  - @procore-oss/backstage-plugin-announcements-common@0.1.3
+
+## 0.4.3
+
+### Patch Changes
+
+- ff9753d: Use Entity display name
+
+## 0.4.2
+
+### Patch Changes
+
+- b4827fa: export announcementsApiRef
+
+## 0.4.1
+
+### Patch Changes
+
+- ee9984f: Allows a user to specify the title length for the list of Announcement cards. This is useful if you would like to truncate all titles to keep cards consistent
+- 38eab72: Announcement cards will now display truncated titles with an ellipsis. Hovering over the title will display a tooltip with the full title.
+
 ## 0.4.0
 
 ### Minor Changes

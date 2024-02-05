@@ -1,11 +1,14 @@
 import { Readable } from 'stream';
 import { Logger } from 'winston';
 import { DiscoveryApi } from '@backstage/core-plugin-api';
-import { DocumentCollatorFactory } from '@backstage/plugin-search-common';
-import { IndexableDocument } from '@backstage/plugin-search-common';
-import { Announcement, AnnouncementsClient } from './api';
+import {
+  DocumentCollatorFactory,
+  IndexableDocument,
+} from '@backstage/plugin-search-common';
+import { DefaultAnnouncementsService } from '@procore-oss/backstage-plugin-announcements-node';
+import { Announcement } from '@procore-oss/backstage-plugin-announcements-common';
 
-export type IndexableAnnouncementDocument = IndexableDocument & {
+type IndexableAnnouncementDocument = IndexableDocument & {
   excerpt: string;
   createdAt: string;
 };
@@ -19,7 +22,7 @@ export class AnnouncementCollatorFactory implements DocumentCollatorFactory {
   public readonly type: string = 'announcements';
 
   private logger: Logger;
-  private announcementsClient: AnnouncementsClient;
+  private announcementsClient: DefaultAnnouncementsService;
 
   static fromConfig(options: AnnouncementCollatorOptions) {
     return new AnnouncementCollatorFactory(options);
@@ -27,7 +30,7 @@ export class AnnouncementCollatorFactory implements DocumentCollatorFactory {
 
   private constructor(options: AnnouncementCollatorOptions) {
     this.logger = options.logger;
-    this.announcementsClient = new AnnouncementsClient({
+    this.announcementsClient = new DefaultAnnouncementsService({
       discoveryApi: options.discoveryApi,
     });
   }

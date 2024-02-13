@@ -1,5 +1,14 @@
 # @procore-oss/backstage-plugin-announcements-backend
 
+## 0.5.5
+
+### Patch Changes
+
+- Fix workspace version replacement by manually deploying packages locally
+- Updated dependencies
+  - @procore-oss/backstage-plugin-announcements-common@0.1.5
+  - @procore-oss/backstage-plugin-search-backend-module-announcements@0.1.2
+
 ## 0.5.4
 
 ### Patch Changes

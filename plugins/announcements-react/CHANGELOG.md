@@ -1,5 +1,13 @@
 # @procore-oss/backstage-plugin-announcements-react
 
+## 0.1.3
+
+### Patch Changes
+
+- Fix workspace version replacement by manually deploying packages locally
+- Updated dependencies
+  - @procore-oss/backstage-plugin-announcements-common@0.1.5
+
 ## 0.1.2
 
 ### Patch Changes

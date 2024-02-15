@@ -235,9 +235,7 @@ describe('AnnouncementsDatabase', () => {
       });
     });
 
-    // TODO: kurtaking - first testing says offset is not working as expected.
-    // eslint-disable-next-line jest/no-disabled-tests
-    it.skip('offset', async () => {
+    it('offset', async () => {
       await store.insertAnnouncement({
         id: 'id',
         publisher: 'publisher',
@@ -276,9 +274,7 @@ describe('AnnouncementsDatabase', () => {
       });
     });
 
-    // TODO: kurtaking - first testing says max is not working as expected.
-    // eslint-disable-next-line jest/no-disabled-tests
-    it.skip('max', async () => {
+    it('max', async () => {
       await store.insertAnnouncement({
         id: 'id',
         publisher: 'publisher',

@@ -18,6 +18,7 @@ import {
   AnnouncementsCard,
   NewAnnouncementBanner,
 } from '../src/plugin';
+import { AdminPage } from '../src/components/admin/AdminPage/AdminPage';
 import { AnnouncementsTimeline } from '../src/components/AnnouncementsTimeline';
 
 const mockCatalogApi = {
@@ -69,6 +70,11 @@ createDevApp()
     element: <AnnouncementsPage cardOptions={{ titleLength: 50 }} />,
     title: 'Announcements',
     path: '/announcements',
+  })
+  .addPage({
+    element: <AdminPage title="Admin Portal" themeId="home" />,
+    title: 'Admin Portal',
+    path: '/announcements/admin',
   })
   .addPage({
     element: <CatalogEntityPage />,

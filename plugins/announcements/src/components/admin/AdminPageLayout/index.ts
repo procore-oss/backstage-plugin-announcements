@@ -1,0 +1,1 @@
+export { AdminPageLayout } from './AdminPageLayout';

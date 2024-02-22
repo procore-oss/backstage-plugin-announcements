@@ -1,0 +1,1 @@
+export { NotAllowed } from './NotAllowed';

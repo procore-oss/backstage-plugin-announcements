@@ -7,11 +7,16 @@ import { Announcement } from '@procore-oss/backstage-plugin-announcements-common
 import { DefaultAnnouncementsService } from './DefaultAnnouncementsService';
 
 /** @public */
+export type AnnouncementRequestOptions = {
+  token?: string;
+};
+
+/** @public */
 export interface AnnouncementsService {
   /**
    * Fetches announcements from the backend.
    */
-  announcements(): Promise<Announcement[]>;
+  announcements(options?: AnnouncementRequestOptions): Promise<Announcement[]>;
 }
 
 /** @public */

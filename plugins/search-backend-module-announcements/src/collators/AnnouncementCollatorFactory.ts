@@ -7,6 +7,7 @@ import {
 } from '@backstage/plugin-search-common';
 import { DefaultAnnouncementsService } from '@procore-oss/backstage-plugin-announcements-node';
 import { Announcement } from '@procore-oss/backstage-plugin-announcements-common';
+import { AuthService } from '@backstage/backend-plugin-api';
 
 type IndexableAnnouncementDocument = IndexableDocument & {
   excerpt: string;
@@ -16,6 +17,7 @@ type IndexableAnnouncementDocument = IndexableDocument & {
 type AnnouncementCollatorOptions = {
   logger: Logger;
   discoveryApi: DiscoveryApi;
+  auth: AuthService;
 };
 
 export class AnnouncementCollatorFactory implements DocumentCollatorFactory {
@@ -23,6 +25,7 @@ export class AnnouncementCollatorFactory implements DocumentCollatorFactory {
 
   private logger: Logger;
   private announcementsClient: DefaultAnnouncementsService;
+  private auth: AuthService;
 
   static fromConfig(options: AnnouncementCollatorOptions) {
     return new AnnouncementCollatorFactory(options);
@@ -33,6 +36,7 @@ export class AnnouncementCollatorFactory implements DocumentCollatorFactory {
     this.announcementsClient = new DefaultAnnouncementsService({
       discoveryApi: options.discoveryApi,
     });
+    this.auth = options.auth;
   }
 
   async getCollator() {
@@ -42,7 +46,12 @@ export class AnnouncementCollatorFactory implements DocumentCollatorFactory {
   private async *execute(): AsyncGenerator<IndexableAnnouncementDocument> {
     this.logger.info('indexing announcements');
 
-    const results = await this.announcementsClient.announcements();
+    const { token } = await this.auth.getPluginRequestToken({
+      onBehalfOf: await this.auth.getOwnServiceCredentials(),
+      targetPluginId: 'announcements',
+    });
+
+    const results = await this.announcementsClient.announcements({ token });
 
     this.logger.debug(`got ${results.length} announcements`);
 

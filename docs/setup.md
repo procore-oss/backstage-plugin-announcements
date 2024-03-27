@@ -19,16 +19,29 @@ import {
 } from '@procore-oss/backstage-plugin-announcements-backend';
 import { Router } from 'express';
 import { PluginEnvironment } from '../types';
+import { createLegacyAuthAdapters } from '@backstage/backend-common';
+import { HttpAuthService } from '@backstage/backend-plugin-api';
 
 export default async function createPlugin({
   logger,
   database,
   permissions,
+  discovery,
+  tokenManager,
 }: PluginEnvironment): Promise<Router> {
+  const { httpAuth } = createLegacyAuthAdapters<
+    any,
+    { httpAuth: HttpAuthService }
+  >({
+    tokenManager,
+    discovery,
+  });
+
   const announcementsContext = await buildAnnouncementsContext({
     logger: logger,
     database: database,
     permissions: permissions,
+    httpAuth: httpAuth,
   });
 
   return await createRouter(announcementsContext);

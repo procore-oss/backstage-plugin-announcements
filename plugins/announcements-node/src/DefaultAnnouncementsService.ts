@@ -2,7 +2,10 @@ import {
   Announcement,
   AnnouncementsList,
 } from '@procore-oss/backstage-plugin-announcements-common';
-import { AnnouncementsService } from './AnnouncementsService';
+import {
+  AnnouncementRequestOptions,
+  AnnouncementsService,
+} from './AnnouncementsService';
 import { DiscoveryApi } from '@backstage/core-plugin-api';
 import { ResponseError } from '@backstage/errors';
 
@@ -21,10 +24,18 @@ export class DefaultAnnouncementsService implements AnnouncementsService {
     this.discoveryApi = opts.discoveryApi;
   }
 
-  private async fetch<T = any>(input: string): Promise<T> {
+  private async fetch<T = any>(
+    input: string,
+    options?: AnnouncementRequestOptions,
+  ): Promise<T> {
     const baseApiUrl = await this.discoveryApi.getBaseUrl('announcements');
 
-    return fetch(`${baseApiUrl}${input}`).then(async response => {
+    return fetch(`${baseApiUrl}${input}`, {
+      headers: {
+        'Content-Type': 'application/json',
+        ...(options?.token && { Authorization: `Bearer ${options?.token}` }),
+      },
+    }).then(async response => {
       if (!response.ok) {
         throw await ResponseError.fromResponse(response);
       }
@@ -32,8 +43,13 @@ export class DefaultAnnouncementsService implements AnnouncementsService {
     });
   }
 
-  async announcements(): Promise<Announcement[]> {
-    const { results } = await this.fetch<AnnouncementsList>('/announcements');
+  async announcements(
+    options?: AnnouncementRequestOptions,
+  ): Promise<Announcement[]> {
+    const { results } = await this.fetch<AnnouncementsList>(
+      '/announcements',
+      options,
+    );
     return results;
   }
 }

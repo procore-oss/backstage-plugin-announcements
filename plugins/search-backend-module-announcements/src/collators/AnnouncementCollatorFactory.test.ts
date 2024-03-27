@@ -5,6 +5,7 @@ import { TestPipeline } from '@backstage/plugin-search-backend-node';
 import { setupRequestMockHandlers } from '@backstage/test-utils';
 import { setupServer } from 'msw/node';
 import { rest } from 'msw';
+import { mockServices } from '@backstage/backend-test-utils';
 
 const mockAnnouncements = {
   count: 3,
@@ -41,10 +42,12 @@ describe('AnnouncementCollatorFactory', () => {
   const mockDiscoveryApi = {
     getBaseUrl: jest.fn().mockReturnValue('http://localhost:7007/api'),
   };
+  const mockAuth = mockServices.auth();
 
   const factory = AnnouncementCollatorFactory.fromConfig({
     logger,
     discoveryApi: mockDiscoveryApi,
+    auth: mockAuth,
   });
 
   it('has expected type', () => {

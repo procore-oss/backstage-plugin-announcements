@@ -62,7 +62,7 @@ describe('DefaultAnnouncementsService', () => {
       ),
     );
     await expect(client.announcements()).rejects.toThrow(
-      'Request failed with 500 Error',
+      'Request failed with 500 Internal Server Error',
     );
   });
 });

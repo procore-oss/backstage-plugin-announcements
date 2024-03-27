@@ -5,7 +5,6 @@ import slugify from 'slugify';
 import { v4 as uuid } from 'uuid';
 import { errorHandler } from '@backstage/backend-common';
 import { NotAllowedError } from '@backstage/errors';
-import { getBearerTokenFromAuthorizationHeader } from '@backstage/plugin-auth-node';
 import {
   AuthorizeResult,
   BasicPermission,
@@ -34,7 +33,7 @@ interface CategoryRequest {
 export async function createRouter(
   options: AnnouncementsContext,
 ): Promise<express.Router> {
-  const { persistenceContext, permissions } = options;
+  const { persistenceContext, permissions, httpAuth } = options;
 
   const permissionIntegrationRouter = createPermissionIntegrationRouter({
     permissions: Object.values(announcementEntityPermissions),
@@ -44,13 +43,11 @@ export async function createRouter(
     req: Request,
     permission: BasicPermission,
   ): Promise<boolean> => {
-    const token = getBearerTokenFromAuthorizationHeader(
-      req.header('authorization'),
-    );
+    const credentials = await httpAuth.credentials(req);
 
     const decision = (
       await permissions.authorize([{ permission: permission }], {
-        token,
+        credentials,
       })
     )[0];
 

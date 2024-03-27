@@ -18,9 +18,17 @@ export const searchModuleAnnouncementsCollator = createBackendModule({
         permissions: coreServices.permissions,
         discovery: coreServices.discovery,
         scheduler: coreServices.scheduler,
+        auth: coreServices.auth,
         indexRegistry: searchIndexRegistryExtensionPoint,
       },
-      async init({ config, logger, discovery, scheduler, indexRegistry }) {
+      async init({
+        config,
+        logger,
+        discovery,
+        scheduler,
+        auth,
+        indexRegistry,
+      }) {
         const defaultSchedule = {
           frequency: { minutes: 10 },
           timeout: { minutes: 15 },
@@ -38,6 +46,7 @@ export const searchModuleAnnouncementsCollator = createBackendModule({
           factory: AnnouncementCollatorFactory.fromConfig({
             discoveryApi: discovery,
             logger: loggerToWinstonLogger(logger),
+            auth: auth,
           }),
         });
       },

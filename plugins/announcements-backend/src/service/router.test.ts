@@ -7,8 +7,11 @@ import { AnnouncementModel } from './model';
 import { AnnouncementsDatabase } from './persistence/AnnouncementsDatabase';
 import { PersistenceContext } from './persistence/persistenceContext';
 import { createRouter } from './router';
-import { PermissionEvaluator } from '@backstage/plugin-permission-common';
 import { CategoriesDatabase } from './persistence/CategoriesDatabase';
+import {
+  HttpAuthService,
+  PermissionsService,
+} from '@backstage/backend-plugin-api';
 
 describe('createRouter', () => {
   let app: express.Express;
@@ -30,16 +33,14 @@ describe('createRouter', () => {
     categoriesStore: {} as unknown as CategoriesDatabase,
   };
 
-  const mockedAuthorize: jest.MockedFunction<PermissionEvaluator['authorize']> =
-    jest.fn();
+  const mockPermissions: PermissionsService = {
+    authorize: jest.fn(),
+    authorizeConditional: jest.fn(),
+  };
 
-  const mockedPermissionQuery: jest.MockedFunction<
-    PermissionEvaluator['authorizeConditional']
-  > = jest.fn();
-
-  const permissionEvaluator: PermissionEvaluator = {
-    authorize: mockedAuthorize,
-    authorizeConditional: mockedPermissionQuery,
+  const mockHttpAuth: HttpAuthService = {
+    credentials: jest.fn(),
+    issueUserCookie: jest.fn(),
   };
 
   afterEach(() => {
@@ -50,7 +51,8 @@ describe('createRouter', () => {
     const announcementsContext: AnnouncementsContext = {
       logger: getVoidLogger(),
       persistenceContext: mockPersistenceContext,
-      permissions: permissionEvaluator,
+      permissions: mockPermissions,
+      httpAuth: mockHttpAuth,
     };
 
     const router = await createRouter(announcementsContext);

@@ -30,7 +30,7 @@
   "devDependencies": {
     "@backstage/cli": "^0.26.2",
     "@backstage/test-utils": "^1.5.3",
-    "msw": "^1.3.2"
+    "msw": "^2.2.13"
   },
   "files": [
     "dist"

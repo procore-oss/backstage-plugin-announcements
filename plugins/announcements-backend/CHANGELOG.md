@@ -1,5 +1,17 @@
 # @procore-oss/backstage-plugin-announcements-backend
 
+## 0.6.0
+
+### Minor Changes
+
+- e811647: upgrade to 1.25.0 and integrate new authentication system
+
+### Patch Changes
+
+- Updated dependencies [e811647]
+  - @procore-oss/backstage-plugin-announcements-common@0.2.0
+  - @procore-oss/backstage-plugin-search-backend-module-announcements@0.2.0
+
 ## 0.5.4
 
 ### Patch Changes

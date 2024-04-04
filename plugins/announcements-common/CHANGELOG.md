@@ -1,5 +1,11 @@
 # @procore-oss/backstage-plugin-announcements-common
 
+## 0.2.0
+
+### Minor Changes
+
+- e811647: upgrade to 1.25.0 and integrate new authentication system
+
 ## 0.1.4
 
 ### Patch Changes

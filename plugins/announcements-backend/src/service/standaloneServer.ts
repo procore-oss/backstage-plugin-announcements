@@ -3,14 +3,15 @@ import Knex from 'knex';
 import { Logger } from 'winston';
 import {
   createServiceBuilder,
-  useHotMemoize,
   ServerTokenManager,
   loadBackendConfig,
   HostDiscovery,
+  createLegacyAuthAdapters,
 } from '@backstage/backend-common';
 import { buildAnnouncementsContext } from './announcementsContextBuilder';
 import { createRouter } from './router';
 import { ServerPermissionClient } from '@backstage/plugin-permission-node';
+import { HttpAuthService } from '@backstage/backend-plugin-api';
 
 export interface ServerOptions {
   port: number;
@@ -31,23 +32,30 @@ export async function startStandaloneServer(
     discovery,
     tokenManager,
   });
+  // TODO: Move to use services instead of this hack
+  const { httpAuth } = createLegacyAuthAdapters<
+    any,
+    { httpAuth: HttpAuthService }
+  >({
+    tokenManager,
+    discovery,
+  });
 
   logger.debug('Starting application server...');
 
-  const database = useHotMemoize(module, () => {
-    return Knex({
-      client: 'better-sqlite3',
-      connection: {
-        filename: 'db/local.sqlite',
-      },
-      useNullAsDefault: true,
-    });
+  const database = Knex({
+    client: 'better-sqlite3',
+    connection: {
+      filename: 'db/local.sqlite',
+    },
+    useNullAsDefault: true,
   });
 
   const announcementsContext = await buildAnnouncementsContext({
     logger: logger,
     database: { getClient: async () => database },
-    permissions,
+    permissions: permissions,
+    httpAuth: httpAuth,
   });
 
   const router = await createRouter(announcementsContext);

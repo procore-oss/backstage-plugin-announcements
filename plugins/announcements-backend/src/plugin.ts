@@ -15,13 +15,15 @@ export const announcementsPlugin = createBackendPlugin({
         http: coreServices.httpRouter,
         permissions: coreServices.permissions,
         database: coreServices.database,
+        httpAuth: coreServices.httpAuth,
       },
-      async init({ http, logger, permissions, database }) {
+      async init({ http, logger, permissions, database, httpAuth }) {
         http.use(
           await createRouter({
             permissions: permissions,
             logger: loggerToWinstonLogger(logger),
             persistenceContext: await initializePersistenceContext(database),
+            httpAuth: httpAuth,
           }),
         );
       },

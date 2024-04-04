@@ -30,7 +30,7 @@
     ]
   },
   "devDependencies": {
-    "@backstage/cli": "^0.25.1",
+    "@backstage/cli": "^0.26.2",
     "@changesets/cli": "^2.26.2",
     "@spotify/prettier-config": "^15.0.0",
     "@types/webpack": "^5.28.4",
@@ -38,10 +38,10 @@
     "husky": "^8.0.3",
     "lint-staged": "^15.2.0",
     "prettier": "^2.8.8",
-    "react": "^18.0.2",
-    "react-dom": "^18.0.2",
-    "react-router": "^6.3.0",
-    "react-router-dom": "^6.3.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router": "^6.22.0",
+    "react-router-dom": "^6.20.0",
     "typescript": "~5.2.2"
   },
   "resolutions": {

@@ -31,3 +31,17 @@ Example
 ```tsx
 <AnnouncementsPage cardOptions={{ titleLength: 10 }} />
 ```
+
+### Overriding the AnnouncementsPage
+
+It is possible to specify the Announcements within a specific category rendered on the `AnnouncementsPage`. You can do this by passing a `category` prop to the `AnnouncementsPage` component. The `AnnouncementsPage` prop accepts an value such as:
+
+```ts
+category = 'conferences';
+```
+
+Example
+
+```tsx
+<AnnouncementsPage category="conferences" />
+```

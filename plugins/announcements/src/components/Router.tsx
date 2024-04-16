@@ -21,6 +21,7 @@ type RouterProps = {
   themeId?: string;
   title?: string;
   subtitle?: string;
+  category?: string;
   cardOptions?: {
     titleLength: number | undefined;
   };

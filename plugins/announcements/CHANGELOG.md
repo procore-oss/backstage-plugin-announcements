@@ -1,5 +1,11 @@
 # @procore-oss/backstage-plugin-announcements
 
+## 0.6.1
+
+### Patch Changes
+
+- 96b8726: Added `category` to Router props to allow filtering on individual routes.
+
 ## 0.6.0
 
 ### Minor Changes

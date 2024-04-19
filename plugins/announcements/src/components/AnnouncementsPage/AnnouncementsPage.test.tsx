@@ -103,10 +103,11 @@ describe('AnnouncementsPage', () => {
           },
         },
       );
+
       expect(rendered.getByText('Announcements')).toBeInTheDocument();
       expect(rendered.queryByText('announcement-title')).toBeNull();
       expect(rendered.getByText('announcement-...')).toBeInTheDocument();
-      expect(rendered.getByText('customNoun')).toBeInTheDocument();
+      expect(rendered.getByText('New customNoun')).toBeInTheDocument();
 
       fireEvent.mouseOver(rendered.getByText('announcement-...'));
       expect(

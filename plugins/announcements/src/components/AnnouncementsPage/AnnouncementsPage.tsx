@@ -294,6 +294,7 @@ type AnnouncementsPageProps = {
   subtitle?: ReactNode;
   maxPerPage?: number;
   category?: string;
+  createNoun?: string;
   cardOptions?: AnnouncementCardProps;
 };
 
@@ -319,7 +320,9 @@ export const AnnouncementsPage = (props: AnnouncementsPageProps) => {
               color="primary"
               variant="contained"
             >
-              New announcement
+              {props.createNoun
+                ? `New ${props.createNoun}`
+                : 'New announcement'}
             </LinkButton>
           )}
         </ContentHeader>

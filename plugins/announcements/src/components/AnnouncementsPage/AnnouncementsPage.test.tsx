@@ -92,6 +92,7 @@ describe('AnnouncementsPage', () => {
           <AnnouncementsPage
             themeId="home"
             title="Announcements"
+            createNoun="customNoun"
             cardOptions={{ titleLength: 13 }}
           />
         </TestApiProvider>,
@@ -105,6 +106,7 @@ describe('AnnouncementsPage', () => {
       expect(rendered.getByText('Announcements')).toBeInTheDocument();
       expect(rendered.queryByText('announcement-title')).toBeNull();
       expect(rendered.getByText('announcement-...')).toBeInTheDocument();
+      expect(rendered.getByText('customNoun')).toBeInTheDocument();
 
       fireEvent.mouseOver(rendered.getByText('announcement-...'));
       expect(

@@ -37,7 +37,7 @@ jobs:
         uses: changesets/action@v1
         with:
           version: yarn version
-          publish: yarn workspaces foreach -v --no-private npm publish --access public --tolerate-republish
+          publish: yarn workspaces foreach -v --no-private npm publish --access public --tolerate-republish && yarn changeset tag
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}

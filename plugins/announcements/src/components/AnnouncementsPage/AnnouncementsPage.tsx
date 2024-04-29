@@ -325,7 +325,7 @@ export const AnnouncementsPage = (props: AnnouncementsPageProps) => {
               variant="contained"
             >
               {props.buttonOptions
-                ? `New ${buttonOptions.name}`
+                ? `New ${props.buttonOptions.name}`
                 : 'New announcement'}
             </LinkButton>
           )}

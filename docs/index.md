@@ -45,3 +45,13 @@ Example
 ```tsx
 <AnnouncementsPage category="conferences" />
 ```
+
+### Overriding the AnnouncementCreateButton
+
+It is possible to specify the text for the "New announcement" button rendered on the `AnnouncementsPage`. You can do this by passing a `buttonOptions` prop to the `AnnouncementsPage` component. The `buttonOptions` prop accepts an object with the following properties:
+
+```ts
+{
+  name: string; // defaults to 'announcement'
+}
+```

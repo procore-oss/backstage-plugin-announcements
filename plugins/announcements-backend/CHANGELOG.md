@@ -1,5 +1,14 @@
 # @procore-oss/backstage-plugin-announcements-backend
 
+## 0.6.1
+
+### Patch Changes
+
+- 3a7ae1a: Bump all packages to latest stable release of Backstage (1.26.4)
+- Updated dependencies [3a7ae1a]
+  - @procore-oss/backstage-plugin-search-backend-module-announcements@0.2.1
+  - @procore-oss/backstage-plugin-announcements-common@0.2.1
+
 ## 0.6.0
 
 ### Minor Changes

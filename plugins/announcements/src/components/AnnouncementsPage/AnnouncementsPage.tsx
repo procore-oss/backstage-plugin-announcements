@@ -288,12 +288,17 @@ type AnnouncementCardProps = {
   titleLength?: number;
 };
 
+type AnnouncementCreateButtonProps = {
+  name?: string
+};
+
 type AnnouncementsPageProps = {
   themeId: string;
   title: string;
   subtitle?: ReactNode;
   maxPerPage?: number;
   category?: string;
+  buttonOptions?: AnnouncementCreateButtonProps
   cardOptions?: AnnouncementCardProps;
 };
 
@@ -319,7 +324,9 @@ export const AnnouncementsPage = (props: AnnouncementsPageProps) => {
               color="primary"
               variant="contained"
             >
-              New announcement
+              {props.buttonOptions
+                ? `New ${props.buttonOptions.name}`
+                : 'New announcement'}
             </LinkButton>
           )}
         </ContentHeader>

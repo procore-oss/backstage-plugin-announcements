@@ -33,6 +33,9 @@ jobs:
       - name: Enable non-immutable yarn installs
         run: yarn config set -H enableImmutableInstalls false
 
+      - name: Authenticate yarn with NPM
+        run: yarn config set -H 'npmAuthToken' "${{secrets.NPM_TOKEN}}"
+
       - name: Create Release Pull Request
         uses: changesets/action@v1
         with:

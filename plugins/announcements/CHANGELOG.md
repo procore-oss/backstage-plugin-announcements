@@ -1,5 +1,15 @@
 # @procore-oss/backstage-plugin-announcements
 
+## 0.6.2
+
+### Patch Changes
+
+- 3a7ae1a: Bump all packages to latest stable release of Backstage (1.26.4)
+- 965e089: Added a property for AnnouncementsPage named `buttonOptions.name` to `AnnouncementCreateButtonProps` which will adjust what is shown in the "New announcement" LinkButton. eg. `buttonOptions.name = Pizza` will update LinkButton to "New Pizza"
+- Updated dependencies [3a7ae1a]
+  - @procore-oss/backstage-plugin-announcements-common@0.2.1
+  - @procore-oss/backstage-plugin-announcements-react@0.2.1
+
 ## 0.6.1
 
 ### Patch Changes

@@ -178,6 +178,10 @@ export async function createRouter(
   router.post(
     '/categories',
     async (req: Request<{}, {}, CategoryRequest, {}>, res) => {
+      if (!(await isRequestAuthorized(req, announcementCreatePermission))) {
+        throw new NotAllowedError('Unauthorized');
+      }
+
       const category = {
         ...req.body,
         ...{

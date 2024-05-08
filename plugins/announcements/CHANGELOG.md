@@ -1,5 +1,11 @@
 # @procore-oss/backstage-plugin-announcements
 
+## 0.6.4
+
+### Patch Changes
+
+- 2a3842e: This package should have been bumped to 0.6.4 to release a fix for the `workspace` issue.
+
 ## 0.6.3
 
 ### Patch Changes

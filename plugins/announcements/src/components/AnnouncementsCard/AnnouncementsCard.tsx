@@ -2,7 +2,12 @@ import React from 'react';
 import { useAsync } from 'react-use';
 import { DateTime } from 'luxon';
 import { usePermission } from '@backstage/plugin-permission-react';
-import { InfoCard, Link, Progress } from '@backstage/core-components';
+import {
+  InfoCard,
+  InfoCardVariants,
+  Link,
+  Progress,
+} from '@backstage/core-components';
 import { useApi, useRouteRef } from '@backstage/core-plugin-api';
 import { announcementEntityPermissions } from '@procore-oss/backstage-plugin-announcements-common';
 import {
@@ -31,12 +36,14 @@ type AnnouncementsCardOpts = {
   title?: string;
   max?: number;
   category?: string;
+  variant?: InfoCardVariants;
 };
 
 export const AnnouncementsCard = ({
   title,
   max,
   category,
+  variant = 'gridItem',
 }: AnnouncementsCardOpts) => {
   const classes = useStyles();
   const announcementsApi = useApi(announcementsApiRef);
@@ -74,7 +81,7 @@ export const AnnouncementsCard = ({
   return (
     <InfoCard
       title={title || 'Announcements'}
-      variant="gridItem"
+      variant={variant}
       deepLink={deepLink}
     >
       <List dense>

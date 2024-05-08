@@ -25,6 +25,9 @@ type RouterProps = {
   cardOptions?: {
     titleLength: number | undefined;
   };
+  buttonOptions?: {
+    name: string | undefined;
+  };
 };
 
 export const Router = (props: RouterProps) => {

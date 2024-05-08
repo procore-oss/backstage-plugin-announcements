@@ -1,11 +1,16 @@
 # @procore-oss/backstage-plugin-announcements-backend
 
+## 0.6.3
+
+### Patch Changes
+
+- a949307: fix: the most recent release version of this package will error with a "workspace:\*" error.
+
 ## 0.6.2
 
 ### Patch Changes
 
 - dd2e1b3: There were not protections against anyone creating categories. Now users will be required to have announcements.create permissions to create one.
-- a949307: fix: the most recent release version of this package will error with a "workspace:\*" error.
 
 ## 0.6.1
 

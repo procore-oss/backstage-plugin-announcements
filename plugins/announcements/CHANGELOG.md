@@ -1,5 +1,13 @@
 # @procore-oss/backstage-plugin-announcements
 
+## 0.6.3
+
+### Patch Changes
+
+- dc3838e: Added buttonOptions to router props so that this can be overridden
+- a949307: fix: the most recent release version of this package will error with a "workspace:\*" error.
+- c0ce990: Added property `variant` to `AnnouncementsCard`
+
 ## 0.6.2
 
 ### Patch Changes

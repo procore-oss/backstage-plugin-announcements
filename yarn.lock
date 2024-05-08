@@ -5866,7 +5866,7 @@ __metadata:
     "@testing-library/user-event": ^14.5.1
     "@types/luxon": ^3.3.3
     "@types/node": ^18.18.7
-    "@uiw/react-md-editor": ^4.0.3
+    "@uiw/react-md-editor": ^4.0.4
     add: ^2.0.6
     cross-fetch: ^3.1.8
     luxon: ^3.2.0
@@ -8838,9 +8838,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@uiw/react-md-editor@npm:^4.0.3":
-  version: 4.0.3
-  resolution: "@uiw/react-md-editor@npm:4.0.3"
+"@uiw/react-md-editor@npm:^4.0.4":
+  version: 4.0.4
+  resolution: "@uiw/react-md-editor@npm:4.0.4"
   dependencies:
     "@babel/runtime": ^7.14.6
     "@uiw/react-markdown-preview": ^5.0.6
@@ -8849,7 +8849,7 @@ __metadata:
   peerDependencies:
     react: ">=16.8.0"
     react-dom: ">=16.8.0"
-  checksum: 0076c111c621e48dc86f1d30aa52be7463b26d0389ac24af22ec61bdd73242814b21356a68ca0d4ca19553b67060b9f7d7df60e1b7d38520396e4130541da7b3
+  checksum: 6d166b1efd948c67319d29f7852d0b81858910fbca298fe37410a7f99d65122c76eacff0ebcfd276cb32f3ef1f4b072ef6fde9c09110a08260eab8e0ea573ea7
   languageName: node
   linkType: hard
 

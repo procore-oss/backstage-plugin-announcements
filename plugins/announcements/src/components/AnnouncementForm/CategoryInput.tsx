@@ -58,8 +58,8 @@ export default function CategoryInput({
         const newCategory = (
           typeof newValue === 'string' ? newValue : newValue.title
         )
-          .replace('Create "', '')
-          .replace('"', '');
+          .replace('Create ', '')
+          .replaceAll('"', '');
 
         setForm({ ...form, category: newCategory });
       }}

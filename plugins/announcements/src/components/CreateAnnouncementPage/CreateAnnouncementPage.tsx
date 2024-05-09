@@ -8,7 +8,10 @@ import {
   CreateAnnouncementRequest,
   announcementsApiRef,
 } from '@procore-oss/backstage-plugin-announcements-react';
-import { Announcement } from '@procore-oss/backstage-plugin-announcements-common';
+import {
+  Announcement,
+  Category,
+} from '@procore-oss/backstage-plugin-announcements-common';
 
 type CreateAnnouncementPageProps = {
   themeId: string;
@@ -23,9 +26,26 @@ export const CreateAnnouncementPage = (props: CreateAnnouncementPageProps) => {
   const navigate = useNavigate();
 
   const onSubmit = async (request: CreateAnnouncementRequest) => {
+    const { category } = request;
+    const categories = await announcementsApi.categories();
+    const slugs = categories.map((c: Category) => c.slug);
+    let alertMsg = 'Announcement created.';
+
     try {
-      await announcementsApi.createAnnouncement(request);
-      alertApi.post({ message: 'Announcement created.', severity: 'success' });
+      if (category && slugs.indexOf(category) === -1) {
+        alertMsg = alertMsg.replace('.', '');
+        alertMsg = `${alertMsg} with new category ${category}.`;
+
+        await announcementsApi.createCategory({
+          title: category,
+        });
+      }
+
+      await announcementsApi.createAnnouncement({
+        ...request,
+        category: request.category?.toLowerCase(),
+      });
+      alertApi.post({ message: alertMsg, severity: 'success' });
 
       navigate(rootPage());
     } catch (err) {

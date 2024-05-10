@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useAsync } from 'react-use';
 import { DateTime } from 'luxon';
 import { Link } from '@backstage/core-components';
 import { useApi, useRouteRef } from '@backstage/core-plugin-api';
@@ -12,7 +11,10 @@ import {
 import { Alert } from '@material-ui/lab';
 import Close from '@material-ui/icons/Close';
 import { announcementViewRouteRef } from '../../routes';
-import { announcementsApiRef } from '@procore-oss/backstage-plugin-announcements-react';
+import {
+  announcementsApiRef,
+  useAnnouncements,
+} from '@procore-oss/backstage-plugin-announcements-react';
 import { Announcement } from '@procore-oss/backstage-plugin-announcements-common';
 
 const useStyles = makeStyles(theme => ({
@@ -113,16 +115,11 @@ type NewAnnouncementBannerProps = {
 
 export const NewAnnouncementBanner = (props: NewAnnouncementBannerProps) => {
   const announcementsApi = useApi(announcementsApiRef);
-  const {
-    value: announcements,
-    loading,
-    error,
-  } = useAsync(async () =>
-    announcementsApi.announcements({
-      max: props.max || 1,
-      category: props.category,
-    }),
-  );
+
+  const { announcements, loading, error } = useAnnouncements({
+    max: props.max || 1,
+    category: props.category,
+  });
   const lastSeen = announcementsApi.lastSeenDate();
 
   if (loading) {
@@ -131,15 +128,13 @@ export const NewAnnouncementBanner = (props: NewAnnouncementBannerProps) => {
     return <Alert severity="error">{error.message}</Alert>;
   }
 
-  if (announcements?.count === 0) {
+  if (announcements.count === 0) {
     return null;
   }
 
-  const unseenAnnouncements = (announcements?.results || []).filter(
-    announcement => {
-      return lastSeen < DateTime.fromISO(announcement.created_at);
-    },
-  );
+  const unseenAnnouncements = announcements.results.filter(announcement => {
+    return lastSeen < DateTime.fromISO(announcement.created_at);
+  });
 
   if (unseenAnnouncements?.length === 0) {
     return null;

@@ -1,5 +1,4 @@
 import React from 'react';
-import { useAsync } from 'react-use';
 import { DateTime } from 'luxon';
 import { usePermission } from '@backstage/plugin-permission-react';
 import {
@@ -24,7 +23,10 @@ import {
   announcementViewRouteRef,
   rootRouteRef,
 } from '../../routes';
-import { announcementsApiRef } from '@procore-oss/backstage-plugin-announcements-react';
+import {
+  announcementsApiRef,
+  useAnnouncements,
+} from '@procore-oss/backstage-plugin-announcements-react';
 
 const useStyles = makeStyles({
   newAnnouncementIcon: {
@@ -52,16 +54,11 @@ export const AnnouncementsCard = ({
   const createAnnouncementLink = useRouteRef(announcementCreateRouteRef);
   const lastSeen = announcementsApi.lastSeenDate();
 
-  const {
-    value: announcements,
-    loading,
-    error,
-  } = useAsync(async () =>
-    announcementsApi.announcements({
-      max: max || 5,
-      category,
-    }),
-  );
+  const { announcements, loading, error } = useAnnouncements({
+    max: max || 5,
+    category,
+  });
+
   const { announcementCreatePermission } = announcementEntityPermissions;
   const { loading: loadingPermission, allowed: canAdd } = usePermission({
     permission: announcementCreatePermission,
@@ -85,7 +82,7 @@ export const AnnouncementsCard = ({
       deepLink={deepLink}
     >
       <List dense>
-        {announcements?.results.map(announcement => (
+        {announcements.results.map(announcement => (
           <ListItem key={announcement.id}>
             <ListItem>
               {lastSeen < DateTime.fromISO(announcement.created_at) && (
@@ -126,7 +123,7 @@ export const AnnouncementsCard = ({
             </ListItem>
           </ListItem>
         ))}
-        {announcements?.count === 0 && !loadingPermission && canAdd && (
+        {announcements.count === 0 && !loadingPermission && canAdd && (
           <ListItem>
             <ListItemText>
               No announcements yet, want to{' '}

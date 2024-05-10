@@ -2,17 +2,8 @@ import React from 'react';
 import MDEditor from '@uiw/react-md-editor';
 import { InfoCard } from '@backstage/core-components';
 import { identityApiRef, useApi } from '@backstage/core-plugin-api';
-import {
-  Button,
-  CircularProgress,
-  makeStyles,
-  TextField,
-} from '@material-ui/core';
-import { Autocomplete } from '@material-ui/lab';
-import {
-  CreateAnnouncementRequest,
-  useCategories,
-} from '@procore-oss/backstage-plugin-announcements-react';
+import { Button, makeStyles, TextField } from '@material-ui/core';
+import { CreateAnnouncementRequest } from '@procore-oss/backstage-plugin-announcements-react';
 import { Announcement } from '@procore-oss/backstage-plugin-announcements-common';
 import CategoryInput from './CategoryInput';
 
@@ -40,8 +31,6 @@ export const AnnouncementForm = ({
     category: initialData.category?.slug,
   });
   const [loading, setLoading] = React.useState(false);
-
-  // const { categories, loading: categoriesLoading } = useCategories();
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setForm({

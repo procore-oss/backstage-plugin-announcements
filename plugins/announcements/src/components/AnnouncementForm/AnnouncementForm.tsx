@@ -13,6 +13,7 @@ import { useAsync } from 'react-use';
 import {
   CreateAnnouncementRequest,
   announcementsApiRef,
+  useCategories,
 } from '@procore-oss/backstage-plugin-announcements-react';
 import { Announcement } from '@procore-oss/backstage-plugin-announcements-common';
 
@@ -41,11 +42,7 @@ export const AnnouncementForm = ({
   });
   const [loading, setLoading] = React.useState(false);
 
-  const announcementsApi = useApi(announcementsApiRef);
-  const { value: categories, loading: categoriesLoading } = useAsync(
-    () => announcementsApi.categories(),
-    [announcementsApi],
-  );
+  const { categories, loading: categoriesLoading } = useCategories();
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setForm({

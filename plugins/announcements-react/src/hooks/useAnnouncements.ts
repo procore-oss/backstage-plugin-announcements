@@ -3,6 +3,7 @@ import { announcementsApiRef } from '../apis';
 import {
   Announcement,
   AnnouncementsFilters,
+  AnnouncementsList,
 } from '@procore-oss/backstage-plugin-announcements-common';
 import { useAsyncRetry } from 'react-use';
 
@@ -14,8 +15,7 @@ export const useAnnouncements = (
   props: AnnouncementsFilters,
   options?: UseAnnouncementsPropOptions,
 ): {
-  announcements: Announcement[];
-  total: number;
+  announcements: AnnouncementsList;
   loading: boolean;
   error: Error | undefined;
   retry: () => void;
@@ -32,8 +32,7 @@ export const useAnnouncements = (
   }, [api, ...(options?.dependencies ?? [])]);
 
   return {
-    announcements: announcementsList?.results ?? [],
-    total: announcementsList?.count ?? 0,
+    announcements: announcementsList ?? { count: 0, results: [] },
     loading,
     error,
     retry,

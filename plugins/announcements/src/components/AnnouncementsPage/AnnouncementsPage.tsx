@@ -1,5 +1,4 @@
 import React, { ReactNode } from 'react';
-import { useAsyncRetry } from 'react-use';
 import { useLocation } from 'react-router-dom';
 import { usePermission } from '@backstage/plugin-permission-react';
 import {
@@ -51,7 +50,10 @@ import { DeleteAnnouncementDialog } from './DeleteAnnouncementDialog';
 import { useDeleteAnnouncementDialogState } from './useDeleteAnnouncementDialogState';
 import { Pagination } from '@material-ui/lab';
 import { ContextMenu } from './ContextMenu';
-import { announcementsApiRef } from '@procore-oss/backstage-plugin-announcements-react';
+import {
+  announcementsApiRef,
+  useAnnouncements,
+} from '@procore-oss/backstage-plugin-announcements-react';
 
 const useStyles = makeStyles(theme => ({
   cardHeader: {
@@ -213,15 +215,18 @@ const AnnouncementsGrid = ({
   };
 
   const {
-    value: announcementsList,
+    announcements,
     loading,
     error,
     retry: refresh,
-  } = useAsyncRetry(
-    async () =>
-      announcementsApi.announcements({ max: maxPerPage, page, category }),
-    [page, maxPerPage, category],
+  } = useAnnouncements(
+    {
+      max: maxPerPage,
+      category,
+    },
+    { dependencies: [maxPerPage, page, category] },
   );
+
   const {
     isOpen: isDeleteDialogOpen,
     open: openDeleteDialog,
@@ -255,7 +260,7 @@ const AnnouncementsGrid = ({
   return (
     <>
       <ItemCardGrid>
-        {announcementsList?.results.map(announcement => (
+        {announcements.results.map(announcement => (
           <AnnouncementCard
             key={announcement.id}
             announcement={announcement}
@@ -265,10 +270,10 @@ const AnnouncementsGrid = ({
         ))}
       </ItemCardGrid>
 
-      {announcementsList && announcementsList.count !== 0 && (
+      {announcements && announcements.count !== 0 && (
         <div className={classes.pagination}>
           <Pagination
-            count={Math.ceil(announcementsList.count / maxPerPage)}
+            count={Math.ceil(announcements.count / maxPerPage)}
             page={page}
             onChange={handleChange}
           />
@@ -289,7 +294,7 @@ type AnnouncementCardProps = {
 };
 
 type AnnouncementCreateButtonProps = {
-  name?: string
+  name?: string;
 };
 
 type AnnouncementsPageProps = {
@@ -298,7 +303,7 @@ type AnnouncementsPageProps = {
   subtitle?: ReactNode;
   maxPerPage?: number;
   category?: string;
-  buttonOptions?: AnnouncementCreateButtonProps
+  buttonOptions?: AnnouncementCreateButtonProps;
   cardOptions?: AnnouncementCardProps;
 };
 

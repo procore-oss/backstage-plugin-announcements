@@ -12,7 +12,10 @@ import { useApi } from '@backstage/core-plugin-api';
 import { Button, makeStyles } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 import { NewCategoryDialog } from '../NewCategoryDialog';
-import { announcementsApiRef } from '@procore-oss/backstage-plugin-announcements-react';
+import {
+  announcementsApiRef,
+  useCategories,
+} from '@procore-oss/backstage-plugin-announcements-react';
 import { Category } from '@procore-oss/backstage-plugin-announcements-common';
 
 const useStyles = makeStyles(theme => ({
@@ -32,11 +35,7 @@ const CategoriesTable = () => {
   const classes = useStyles();
   const [newCategoryDialogOpen, setNewCategoryDialogOpen] = useState(false);
 
-  const announcementsApi = useApi(announcementsApiRef);
-  const { value, loading, error, retry } = useAsyncRetry(
-    () => announcementsApi.categories(),
-    [announcementsApi],
-  );
+  const { categories, loading, error, retry } = useCategories();
 
   if (error) {
     return <ErrorPanel error={error} />;
@@ -63,7 +62,7 @@ const CategoriesTable = () => {
     <>
       <Table
         options={{ paging: false }}
-        data={value || []}
+        data={categories || []}
         columns={columns}
         isLoading={loading}
         title="Categories"

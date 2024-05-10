@@ -8,15 +8,24 @@ import {
 
 export const useAnnouncements = (
   props: AnnouncementsFilters,
-): { announcements: Announcement[]; loading: boolean } => {
+): {
+  announcements: Announcement[];
+  loading: boolean;
+  error: Error | undefined;
+} => {
   const api = useApi(announcementsApiRef);
 
-  const { value: announcements, loading } = useAsync(async () => {
+  const {
+    value: announcements,
+    loading,
+    error,
+  } = useAsync(async () => {
     return await api.announcements(props);
   });
 
   return {
     announcements: announcements?.results ?? [],
     loading,
+    error,
   };
 };

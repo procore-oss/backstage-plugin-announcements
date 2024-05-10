@@ -44,9 +44,11 @@ export const EditAnnouncementPage = (props: EditAnnouncementPageProps) => {
     content = <Progress />;
   } else if (error) {
     content = <Alert severity="error">{error.message}</Alert>;
+  } else if (!value) {
+    content = <Alert severity="error">Unable to find announcement</Alert>;
   } else {
-    title = `Edit "${value!.title}" – ${title}`;
-    content = <AnnouncementForm initialData={value!} onSubmit={onSubmit} />;
+    title = `Edit "${value.title}" – ${title}`;
+    content = <AnnouncementForm initialData={value} onSubmit={onSubmit} />;
   }
 
   return (

@@ -64,7 +64,9 @@ export default function CategoryInput({
           Suggest the creation of a new category. This adds the new value to the list of options
           and creates the new category when the form is submitted.
         */
-        const isExisting = options.some(option => inputValue === option.title);
+        const isExisting = options.some(
+          option => inputValue.toLowerCase() === option.title.toLowerCase(),
+        );
         if (inputValue !== '' && !isExisting) {
           filtered.push({
             title: `Create "${inputValue}"`,

@@ -7,6 +7,7 @@ import { AnnouncementForm } from '../AnnouncementForm';
 import {
   CreateAnnouncementRequest,
   announcementsApiRef,
+  useCategories,
 } from '@procore-oss/backstage-plugin-announcements-react';
 import {
   Announcement,
@@ -24,10 +25,11 @@ export const CreateAnnouncementPage = (props: CreateAnnouncementPageProps) => {
   const rootPage = useRouteRef(rootRouteRef);
   const alertApi = useApi(alertApiRef);
   const navigate = useNavigate();
+  const { categories } = useCategories();
 
   const onSubmit = async (request: CreateAnnouncementRequest) => {
     const { category } = request;
-    const categories = await announcementsApi.categories();
+
     const slugs = categories.map((c: Category) => c.slug);
     let alertMsg = 'Announcement created.';
 

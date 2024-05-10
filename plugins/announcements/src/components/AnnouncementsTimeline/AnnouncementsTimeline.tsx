@@ -15,6 +15,7 @@ import Stack from '@mui/material/Stack';
 import { DateTime } from 'luxon';
 import { announcementViewRouteRef } from '../../routes';
 import { useAnnouncements } from '@procore-oss/backstage-plugin-announcements-react';
+import { Progress } from '@backstage/core-components';
 
 /**
  * Props for the AnnouncementsTimeline component.
@@ -69,8 +70,11 @@ export const AnnouncementsTimeline = ({
     max: maxResults,
   });
 
-  if (loading || !announcements || announcements.count === 0)
-    return <>No announcements</>;
+  if (loading) {
+    return <Progress />;
+  }
+
+  if (!announcements || announcements.count === 0) return <>No announcements</>;
 
   if (error) return <>Error: {error.message}</>;
 

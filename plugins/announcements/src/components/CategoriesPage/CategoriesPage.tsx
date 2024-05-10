@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useAsyncRetry } from 'react-use';
 import {
   Page,
   Header,
@@ -8,14 +7,10 @@ import {
   TableColumn,
   ErrorPanel,
 } from '@backstage/core-components';
-import { useApi } from '@backstage/core-plugin-api';
 import { Button, makeStyles } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 import { NewCategoryDialog } from '../NewCategoryDialog';
-import {
-  announcementsApiRef,
-  useCategories,
-} from '@procore-oss/backstage-plugin-announcements-react';
+import { useCategories } from '@procore-oss/backstage-plugin-announcements-react';
 import { Category } from '@procore-oss/backstage-plugin-announcements-common';
 
 const useStyles = makeStyles(theme => ({

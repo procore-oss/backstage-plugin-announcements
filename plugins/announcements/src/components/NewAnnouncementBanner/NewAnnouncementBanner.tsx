@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useAsync } from 'react-use';
 import { DateTime } from 'luxon';
 import { Link } from '@backstage/core-components';
 import { useApi, useRouteRef } from '@backstage/core-plugin-api';
@@ -129,11 +128,11 @@ export const NewAnnouncementBanner = (props: NewAnnouncementBannerProps) => {
     return <Alert severity="error">{error.message}</Alert>;
   }
 
-  if (announcements.length === 0) {
+  if (announcements.count === 0) {
     return null;
   }
 
-  const unseenAnnouncements = (announcements || []).filter(announcement => {
+  const unseenAnnouncements = announcements.results.filter(announcement => {
     return lastSeen < DateTime.fromISO(announcement.created_at);
   });
 

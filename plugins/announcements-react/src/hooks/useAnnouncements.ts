@@ -1,7 +1,6 @@
 import { useApi } from '@backstage/core-plugin-api';
 import { announcementsApiRef } from '../apis';
 import {
-  Announcement,
   AnnouncementsFilters,
   AnnouncementsList,
 } from '@procore-oss/backstage-plugin-announcements-common';

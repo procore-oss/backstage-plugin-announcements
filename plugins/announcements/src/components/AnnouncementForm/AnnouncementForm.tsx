@@ -9,10 +9,8 @@ import {
   TextField,
 } from '@material-ui/core';
 import { Autocomplete } from '@material-ui/lab';
-import { useAsync } from 'react-use';
 import {
   CreateAnnouncementRequest,
-  announcementsApiRef,
   useCategories,
 } from '@procore-oss/backstage-plugin-announcements-react';
 import { Announcement } from '@procore-oss/backstage-plugin-announcements-common';

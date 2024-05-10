@@ -1,5 +1,4 @@
 import React from 'react';
-import { useAsync } from 'react-use';
 import { DateTime } from 'luxon';
 import { usePermission } from '@backstage/plugin-permission-react';
 import {
@@ -83,7 +82,7 @@ export const AnnouncementsCard = ({
       deepLink={deepLink}
     >
       <List dense>
-        {announcements.map(announcement => (
+        {announcements.results.map(announcement => (
           <ListItem key={announcement.id}>
             <ListItem>
               {lastSeen < DateTime.fromISO(announcement.created_at) && (
@@ -124,7 +123,7 @@ export const AnnouncementsCard = ({
             </ListItem>
           </ListItem>
         ))}
-        {announcements.length === 0 && !loadingPermission && canAdd && (
+        {announcements.count === 0 && !loadingPermission && canAdd && (
           <ListItem>
             <ListItemText>
               No announcements yet, want to{' '}

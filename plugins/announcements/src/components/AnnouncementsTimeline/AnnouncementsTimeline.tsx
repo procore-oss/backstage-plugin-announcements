@@ -69,7 +69,7 @@ export const AnnouncementsTimeline = ({
     max: maxResults,
   });
 
-  if (loading || !announcements || announcements.length === 0)
+  if (loading || !announcements || announcements.count === 0)
     return <>No announcements</>;
 
   if (error) return <>Error: {error.message}</>;
@@ -83,7 +83,7 @@ export const AnnouncementsTimeline = ({
     >
       <Box sx={{ minWidth: timelineMinWidth }}>
         <Timeline align={timelineAlignment}>
-          {announcements.map(a => (
+          {announcements.results.map(a => (
             <TimelineItem key={`ti-${a.id}`}>
               <TimelineOppositeContent
                 key={`toc-${a.id}`}

@@ -1,31 +1,41 @@
 import { useApi } from '@backstage/core-plugin-api';
 import { announcementsApiRef } from '../apis';
-import useAsync from 'react-use/esm/useAsync';
 import {
   Announcement,
   AnnouncementsFilters,
 } from '@procore-oss/backstage-plugin-announcements-common';
+import { useAsyncRetry } from 'react-use';
+
+type UseAnnouncementsPropOptions = {
+  dependencies?: any[];
+};
 
 export const useAnnouncements = (
   props: AnnouncementsFilters,
+  options?: UseAnnouncementsPropOptions,
 ): {
   announcements: Announcement[];
+  total: number;
   loading: boolean;
   error: Error | undefined;
+  retry: () => void;
 } => {
   const api = useApi(announcementsApiRef);
 
   const {
-    value: announcements,
+    value: announcementsList,
     loading,
     error,
-  } = useAsync(async () => {
+    retry,
+  } = useAsyncRetry(async () => {
     return await api.announcements(props);
-  });
+  }, [api, ...(options?.dependencies ?? [])]);
 
   return {
-    announcements: announcements?.results ?? [],
+    announcements: announcementsList?.results ?? [],
+    total: announcementsList?.count ?? 0,
     loading,
     error,
+    retry,
   };
 };

@@ -2,9 +2,7 @@ import * as React from 'react';
 import TextField from '@mui/material/TextField';
 import Autocomplete, { createFilterOptions } from '@mui/material/Autocomplete';
 import { Category } from '@procore-oss/backstage-plugin-announcements-common';
-import { useApi } from '@backstage/core-plugin-api';
-import { announcementsApiRef } from '@procore-oss/backstage-plugin-announcements-react';
-import { useAsync } from 'react-use';
+import { useCategories } from '@procore-oss/backstage-plugin-announcements-react';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
 type CategoryInputProps = {
@@ -38,12 +36,7 @@ export default function CategoryInput({
   form,
   initialValue,
 }: CategoryInputProps) {
-  const announcementsApi = useApi(announcementsApiRef);
-
-  const { value: categories, loading: categoriesLoading } = useAsync(
-    () => announcementsApi.categories(),
-    [announcementsApi],
-  );
+  const { categories, loading: categoriesLoading } = useCategories();
 
   return (
     <Autocomplete

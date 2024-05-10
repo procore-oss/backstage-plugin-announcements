@@ -1,4 +1,4 @@
-import { useApi, useRouteRef } from '@backstage/core-plugin-api';
+import { useRouteRef } from '@backstage/core-plugin-api';
 import { Typography, Box } from '@material-ui/core';
 import {
   Timeline,
@@ -9,13 +9,13 @@ import {
   TimelineDot,
   TimelineSeparator,
 } from '@material-ui/lab';
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import Stack from '@mui/material/Stack';
 import { DateTime } from 'luxon';
 import { announcementViewRouteRef } from '../../routes';
-import { announcementsApiRef } from '@procore-oss/backstage-plugin-announcements-react';
-import { Announcement } from '@procore-oss/backstage-plugin-announcements-common';
+import { useAnnouncements } from '@procore-oss/backstage-plugin-announcements-react';
+import { Progress } from '@backstage/core-components';
 
 /**
  * Props for the AnnouncementsTimeline component.
@@ -64,23 +64,19 @@ export const AnnouncementsTimeline = ({
   timelineAlignment = DEFAULT_TIMELINE_ALIGNMENT,
   timelineMinWidth = DEFAULT_TIMELINE_WIDTH,
 }: AnnouncementsTimelineProps) => {
-  const [announcements, setAnnouncements] = useState<Announcement[]>([]);
-  const announcementsApi = useApi(announcementsApiRef);
   const viewAnnouncementLink = useRouteRef(announcementViewRouteRef);
 
-  useEffect(() => {
-    async function fetchData() {
-      const { results } = await announcementsApi.announcements({
-        max: maxResults,
-      });
-      setAnnouncements(results);
-    }
+  const { announcements, loading, error } = useAnnouncements({
+    max: maxResults,
+  });
 
-    fetchData();
-  }, [announcementsApi, maxResults]);
+  if (loading) {
+    return <Progress />;
+  }
 
-  if (!announcements || announcements.length === 0)
-    return <>No announcements</>;
+  if (!announcements || announcements.count === 0) return <>No announcements</>;
+
+  if (error) return <>Error: {error.message}</>;
 
   return (
     <Stack
@@ -91,7 +87,7 @@ export const AnnouncementsTimeline = ({
     >
       <Box sx={{ minWidth: timelineMinWidth }}>
         <Timeline align={timelineAlignment}>
-          {announcements.map(a => (
+          {announcements.results.map(a => (
             <TimelineItem key={`ti-${a.id}`}>
               <TimelineOppositeContent
                 key={`toc-${a.id}`}

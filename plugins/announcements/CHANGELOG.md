@@ -1,5 +1,20 @@
 # @procore-oss/backstage-plugin-announcements
 
+## 0.6.5
+
+### Patch Changes
+
+- 656ef61: Update to Backstage version 1.27.1
+- 1a669e3: Added two new hooks (useAnnouncements and useCategories) to refactor out some repetive calls to the announcementsApi on the frontend.
+
+  While not the primary objective, these will be exported from '@procore-oss/backstage-plugin-announcements-react' so adopters _could_ retrieve announcements and display them as they see fit.
+
+- e9e446f: Adds the ability to create new categories dynamically from the new announcement form
+- Updated dependencies [656ef61]
+- Updated dependencies [1a669e3]
+  - @procore-oss/backstage-plugin-announcements-common@0.2.2
+  - @procore-oss/backstage-plugin-announcements-react@0.2.2
+
 ## 0.6.4
 
 ### Patch Changes

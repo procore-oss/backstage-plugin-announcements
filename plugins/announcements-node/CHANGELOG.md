@@ -1,5 +1,13 @@
 # @procore-oss/backstage-plugin-announcements-node
 
+## 0.2.2
+
+### Patch Changes
+
+- 656ef61: Update to Backstage version 1.27.1
+- Updated dependencies [656ef61]
+  - @procore-oss/backstage-plugin-announcements-common@0.2.2
+
 ## 0.2.1
 
 ### Patch Changes

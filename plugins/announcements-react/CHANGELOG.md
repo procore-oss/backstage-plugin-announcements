@@ -1,5 +1,17 @@
 # @procore-oss/backstage-plugin-announcements-react
 
+## 0.2.2
+
+### Patch Changes
+
+- 656ef61: Update to Backstage version 1.27.1
+- 1a669e3: Added two new hooks (useAnnouncements and useCategories) to refactor out some repetive calls to the announcementsApi on the frontend.
+
+  While not the primary objective, these will be exported from '@procore-oss/backstage-plugin-announcements-react' so adopters _could_ retrieve announcements and display them as they see fit.
+
+- Updated dependencies [656ef61]
+  - @procore-oss/backstage-plugin-announcements-common@0.2.2
+
 ## 0.2.1
 
 ### Patch Changes

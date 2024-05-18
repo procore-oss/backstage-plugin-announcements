@@ -7,11 +7,16 @@ import {
   TableColumn,
   ErrorPanel,
 } from '@backstage/core-components';
-import { Button, makeStyles } from '@material-ui/core';
+import { Button, IconButton, makeStyles } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
+import DeleteIcon from '@material-ui/icons/Delete';
 import { NewCategoryDialog } from '../NewCategoryDialog';
 import { useCategories } from '@procore-oss/backstage-plugin-announcements-react';
 import { Category } from '@procore-oss/backstage-plugin-announcements-common';
+import { useDeleteCategoryDialogState } from './useDeleteCategoryDialogState';
+import { alertApiRef, useApi } from '@backstage/core-plugin-api';
+import { announcementsApiRef } from '@procore-oss/backstage-plugin-announcements-react';
+import { DeleteCategoryDialog } from './DeleteCategoryDialog';
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -29,8 +34,17 @@ const useStyles = makeStyles(theme => ({
 const CategoriesTable = () => {
   const classes = useStyles();
   const [newCategoryDialogOpen, setNewCategoryDialogOpen] = useState(false);
+  const announcementsApi = useApi(announcementsApiRef);
+  const alertApi = useApi(alertApiRef);
 
-  const { categories, loading, error, retry } = useCategories();
+  const { categories, loading, error, retry: refresh } = useCategories();
+
+  const {
+    isOpen: isDeleteDialogOpen,
+    open: openDeleteDialog,
+    close: closeDeleteDialog,
+    category: categoryToDelete,
+  } = useDeleteCategoryDialogState();
 
   if (error) {
     return <ErrorPanel error={error} />;
@@ -38,7 +52,24 @@ const CategoriesTable = () => {
 
   const onNewCategoryDialogClose = () => {
     setNewCategoryDialogOpen(false);
-    retry();
+    refresh();
+  };
+
+  const onCancelDelete = () => {
+    closeDeleteDialog();
+  };
+  const onConfirmDelete = async () => {
+    closeDeleteDialog();
+
+    try {
+      await announcementsApi.deleteCategory(categoryToDelete!.slug);
+
+      alertApi.post({ message: 'Category deleted.', severity: 'success' });
+    } catch (err) {
+      alertApi.post({ message: (err as Error).message, severity: 'error' });
+    }
+
+    refresh();
   };
 
   const columns: TableColumn<Category>[] = [
@@ -50,6 +81,17 @@ const CategoriesTable = () => {
     {
       title: 'Title',
       field: 'title',
+    },
+    {
+      title: 'Actions',
+      field: 'actions',
+      render: category => {
+        return (
+          <IconButton onClick={() => openDeleteDialog(category)}>
+            <DeleteIcon />
+          </IconButton>
+        );
+      },
     },
   ];
 
@@ -87,6 +129,11 @@ const CategoriesTable = () => {
       <NewCategoryDialog
         open={newCategoryDialogOpen}
         onClose={onNewCategoryDialogClose}
+      />
+      <DeleteCategoryDialog
+        open={isDeleteDialogOpen}
+        onCancel={onCancelDelete}
+        onConfirm={onConfirmDelete}
       />
     </>
   );

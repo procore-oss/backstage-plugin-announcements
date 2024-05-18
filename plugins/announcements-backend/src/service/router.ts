@@ -197,6 +197,19 @@ export async function createRouter(
     },
   );
 
+  router.delete(
+    '/categories/:slug',
+    async (req: Request<{ slug: string }, {}, {}, {}>, res) => {
+      if (!(await isRequestAuthorized(req, announcementDeletePermission))) {
+        throw new NotAllowedError('Unauthorized');
+      }
+
+      await persistenceContext.categoriesStore.delete(req.params.slug);
+
+      return res.status(204).end();
+    },
+  );
+
   router.use(errorHandler());
 
   return router;

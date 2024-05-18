@@ -33,7 +33,7 @@
     "@procore-oss/backstage-plugin-announcements-common": "workspace:^",
     "@procore-oss/backstage-plugin-announcements-node": "workspace:^",
     "cross-fetch": "^4.0.0",
-    "winston": "^3.11.0"
+    "winston": "^3.13.0"
   },
   "devDependencies": {
     "@backstage/backend-test-utils": "^0.3.8",

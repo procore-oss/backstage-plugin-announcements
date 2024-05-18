@@ -5790,7 +5790,7 @@ __metadata:
     "@types/express": ^4.17.6
     "@types/supertest": ^2.0.15
     "@types/uuid": ^8.3.4
-    better-sqlite3: ^9.0.0
+    better-sqlite3: ^10.0.0
     cross-fetch: ^3.1.5
     express: ^4.17.1
     express-promise-router: ^4.1.0
@@ -9954,6 +9954,17 @@ __metadata:
   dependencies:
     is-windows: ^1.0.0
   checksum: 5392dbe04e7fe68b944eb37961d9dfa147aaac3ee9ee3f6e13d42e2c9fbe949e68d16e896c14ee9016fa5f8e6e53ec7fd8b5f01b50a32067a7d94ac9cfb9a050
+  languageName: node
+  linkType: hard
+
+"better-sqlite3@npm:^10.0.0":
+  version: 10.0.0
+  resolution: "better-sqlite3@npm:10.0.0"
+  dependencies:
+    bindings: ^1.5.0
+    node-gyp: latest
+    prebuild-install: ^7.1.1
+  checksum: dc0d097626171ac4cbc0989888f8314abc2337635b203905f72ea8e0c797b3175e60d03d36618a26023e17ce05da52c49bdccd50eaf3eef1f09ad1fe15bc43c3
   languageName: node
   linkType: hard
 

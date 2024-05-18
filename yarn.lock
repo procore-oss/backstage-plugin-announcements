@@ -5874,7 +5874,7 @@ __metadata:
     "@testing-library/react": ^14.0.0
     "@testing-library/user-event": ^14.5.1
     "@types/luxon": ^3.3.3
-    "@types/node": ^18.18.7
+    "@types/node": ^20.12.12
     "@uiw/react-md-editor": ^4.0.3
     add: ^2.0.6
     cross-fetch: ^3.1.8
@@ -8199,12 +8199,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:^18.11.18, @types/node@npm:^18.18.7":
+"@types/node@npm:^18.11.18":
   version: 18.19.14
   resolution: "@types/node@npm:18.19.14"
   dependencies:
     undici-types: ~5.26.4
   checksum: 3d42b50e649f18c6ca7044714eaeb51ba5fda463c845eeb1973bcbbfcab8e93179501fbf865e675cb0c7a5e59f7ea18eca8296b52c2455c856aa45c77ae815dc
+  languageName: node
+  linkType: hard
+
+"@types/node@npm:^20.12.12":
+  version: 20.12.12
+  resolution: "@types/node@npm:20.12.12"
+  dependencies:
+    undici-types: ~5.26.4
+  checksum: 5373983874b9af7c216e7ca5d26b32a8d9829c703a69f1e66f2113598b5be8582c0e009ca97369f1ec9a6282b3f92812208d06eb1e9fc3bd9b939b022303d042
   languageName: node
   linkType: hard
 

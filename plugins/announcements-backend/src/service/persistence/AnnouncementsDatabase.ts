@@ -122,7 +122,10 @@ export class AnnouncementsDatabase {
     }
 
     return {
-      count: countResult && countResult.total ? countResult.total : 0,
+      count:
+        countResult && countResult.total
+          ? parseInt(countResult.total.toString(), 10)
+          : 0,
       results: (await queryBuilder.select()).map(DBToAnnouncementWithCategory),
     };
   }

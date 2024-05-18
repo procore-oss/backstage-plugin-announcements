@@ -17,6 +17,7 @@ import { useDeleteCategoryDialogState } from './useDeleteCategoryDialogState';
 import { alertApiRef, useApi } from '@backstage/core-plugin-api';
 import { announcementsApiRef } from '@procore-oss/backstage-plugin-announcements-react';
 import { DeleteCategoryDialog } from './DeleteCategoryDialog';
+import { ResponseError } from '@backstage/errors';
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -66,7 +67,7 @@ const CategoriesTable = () => {
 
       alertApi.post({ message: 'Category deleted.', severity: 'success' });
     } catch (err) {
-      alertApi.post({ message: (err as Error).message, severity: 'error' });
+      alertApi.post({ message: (err as ResponseError).body.error.message, severity: 'error' });
     }
 
     refresh();

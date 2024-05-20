@@ -19,6 +19,7 @@ import {
   NewAnnouncementBanner,
 } from '../src/plugin';
 import { AnnouncementsTimeline } from '../src/components/AnnouncementsTimeline';
+import { AdminPortal } from '../src/components/Admin';
 
 const mockCatalogApi = {
   getEntityByRef: async (entityRef: string) => {
@@ -69,6 +70,11 @@ createDevApp()
     element: <AnnouncementsPage cardOptions={{ titleLength: 50 }} />,
     title: 'Announcements',
     path: '/announcements',
+  })
+  .addPage({
+    element: <AdminPortal />,
+    title: 'Admin Portal',
+    path: '/admin',
   })
   .addPage({
     element: <CatalogEntityPage />,

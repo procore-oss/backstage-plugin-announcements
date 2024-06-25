@@ -222,6 +222,7 @@ const AnnouncementsGrid = ({
   } = useAnnouncements(
     {
       max: maxPerPage,
+      page: page,
       category,
     },
     { dependencies: [maxPerPage, page, category] },

@@ -1,5 +1,11 @@
 # @procore-oss/backstage-plugin-announcements
 
+## 0.6.6
+
+### Patch Changes
+
+- fbbc5e3: A frontend bugfix to fix paging on the AnnouncementsPage
+
 ## 0.6.5
 
 ### Patch Changes

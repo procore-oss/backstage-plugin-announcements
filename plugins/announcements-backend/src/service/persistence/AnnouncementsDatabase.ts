@@ -5,6 +5,7 @@ import {
   AnnouncementsFilters,
   Announcement,
 } from '@procore-oss/backstage-plugin-announcements-common';
+import slugify from 'slugify';
 
 const announcementsTable = 'announcements';
 
@@ -47,7 +48,11 @@ const announcementUpsertToDB = (
 ): DbAnnouncement => {
   return {
     id: announcement.id,
-    category: announcement.category,
+    category: announcement.category
+      ? slugify(announcement.category, {
+          lower: true,
+        })
+      : announcement.category,
     title: announcement.title,
     excerpt: announcement.excerpt,
     body: announcement.body,

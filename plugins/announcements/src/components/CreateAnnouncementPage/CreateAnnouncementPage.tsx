@@ -1,5 +1,6 @@
 import React, { ReactNode } from 'react';
 import { useNavigate } from 'react-router-dom';
+import slugify from 'slugify';
 import { Page, Header, Content } from '@backstage/core-components';
 import { alertApiRef, useApi, useRouteRef } from '@backstage/core-plugin-api';
 import { rootRouteRef } from '../../routes';
@@ -34,13 +35,18 @@ export const CreateAnnouncementPage = (props: CreateAnnouncementPageProps) => {
     let alertMsg = 'Announcement created.';
 
     try {
-      if (category && slugs.indexOf(category) === -1) {
-        alertMsg = alertMsg.replace('.', '');
-        alertMsg = `${alertMsg} with new category ${category}.`;
-
-        await announcementsApi.createCategory({
-          title: category,
+      if (category) {
+        const categorySlug = slugify(category, {
+          lower: true,
         });
+        if (slugs.indexOf(categorySlug) === -1) {
+          alertMsg = alertMsg.replace('.', '');
+          alertMsg = `${alertMsg} with new category ${category}.`;
+
+          await announcementsApi.createCategory({
+            title: category,
+          });
+        }
       }
 
       await announcementsApi.createAnnouncement({

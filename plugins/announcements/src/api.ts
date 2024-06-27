@@ -11,12 +11,12 @@ import {
   CreateAnnouncementRequest,
   CreateCategoryRequest,
   AnnouncementsApi,
-} from '@procore-oss/backstage-plugin-announcements-react';
+} from '@clark-associates/backstage-plugin-announcements-react';
 import {
   Announcement,
   AnnouncementsList,
   Category,
-} from '@procore-oss/backstage-plugin-announcements-common';
+} from '@clark-associates/backstage-plugin-announcements-common';
 
 const lastSeenKey = 'user_last_seen_date';
 

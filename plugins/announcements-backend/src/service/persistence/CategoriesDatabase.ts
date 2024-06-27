@@ -1,4 +1,4 @@
-import { Category } from '@procore-oss/backstage-plugin-announcements-common';
+import { Category } from '@clark-associates/backstage-plugin-announcements-common';
 import { Knex } from 'knex';
 
 const categoriesTable = 'categories';

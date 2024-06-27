@@ -12,7 +12,7 @@ import { announcementEditRouteRef } from '../../routes';
 import {
   announcementsApiRef,
   CreateAnnouncementRequest,
-} from '@procore-oss/backstage-plugin-announcements-react';
+} from '@clark-associates/backstage-plugin-announcements-react';
 
 type EditAnnouncementPageProps = {
   themeId: string;

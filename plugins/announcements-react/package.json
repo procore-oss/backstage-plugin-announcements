@@ -1,5 +1,5 @@
 {
-  "name": "@procore-oss/backstage-plugin-announcements-react",
+  "name": "@clark-associates/backstage-plugin-announcements-react",
   "description": "Web library for the announcements plugin",
   "version": "0.2.2",
   "main": "src/index.ts",
@@ -26,8 +26,8 @@
   "dependencies": {
     "@backstage/core-plugin-api": "^1.9.2",
     "@backstage/errors": "^1.2.4",
+    "@clark-associates/backstage-plugin-announcements-common": "workspace:^",
     "@material-ui/core": "^4.12.2",
-    "@procore-oss/backstage-plugin-announcements-common": "workspace:^",
     "luxon": "^3.4.4",
     "react-use": "^17.2.4"
   },

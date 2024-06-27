@@ -6,11 +6,11 @@ import {
 import React from 'react';
 import { TestApiProvider, renderInTestApp } from '@backstage/test-utils';
 import { rootRouteRef } from '../../routes';
-import { AnnouncementsList } from '@procore-oss/backstage-plugin-announcements-common';
+import { AnnouncementsList } from '@clark-associates/backstage-plugin-announcements-common';
 import {
   AnnouncementsApi,
   announcementsApiRef,
-} from '@procore-oss/backstage-plugin-announcements-react';
+} from '@clark-associates/backstage-plugin-announcements-react';
 
 const renderMockTimelineComponent = async ({
   announcements,

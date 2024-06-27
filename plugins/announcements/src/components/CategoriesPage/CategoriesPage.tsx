@@ -10,8 +10,8 @@ import {
 import { Button, makeStyles } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 import { NewCategoryDialog } from '../NewCategoryDialog';
-import { useCategories } from '@procore-oss/backstage-plugin-announcements-react';
-import { Category } from '@procore-oss/backstage-plugin-announcements-common';
+import { useCategories } from '@clark-associates/backstage-plugin-announcements-react';
+import { Category } from '@clark-associates/backstage-plugin-announcements-common';
 
 const useStyles = makeStyles(theme => ({
   container: {

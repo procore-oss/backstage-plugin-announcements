@@ -4,7 +4,7 @@ import { AnnouncementModel } from '../model';
 import {
   AnnouncementsFilters,
   Announcement,
-} from '@procore-oss/backstage-plugin-announcements-common';
+} from '@clark-associates/backstage-plugin-announcements-common';
 
 const announcementsTable = 'announcements';
 

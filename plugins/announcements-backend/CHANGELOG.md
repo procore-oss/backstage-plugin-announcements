@@ -1,5 +1,11 @@
 # @procore-oss/backstage-plugin-announcements-backend
 
+## 0.7.0
+
+### Minor Changes
+
+- d1f456b: Bug Fix: Creating a category with a different slug and title will prevent the announcement from being created #351
+
 ## 0.6.4
 
 ### Patch Changes

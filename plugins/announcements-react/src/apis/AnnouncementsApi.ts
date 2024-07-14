@@ -28,6 +28,7 @@ export interface AnnouncementsApi {
 
   categories(): Promise<Category[]>;
   createCategory(request: CreateCategoryRequest): Promise<void>;
+  deleteCategory(slug: string): Promise<void>;
 
   lastSeenDate(): DateTime;
   markLastSeenDate(date: DateTime): void;

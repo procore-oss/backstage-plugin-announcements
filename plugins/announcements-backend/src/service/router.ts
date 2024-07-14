@@ -197,6 +197,28 @@ export async function createRouter(
     },
   );
 
+  router.delete(
+    '/categories/:slug',
+    async (req: Request<{ slug: string }, {}, {}, {}>, res) => {
+      if (!(await isRequestAuthorized(req, announcementDeletePermission))) {
+        throw new NotAllowedError('Unauthorized');
+      }
+      const announcementsByCategory =
+        await persistenceContext.announcementsStore.announcements({
+          category: req.params.slug,
+        });
+
+      if (announcementsByCategory.count) {
+        throw new NotAllowedError(
+          'Category to delete is used in some announcements',
+        );
+      }
+      await persistenceContext.categoriesStore.delete(req.params.slug);
+
+      return res.status(204).end();
+    },
+  );
+
   router.use(errorHandler());
 
   return router;

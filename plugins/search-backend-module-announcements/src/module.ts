@@ -1,8 +1,8 @@
 import {
   coreServices,
   createBackendModule,
+  readSchedulerServiceTaskScheduleDefinitionFromConfig,
 } from '@backstage/backend-plugin-api';
-import { readTaskScheduleDefinitionFromConfig } from '@backstage/backend-tasks';
 import { AnnouncementCollatorFactory } from './collators/AnnouncementCollatorFactory';
 import { loggerToWinstonLogger } from '@backstage/backend-common';
 import { searchIndexRegistryExtensionPoint } from '@backstage/plugin-search-backend-node/alpha';
@@ -36,7 +36,7 @@ export const searchModuleAnnouncementsCollator = createBackendModule({
         };
 
         const schedule = config.has('search.collators.announcements.schedule')
-          ? readTaskScheduleDefinitionFromConfig(
+          ? readSchedulerServiceTaskScheduleDefinitionFromConfig(
               config.getConfig('search.collators.announcements.schedule'),
             )
           : defaultSchedule;

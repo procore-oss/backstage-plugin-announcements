@@ -1,5 +1,19 @@
 # @procore-oss/backstage-plugin-announcements
 
+## 0.8.0
+
+### Minor Changes
+
+- b4e2ed3: Able to delete Announcement Categories for following benefits:-
+
+  1. If created by mistake, a user can delete that
+  2. Categories doesn't get cluttered
+
+### Patch Changes
+
+- Updated dependencies [b4e2ed3]
+  - @procore-oss/backstage-plugin-announcements-react@0.3.0
+
 ## 0.7.0
 
 ### Minor Changes

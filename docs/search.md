@@ -5,7 +5,7 @@
 Add the new module to your backend app:
 
 ```bash
-yarn add --cwd packages/backend @procore-oss/backstage-plugin-search-backend-module-announcements
+yarn add --cwd packages/backend @ClarkAssociates/backstage-plugin-search-backend-module-announcements
 ```
 
 Update `packages/backend/src/index.ts` to import announcements search module and register it with the backend:
@@ -15,10 +15,11 @@ Update `packages/backend/src/index.ts` to import announcements search module and
 const backend = createBackend();
 
 // ...
-
-backend.add(import('@procore-oss/backstage-plugin-announcements-backend'));
+backend.add(import('@ClarkAssociates/backstage-plugin-announcements-backend'));
 backend.add(
-  import('@procore-oss/backstage-plugin-search-backend-module-announcements'),
+  import(
+    '@ClarkAssociates/backstage-plugin-search-backend-module-announcements'
+  ),
 );
 // ...
 ```
@@ -29,7 +30,7 @@ Enable announcements indexing in the search engine:
 
 ```typescript
 // packages/backend/src/plugins/search.ts
-import { AnnouncementCollatorFactory } from '@procore-oss/backstage-plugin-announcements-backend';
+import { AnnouncementCollatorFactory } from '@ClarkAssociatesbackstage-plugin-announcements-backend';
 
 export default async function createPlugin({
   logger,
@@ -90,7 +91,7 @@ Nicely display announcements search results:
 ```typescript
 // packages/app/src/components/search/SearchPage.tsx
 
-import { AnnouncementSearchResultListItem } from '@procore-oss/backstage-plugin-announcements';
+import { AnnouncementSearchResultListItem } from '@ClarkAssociates/backstage-plugin-announcements';
 import RecordVoiceOverIcon from '@material-ui/icons/RecordVoiceOver';
 
 // ...

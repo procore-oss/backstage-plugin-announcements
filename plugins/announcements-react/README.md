@@ -1,4 +1,4 @@
-# @procore-oss/backstage-plugin-announcements-react
+# @ClarkAssociates/backstage-plugin-announcements-react
 
 This library provides reusable components for displaying announcements in a Backstage plugin.
 

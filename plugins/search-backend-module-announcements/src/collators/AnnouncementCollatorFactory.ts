@@ -5,8 +5,8 @@ import {
   DocumentCollatorFactory,
   IndexableDocument,
 } from '@backstage/plugin-search-common';
-import { DefaultAnnouncementsService } from '@procore-oss/backstage-plugin-announcements-node';
-import { Announcement } from '@procore-oss/backstage-plugin-announcements-common';
+import { DefaultAnnouncementsService } from '@clark-associates/backstage-plugin-announcements-node';
+import { Announcement } from '@clark-associates/backstage-plugin-announcements-common';
 import { AuthService } from '@backstage/backend-plugin-api';
 
 type IndexableAnnouncementDocument = IndexableDocument & {

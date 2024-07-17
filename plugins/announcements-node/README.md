@@ -1,4 +1,4 @@
-# @procore-oss/backstage-plugin-announcements-node
+# @ClarkAssociates/backstage-plugin-announcements-node
 
 Welcome to the Node.js library package for the announcements plugin!
 

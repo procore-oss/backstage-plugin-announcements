@@ -7,7 +7,7 @@
 Add the plugin to your backend app:
 
 ```bash
-yarn add --cwd packages/backend @procore-oss/backstage-plugin-announcements-backend
+yarn add --cwd packages/backend @ClarkAssociates/backstage-plugin-announcements-backend
 ```
 
 Create `packages/backend/src/plugins/announcements.ts`:
@@ -16,7 +16,7 @@ Create `packages/backend/src/plugins/announcements.ts`:
 import {
   buildAnnouncementsContext,
   createRouter,
-} from '@procore-oss/backstage-plugin-announcements-backend';
+} from '@ClarkAssociates/backstage-plugin-announcements-backend';
 import { Router } from 'express';
 import { PluginEnvironment } from '../types';
 import { createLegacyAuthAdapters } from '@backstage/backend-common';
@@ -73,7 +73,7 @@ async function main() {
 Add the plugin to your backend app:
 
 ```bash
-yarn add --cwd packages/backend @procore-oss/backstage-plugin-announcements-backend
+yarn add --cwd packages/backend @ClarkAssociates/backstage-plugin-announcements-backend
 ```
 
 Update `packages/backend/src/index.ts` to import announcements plugin package and register it in your backend using:
@@ -82,7 +82,7 @@ Update `packages/backend/src/index.ts` to import announcements plugin package an
 // ...
 const backend = createBackend();
 
-backend.add(import('@procore-oss/backstage-plugin-announcements-backend'));
+backend.add(import('@ClarkAssociates/backstage-plugin-announcements-backend'));
 // ...
 ```
 
@@ -91,14 +91,14 @@ backend.add(import('@procore-oss/backstage-plugin-announcements-backend'));
 Add the plugin to your frontend app:
 
 ```bash
-yarn add --cwd packages/app @procore-oss/backstage-plugin-announcements
+yarn add --cwd packages/app @ClarkAssociates/backstage-plugin-announcements
 ```
 
 Expose the announcements page:
 
 ```ts
 // packages/app/src/App.tsx
-import { AnnouncementsPage } from '@procore-oss/backstage-plugin-announcements';
+import { AnnouncementsPage } from '@ClarkAssociates/backstage-plugin-announcements';
 
 // ...
 

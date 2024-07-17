@@ -40,6 +40,6 @@ This library is under the [MIT](LICENSE.md) license.
 
 ## Special thanks & Disclaimer
 
-We want to thank K-Phoen for creating the announcement plugins found [here](https://github.com/K-Phoen/backstage-plugin-announcements). Their work has been invaluable in providing a foundation for our development efforts, and we are grateful for the time and effort they put into creating this plugin.
+We want to thank [K-Phoen](<(https://github.com/K-Phoen/backstage-plugin-announcements)>) and [Procore-oss](https://github.com/procore-oss/backstage-plugin-announcements) for their work and contributions to the announcements plugin. They have provided an excellent foundation for announcements within our organization.
 
-In the spirit of Procore’s values of openness, our focus will be on meeting our internal needs, meaning we are making changes to the plugin that are incompatible with the original. We are happy to share it with the community and welcome all pull requests and issues.
+To meet Clark's internal needs and desires we are making many changes and enhancements to the announcements plug-in. We are excited to share the changes with the community at large and welcome feedback and contributions.

@@ -1,5 +1,15 @@
 # @procore-oss/backstage-plugin-announcements-backend
 
+## 0.9.0
+
+### Minor Changes
+
+- 6089647: Bug Report: Announcement category cannot be deleted in certain scenarios
+- 6089647: Able to delete Announcement Categories for following benefits:-
+
+  1. If created by mistake, a user can delete that
+  2. Categories doesn't get cluttered
+
 ## 0.8.0
 
 ### Minor Changes

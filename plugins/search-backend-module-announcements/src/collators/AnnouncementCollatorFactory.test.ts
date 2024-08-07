@@ -1,6 +1,5 @@
 import { AnnouncementCollatorFactory } from './AnnouncementCollatorFactory';
 import { Readable } from 'stream';
-import { getVoidLogger } from '@backstage/backend-common';
 import { TestPipeline } from '@backstage/plugin-search-backend-node';
 import { setupRequestMockHandlers } from '@backstage/test-utils';
 import { setupServer } from 'msw/node';
@@ -38,7 +37,7 @@ const mockAnnouncements = {
 };
 
 describe('AnnouncementCollatorFactory', () => {
-  const logger = getVoidLogger();
+  const logger = mockServices.logger.mock();
   const mockDiscoveryApi = {
     getBaseUrl: jest.fn().mockReturnValue('http://localhost:7007/api'),
   };

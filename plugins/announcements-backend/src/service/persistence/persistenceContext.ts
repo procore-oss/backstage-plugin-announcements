@@ -1,7 +1,7 @@
 import {
-  PluginDatabaseManager,
+  DatabaseService,
   resolvePackagePath,
-} from '@backstage/backend-common';
+} from '@backstage/backend-plugin-api';
 import { AnnouncementsDatabase } from './AnnouncementsDatabase';
 import { CategoriesDatabase } from './CategoriesDatabase';
 
@@ -26,7 +26,7 @@ export type PersistenceContext = {
  * @public
  */
 export const initializePersistenceContext = async (
-  database: PluginDatabaseManager,
+  database: DatabaseService,
 ): Promise<PersistenceContext> => {
   const client = await database.getClient();
 

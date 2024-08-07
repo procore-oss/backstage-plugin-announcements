@@ -1,5 +1,4 @@
 import { Readable } from 'stream';
-import { Logger } from 'winston';
 import { DiscoveryApi } from '@backstage/core-plugin-api';
 import {
   DocumentCollatorFactory,
@@ -7,7 +6,7 @@ import {
 } from '@backstage/plugin-search-common';
 import { DefaultAnnouncementsService } from '@procore-oss/backstage-plugin-announcements-node';
 import { Announcement } from '@procore-oss/backstage-plugin-announcements-common';
-import { AuthService } from '@backstage/backend-plugin-api';
+import { AuthService, LoggerService } from '@backstage/backend-plugin-api';
 
 type IndexableAnnouncementDocument = IndexableDocument & {
   excerpt: string;
@@ -15,7 +14,7 @@ type IndexableAnnouncementDocument = IndexableDocument & {
 };
 
 type AnnouncementCollatorOptions = {
-  logger: Logger;
+  logger: LoggerService;
   discoveryApi: DiscoveryApi;
   auth: AuthService;
 };
@@ -23,7 +22,7 @@ type AnnouncementCollatorOptions = {
 export class AnnouncementCollatorFactory implements DocumentCollatorFactory {
   public readonly type: string = 'announcements';
 
-  private logger: Logger;
+  private logger: LoggerService;
   private announcementsClient: DefaultAnnouncementsService;
   private auth: AuthService;
 

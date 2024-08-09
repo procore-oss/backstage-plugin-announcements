@@ -2,6 +2,7 @@ import { convertLegacyRouteRefs } from '@backstage/core-compat-api';
 import { BackstagePlugin, createPlugin } from '@backstage/frontend-plugin-api';
 import { announcementsApiExtension } from './alpha/apis';
 import { entityAnnouncementsCard } from './alpha/entityCards';
+import { announcementsPage } from './alpha/pages';
 import { rootRouteRef } from './routes';
 
 /**
@@ -12,5 +13,9 @@ export default createPlugin({
   routes: convertLegacyRouteRefs({
     root: rootRouteRef,
   }),
-  extensions: [announcementsApiExtension, entityAnnouncementsCard],
+  extensions: [
+    announcementsApiExtension,
+    entityAnnouncementsCard,
+    announcementsPage,
+  ],
 }) as BackstagePlugin;

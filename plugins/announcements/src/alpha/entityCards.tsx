@@ -7,8 +7,11 @@ import { ExtensionDefinition } from '@backstage/frontend-plugin-api';
  */
 export const entityAnnouncementsCard = createEntityCardExtension({
   name: 'announcements',
-  loader: () =>
-    import('../components/AnnouncementsCard').then(m => (
-      <m.AnnouncementsCard />
-    )),
+  loader: async () => {
+    const { AnnouncementsCard } = await import(
+      '../components/AnnouncementsCard'
+    );
+
+    return <AnnouncementsCard />;
+  },
 }) as ExtensionDefinition<{ filter?: string }>;

@@ -7,9 +7,7 @@ export const announcementsPage = createPageExtension({
   defaultPath: '/announcements',
   routeRef: convertLegacyRouteRef(rootRouteRef),
   loader: async () => {
-    const { AnnouncementsPage } = await import(
-      '../components/AnnouncementsPage'
-    );
-    return <AnnouncementsPage title="Announcements" themeId="app" />;
+    const { Router } = await import('../components/Router');
+    return <Router />;
   },
 });

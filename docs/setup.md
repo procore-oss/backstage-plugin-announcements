@@ -112,3 +112,38 @@ const AppRoutes = () => (
 ```
 
 An interface to create/update/edit/delete announcements is now available at `/announcements`.
+
+## New Frontend System Setup (Alpha)
+
+Add the plugin to your frontend app:
+
+```bash
+yarn add --cwd packages/app @procore-oss/backstage-plugin-announcements
+```
+
+Add the plugin to `packages/app/src/App.tsx`:
+
+```ts
+import announcementsPlugin from '@procore-oss/backstage-plugin-announcements/alpha';
+
+// ...
+
+const app = createApp({
+  // ...
+  features: [
+    // ...
+    announcementsPlugin,
+    // ...
+  ],
+  // ...
+});
+```
+
+Add the extensions in `app-config.yaml`:
+
+```yaml
+app:
+  extensions:
+    - entity-card:announcements/announcements
+    - nav-item:announcements
+```

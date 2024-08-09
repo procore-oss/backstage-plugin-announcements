@@ -7,4 +7,3 @@
 ---
 
 - Adds missing backstage metadata to package.json
-- Upgrades @backstage/cli to ^0.26.11

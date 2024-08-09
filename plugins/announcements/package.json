@@ -13,9 +13,22 @@
     "url": "https://github.com/procore-oss/backstage-plugin-announcements.git"
   },
   "publishConfig": {
-    "access": "public",
-    "main": "dist/index.esm.js",
-    "types": "dist/index.d.ts"
+    "access": "public"
+  },
+  "exports": {
+    ".": "./src/index.ts",
+    "./alpha": "./src/alpha.ts",
+    "./package.json": "./package.json"
+  },
+  "typesVersions": {
+    "*": {
+      "alpha": [
+        "src/alpha.ts"
+      ],
+      "package.json": [
+        "package.json"
+      ]
+    }
   },
   "backstage": {
     "role": "frontend-plugin"
@@ -32,9 +45,11 @@
   "dependencies": {
     "@backstage/catalog-model": "^1.5.0",
     "@backstage/core-app-api": "^1.12.5",
+    "@backstage/core-compat-api": "^0.2.7",
     "@backstage/core-components": "^0.14.7",
     "@backstage/core-plugin-api": "^1.9.2",
     "@backstage/errors": "^1.2.4",
+    "@backstage/frontend-plugin-api": "^0.6.7",
     "@backstage/plugin-catalog-react": "^1.12.0",
     "@backstage/plugin-permission-react": "^0.4.22",
     "@backstage/plugin-search-common": "^1.2.11",

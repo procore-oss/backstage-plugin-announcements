@@ -4,6 +4,7 @@ import {
 } from '@backstage/backend-common';
 import { AnnouncementsDatabase } from './AnnouncementsDatabase';
 import { CategoriesDatabase } from './CategoriesDatabase';
+import { IAnnouncementsDatabase } from './IAnnouncementsDatabase';
 
 const migrationsDir = resolvePackagePath(
   '@clark-associates/backstage-plugin-announcements-backend',
@@ -16,7 +17,7 @@ const migrationsDir = resolvePackagePath(
  * @public
  */
 export type PersistenceContext = {
-  announcementsStore: AnnouncementsDatabase;
+  announcementsStore: IAnnouncementsDatabase;
   categoriesStore: CategoriesDatabase;
 };
 
@@ -27,6 +28,7 @@ export type PersistenceContext = {
  */
 export const initializePersistenceContext = async (
   database: PluginDatabaseManager,
+  announcementsDatabase?: IAnnouncementsDatabase,
 ): Promise<PersistenceContext> => {
   const client = await database.getClient();
 
@@ -37,7 +39,10 @@ export const initializePersistenceContext = async (
   }
 
   return {
-    announcementsStore: new AnnouncementsDatabase(client),
+    announcementsStore:
+      announcementsDatabase !== undefined
+        ? announcementsDatabase
+        : new AnnouncementsDatabase(client),
     categoriesStore: new CategoriesDatabase(client),
   };
 };

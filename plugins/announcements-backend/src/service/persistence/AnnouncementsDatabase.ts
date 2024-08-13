@@ -5,10 +5,14 @@ import {
   AnnouncementsFilters,
   Announcement,
 } from '@clark-associates/backstage-plugin-announcements-common';
+import { IAnnouncementsDatabase } from './IAnnouncementsDatabase';
 
 const announcementsTable = 'announcements';
 
-type AnnouncementUpsert = Omit<Announcement, 'category' | 'created_at'> & {
+export type AnnouncementUpsert = Omit<
+  Announcement,
+  'category' | 'created_at'
+> & {
   category?: string;
   created_at: DateTime;
 };
@@ -22,7 +26,7 @@ export type DbAnnouncementWithCategory = DbAnnouncement & {
   category_title?: string;
 };
 
-type AnnouncementModelsList = {
+export type AnnouncementModelsList = {
   count: number;
   results: AnnouncementModel[];
 };
@@ -76,7 +80,7 @@ const DBToAnnouncementWithCategory = (
   };
 };
 
-export class AnnouncementsDatabase {
+export class AnnouncementsDatabase implements IAnnouncementsDatabase {
   constructor(private readonly db: Knex) {}
 
   async announcements(

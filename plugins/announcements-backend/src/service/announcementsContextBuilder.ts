@@ -31,7 +31,7 @@ export const buildAnnouncementsContext = async ({
 }: AnnouncementsContextOptions): Promise<AnnouncementsContext> => {
   return {
     logger: logger,
-    persistenceContext: await initializePersistenceContext(database),
+    persistenceContext: await initializePersistenceContext(database, undefined),
     permissions: permissions,
     httpAuth: httpAuth,
   };

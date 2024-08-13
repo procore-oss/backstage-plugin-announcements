@@ -34,7 +34,6 @@ export async function createRouter(
   options: AnnouncementsContext,
 ): Promise<express.Router> {
   const { persistenceContext, permissions, httpAuth } = options;
-
   const permissionIntegrationRouter = createPermissionIntegrationRouter({
     permissions: Object.values(announcementEntityPermissions),
   });

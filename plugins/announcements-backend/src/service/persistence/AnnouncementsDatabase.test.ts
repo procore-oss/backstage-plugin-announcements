@@ -1,11 +1,9 @@
 import { TestDatabases } from '@backstage/backend-test-utils';
-import {
-  AnnouncementsDatabase,
-  timestampToDateTime,
-} from './AnnouncementsDatabase';
+import { timestampToDateTime } from './AnnouncementsDatabase';
 import { Knex } from 'knex';
 import { initializePersistenceContext } from './persistenceContext';
 import { DateTime } from 'luxon';
+import { IAnnouncementsDatabase } from './IAnnouncementsDatabase';
 
 function createDatabaseManager(client: Knex, skipMigrations: boolean = false) {
   return {
@@ -18,14 +16,15 @@ function createDatabaseManager(client: Knex, skipMigrations: boolean = false) {
 
 describe('AnnouncementsDatabase', () => {
   const databases = TestDatabases.create();
-  let store: AnnouncementsDatabase;
+  let store: IAnnouncementsDatabase;
   let testDbClient: Knex<any, unknown[]>;
   let database;
 
   beforeAll(async () => {
     testDbClient = await databases.init('SQLITE_3');
     database = createDatabaseManager(testDbClient);
-    store = (await initializePersistenceContext(database)).announcementsStore;
+    store = (await initializePersistenceContext(database, undefined))
+      .announcementsStore;
   });
 
   afterEach(async () => {

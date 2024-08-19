@@ -1,5 +1,13 @@
 # @procore-oss/backstage-plugin-announcements-react
 
+## 0.4.1
+
+### Patch Changes
+
+- 9937f08: - Adds missing backstage metadata to package.json
+- Updated dependencies [9937f08]
+  - @procore-oss/backstage-plugin-announcements-common@0.2.3
+
 ## 0.4.0
 
 ### Minor Changes

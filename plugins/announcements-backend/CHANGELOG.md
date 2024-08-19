@@ -1,5 +1,14 @@
 # @procore-oss/backstage-plugin-announcements-backend
 
+## 0.9.1
+
+### Patch Changes
+
+- 9937f08: - Adds missing backstage metadata to package.json
+- Updated dependencies [9937f08]
+  - @procore-oss/backstage-plugin-search-backend-module-announcements@0.2.3
+  - @procore-oss/backstage-plugin-announcements-common@0.2.3
+
 ## 0.9.0
 
 ### Minor Changes

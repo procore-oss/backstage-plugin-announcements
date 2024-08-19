@@ -18,7 +18,15 @@
     "types": "dist/index.d.ts"
   },
   "backstage": {
-    "role": "backend-plugin"
+    "role": "backend-plugin",
+    "pluginId": "announcements",
+    "pluginPackages": [
+      "@procore-oss/backstage-plugin-announcements",
+      "@procore-oss/backstage-plugin-announcements-backend",
+      "@procore-oss/backstage-plugin-announcements-common",
+      "@procore-oss/backstage-plugin-announcements-node",
+      "@procore-oss/backstage-plugin-announcements-react"
+    ]
   },
   "scripts": {
     "start": "LEGACY_BACKEND_START=1 backstage-cli package start",

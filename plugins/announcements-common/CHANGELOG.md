@@ -1,5 +1,11 @@
 # @procore-oss/backstage-plugin-announcements-common
 
+## 0.2.3
+
+### Patch Changes
+
+- 9937f08: - Adds missing backstage metadata to package.json
+
 ## 0.2.2
 
 ### Patch Changes

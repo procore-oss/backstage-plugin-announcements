@@ -1,5 +1,14 @@
 # @procore-oss/backstage-plugin-announcements
 
+## 0.9.1
+
+### Patch Changes
+
+- 9937f08: - Adds support for Backstage's new frontend system, available via the `/alpha` sub-path export.
+- Updated dependencies [9937f08]
+  - @procore-oss/backstage-plugin-announcements-common@0.2.3
+  - @procore-oss/backstage-plugin-announcements-react@0.4.1
+
 ## 0.9.0
 
 ### Minor Changes

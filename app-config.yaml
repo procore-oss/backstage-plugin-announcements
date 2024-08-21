@@ -22,3 +22,7 @@ backend:
   reading:
     allow:
       - host: localhost
+
+auth:
+  providers:
+    guest: {}

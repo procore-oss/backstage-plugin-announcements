@@ -6756,7 +6756,7 @@ __metadata:
     "@testing-library/react": ^14.0.0
     "@testing-library/user-event": ^14.5.1
     "@types/luxon": ^3.3.3
-    "@types/node": ^18.18.7
+    "@types/node": ^22.4.2
     "@uiw/react-md-editor": ^4.0.3
     add: ^2.0.6
     cross-fetch: ^3.1.8
@@ -8685,7 +8685,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:>=13.7.0":
+"@types/node@npm:>=13.7.0, @types/node@npm:^22.4.2":
   version: 22.4.2
   resolution: "@types/node@npm:22.4.2"
   dependencies:
@@ -8708,7 +8708,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:^18.11.18, @types/node@npm:^18.18.7":
+"@types/node@npm:^18.11.18":
   version: 18.19.14
   resolution: "@types/node@npm:18.19.14"
   dependencies:

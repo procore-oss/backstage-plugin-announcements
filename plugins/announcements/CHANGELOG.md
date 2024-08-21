@@ -1,5 +1,14 @@
 # @procore-oss/backstage-plugin-announcements
 
+## 0.9.2
+
+### Patch Changes
+
+- 5d34ab8: Update to Backstage 1.30.1
+- Updated dependencies [5d34ab8]
+  - @procore-oss/backstage-plugin-announcements-common@0.2.4
+  - @procore-oss/backstage-plugin-announcements-react@0.4.2
+
 ## 0.9.1
 
 ### Patch Changes

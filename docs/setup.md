@@ -147,3 +147,14 @@ app:
     - entity-card:announcements/announcements
     - nav-item:announcements
 ```
+
+The entity card will only appear on components & systems by default, but you can override that
+behavior by passing a filter into the card extension like so:
+
+```yaml
+app:
+  extensions:
+    - entity-card:announcements/announcements:
+        config:
+          filter: kind:component,system,group,api
+```

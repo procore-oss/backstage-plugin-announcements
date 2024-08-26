@@ -1,15 +1,17 @@
-import { createExtensionTester } from '@backstage/frontend-test-utils';
+import {
+  createExtensionTester,
+  renderInTestApp,
+  TestApiProvider,
+} from '@backstage/frontend-test-utils';
 import { entityAnnouncementsCard } from './entityCards';
 import { screen, waitFor } from '@testing-library/react';
-import {
-  createApiExtension,
-  createApiFactory,
-} from '@backstage/frontend-plugin-api';
 import {
   AnnouncementsApi,
   announcementsApiRef,
 } from '@procore-oss/backstage-plugin-announcements-react';
 import { DateTime } from 'luxon';
+import { EntityProvider } from '@backstage/plugin-catalog-react';
+import React from 'react';
 
 jest.mock('@backstage/core-plugin-api', () => {
   return {
@@ -26,35 +28,46 @@ jest.mock('@backstage/plugin-permission-react', () => {
 });
 
 describe('Entity card extensions', () => {
-  const mockAnnouncementsApi = createApiExtension({
-    factory: createApiFactory({
-      api: announcementsApiRef,
-      deps: {},
-      factory: () =>
-        ({
-          lastSeenDate: () => DateTime.now(),
-          announcements: async () => ({
-            count: 1,
-            results: [
-              {
-                id: '1',
-                category: { slug: 'test', title: 'Test' },
-                publisher: 'Test Publisher',
-                title: 'Test Announcement',
-                excerpt: 'Test Excerpt',
-                body: 'Test Body',
-                created_at: DateTime.now().toISO(),
-              },
-            ],
-          }),
-        } as unknown as AnnouncementsApi),
+  const mockAnnouncementsApi = {
+    lastSeenDate: () => DateTime.now(),
+    announcements: async () => ({
+      count: 1,
+      results: [
+        {
+          id: '1',
+          category: { slug: 'test', title: 'Test' },
+          publisher: 'Test Publisher',
+          title: 'Test Announcement',
+          excerpt: 'Test Excerpt',
+          body: 'Test Body',
+          created_at: DateTime.now().toISO(),
+        },
+      ],
     }),
-  });
+  } as unknown as AnnouncementsApi;
+
+  const mockedEntity = {
+    apiVersion: 'backstage.io/v1alpha1',
+    kind: 'Component',
+    metadata: {
+      name: 'backstage',
+      description: 'backstage.io',
+    },
+    spec: {
+      lifecycle: 'production',
+      type: 'service',
+      owner: 'user:guest',
+    },
+  };
 
   it('should render the Announcements card', async () => {
-    createExtensionTester(entityAnnouncementsCard)
-      .add(mockAnnouncementsApi)
-      .render();
+    await renderInTestApp(
+      <TestApiProvider apis={[[announcementsApiRef, mockAnnouncementsApi]]}>
+        <EntityProvider entity={mockedEntity}>
+          {createExtensionTester(entityAnnouncementsCard).reactElement()}
+        </EntityProvider>
+      </TestApiProvider>,
+    );
 
     await waitFor(
       () => expect(screen.getByText('Test Announcement')).toBeInTheDocument(),

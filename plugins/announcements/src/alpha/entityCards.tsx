@@ -1,17 +1,19 @@
 import React from 'react';
-import { createEntityCardExtension } from '@backstage/plugin-catalog-react/alpha';
-import { ExtensionDefinition } from '@backstage/frontend-plugin-api';
+import { EntityCardBlueprint } from '@backstage/plugin-catalog-react/alpha';
 
 /**
  * @alpha
  */
-export const entityAnnouncementsCard = createEntityCardExtension({
+export const entityAnnouncementsCard = EntityCardBlueprint.make({
   name: 'announcements',
-  loader: async () => {
-    const { AnnouncementsCard } = await import(
-      '../components/AnnouncementsCard'
-    );
+  params: {
+    filter: 'kind:component,system',
+    loader: async () => {
+      const { AnnouncementsCard } = await import(
+        '../components/AnnouncementsCard'
+      );
 
-    return <AnnouncementsCard />;
+      return <AnnouncementsCard />;
+    },
   },
-}) as ExtensionDefinition<{ filter?: string }>;
+});

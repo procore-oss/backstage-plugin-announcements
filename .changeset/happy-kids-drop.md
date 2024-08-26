@@ -2,4 +2,4 @@
 '@procore-oss/backstage-plugin-announcements': patch
 ---
 
-Make entity content appear on components & groups only by default in new FE system
+Make entity card appear on components & systems only by default in new FE system

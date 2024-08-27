@@ -2,4 +2,4 @@
 '@procore-oss/backstage-plugin-announcements': minor
 ---
 
-Add react-dom as a peer-dependency
+Add react-dom & types/react as peer dependencies

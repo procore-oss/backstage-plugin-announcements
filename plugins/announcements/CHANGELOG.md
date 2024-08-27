@@ -1,5 +1,15 @@
 # @procore-oss/backstage-plugin-announcements
 
+## 0.10.0
+
+### Minor Changes
+
+- 3c04265: Add react-dom & types/react as peer dependencies
+
+### Patch Changes
+
+- 7158f76: Make entity card appear on components & systems only by default in new FE system
+
 ## 0.9.2
 
 ### Patch Changes

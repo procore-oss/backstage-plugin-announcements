@@ -1,5 +1,11 @@
 # @procore-oss/backstage-plugin-search-backend-module-announcements
 
+## 0.2.5
+
+### Patch Changes
+
+- 2bee323: Added config.d.ts for configuring the task scheduler
+
 ## 0.2.4
 
 ### Patch Changes

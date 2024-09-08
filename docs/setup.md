@@ -7,7 +7,7 @@
 Add the plugin to your backend app:
 
 ```bash
-yarn add --cwd packages/backend @procore-oss/backstage-plugin-announcements-backend
+yarn --cwd packages/backend add @procore-oss/backstage-plugin-announcements-backend
 ```
 
 Create `packages/backend/src/plugins/announcements.ts`:

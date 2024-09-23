@@ -149,9 +149,14 @@ const AnnouncementCard = ({
       setAnchorEl(undefined);
       setOpen(false);
     };
+
+    const canShowMenu =
+      (!loadingUpdatePermission && canUpdate) ||
+      (!loadingDeletePermission && canDelete);
+
     return (
       <>
-        {(canUpdate || canDelete) && (
+        {canShowMenu && (
           <IconButton
             data-testid="announcement-edit-menu"
             aria-label="more"

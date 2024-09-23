@@ -151,13 +151,15 @@ const AnnouncementCard = ({
     };
     return (
       <>
-        <IconButton
-          data-testid="announcement-edit-menu"
-          aria-label="more"
-          onClick={handleOpenEditMenu}
-        >
-          <MoreVertIcon />
-        </IconButton>
+        {(canUpdate || canDelete) && (
+          <IconButton
+            data-testid="announcement-edit-menu"
+            aria-label="more"
+            onClick={handleOpenEditMenu}
+          >
+            <MoreVertIcon />
+          </IconButton>
+        )}
         <Menu anchorEl={anchorEl} open={open} onClose={handleCloseEditClose}>
           {!loadingUpdatePermission && canUpdate && (
             <MenuItem

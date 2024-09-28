@@ -1,5 +1,5 @@
 import {
-  createApiExtension,
+  ApiBlueprint,
   createApiFactory,
   discoveryApiRef,
   errorApiRef,
@@ -12,21 +12,23 @@ import { AnnouncementsClient } from '../api';
 /**
  * @alpha
  */
-export const announcementsApiExtension = createApiExtension({
-  factory: createApiFactory({
-    api: announcementsApiRef,
-    deps: {
-      discoveryApi: discoveryApiRef,
-      identityApi: identityApiRef,
-      fetchApi: fetchApiRef,
-      errorApi: errorApiRef,
-    },
-    factory: ({ discoveryApi, identityApi, fetchApi, errorApi }) =>
-      new AnnouncementsClient({
-        discoveryApi,
-        identityApi,
-        fetchApi,
-        errorApi,
-      }),
-  }),
+export const announcementsApiExtension = ApiBlueprint.make({
+  params: {
+    factory: createApiFactory({
+      api: announcementsApiRef,
+      deps: {
+        discoveryApi: discoveryApiRef,
+        identityApi: identityApiRef,
+        fetchApi: fetchApiRef,
+        errorApi: errorApiRef,
+      },
+      factory: ({ discoveryApi, identityApi, fetchApi, errorApi }) =>
+        new AnnouncementsClient({
+          discoveryApi,
+          identityApi,
+          fetchApi,
+          errorApi,
+        }),
+    }),
+  },
 });

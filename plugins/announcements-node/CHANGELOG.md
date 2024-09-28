@@ -1,5 +1,17 @@
 # @procore-oss/backstage-plugin-announcements-node
 
+## 0.3.0
+
+### Minor Changes
+
+- ebcc341: Migrate away from winston logger and old services. Replace with coreServices where posisble. It is possible this will be a breaking change for those who have not migrated to the new backend system.
+
+### Patch Changes
+
+- 071914c: bump dependencies and update to the latest version of backstage (1.31.2)
+- Updated dependencies [071914c]
+  - @procore-oss/backstage-plugin-announcements-common@0.2.5
+
 ## 0.2.4
 
 ### Patch Changes

@@ -50,6 +50,7 @@ describe('createRouter', () => {
   beforeAll(async () => {
     const announcementsContext: AnnouncementsContext = {
       logger: mockServices.logger.mock(),
+      config: mockServices.rootConfig.mock(),
       persistenceContext: mockPersistenceContext,
       permissions: mockPermissions,
       httpAuth: mockHttpAuth,

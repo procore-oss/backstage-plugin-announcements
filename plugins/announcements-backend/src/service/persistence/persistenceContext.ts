@@ -1,9 +1,9 @@
-import {
-  PluginDatabaseManager,
-  resolvePackagePath,
-} from '@backstage/backend-common';
 import { AnnouncementsDatabase } from './AnnouncementsDatabase';
 import { CategoriesDatabase } from './CategoriesDatabase';
+import {
+  DatabaseService,
+  resolvePackagePath,
+} from '@backstage/backend-plugin-api';
 
 const migrationsDir = resolvePackagePath(
   '@procore-oss/backstage-plugin-announcements-backend',
@@ -26,7 +26,7 @@ export type PersistenceContext = {
  * @public
  */
 export const initializePersistenceContext = async (
-  database: PluginDatabaseManager,
+  database: DatabaseService,
 ): Promise<PersistenceContext> => {
   const client = await database.getClient();
 

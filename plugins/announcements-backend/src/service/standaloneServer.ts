@@ -4,13 +4,14 @@ import {
   createServiceBuilder,
   ServerTokenManager,
   loadBackendConfig,
-  HostDiscovery,
   createLegacyAuthAdapters,
 } from '@backstage/backend-common';
+import { HostDiscovery } from '@backstage/backend-defaults/discovery';
 import { buildAnnouncementsContext } from './announcementsContextBuilder';
 import { createRouter } from './router';
 import { ServerPermissionClient } from '@backstage/plugin-permission-node';
 import { HttpAuthService, LoggerService } from '@backstage/backend-plugin-api';
+import { mockServices } from '@backstage/backend-test-utils';
 
 export interface ServerOptions {
   port: number;
@@ -52,6 +53,7 @@ export async function startStandaloneServer(
 
   const announcementsContext = await buildAnnouncementsContext({
     logger: logger,
+    config: mockServices.rootConfig.mock(),
     database: { getClient: async () => database },
     permissions: permissions,
     httpAuth: httpAuth,

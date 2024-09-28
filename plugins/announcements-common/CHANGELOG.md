@@ -1,5 +1,11 @@
 # @procore-oss/backstage-plugin-announcements-common
 
+## 0.2.5
+
+### Patch Changes
+
+- 071914c: bump dependencies and update to the latest version of backstage (1.31.2)
+
 ## 0.2.4
 
 ### Patch Changes

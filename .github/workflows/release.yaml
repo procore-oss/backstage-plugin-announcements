@@ -11,17 +11,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@a5ac7e51b41094c92402da3b24376905380afc29 # v4
-      - name: Use Node.js 18.x
+      - name: Use Node.js 20.x
         uses: actions/setup-node@60edb5dd545a775178f52524783378180af0d1f8 # v4
         with:
-          node-version: 18.x
+          node-version: 20.x
           cache: 'yarn'
       - name: Install Dependencies
         run: yarn install --immutable
       - name: Build type declarations
         run: yarn tsc
       - name: Build packages
-        run: yarn build
+        run: yarn build:all
       - name: Enable non-immutable yarn installs
         run: yarn config set -H enableImmutableInstalls false
       - name: Authenticate yarn with NPM

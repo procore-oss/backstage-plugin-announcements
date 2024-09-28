@@ -7,7 +7,7 @@ coverage
 dist-types
 dist
 
-# Yarn 3 files
+# Yarn files
 .pnp.*
 .yarn/*
 !.yarn/patches

@@ -23,7 +23,7 @@
     "format:check": "prettier --check .",
     "lint": "backstage-cli repo lint --since origin/main",
     "lint:all": "backstage-cli repo lint",
-    "version": "changeset version && yarn install && (git commit -am 'Update internal dependencies' || true)",
+    "version-packages": "changeset version && yarn install && (git commit -am 'Update internal dependencies' || true)",
     "release": "changeset publish",
     "knip": "knip",
     "prepare": "husky",

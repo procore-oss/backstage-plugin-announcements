@@ -7,4 +7,4 @@
 '@procore-oss/backstage-plugin-announcements': patch
 ---
 
-bump dependencies and to latest version of backstage (1.31.2)
+bump dependencies and update to the latest version of backstage (1.31.2)

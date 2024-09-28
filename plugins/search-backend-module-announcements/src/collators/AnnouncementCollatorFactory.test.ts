@@ -37,9 +37,13 @@ const mockAnnouncements = {
 };
 
 describe('AnnouncementCollatorFactory', () => {
+  const mockDiscovery = mockServices.discovery.mock({
+    getBaseUrl: jest.fn().mockReturnValue('http://localhost:7007/api'),
+  });
+
   const factory = AnnouncementCollatorFactory.fromConfig({
     logger: mockServices.logger.mock(),
-    discoveryApi: mockServices.discovery(),
+    discoveryApi: mockDiscovery,
     auth: mockServices.auth(),
   });
 
@@ -70,9 +74,7 @@ describe('AnnouncementCollatorFactory', () => {
       collator = await factory.getCollator();
       const pipeline = TestPipeline.fromCollator(collator);
       const { documents } = await pipeline.execute();
-      expect(mockServices.discovery().getBaseUrl).toHaveBeenCalledWith(
-        'announcements',
-      );
+      expect(mockDiscovery.getBaseUrl).toHaveBeenCalledWith('announcements');
       expect(documents).toHaveLength(mockAnnouncements.results.length);
     });
   });

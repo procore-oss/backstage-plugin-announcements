@@ -1,4 +1,4 @@
-import { setupRequestMockHandlers } from '@backstage/test-utils';
+import { registerMswTestHooks } from '@backstage/test-utils';
 import { DefaultAnnouncementsService } from './DefaultAnnouncementsService';
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
@@ -8,7 +8,7 @@ describe('DefaultAnnouncementsService', () => {
   const mockBaseUrl = 'http://localhost:7007/api/';
   const discoveryApi = { getBaseUrl: async () => mockBaseUrl };
 
-  setupRequestMockHandlers(server);
+  registerMswTestHooks(server);
 
   let client: DefaultAnnouncementsService;
   beforeEach(() => {

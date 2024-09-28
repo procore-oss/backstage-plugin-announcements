@@ -1,6 +1,5 @@
 import { Server } from 'http';
 import Knex from 'knex';
-import { Logger } from 'winston';
 import {
   createServiceBuilder,
   ServerTokenManager,
@@ -11,12 +10,12 @@ import {
 import { buildAnnouncementsContext } from './announcementsContextBuilder';
 import { createRouter } from './router';
 import { ServerPermissionClient } from '@backstage/plugin-permission-node';
-import { HttpAuthService } from '@backstage/backend-plugin-api';
+import { HttpAuthService, LoggerService } from '@backstage/backend-plugin-api';
 
 export interface ServerOptions {
   port: number;
   enableCors: boolean;
-  logger: Logger;
+  logger: LoggerService;
 }
 
 export async function startStandaloneServer(

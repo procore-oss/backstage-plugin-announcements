@@ -14,9 +14,21 @@ import {
   announcementDeletePermission,
   announcementUpdatePermission,
   announcementEntityPermissions,
+  EVENTS_TOPIC_ANNOUNCEMENTS,
+  EVENTS_ACTION_CREATE_ANNOUNCEMENT,
+  EVENTS_ACTION_UPDATE_ANNOUNCEMENT,
+  EVENTS_ACTION_CREATE_CATEGORY,
+  EVENTS_ACTION_DELETE_CATEGORY,
 } from '@procore-oss/backstage-plugin-announcements-common';
-import { AnnouncementsContext } from './announcementsContextBuilder';
 import { createPermissionIntegrationRouter } from '@backstage/plugin-permission-node';
+import {
+  HttpAuthService,
+  LoggerService,
+  PermissionsService,
+  RootConfigService,
+} from '@backstage/backend-plugin-api';
+import { PersistenceContext } from './persistence/persistenceContext';
+import { EventsService } from '@backstage/plugin-events-node';
 
 interface AnnouncementRequest {
   publisher: string;
@@ -30,10 +42,20 @@ interface CategoryRequest {
   title: string;
 }
 
+type RouterOptions = {
+  httpAuth: HttpAuthService;
+  config: RootConfigService;
+  logger: LoggerService;
+  permissions: PermissionsService;
+  persistenceContext: PersistenceContext;
+  events?: EventsService;
+};
+
 export async function createRouter(
-  options: AnnouncementsContext,
+  options: RouterOptions,
 ): Promise<express.Router> {
-  const { persistenceContext, permissions, httpAuth, config, logger } = options;
+  const { persistenceContext, permissions, httpAuth, config, logger, events } =
+    options;
 
   const permissionIntegrationRouter = createPermissionIntegrationRouter({
     permissions: Object.values(announcementEntityPermissions),
@@ -106,9 +128,29 @@ export async function createRouter(
         throw new NotAllowedError('Unauthorized');
       }
 
+      const announcement =
+        await persistenceContext.announcementsStore.announcementByID(
+          req.params.id,
+        );
+
+      if (!announcement) {
+        logger.warn('Announcement not found', { id: req.params.id });
+        return res.status(404).end();
+      }
+
       await persistenceContext.announcementsStore.deleteAnnouncementByID(
         req.params.id,
       );
+
+      if (events) {
+        events.publish({
+          topic: EVENTS_TOPIC_ANNOUNCEMENTS,
+          eventPayload: {
+            announcement,
+          },
+          metadata: { action: EVENTS_ACTION_DELETE_CATEGORY },
+        });
+      }
 
       return res.status(204).end();
     },
@@ -129,6 +171,21 @@ export async function createRouter(
             created_at: DateTime.now(),
           },
         });
+
+      if (events) {
+        logger.info('Publishing event', {
+          topic: EVENTS_TOPIC_ANNOUNCEMENTS,
+          action: EVENTS_ACTION_CREATE_ANNOUNCEMENT,
+          announcement: announcement.id,
+        });
+        events.publish({
+          topic: EVENTS_TOPIC_ANNOUNCEMENTS,
+          eventPayload: {
+            announcement,
+          },
+          metadata: { action: EVENTS_ACTION_CREATE_ANNOUNCEMENT },
+        });
+      }
 
       return res.status(201).json(announcement);
     },
@@ -160,6 +217,16 @@ export async function createRouter(
             category: req.body.category,
           },
         });
+
+      if (events) {
+        events.publish({
+          topic: EVENTS_TOPIC_ANNOUNCEMENTS,
+          eventPayload: {
+            announcement,
+          },
+          metadata: { action: EVENTS_ACTION_UPDATE_ANNOUNCEMENT },
+        });
+      }
 
       return res.status(200).json(announcement);
     },
@@ -193,6 +260,16 @@ export async function createRouter(
 
       await persistenceContext.categoriesStore.insert(category);
 
+      if (events) {
+        events.publish({
+          topic: EVENTS_TOPIC_ANNOUNCEMENTS,
+          eventPayload: {
+            category: category.slug,
+          },
+          metadata: { action: EVENTS_ACTION_CREATE_CATEGORY },
+        });
+      }
+
       return res.status(201).json(category);
     },
   );
@@ -214,6 +291,16 @@ export async function createRouter(
         );
       }
       await persistenceContext.categoriesStore.delete(req.params.slug);
+
+      if (events) {
+        events.publish({
+          topic: EVENTS_TOPIC_ANNOUNCEMENTS,
+          eventPayload: {
+            category: req.params.slug,
+          },
+          metadata: { action: EVENTS_ACTION_DELETE_CATEGORY },
+        });
+      }
 
       return res.status(204).end();
     },

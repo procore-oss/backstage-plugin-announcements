@@ -18,7 +18,15 @@ import {
 } from '@procore-oss/backstage-plugin-announcements-common';
 import { AnnouncementsContext } from './announcementsContextBuilder';
 import { createPermissionIntegrationRouter } from '@backstage/plugin-permission-node';
-import { broadcast } from './signal';
+import { signalAnnouncement } from './signal';
+import {
+  LoggerService,
+  RootConfigService,
+  PermissionsService,
+  HttpAuthService,
+} from '@backstage/backend-plugin-api';
+import { SignalsService } from '@backstage/plugin-signals-node';
+import { PersistenceContext } from './persistence/persistenceContext';
 
 interface AnnouncementRequest {
   publisher: string;
@@ -32,8 +40,17 @@ interface CategoryRequest {
   title: string;
 }
 
+type RouterOptions = {
+  logger: LoggerService;
+  config: RootConfigService;
+  persistenceContext: PersistenceContext;
+  permissions: PermissionsService;
+  httpAuth: HttpAuthService;
+  signals: SignalsService;
+};
+
 export async function createRouter(
-  options: AnnouncementsContext,
+  options: RouterOptions,
 ): Promise<express.Router> {
   const { persistenceContext, permissions, httpAuth, config, logger, signals } =
     options;
@@ -112,16 +129,20 @@ export async function createRouter(
         throw new NotAllowedError('Unauthorized');
       }
 
+      const { publisher, category, title, excerpt, body } = req.body;
+
       const announcement =
         await persistenceContext.announcementsStore.insertAnnouncement({
-          ...req.body,
-          ...{
-            id: uuid(),
-            created_at: DateTime.now(),
-          },
+          id: uuid(),
+          publisher,
+          category,
+          title,
+          excerpt,
+          body,
+          created_at: DateTime.now(),
         });
 
-      await broadcast(announcement, signals);
+      await signalAnnouncement(announcement, signals);
 
       return res.status(201).json(announcement);
     },
@@ -138,20 +159,21 @@ export async function createRouter(
         await persistenceContext.announcementsStore.announcementByID(
           req.params.id,
         );
+
       if (!initialAnnouncement) {
         return res.status(404).end();
       }
 
+      const { title, excerpt, body, publisher, category } = req.body;
+
       const announcement =
         await persistenceContext.announcementsStore.updateAnnouncement({
           ...initialAnnouncement,
-          ...{
-            title: req.body.title,
-            excerpt: req.body.excerpt,
-            body: req.body.body,
-            publisher: req.body.publisher,
-            category: req.body.category,
-          },
+          title,
+          excerpt,
+          body,
+          publisher,
+          category,
         });
 
       return res.status(200).json(announcement);
@@ -173,11 +195,9 @@ export async function createRouter(
 
       const category = {
         ...req.body,
-        ...{
-          slug: slugify(req.body.title, {
-            lower: true,
-          }),
-        },
+        slug: slugify(req.body.title, {
+          lower: true,
+        }),
       };
 
       await persistenceContext.categoriesStore.insert(category);

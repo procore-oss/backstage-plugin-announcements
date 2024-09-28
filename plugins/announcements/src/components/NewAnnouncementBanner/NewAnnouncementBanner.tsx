@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { DateTime } from 'luxon';
 import { Link } from '@backstage/core-components';
 import { useApi, useRouteRef } from '@backstage/core-plugin-api';
@@ -15,7 +15,12 @@ import {
   announcementsApiRef,
   useAnnouncements,
 } from '@procore-oss/backstage-plugin-announcements-react';
-import { Announcement } from '@procore-oss/backstage-plugin-announcements-common';
+import {
+  Announcement,
+  AnnouncementSignal,
+} from '@procore-oss/backstage-plugin-announcements-common';
+import { signalApiRef, useSignal } from '@backstage/plugin-signals-react';
+import { useParams } from 'react-router-dom';
 
 const useStyles = makeStyles(theme => ({
   // showing on top, as a block
@@ -150,5 +155,59 @@ export const NewAnnouncementBanner = (props: NewAnnouncementBannerProps) => {
         />
       ))}
     </>
+  );
+};
+
+export const SignalAnnouncementBanner = (props: NewAnnouncementBannerProps) => {
+  const { id } = useParams();
+  const [announcement, setAnnouncement] = useState<
+    AnnouncementSignal['data'] | undefined
+  >();
+  
+  const { lastSignal } = useSignal<AnnouncementSignal>('announcements:announcements:new');
+
+  console.log({
+    pos: 1,
+    id,
+    announcement,
+    lastSignal
+  })
+  
+  useEffect(() => {
+    if (!lastSignal) {
+      console.log('is null', lastSignal);
+      return;
+    }
+
+    console.log('useEffect', lastSignal);
+
+    setAnnouncement(lastSignal?.data);
+  }, [lastSignal]);
+
+  console.log({
+    pos: 2,
+    id,
+    announcement,
+    lastSignal
+  })
+
+  if (!announcement) {
+    return null;
+  }
+
+  console.log({
+    pos: 3,
+    id,
+    announcement,
+    lastSignal
+  })
+
+  return (
+    <>Helo</>
+    // <AnnouncementBanner
+    //   key={announcement.id}
+    //   announcement={announcement}
+    //   variant={props.variant}
+    // />
   );
 };

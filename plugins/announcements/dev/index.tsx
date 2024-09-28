@@ -19,6 +19,8 @@ import {
   NewAnnouncementBanner,
 } from '../src/plugin';
 import { AnnouncementsTimeline } from '../src/components/AnnouncementsTimeline';
+import { useSignal } from '@backstage/plugin-signals-react';
+import { SignalAnnouncementBanner } from '../src/components/NewAnnouncementBanner/NewAnnouncementBanner';
 
 const mockCatalogApi = {
   getEntityByRef: async (entityRef: string) => {
@@ -82,6 +84,10 @@ createDevApp()
 
         <Content>
           <Grid container spacing={8} direction="column">
+          <Grid item md={12}>
+              <Typography variant="h4">Signal</Typography>
+              <SignalAnnouncementBanner />
+            </Grid>
             <Grid item md={12}>
               <Typography variant="h4">Banner</Typography>
               <NewAnnouncementBanner max={2} />
@@ -94,6 +100,7 @@ createDevApp()
               <Typography variant="h4">Timeline</Typography>
               <AnnouncementsTimeline />
             </Grid>
+            
           </Grid>
         </Content>
       </Page>

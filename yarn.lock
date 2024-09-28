@@ -6542,6 +6542,7 @@ __metadata:
     "@backstage/plugin-search-common": "npm:^1.2.14"
     "@backstage/plugin-search-react": "npm:^1.8.0"
     "@backstage/plugin-signals": "npm:^0.0.10"
+    "@backstage/plugin-signals-react": "npm:^0.0.5"
     "@backstage/test-utils": "npm:^1.6.0"
     "@backstage/theme": "npm:^0.5.7"
     "@material-ui/core": "npm:^4.12.2"

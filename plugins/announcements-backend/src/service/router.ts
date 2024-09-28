@@ -14,9 +14,11 @@ import {
   announcementDeletePermission,
   announcementUpdatePermission,
   announcementEntityPermissions,
+  AnnouncementsFilters,
 } from '@procore-oss/backstage-plugin-announcements-common';
 import { AnnouncementsContext } from './announcementsContextBuilder';
 import { createPermissionIntegrationRouter } from '@backstage/plugin-permission-node';
+import { broadcast } from './signal';
 
 interface AnnouncementRequest {
   publisher: string;
@@ -33,7 +35,8 @@ interface CategoryRequest {
 export async function createRouter(
   options: AnnouncementsContext,
 ): Promise<express.Router> {
-  const { persistenceContext, permissions, httpAuth, config, logger } = options;
+  const { persistenceContext, permissions, httpAuth, config, logger, signals } =
+    options;
 
   const permissionIntegrationRouter = createPermissionIntegrationRouter({
     permissions: Object.values(announcementEntityPermissions),
@@ -58,21 +61,9 @@ export async function createRouter(
   router.use(express.json());
   router.use(permissionIntegrationRouter);
 
-  // eslint-disable-next-line spaced-comment
-  /*****************
-   * Announcements *
-   ****************/
   router.get(
     '/announcements',
-    async (
-      req: Request<
-        {},
-        {},
-        {},
-        { category?: string; page?: number; max?: number }
-      >,
-      res,
-    ) => {
+    async (req: Request<{}, {}, {}, AnnouncementsFilters>, res) => {
       const results = await persistenceContext.announcementsStore.announcements(
         {
           category: req.query.category,
@@ -130,6 +121,8 @@ export async function createRouter(
           },
         });
 
+      await broadcast(announcement, signals);
+
       return res.status(201).json(announcement);
     },
   );
@@ -165,10 +158,6 @@ export async function createRouter(
     },
   );
 
-  // eslint-disable-next-line spaced-comment
-  /**************
-   * Categories *
-   **************/
   router.get('/categories', async (_req, res) => {
     const results = await persistenceContext.categoriesStore.categories();
 

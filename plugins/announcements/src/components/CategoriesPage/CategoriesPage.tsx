@@ -67,7 +67,10 @@ const CategoriesTable = () => {
 
       alertApi.post({ message: 'Category deleted.', severity: 'success' });
     } catch (err) {
-      alertApi.post({ message: (err as ResponseError).body.error.message, severity: 'error' });
+      alertApi.post({
+        message: (err as ResponseError).body.error.message,
+        severity: 'error',
+      });
     }
 
     refresh();

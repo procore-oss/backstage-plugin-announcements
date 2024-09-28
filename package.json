@@ -6,7 +6,7 @@
     "node": "18 || 20"
   },
   "scripts": {
-    "dev": "yarn workspaces foreach -A --include @procore-oss/backstage-plugin-announcements-backend --include app --parallel -v -i run start",
+    "dev": "yarn workspaces foreach -A --include @procore-oss/backstage-plugin-announcements-backend --include @procore-oss/backstage-plugin-announcements --parallel -v -i run start",
     "start": "yarn workspace @procore-oss/backstage-plugin-announcements start",
     "start-backend": "yarn workspace @procore-oss/backstage-plugin-announcements-backend start",
     "build:backend": "yarn workspace backend build",
@@ -19,7 +19,6 @@
     "test:all": "backstage-cli repo test --coverage",
     "new": "backstage-cli new --scope internal",
     "fix": "backstage-cli repo fix",
-    "test:e2e": "playwright test",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "lint": "backstage-cli repo lint --since origin/main",
@@ -40,7 +39,6 @@
     "@changesets/cli": "^2.27.8",
     "@spotify/prettier-config": "^15.0.0",
     "@types/webpack": "^5.28.5",
-    "concurrently": "^9.0.1",
     "husky": "^9.1.6",
     "lint-staged": "^15.2.10",
     "prettier": "^3.3.3",
@@ -56,11 +54,11 @@
   },
   "prettier": "@spotify/prettier-config",
   "lint-staged": {
-    "*.{js,jsx,ts,tsx,mjs,cjs}": [
+    "*.{js,jsx,ts,tsx}": [
       "eslint --fix",
       "prettier --write"
     ],
-    "*.{json,md}": [
+    "*.{json,md,yaml,yml}": [
       "prettier --write"
     ]
   },

@@ -92,7 +92,7 @@ describe('AnnouncementsPage', () => {
           <AnnouncementsPage
             themeId="home"
             title="Announcements"
-            buttonOptions={{ name: "customNoun" }}
+            buttonOptions={{ name: 'customNoun' }}
             cardOptions={{ titleLength: 13 }}
           />
         </TestApiProvider>,

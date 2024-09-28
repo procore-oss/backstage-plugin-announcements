@@ -149,15 +149,22 @@ const AnnouncementCard = ({
       setAnchorEl(undefined);
       setOpen(false);
     };
+
+    const canShowMenu =
+      (!loadingUpdatePermission && canUpdate) ||
+      (!loadingDeletePermission && canDelete);
+
     return (
       <>
-        <IconButton
-          data-testid="announcement-edit-menu"
-          aria-label="more"
-          onClick={handleOpenEditMenu}
-        >
-          <MoreVertIcon />
-        </IconButton>
+        {canShowMenu && (
+          <IconButton
+            data-testid="announcement-edit-menu"
+            aria-label="more"
+            onClick={handleOpenEditMenu}
+          >
+            <MoreVertIcon />
+          </IconButton>
+        )}
         <Menu anchorEl={anchorEl} open={open} onClose={handleCloseEditClose}>
           {!loadingUpdatePermission && canUpdate && (
             <MenuItem

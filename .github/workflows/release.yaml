@@ -29,7 +29,7 @@ jobs:
       - name: Create Release Pull Request
         uses: changesets/action@aba318e9165b45b7948c60273e0b72fce0a64eb9 # v1
         with:
-          version: yarn version
+          version: yarn version-packages
           publish: yarn workspaces foreach -v --no-private npm publish --access public --tolerate-republish
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

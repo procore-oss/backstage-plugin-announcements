@@ -4,7 +4,6 @@ import {
 } from '@backstage/backend-plugin-api';
 import { createRouter } from './service/router';
 import { initializePersistenceContext } from './service/persistence/persistenceContext';
-import { loggerToWinstonLogger } from '@backstage/backend-common';
 
 export const announcementsPlugin = createBackendPlugin({
   pluginId: 'announcements',
@@ -16,14 +15,16 @@ export const announcementsPlugin = createBackendPlugin({
         permissions: coreServices.permissions,
         database: coreServices.database,
         httpAuth: coreServices.httpAuth,
+        config: coreServices.rootConfig,
       },
-      async init({ http, logger, permissions, database, httpAuth }) {
+      async init({ http, logger, permissions, database, httpAuth, config }) {
         http.use(
           await createRouter({
-            permissions: permissions,
-            logger: loggerToWinstonLogger(logger),
+            permissions,
+            logger,
+            config,
             persistenceContext: await initializePersistenceContext(database),
-            httpAuth: httpAuth,
+            httpAuth,
           }),
         );
       },

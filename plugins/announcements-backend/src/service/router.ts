@@ -3,7 +3,7 @@ import Router from 'express-promise-router';
 import { DateTime } from 'luxon';
 import slugify from 'slugify';
 import { v4 as uuid } from 'uuid';
-import { errorHandler } from '@backstage/backend-common';
+import { MiddlewareFactory } from '@backstage/backend-defaults/rootHttpRouter';
 import { NotAllowedError } from '@backstage/errors';
 import {
   AuthorizeResult,
@@ -33,7 +33,7 @@ interface CategoryRequest {
 export async function createRouter(
   options: AnnouncementsContext,
 ): Promise<express.Router> {
-  const { persistenceContext, permissions, httpAuth } = options;
+  const { persistenceContext, permissions, httpAuth, config, logger } = options;
 
   const permissionIntegrationRouter = createPermissionIntegrationRouter({
     permissions: Object.values(announcementEntityPermissions),
@@ -219,7 +219,7 @@ export async function createRouter(
     },
   );
 
-  router.use(errorHandler());
+  router.use(MiddlewareFactory.create({ config, logger }).error());
 
   return router;
 }

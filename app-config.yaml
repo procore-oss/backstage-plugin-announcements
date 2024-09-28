@@ -2,6 +2,9 @@ app:
   title: Announcements Dev App
   baseUrl: http://localhost:3000
 
+permission:
+  enabled: true
+
 backend:
   baseUrl: http://localhost:7007
   listen:

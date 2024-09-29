@@ -24,3 +24,7 @@ export type AnnouncementsFilters = {
   category?: string;
   page?: number;
 };
+
+export type AnnouncementSignal = {
+  data: Announcement;
+};

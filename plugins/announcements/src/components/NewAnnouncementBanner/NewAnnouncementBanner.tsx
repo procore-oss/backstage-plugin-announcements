@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { DateTime } from 'luxon';
 import { Link } from '@backstage/core-components';
 import { useApi, useRouteRef } from '@backstage/core-plugin-api';
@@ -15,7 +15,12 @@ import {
   announcementsApiRef,
   useAnnouncements,
 } from '@procore-oss/backstage-plugin-announcements-react';
-import { Announcement } from '@procore-oss/backstage-plugin-announcements-common';
+import {
+  Announcement,
+  AnnouncementSignal,
+  SIGNALS_CHANNEL_ANNOUNCEMENTS,
+} from '@procore-oss/backstage-plugin-announcements-common';
+import { useSignal } from '@backstage/plugin-signals-react';
 
 const useStyles = makeStyles(theme => ({
   // showing on top, as a block
@@ -116,11 +121,27 @@ type NewAnnouncementBannerProps = {
 export const NewAnnouncementBanner = (props: NewAnnouncementBannerProps) => {
   const announcementsApi = useApi(announcementsApiRef);
 
+  const [signaledAnnouncement, setSignaledAnnouncement] = useState<
+    AnnouncementSignal['data'] | undefined
+  >();
+
   const { announcements, loading, error } = useAnnouncements({
     max: props.max || 1,
     category: props.category,
   });
   const lastSeen = announcementsApi.lastSeenDate();
+
+  const { lastSignal } = useSignal<AnnouncementSignal>(
+    SIGNALS_CHANNEL_ANNOUNCEMENTS,
+  );
+
+  useEffect(() => {
+    if (!lastSignal) {
+      return;
+    }
+
+    setSignaledAnnouncement(lastSignal?.data);
+  }, [lastSignal]);
 
   if (loading) {
     return null;
@@ -135,6 +156,10 @@ export const NewAnnouncementBanner = (props: NewAnnouncementBannerProps) => {
   const unseenAnnouncements = announcements.results.filter(announcement => {
     return lastSeen < DateTime.fromISO(announcement.created_at);
   });
+
+  if (signaledAnnouncement) {
+    unseenAnnouncements.push(signaledAnnouncement);
+  }
 
   if (unseenAnnouncements?.length === 0) {
     return null;

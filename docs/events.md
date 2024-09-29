@@ -1,6 +1,6 @@
 # Support for events
 
-The announcements plugin supports publishing messages to the Backstage Event system.
+The announcements plugin supports the Backstage Event system.
 
 ```ts
 import { createBackend } from '@backstage/backend-defaults';

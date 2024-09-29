@@ -19,6 +19,7 @@ import {
   NewAnnouncementBanner,
 } from '../src/plugin';
 import { AnnouncementsTimeline } from '../src/components/AnnouncementsTimeline';
+import { signalsPlugin } from '@backstage/plugin-signals';
 
 const mockCatalogApi = {
   getEntityByRef: async (entityRef: string) => {
@@ -65,6 +66,7 @@ export const CatalogEntityPage: () => JSX.Element = fakeCatalogPlugin.provide(
 createDevApp()
   .registerPlugin(fakeCatalogPlugin)
   .registerPlugin(announcementsPlugin)
+  .registerPlugin(signalsPlugin)
   .addPage({
     element: <AnnouncementsPage cardOptions={{ titleLength: 50 }} />,
     title: 'Announcements',

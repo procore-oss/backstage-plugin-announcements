@@ -3925,6 +3925,80 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@backstage/plugin-signals-backend@npm:^0.2.0":
+  version: 0.2.0
+  resolution: "@backstage/plugin-signals-backend@npm:0.2.0"
+  dependencies:
+    "@backstage/backend-common": "npm:^0.25.0"
+    "@backstage/backend-plugin-api": "npm:^1.0.0"
+    "@backstage/config": "npm:^1.2.0"
+    "@backstage/plugin-auth-node": "npm:^0.5.2"
+    "@backstage/plugin-events-node": "npm:^0.4.0"
+    "@backstage/plugin-signals-node": "npm:^0.1.11"
+    "@backstage/types": "npm:^1.1.1"
+    "@types/express": "npm:*"
+    express: "npm:^4.17.1"
+    express-promise-router: "npm:^4.1.0"
+    http-proxy-middleware: "npm:^2.0.0"
+    node-fetch: "npm:^2.7.0"
+    uuid: "npm:^9.0.0"
+    winston: "npm:^3.2.1"
+    ws: "npm:^8.18.0"
+    yn: "npm:^4.0.0"
+  checksum: 10c0/c88ed2b63f2e7a6b0077265a4dac15fb2f43dc15398663e50aae44519ef4a0dec14b0a67b05bbb5377b112a3397b2d0ad0d4c39233fedfd6af4b249c4917e8d9
+  languageName: node
+  linkType: hard
+
+"@backstage/plugin-signals-node@npm:^0.1.11":
+  version: 0.1.11
+  resolution: "@backstage/plugin-signals-node@npm:0.1.11"
+  dependencies:
+    "@backstage/backend-common": "npm:^0.25.0"
+    "@backstage/backend-plugin-api": "npm:^1.0.0"
+    "@backstage/config": "npm:^1.2.0"
+    "@backstage/plugin-auth-node": "npm:^0.5.2"
+    "@backstage/plugin-events-node": "npm:^0.4.0"
+    "@backstage/types": "npm:^1.1.1"
+    express: "npm:^4.17.1"
+    uuid: "npm:^9.0.0"
+    ws: "npm:^8.18.0"
+  checksum: 10c0/3b167a4f1bc76f9e38658cb3178a14d4251d4b516af3e270edcbcaa4e21c6e32ce5b51e7fb7df724cdca04a883a9ac8de70b313ec0988a74432b5e80eb22a920
+  languageName: node
+  linkType: hard
+
+"@backstage/plugin-signals-react@npm:^0.0.5":
+  version: 0.0.5
+  resolution: "@backstage/plugin-signals-react@npm:0.0.5"
+  dependencies:
+    "@backstage/core-plugin-api": "npm:^1.9.4"
+    "@backstage/types": "npm:^1.1.1"
+    "@material-ui/core": "npm:^4.12.4"
+  peerDependencies:
+    react: ^16.13.1 || ^17.0.0
+  checksum: 10c0/95bd245c39283f849dd55e5cc641646a26a6d35d44613331ea04d1a370a43b4c9991d98a7bef2b711720d3349140fd10b52bd559de9bcfa5c2a03883a50129ab
+  languageName: node
+  linkType: hard
+
+"@backstage/plugin-signals@npm:^0.0.10":
+  version: 0.0.10
+  resolution: "@backstage/plugin-signals@npm:0.0.10"
+  dependencies:
+    "@backstage/core-components": "npm:^0.15.0"
+    "@backstage/core-plugin-api": "npm:^1.9.4"
+    "@backstage/plugin-signals-react": "npm:^0.0.5"
+    "@backstage/theme": "npm:^0.5.7"
+    "@backstage/types": "npm:^1.1.1"
+    "@material-ui/core": "npm:^4.12.4"
+    "@material-ui/icons": "npm:^4.9.1"
+    "@material-ui/lab": "npm:^4.0.0-alpha.61"
+    react-use: "npm:^17.2.4"
+    uuid: "npm:^9.0.0"
+  peerDependencies:
+    react: ^16.13.1 || ^17.0.0
+  checksum: 10c0/251bbf8a7671e9e92470e879eed86cb5509e0fc9a44e2f8e72cdf12160c00e893e32edfdd21fbd3c01a3a6cdc0ef3900b1c15e5fdcd21bb05fcd7d242babc711
+  languageName: node
+  linkType: hard
+
 "@backstage/release-manifests@npm:^0.0.11":
   version: 0.0.11
   resolution: "@backstage/release-manifests@npm:0.0.11"
@@ -6401,6 +6475,8 @@ __metadata:
     "@backstage/plugin-permission-node": "npm:^0.8.3"
     "@backstage/plugin-search-backend-node": "npm:^1.3.2"
     "@backstage/plugin-search-common": "npm:^1.2.14"
+    "@backstage/plugin-signals-backend": "npm:^0.2.0"
+    "@backstage/plugin-signals-node": "npm:^0.1.11"
     "@backstage/test-utils": "npm:^1.6.0"
     "@procore-oss/backstage-plugin-announcements-common": "workspace:^"
     "@procore-oss/backstage-plugin-search-backend-module-announcements": "workspace:^"
@@ -6483,6 +6559,8 @@ __metadata:
     "@backstage/plugin-permission-react": "npm:^0.4.26"
     "@backstage/plugin-search-common": "npm:^1.2.14"
     "@backstage/plugin-search-react": "npm:^1.8.0"
+    "@backstage/plugin-signals": "npm:^0.0.10"
+    "@backstage/plugin-signals-react": "npm:^0.0.5"
     "@backstage/test-utils": "npm:^1.6.0"
     "@backstage/theme": "npm:^0.5.7"
     "@material-ui/core": "npm:^4.12.2"
@@ -15668,7 +15746,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"http-proxy-middleware@npm:^2.0.3":
+"http-proxy-middleware@npm:^2.0.0, http-proxy-middleware@npm:^2.0.3":
   version: 2.0.6
   resolution: "http-proxy-middleware@npm:2.0.6"
   dependencies:

@@ -29,6 +29,8 @@ import {
 } from '@backstage/backend-plugin-api';
 import { PersistenceContext } from './persistence/persistenceContext';
 import { EventsService } from '@backstage/plugin-events-node';
+import { signalAnnouncement } from './signal';
+import { SignalsService } from '@backstage/plugin-signals-node';
 
 interface AnnouncementRequest {
   publisher: string;
@@ -49,13 +51,21 @@ type RouterOptions = {
   permissions: PermissionsService;
   persistenceContext: PersistenceContext;
   events?: EventsService;
+  signals?: SignalsService;
 };
 
 export async function createRouter(
   options: RouterOptions,
 ): Promise<express.Router> {
-  const { persistenceContext, permissions, httpAuth, config, logger, events } =
-    options;
+  const {
+    persistenceContext,
+    permissions,
+    httpAuth,
+    config,
+    logger,
+    events,
+    signals,
+  } = options;
 
   const permissionIntegrationRouter = createPermissionIntegrationRouter({
     permissions: Object.values(announcementEntityPermissions),
@@ -180,6 +190,8 @@ export async function createRouter(
           },
           metadata: { action: EVENTS_ACTION_CREATE_ANNOUNCEMENT },
         });
+
+        await signalAnnouncement(announcement, signals);
       }
 
       return res.status(201).json(announcement);

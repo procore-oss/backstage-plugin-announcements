@@ -4,6 +4,7 @@ import {
 } from '@backstage/backend-plugin-api';
 import { createRouter } from './service/router';
 import { initializePersistenceContext } from './service/persistence/persistenceContext';
+import { signalsServiceRef } from '@backstage/plugin-signals-node';
 import { eventsServiceRef } from '@backstage/plugin-events-node';
 
 export const announcementsPlugin = createBackendPlugin({
@@ -18,6 +19,7 @@ export const announcementsPlugin = createBackendPlugin({
         httpAuth: coreServices.httpAuth,
         config: coreServices.rootConfig,
         events: eventsServiceRef,
+        signals: signalsServiceRef,
       },
       async init({
         http,
@@ -27,6 +29,7 @@ export const announcementsPlugin = createBackendPlugin({
         httpAuth,
         config,
         events,
+        signals,
       }) {
         http.use(
           await createRouter({
@@ -36,6 +39,7 @@ export const announcementsPlugin = createBackendPlugin({
             persistenceContext: await initializePersistenceContext(database),
             httpAuth,
             events,
+            signals,
           }),
         );
       },

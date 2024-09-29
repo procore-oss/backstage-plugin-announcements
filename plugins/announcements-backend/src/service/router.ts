@@ -14,7 +14,6 @@ import {
   announcementDeletePermission,
   announcementUpdatePermission,
   announcementEntityPermissions,
-  AnnouncementsFilters,
   EVENTS_TOPIC_ANNOUNCEMENTS,
   EVENTS_ACTION_CREATE_ANNOUNCEMENT,
   EVENTS_ACTION_UPDATE_ANNOUNCEMENT,
@@ -22,15 +21,6 @@ import {
   EVENTS_ACTION_DELETE_CATEGORY,
 } from '@procore-oss/backstage-plugin-announcements-common';
 import { createPermissionIntegrationRouter } from '@backstage/plugin-permission-node';
-import { signalAnnouncement } from './signal';
-import {
-  LoggerService,
-  RootConfigService,
-  PermissionsService,
-  HttpAuthService,
-} from '@backstage/backend-plugin-api';
-import { SignalsService } from '@backstage/plugin-signals-node';
-import { PersistenceContext } from './persistence/persistenceContext';
 import {
   HttpAuthService,
   LoggerService,
@@ -39,6 +29,8 @@ import {
 } from '@backstage/backend-plugin-api';
 import { PersistenceContext } from './persistence/persistenceContext';
 import { EventsService } from '@backstage/plugin-events-node';
+import { signalAnnouncement } from './signal';
+import { SignalsService } from '@backstage/plugin-signals-node';
 
 interface AnnouncementRequest {
   publisher: string;
@@ -53,20 +45,27 @@ interface CategoryRequest {
 }
 
 type RouterOptions = {
-  logger: LoggerService;
-  config: RootConfigService;
-  persistenceContext: PersistenceContext;
-  permissions: PermissionsService;
   httpAuth: HttpAuthService;
-  signals?: SignalsService;
+  config: RootConfigService;
+  logger: LoggerService;
+  permissions: PermissionsService;
+  persistenceContext: PersistenceContext;
   events?: EventsService;
+  signals?: SignalsService;
 };
 
 export async function createRouter(
   options: RouterOptions,
 ): Promise<express.Router> {
-  const { persistenceContext, permissions, httpAuth, config, logger, events, signals } =
-    options;
+  const {
+    persistenceContext,
+    permissions,
+    httpAuth,
+    config,
+    logger,
+    events,
+    signals,
+  } = options;
 
   const permissionIntegrationRouter = createPermissionIntegrationRouter({
     permissions: Object.values(announcementEntityPermissions),
@@ -91,9 +90,21 @@ export async function createRouter(
   router.use(express.json());
   router.use(permissionIntegrationRouter);
 
+  // eslint-disable-next-line spaced-comment
+  /*****************
+   * Announcements *
+   ****************/
   router.get(
     '/announcements',
-    async (req: Request<{}, {}, {}, AnnouncementsFilters>, res) => {
+    async (
+      req: Request<
+        {},
+        {},
+        {},
+        { category?: string; page?: number; max?: number }
+      >,
+      res,
+    ) => {
       const results = await persistenceContext.announcementsStore.announcements(
         {
           category: req.query.category,
@@ -162,20 +173,15 @@ export async function createRouter(
         throw new NotAllowedError('Unauthorized');
       }
 
-      const { publisher, category, title, excerpt, body } = req.body;
-
       const announcement =
         await persistenceContext.announcementsStore.insertAnnouncement({
-          id: uuid(),
-          publisher,
-          category,
-          title,
-          excerpt,
-          body,
-          created_at: DateTime.now(),
+          ...req.body,
+          ...{
+            id: uuid(),
+            created_at: DateTime.now(),
+          },
         });
 
-      
       if (events) {
         events.publish({
           topic: EVENTS_TOPIC_ANNOUNCEMENTS,
@@ -184,7 +190,7 @@ export async function createRouter(
           },
           metadata: { action: EVENTS_ACTION_CREATE_ANNOUNCEMENT },
         });
-        
+
         await signalAnnouncement(announcement, signals);
       }
 
@@ -203,21 +209,20 @@ export async function createRouter(
         await persistenceContext.announcementsStore.announcementByID(
           req.params.id,
         );
-
       if (!initialAnnouncement) {
         return res.status(404).end();
       }
 
-      const { title, excerpt, body, publisher, category } = req.body;
-
       const announcement =
         await persistenceContext.announcementsStore.updateAnnouncement({
           ...initialAnnouncement,
-          title,
-          excerpt,
-          body,
-          publisher,
-          category,
+          ...{
+            title: req.body.title,
+            excerpt: req.body.excerpt,
+            body: req.body.body,
+            publisher: req.body.publisher,
+            category: req.body.category,
+          },
         });
 
       if (events) {
@@ -234,6 +239,10 @@ export async function createRouter(
     },
   );
 
+  // eslint-disable-next-line spaced-comment
+  /**************
+   * Categories *
+   **************/
   router.get('/categories', async (_req, res) => {
     const results = await persistenceContext.categoriesStore.categories();
 
@@ -249,9 +258,11 @@ export async function createRouter(
 
       const category = {
         ...req.body,
-        slug: slugify(req.body.title, {
-          lower: true,
-        }),
+        ...{
+          slug: slugify(req.body.title, {
+            lower: true,
+          }),
+        },
       };
 
       await persistenceContext.categoriesStore.insert(category);

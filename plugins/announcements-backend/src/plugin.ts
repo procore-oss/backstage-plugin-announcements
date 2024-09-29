@@ -18,8 +18,8 @@ export const announcementsPlugin = createBackendPlugin({
         database: coreServices.database,
         httpAuth: coreServices.httpAuth,
         config: coreServices.rootConfig,
-        signals: signalsServiceRef,
         events: eventsServiceRef,
+        signals: signalsServiceRef,
       },
       async init({
         http,
@@ -28,8 +28,8 @@ export const announcementsPlugin = createBackendPlugin({
         database,
         httpAuth,
         config,
-        signals,
         events,
+        signals,
       }) {
         http.use(
           await createRouter({
@@ -38,8 +38,8 @@ export const announcementsPlugin = createBackendPlugin({
             config,
             persistenceContext: await initializePersistenceContext(database),
             httpAuth,
-            signals,
             events,
+            signals,
           }),
         );
       },

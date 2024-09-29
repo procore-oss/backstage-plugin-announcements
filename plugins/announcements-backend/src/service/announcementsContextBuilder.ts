@@ -1,4 +1,3 @@
-import { SignalsService } from '@backstage/plugin-signals-node';
 import {
   initializePersistenceContext,
   PersistenceContext,
@@ -17,7 +16,6 @@ type AnnouncementsContextOptions = {
   database: DatabaseService;
   permissions: PermissionsService;
   httpAuth: HttpAuthService;
-  signals: SignalsService;
 };
 
 export type AnnouncementsContext = {
@@ -26,7 +24,6 @@ export type AnnouncementsContext = {
   persistenceContext: PersistenceContext;
   permissions: PermissionsService;
   httpAuth: HttpAuthService;
-  signals: SignalsService;
 };
 
 export const buildAnnouncementsContext = async ({
@@ -35,7 +32,6 @@ export const buildAnnouncementsContext = async ({
   database,
   permissions,
   httpAuth,
-  signals,
 }: AnnouncementsContextOptions): Promise<AnnouncementsContext> => {
   return {
     logger,
@@ -43,6 +39,5 @@ export const buildAnnouncementsContext = async ({
     persistenceContext: await initializePersistenceContext(database),
     permissions,
     httpAuth,
-    signals,
   };
 };

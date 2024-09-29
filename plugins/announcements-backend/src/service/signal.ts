@@ -1,22 +1,21 @@
 import { SignalsService } from '@backstage/plugin-signals-node';
 import { AnnouncementModel } from './model';
 import {
-  Announcement,
   AnnouncementSignal,
+  SIGNALS_CHANNEL_ANNOUNCEMENTS,
 } from '@procore-oss/backstage-plugin-announcements-common';
 
 export const signalAnnouncement = async (
   announcement: AnnouncementModel,
-  signalService: SignalsService,
+  signals?: SignalsService,
 ) => {
-  if (!announcement) {
+  if (!signals) {
     return;
   }
 
-  console.log('Broadcasting announcement', announcement);
-  await signalService.publish<AnnouncementSignal>({
+  await signals.publish<AnnouncementSignal>({
     recipients: { type: 'broadcast' },
-    channel: 'announcement:new',
+    channel: SIGNALS_CHANNEL_ANNOUNCEMENTS,
     message: {
       data: {
         ...announcement,
@@ -24,5 +23,4 @@ export const signalAnnouncement = async (
       },
     },
   });
-  console.log('Broadcasted announcement');
 };

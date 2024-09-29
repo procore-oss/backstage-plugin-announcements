@@ -6,3 +6,5 @@ export const EVENTS_ACTION_DELETE_ANNOUNCEMENT = 'delete_announcement';
 
 export const EVENTS_ACTION_CREATE_CATEGORY = 'create_category';
 export const EVENTS_ACTION_DELETE_CATEGORY = 'delete_category';
+
+export const SIGNALS_CHANNEL_ANNOUNCEMENTS = 'announcements:new';

@@ -53,7 +53,7 @@ export const CreateAnnouncementPage = (props: CreateAnnouncementPageProps) => {
         ...request,
         category: request.category?.toLowerCase(),
       });
-      // alertApi.post({ message: alertMsg, severity: 'success' });
+      alertApi.post({ message: alertMsg, severity: 'success' });
 
       navigate(rootPage());
     } catch (err) {

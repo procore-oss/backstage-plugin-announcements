@@ -25,15 +25,6 @@ export type AnnouncementsFilters = {
   page?: number;
 };
 
-type SignalDetails = {
-  id: string;
-  category?: Category;
-  publisher: string;
-  title: string;
-  excerpt: string;
-  body: string;
-};
-
 export type AnnouncementSignal = {
   data: Announcement;
 };

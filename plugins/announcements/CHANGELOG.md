@@ -1,5 +1,11 @@
 # @procore-oss/backstage-plugin-announcements
 
+## 0.10.4
+
+### Patch Changes
+
+- 75536ca: Internal refactor to remove `export` from unused exported types.
+
 ## 0.10.3
 
 ### Patch Changes

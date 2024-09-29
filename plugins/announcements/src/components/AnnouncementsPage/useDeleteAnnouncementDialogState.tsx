@@ -1,7 +1,7 @@
 import { Announcement } from '@procore-oss/backstage-plugin-announcements-common';
 import { useCallback, useState } from 'react';
 
-export type DeleteAnnouncementDialogState = {
+type DeleteAnnouncementDialogState = {
   open: (a: Announcement) => void;
   close: () => void;
 

@@ -10,7 +10,7 @@ import {
 import { alertApiRef, useApi } from '@backstage/core-plugin-api';
 import { announcementsApiRef } from '@procore-oss/backstage-plugin-announcements-react';
 
-export type NewCategoryDialogProps = {
+type NewCategoryDialogProps = {
   open: boolean;
   onClose: () => any;
 };

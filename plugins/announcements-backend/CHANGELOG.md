@@ -1,5 +1,54 @@
 # @procore-oss/backstage-plugin-announcements-backend
 
+## 0.10.1
+
+### Patch Changes
+
+- 152842c: # Overview
+
+  Adds support for the Backstage event system (@backstage/plugin-events-backend).
+
+  ## Topic
+
+  All events are published to the `announcements` topic.
+
+  ## Event actions
+
+  The following event actions are supported
+
+  ### Announcements
+
+  All announcement payloads include the entire contents of the announcement
+
+  - 'create_announcement': Create a new announcement
+  - 'update_announcement': Update an existing announcement
+  - 'delete_announcement': Delete an existing announcement
+
+  ### Categories
+
+  All category payloads include the category slug.
+
+  - 'create_category': Create a new category
+  - 'delete_category': Delete an existing category
+
+  ## Subscribing to announcement events example
+
+  ```ts
+  import { EVENTS_TOPIC_ANNOUNCEMENTS } from '@procore-oss/backstage-plugin-announcements-common';
+
+  events.subscribe({
+    id: 'announcements-subscriber',
+    topics: [EVENTS_TOPIC_ANNOUNCEMENTS],
+    async onEvent(params): Promise<void> {
+      console.log('Announcement', params);
+    },
+  });
+  ```
+
+- Updated dependencies [152842c]
+  - @procore-oss/backstage-plugin-announcements-common@0.2.6
+  - @procore-oss/backstage-plugin-search-backend-module-announcements@0.3.1
+
 ## 0.10.0
 
 ### Minor Changes

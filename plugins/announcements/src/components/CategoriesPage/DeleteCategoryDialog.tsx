@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, Dialog, DialogActions, DialogTitle } from '@material-ui/core';
 
-export type DeleteCategoryDialogProps = {
+type DeleteCategoryDialogProps = {
   open: boolean;
   onConfirm: () => any;
   onCancel: () => any;

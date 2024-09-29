@@ -3759,6 +3759,22 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@backstage/plugin-events-backend@npm:^0.3.12":
+  version: 0.3.12
+  resolution: "@backstage/plugin-events-backend@npm:0.3.12"
+  dependencies:
+    "@backstage/backend-common": "npm:^0.25.0"
+    "@backstage/backend-plugin-api": "npm:^1.0.0"
+    "@backstage/config": "npm:^1.2.0"
+    "@backstage/plugin-events-node": "npm:^0.4.0"
+    "@types/express": "npm:^4.17.6"
+    express: "npm:^4.17.1"
+    express-promise-router: "npm:^4.1.0"
+    winston: "npm:^3.2.1"
+  checksum: 10c0/aba24215b6e0121ae1b711116f8546e53c7964b0376439ba216ce4da3627bcb43d8d1aa83cf912ddea8862c8c4005a4ac58ac3bc7e1a82be98745f5cf63de0d2
+  languageName: node
+  linkType: hard
+
 "@backstage/plugin-events-node@npm:^0.4.0":
   version: 0.4.0
   resolution: "@backstage/plugin-events-node@npm:0.4.0"
@@ -6451,6 +6467,8 @@ __metadata:
     "@backstage/plugin-auth-backend": "npm:^0.23.0"
     "@backstage/plugin-auth-backend-module-guest-provider": "npm:^0.2.0"
     "@backstage/plugin-auth-node": "npm:^0.5.2"
+    "@backstage/plugin-events-backend": "npm:^0.3.12"
+    "@backstage/plugin-events-node": "npm:^0.4.0"
     "@backstage/plugin-permission-backend": "npm:^0.5.49"
     "@backstage/plugin-permission-backend-module-allow-all-policy": "npm:^0.2.0"
     "@backstage/plugin-permission-common": "npm:^0.8.1"

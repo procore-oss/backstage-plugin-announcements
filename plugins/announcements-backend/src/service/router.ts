@@ -173,11 +173,6 @@ export async function createRouter(
         });
 
       if (events) {
-        logger.info('Publishing event', {
-          topic: EVENTS_TOPIC_ANNOUNCEMENTS,
-          action: EVENTS_ACTION_CREATE_ANNOUNCEMENT,
-          announcement: announcement.id,
-        });
         events.publish({
           topic: EVENTS_TOPIC_ANNOUNCEMENTS,
           eventPayload: {

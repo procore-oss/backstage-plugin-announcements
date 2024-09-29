@@ -1,5 +1,13 @@
 # @procore-oss/backstage-plugin-search-backend-module-announcements
 
+## 0.3.2
+
+### Patch Changes
+
+- Updated dependencies [c9be1ca]
+  - @procore-oss/backstage-plugin-announcements-common@0.2.7
+  - @procore-oss/backstage-plugin-announcements-node@0.3.2
+
 ## 0.3.1
 
 ### Patch Changes

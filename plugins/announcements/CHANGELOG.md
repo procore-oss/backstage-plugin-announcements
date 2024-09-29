@@ -1,5 +1,11 @@
 # @procore-oss/backstage-plugin-announcements
 
+## 0.10.2
+
+### Patch Changes
+
+- ed63d12: No longer display the three dots (menu) option if user does not have correct permissions to edit or delete announcements.
+
 ## 0.10.1
 
 ### Patch Changes

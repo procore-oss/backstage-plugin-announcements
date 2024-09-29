@@ -121,11 +121,27 @@ type NewAnnouncementBannerProps = {
 export const NewAnnouncementBanner = (props: NewAnnouncementBannerProps) => {
   const announcementsApi = useApi(announcementsApiRef);
 
+  const [signaledAnnouncement, setSignaledAnnouncement] = useState<
+    AnnouncementSignal['data'] | undefined
+  >();
+
   const { announcements, loading, error } = useAnnouncements({
     max: props.max || 1,
     category: props.category,
   });
   const lastSeen = announcementsApi.lastSeenDate();
+
+  const { lastSignal } = useSignal<AnnouncementSignal>(
+    SIGNALS_CHANNEL_ANNOUNCEMENTS,
+  );
+
+  useEffect(() => {
+    if (!lastSignal) {
+      return;
+    }
+
+    setSignaledAnnouncement(lastSignal?.data);
+  }, [lastSignal]);
 
   if (loading) {
     return null;
@@ -141,6 +157,10 @@ export const NewAnnouncementBanner = (props: NewAnnouncementBannerProps) => {
     return lastSeen < DateTime.fromISO(announcement.created_at);
   });
 
+  if (signaledAnnouncement) {
+    unseenAnnouncements.push(signaledAnnouncement);
+  }
+
   if (unseenAnnouncements?.length === 0) {
     return null;
   }
@@ -155,35 +175,5 @@ export const NewAnnouncementBanner = (props: NewAnnouncementBannerProps) => {
         />
       ))}
     </>
-  );
-};
-
-export const SignalAnnouncementBanner = (props: NewAnnouncementBannerProps) => {
-  const [announcement, setAnnouncement] = useState<
-    AnnouncementSignal['data'] | undefined
-  >();
-
-  const { lastSignal } = useSignal<AnnouncementSignal>(
-    SIGNALS_CHANNEL_ANNOUNCEMENTS,
-  );
-
-  useEffect(() => {
-    if (!lastSignal) {
-      return;
-    }
-
-    setAnnouncement(lastSignal?.data);
-  }, [lastSignal]);
-
-  if (!announcement) {
-    return null;
-  }
-
-  return (
-    <AnnouncementBanner
-      key={announcement.id}
-      announcement={announcement}
-      variant={props.variant}
-    />
   );
 };

@@ -86,10 +86,6 @@ createDevApp()
         <Content>
           <Grid container spacing={8} direction="column">
             <Grid item md={12}>
-              <Typography variant="h4">Signal</Typography>
-              <SignalAnnouncementBanner />
-            </Grid>
-            <Grid item md={12}>
               <Typography variant="h4">Banner</Typography>
               <NewAnnouncementBanner max={2} />
             </Grid>

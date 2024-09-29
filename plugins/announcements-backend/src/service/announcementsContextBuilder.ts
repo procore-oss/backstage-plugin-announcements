@@ -10,7 +10,7 @@ import {
   RootConfigService,
 } from '@backstage/backend-plugin-api';
 
-export type AnnouncementsContextOptions = {
+type AnnouncementsContextOptions = {
   logger: LoggerService;
   config: RootConfigService;
   database: DatabaseService;

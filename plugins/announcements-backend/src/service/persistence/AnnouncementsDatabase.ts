@@ -14,11 +14,11 @@ type AnnouncementUpsert = Omit<Announcement, 'category' | 'created_at'> & {
   created_at: DateTime;
 };
 
-export type DbAnnouncement = Omit<Announcement, 'category'> & {
+type DbAnnouncement = Omit<Announcement, 'category'> & {
   category?: string;
 };
 
-export type DbAnnouncementWithCategory = DbAnnouncement & {
+type DbAnnouncementWithCategory = DbAnnouncement & {
   category_slug?: string;
   category_title?: string;
 };

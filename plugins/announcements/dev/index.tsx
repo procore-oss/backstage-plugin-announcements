@@ -19,7 +19,6 @@ import {
   NewAnnouncementBanner,
 } from '../src/plugin';
 import { AnnouncementsTimeline } from '../src/components/AnnouncementsTimeline';
-import { SignalAnnouncementBanner } from '../src/components/NewAnnouncementBanner/NewAnnouncementBanner';
 import { signalsPlugin } from '@backstage/plugin-signals';
 
 const mockCatalogApi = {

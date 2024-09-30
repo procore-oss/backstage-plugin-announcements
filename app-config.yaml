@@ -3,15 +3,19 @@ app:
   baseUrl: http://localhost:3000
 
 permission:
-  enabled: true
+  enabled: false
 
 backend:
   baseUrl: http://localhost:7007
   listen:
     port: 7007
+  # uncomment for sqlite
+  # database:
+  #   client: better-sqlite3
+  #   connection: ':memory:'
   database:
-    client: better-sqlite3
-    connection: ':memory:'
+    client: pg
+    connection: ${DATABASE_URL}
   cache:
     store: memory
   cors:

@@ -61,6 +61,7 @@ describe('AnnouncementsTimeline', () => {
           body: 'Body 1',
           publisher: 'Publisher 1',
           created_at: '2022-01-01',
+          active: true,
         },
         {
           id: '2',
@@ -69,6 +70,7 @@ describe('AnnouncementsTimeline', () => {
           body: 'Body 2',
           publisher: 'Publisher 2',
           created_at: '2022-01-02',
+          active: true,
         },
       ],
     };

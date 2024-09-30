@@ -58,12 +58,36 @@ const announcementUpsertToDB = (
     body: announcement.body,
     publisher: announcement.publisher,
     created_at: announcement.created_at.toSQL()!,
+    active: announcement.active,
   };
 };
 
 const DBToAnnouncementWithCategory = (
   announcementDb: DbAnnouncementWithCategory,
 ): AnnouncementModel => {
+  const model = {
+    id: announcementDb.id,
+    category:
+      announcementDb.category && announcementDb.category_title
+        ? {
+          slug: announcementDb.category,
+          title: announcementDb.category_title,
+        }
+        : undefined,
+    title: announcementDb.title,
+    excerpt: announcementDb.excerpt,
+    body: announcementDb.body,
+    publisher: announcementDb.publisher,
+    created_at: timestampToDateTime(announcementDb.created_at),
+    active: announcementDb.active ?? false
+  }
+
+  console.log({
+    func: 'DBToAnnouncementWithCategory',
+    announcementDb,
+    model
+  })
+
   return {
     id: announcementDb.id,
     category:
@@ -78,6 +102,7 @@ const DBToAnnouncementWithCategory = (
     body: announcementDb.body,
     publisher: announcementDb.publisher,
     created_at: timestampToDateTime(announcementDb.created_at),
+    active: announcementDb.active ?? false
   };
 };
 
@@ -107,6 +132,7 @@ export class AnnouncementsDatabase {
         'category',
         'created_at',
         'categories.title as category_title',
+        'active',
       )
       .orderBy('created_at', 'desc')
       .leftJoin('categories', 'announcements.category', 'categories.slug');
@@ -131,7 +157,9 @@ export class AnnouncementsDatabase {
   }
 
   async announcementByID(id: string): Promise<AnnouncementModel | undefined> {
-    const dbAnnouncement = await this.db<DbAnnouncementWithCategory>(
+
+
+    const dbAnnouncement: DbAnnouncementWithCategory = await this.db<DbAnnouncementWithCategory>(
       announcementsTable,
     )
       .select(
@@ -143,6 +171,7 @@ export class AnnouncementsDatabase {
         'category',
         'created_at',
         'categories.title as category_title',
+        'active',
       )
       .leftJoin('categories', 'announcements.category', 'categories.slug')
       .where('id', id)
@@ -150,6 +179,11 @@ export class AnnouncementsDatabase {
     if (!dbAnnouncement) {
       return undefined;
     }
+
+    console.log({
+      func: 'announcementByID',
+      dbAnnouncement
+    })
 
     return DBToAnnouncementWithCategory(dbAnnouncement);
   }
@@ -161,16 +195,31 @@ export class AnnouncementsDatabase {
   async insertAnnouncement(
     announcement: AnnouncementUpsert,
   ): Promise<AnnouncementModel> {
+    const model = {
+      ...announcement,
+      active: announcement.active ?? false
+    }
+
+    console.log({ msg: 'inserting into db', announcement, model })
+
     await this.db<DbAnnouncement>(announcementsTable).insert(
       announcementUpsertToDB(announcement),
     );
 
-    return (await this.announcementByID(announcement.id))!;
+    const newAnnouncement = await this.announcementByID(announcement.id)
+
+    if (!newAnnouncement) {
+      throw new Error('Failed to insert announcement')
+    }
+
+    return newAnnouncement;
   }
 
   async updateAnnouncement(
     announcement: AnnouncementUpsert,
   ): Promise<AnnouncementModel> {
+    // console.log({ msg: 'updating in db', announcement })
+
     await this.db<DbAnnouncement>(announcementsTable)
       .where('id', announcement.id)
       .update(announcementUpsertToDB(announcement));

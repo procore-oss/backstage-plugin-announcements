@@ -33,6 +33,12 @@ export const EditAnnouncementPage = (props: EditAnnouncementPageProps) => {
 
   const onSubmit = async (request: CreateAnnouncementRequest) => {
     try {
+      console.log({
+        msg: 'onSubmit',
+        func: 'await announcementsApi.updateAnnouncement(id, request)',
+        id,
+        request
+      })
       await announcementsApi.updateAnnouncement(id, request);
       alertApi.post({ message: 'Announcement updated.', severity: 'success' });
     } catch (err) {

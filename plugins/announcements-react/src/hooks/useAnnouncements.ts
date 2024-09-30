@@ -30,6 +30,12 @@ export const useAnnouncements = (
     return await api.announcements(props);
   }, [api, ...(options?.dependencies ?? [])]);
 
+
+  console.log({
+    func: 'useAnnouncements',
+    announcementsList,
+  });
+
   return {
     announcements: announcementsList ?? { count: 0, results: [] },
     loading,

@@ -235,6 +235,11 @@ const AnnouncementsGrid = ({
     { dependencies: [maxPerPage, page, category] },
   );
 
+  console.log({
+    component: 'AnnouncementsGrid',
+    announcements,
+  })
+
   const {
     isOpen: isDeleteDialogOpen,
     open: openDeleteDialog,

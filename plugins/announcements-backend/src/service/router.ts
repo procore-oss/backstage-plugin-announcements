@@ -38,6 +38,7 @@ interface AnnouncementRequest {
   title: string;
   excerpt: string;
   body: string;
+  active: boolean;
 }
 
 interface CategoryRequest {

@@ -1,5 +1,14 @@
 # @procore-oss/backstage-plugin-announcements
 
+## 0.10.5
+
+### Patch Changes
+
+- c9be1ca: Adds an integration with @backstage/plugins-signals-backend. New announcements will now be displayed in near real-time if your Backstage instance supports signals.
+- Updated dependencies [c9be1ca]
+  - @procore-oss/backstage-plugin-announcements-common@0.2.7
+  - @procore-oss/backstage-plugin-announcements-react@0.4.5
+
 ## 0.10.4
 
 ### Patch Changes

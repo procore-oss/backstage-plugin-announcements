@@ -1,6 +1,6 @@
 import { NavItemBlueprint } from '@backstage/frontend-plugin-api';
 import { convertLegacyRouteRef } from '@backstage/core-compat-api';
-import NotificationsIcon from '@material-ui/icons/Notifications';
+import NotificationsIcon from '@mui/icons-material/Notifications';
 import { rootRouteRef } from '../routes';
 
 /**

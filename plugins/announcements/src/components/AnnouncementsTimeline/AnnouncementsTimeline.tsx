@@ -1,5 +1,4 @@
 import { useRouteRef } from '@backstage/core-plugin-api';
-import { Typography, Box } from '@material-ui/core';
 import {
   Timeline,
   TimelineItem,
@@ -8,7 +7,7 @@ import {
   TimelineConnector,
   TimelineDot,
   TimelineSeparator,
-} from '@material-ui/lab';
+} from '@mui/lab';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Stack from '@mui/material/Stack';
@@ -16,6 +15,8 @@ import { DateTime } from 'luxon';
 import { announcementViewRouteRef } from '../../routes';
 import { useAnnouncements } from '@procore-oss/backstage-plugin-announcements-react';
 import { Progress } from '@backstage/core-components';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
 
 /**
  * Props for the AnnouncementsTimeline component.

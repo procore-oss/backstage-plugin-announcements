@@ -10,8 +10,15 @@ backend:
   listen:
     port: 7007
   database:
-    client: better-sqlite3
-    connection: ':memory:'
+    # uncomment for sqlite
+    # client: better-sqlite3
+    # connection: ':memory:'
+    client: pg
+    connection:
+      host: ${POSTGRESQL_HOST}
+      port: ${POSTGRESQL_POST}
+      user: ${POSTGRESQL_USER}
+      password: ${POSTGRESQL_PASSWORD}
   cache:
     store: memory
   cors:

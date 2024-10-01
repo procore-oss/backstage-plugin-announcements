@@ -87,7 +87,7 @@ export const AnnouncementsTimeline = ({
       spacing={0}
     >
       <Box sx={{ minWidth: timelineMinWidth }}>
-        <Timeline align={timelineAlignment}>
+        <Timeline position={timelineAlignment}>
           {announcements.results.map(a => (
             <TimelineItem key={`ti-${a.id}`}>
               <TimelineOppositeContent

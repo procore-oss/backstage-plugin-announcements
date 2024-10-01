@@ -11,22 +11,30 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@a5ac7e51b41094c92402da3b24376905380afc29 # v4
+      
       - name: Use Node.js 20.x
         uses: actions/setup-node@60edb5dd545a775178f52524783378180af0d1f8 # v4
         with:
           node-version: 20.x
           cache: 'yarn'
+      
       - name: Install Dependencies
         run: yarn install --immutable
+      
       - name: Build type declarations
         run: yarn tsc
+      
       - name: Build packages
         run: yarn build:all
+      
       - name: Enable non-immutable yarn installs
         run: yarn config set -H enableImmutableInstalls false
+ 
       - name: Authenticate yarn with NPM
         run: yarn config set -H 'npmAuthToken' "${{secrets.NPM_TOKEN}}"
+        
       - name: Create Release Pull Request
+        id: changesets
         uses: changesets/action@aba318e9165b45b7948c60273e0b72fce0a64eb9 # v1
         with:
           version: yarn version-packages
@@ -34,8 +42,11 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          
       - name: Publish git tags
         run: yarn changeset tag
+        if: steps.changesets.outputs.published == 'true'
+        run: yarn changeset tag && git push --follow-tags
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}

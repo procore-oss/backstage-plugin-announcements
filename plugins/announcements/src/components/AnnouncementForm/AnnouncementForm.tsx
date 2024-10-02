@@ -51,6 +51,12 @@ export const AnnouncementForm = ({
       },
     };
 
+    console.log({
+      userIdentity,
+      form,
+      createRequest,
+    });
+
     await onSubmit(createRequest);
     setLoading(false);
   };

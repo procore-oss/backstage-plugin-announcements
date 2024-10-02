@@ -96,6 +96,44 @@ export const AnnouncementsContent = () => {
     retry();
   };
 
+  const onSubmit = async (request: CreateAnnouncementRequest) => {
+    // const { category } = request;
+
+    // const slugs = categories.map((c: Category) => c.slug);
+    // let alertMsg = 'Announcement created.';
+
+    try {
+      // if (category) {
+      //   const categorySlug = slugify(category, {
+      //     lower: true,
+      //   });
+      //   if (slugs.indexOf(categorySlug) === -1) {
+      //     alertMsg = alertMsg.replace('.', '');
+      //     alertMsg = `${alertMsg} with new category ${category}.`;
+
+      //     await announcementsApi.createCategory({
+      //       title: category,
+      //     });
+      //   }
+      // }
+
+      // console.log({
+      //   ...request,
+      //   category: request.category?.toLowerCase(),
+      // });
+
+      await announcementsApi.createAnnouncement({
+        ...request,
+        category: request.category?.toLowerCase(),
+      });
+      // alertApi.post({ message: alertMsg, severity: 'success' });
+
+      // navigate(rootPage());
+    } catch (err) {
+      alertApi.post({ message: (err as Error).message, severity: 'error' });
+    }
+  };
+
   if (loading) {
     return <Progress />;
   }
@@ -172,7 +210,7 @@ export const AnnouncementsContent = () => {
           <Content>
             <AnnouncementForm
               initialData={{} as Announcement}
-              onSubmit={async () => {}}
+              onSubmit={onSubmit}
             />
           </Content>
         )}

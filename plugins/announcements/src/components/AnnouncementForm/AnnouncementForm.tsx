@@ -15,7 +15,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export type AnnouncementFormProps = {
+type AnnouncementFormProps = {
   initialData: Announcement;
   onSubmit: (data: CreateAnnouncementRequest) => Promise<void>;
 };

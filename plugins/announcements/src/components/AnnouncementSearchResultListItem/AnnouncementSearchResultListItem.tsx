@@ -30,7 +30,7 @@ const useStyles = makeStyles({
   },
 });
 
-export type IndexableAnnouncement = IndexableDocument & {
+type IndexableAnnouncement = IndexableDocument & {
   createdAt: string;
 };
 

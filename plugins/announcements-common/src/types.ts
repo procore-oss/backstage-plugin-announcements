@@ -22,4 +22,9 @@ export type AnnouncementsFilters = {
   max?: number;
   offset?: number;
   category?: string;
+  page?: number;
+};
+
+export type AnnouncementSignal = {
+  data: Announcement;
 };

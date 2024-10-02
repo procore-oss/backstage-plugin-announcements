@@ -7,7 +7,7 @@
 Add the plugin to your backend app:
 
 ```bash
-yarn add --cwd packages/backend @procore-oss/backstage-plugin-announcements-backend
+yarn --cwd packages/backend add @procore-oss/backstage-plugin-announcements-backend
 ```
 
 Create `packages/backend/src/plugins/announcements.ts`:
@@ -73,7 +73,7 @@ async function main() {
 Add the plugin to your backend app:
 
 ```bash
-yarn add --cwd packages/backend @procore-oss/backstage-plugin-announcements-backend
+yarn --cwd packages/backend add @procore-oss/backstage-plugin-announcements-backend
 ```
 
 Update `packages/backend/src/index.ts` to import announcements plugin package and register it in your backend using:
@@ -91,7 +91,7 @@ backend.add(import('@procore-oss/backstage-plugin-announcements-backend'));
 Add the plugin to your frontend app:
 
 ```bash
-yarn add --cwd packages/app @procore-oss/backstage-plugin-announcements
+yarn --cwd packages/app add @procore-oss/backstage-plugin-announcements
 ```
 
 Expose the announcements page:
@@ -112,3 +112,49 @@ const AppRoutes = () => (
 ```
 
 An interface to create/update/edit/delete announcements is now available at `/announcements`.
+
+## New Frontend System Setup (Alpha)
+
+Add the plugin to your frontend app:
+
+```bash
+yarn --cwd packages/app add @procore-oss/backstage-plugin-announcements
+```
+
+Add the plugin to `packages/app/src/App.tsx`:
+
+```ts
+import announcementsPlugin from '@procore-oss/backstage-plugin-announcements/alpha';
+
+// ...
+
+const app = createApp({
+  // ...
+  features: [
+    // ...
+    announcementsPlugin,
+    // ...
+  ],
+  // ...
+});
+```
+
+Add the extensions in `app-config.yaml`:
+
+```yaml
+app:
+  extensions:
+    - entity-card:announcements/announcements
+    - nav-item:announcements
+```
+
+The entity card will only appear on components & systems by default, but you can override that
+behavior by passing a filter into the card extension like so:
+
+```yaml
+app:
+  extensions:
+    - entity-card:announcements/announcements:
+        config:
+          filter: kind:component,system,group,api
+```

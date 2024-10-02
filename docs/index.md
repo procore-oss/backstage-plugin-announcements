@@ -55,3 +55,11 @@ It is possible to specify the text for the "New announcement" button rendered on
   name: string; // defaults to 'announcement'
 }
 ```
+
+## Events support
+
+The announcements plugin supports the Backstage Event system. View the [events](events.md) documentation for more information.
+
+## Signals support
+
+The announcements plugin supports the Backstage Signal system. View the [signals](signals.md) documentation for more information.

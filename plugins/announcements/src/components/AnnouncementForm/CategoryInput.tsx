@@ -31,6 +31,14 @@ type CategoryInputProps = {
 
 const filter = createFilterOptions<Category>();
 
+function prepareCategoryFromInput(inputCategory: Category | string): string {
+  return (
+    typeof inputCategory === 'string' ? inputCategory : inputCategory.title
+  )
+    .replace('Create ', '')
+    .replaceAll('"', '');
+}
+
 export default function CategoryInput({
   setForm,
   form,
@@ -48,12 +56,7 @@ export default function CategoryInput({
           return;
         }
 
-        const newCategory = (
-          typeof newValue === 'string' ? newValue : newValue.title
-        )
-          .replace('Create ', '')
-          .replaceAll('"', '');
-
+        const newCategory = prepareCategoryFromInput(newValue);
         setForm({ ...form, category: newCategory });
       }}
       filterOptions={(options, params) => {
@@ -83,11 +86,7 @@ export default function CategoryInput({
       options={categories || []}
       getOptionLabel={option => {
         // Value selected with enter, right from the input
-        if (typeof option === 'string') {
-          return option;
-        }
-
-        return option.slug;
+        return prepareCategoryFromInput(option);
       }}
       renderOption={(props, option) => <li {...props}>{option.title}</li>}
       freeSolo

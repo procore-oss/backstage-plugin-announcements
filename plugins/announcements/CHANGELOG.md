@@ -1,5 +1,111 @@
 # @procore-oss/backstage-plugin-announcements
 
+## 0.10.5
+
+### Patch Changes
+
+- c9be1ca: Adds an integration with @backstage/plugins-signals-backend. New announcements will now be displayed in near real-time if your Backstage instance supports signals.
+- Updated dependencies [c9be1ca]
+  - @procore-oss/backstage-plugin-announcements-common@0.2.7
+  - @procore-oss/backstage-plugin-announcements-react@0.4.5
+
+## 0.10.4
+
+### Patch Changes
+
+- 75536ca: Internal refactor to remove `export` from unused exported types.
+
+## 0.10.3
+
+### Patch Changes
+
+- Updated dependencies [152842c]
+  - @procore-oss/backstage-plugin-announcements-common@0.2.6
+  - @procore-oss/backstage-plugin-announcements-react@0.4.4
+
+## 0.10.2
+
+### Patch Changes
+
+- ed63d12: No longer display the three dots (menu) option if user does not have correct permissions to edit or delete announcements.
+
+## 0.10.1
+
+### Patch Changes
+
+- 071914c: bump dependencies and update to the latest version of backstage (1.31.2)
+- Updated dependencies [071914c]
+  - @procore-oss/backstage-plugin-announcements-common@0.2.5
+  - @procore-oss/backstage-plugin-announcements-react@0.4.3
+
+## 0.10.0
+
+### Minor Changes
+
+- 3c04265: Add react-dom & types/react as peer dependencies
+
+### Patch Changes
+
+- 7158f76: Make entity card appear on components & systems only by default in new FE system
+
+## 0.9.2
+
+### Patch Changes
+
+- 5d34ab8: Update to Backstage 1.30.1
+- Updated dependencies [5d34ab8]
+  - @procore-oss/backstage-plugin-announcements-common@0.2.4
+  - @procore-oss/backstage-plugin-announcements-react@0.4.2
+
+## 0.9.1
+
+### Patch Changes
+
+- 9937f08: - Adds support for Backstage's new frontend system, available via the `/alpha` sub-path export.
+- Updated dependencies [9937f08]
+  - @procore-oss/backstage-plugin-announcements-common@0.2.3
+  - @procore-oss/backstage-plugin-announcements-react@0.4.1
+
+## 0.9.0
+
+### Minor Changes
+
+- 6089647: Able to delete Announcement Categories for following benefits:-
+
+  1. If created by mistake, a user can delete that
+  2. Categories doesn't get cluttered
+
+### Patch Changes
+
+- Updated dependencies [6089647]
+  - @procore-oss/backstage-plugin-announcements-react@0.4.0
+
+## 0.8.0
+
+### Minor Changes
+
+- b4e2ed3: Able to delete Announcement Categories for following benefits:-
+
+  1. If created by mistake, a user can delete that
+  2. Categories doesn't get cluttered
+
+### Patch Changes
+
+- Updated dependencies [b4e2ed3]
+  - @procore-oss/backstage-plugin-announcements-react@0.3.0
+
+## 0.7.0
+
+### Minor Changes
+
+- d1f456b: Bug Fix: Creating a category with a different slug and title will prevent the announcement from being created #351
+
+## 0.6.6
+
+### Patch Changes
+
+- fbbc5e3: A frontend bugfix to fix paging on the AnnouncementsPage
+
 ## 0.6.5
 
 ### Patch Changes

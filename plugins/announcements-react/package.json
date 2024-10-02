@@ -1,7 +1,7 @@
 {
   "name": "@procore-oss/backstage-plugin-announcements-react",
   "description": "Web library for the announcements plugin",
-  "version": "0.2.2",
+  "version": "0.4.5",
   "main": "src/index.ts",
   "types": "src/index.ts",
   "license": "MIT",
@@ -11,7 +11,15 @@
     "types": "dist/index.d.ts"
   },
   "backstage": {
-    "role": "web-library"
+    "role": "web-library",
+    "pluginId": "announcements",
+    "pluginPackages": [
+      "@procore-oss/backstage-plugin-announcements",
+      "@procore-oss/backstage-plugin-announcements-backend",
+      "@procore-oss/backstage-plugin-announcements-common",
+      "@procore-oss/backstage-plugin-announcements-node",
+      "@procore-oss/backstage-plugin-announcements-react"
+    ]
   },
   "sideEffects": false,
   "scripts": {
@@ -24,7 +32,7 @@
     "postpack": "backstage-cli package postpack"
   },
   "dependencies": {
-    "@backstage/core-plugin-api": "^1.9.2",
+    "@backstage/core-plugin-api": "^1.9.4",
     "@backstage/errors": "^1.2.4",
     "@material-ui/core": "^4.12.2",
     "@procore-oss/backstage-plugin-announcements-common": "workspace:^",
@@ -35,7 +43,7 @@
     "react": "^16.13.1 || ^17.0.0 || ^18.0.0"
   },
   "devDependencies": {
-    "@backstage/cli": "^0.26.5",
+    "@backstage/cli": "^0.27.1",
     "@testing-library/jest-dom": "^5.10.1",
     "@testing-library/react": "^12.1.3"
   },

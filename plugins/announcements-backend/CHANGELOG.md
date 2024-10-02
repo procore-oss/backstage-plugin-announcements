@@ -1,5 +1,133 @@
 # @procore-oss/backstage-plugin-announcements-backend
 
+## 0.10.3
+
+### Patch Changes
+
+- c9be1ca: Adds an integration with @backstage/plugins-signals-backend. New announcements will now be displayed in near real-time if your Backstage instance supports signals.
+- Updated dependencies [c9be1ca]
+  - @procore-oss/backstage-plugin-announcements-common@0.2.7
+  - @procore-oss/backstage-plugin-search-backend-module-announcements@0.3.2
+
+## 0.10.2
+
+### Patch Changes
+
+- 75536ca: Internal refactor to remove `export` from unused exported types.
+
+## 0.10.1
+
+### Patch Changes
+
+- 152842c: # Overview
+
+  Adds support for the Backstage event system (@backstage/plugin-events-backend).
+
+  ## Topic
+
+  All events are published to the `announcements` topic.
+
+  ## Event actions
+
+  The following event actions are supported
+
+  ### Announcements
+
+  All announcement payloads include the entire contents of the announcement
+
+  - 'create_announcement': Create a new announcement
+  - 'update_announcement': Update an existing announcement
+  - 'delete_announcement': Delete an existing announcement
+
+  ### Categories
+
+  All category payloads include the category slug.
+
+  - 'create_category': Create a new category
+  - 'delete_category': Delete an existing category
+
+  ## Subscribing to announcement events example
+
+  ```ts
+  import { EVENTS_TOPIC_ANNOUNCEMENTS } from '@procore-oss/backstage-plugin-announcements-common';
+
+  events.subscribe({
+    id: 'announcements-subscriber',
+    topics: [EVENTS_TOPIC_ANNOUNCEMENTS],
+    async onEvent(params): Promise<void> {
+      console.log('Announcement', params);
+    },
+  });
+  ```
+
+- Updated dependencies [152842c]
+  - @procore-oss/backstage-plugin-announcements-common@0.2.6
+  - @procore-oss/backstage-plugin-search-backend-module-announcements@0.3.1
+
+## 0.10.0
+
+### Minor Changes
+
+- ebcc341: Migrate away from winston logger and old services. Replace with coreServices where posisble. It is possible this will be a breaking change for those who have not migrated to the new backend system.
+
+### Patch Changes
+
+- 071914c: bump dependencies and update to the latest version of backstage (1.31.2)
+- Updated dependencies [071914c]
+- Updated dependencies [ebcc341]
+  - @procore-oss/backstage-plugin-search-backend-module-announcements@0.3.0
+  - @procore-oss/backstage-plugin-announcements-common@0.2.5
+
+## 0.9.3
+
+### Patch Changes
+
+- Updated dependencies [2bee323]
+  - @procore-oss/backstage-plugin-search-backend-module-announcements@0.2.5
+
+## 0.9.2
+
+### Patch Changes
+
+- 5d34ab8: Update to Backstage 1.30.1
+- Updated dependencies [5d34ab8]
+  - @procore-oss/backstage-plugin-search-backend-module-announcements@0.2.4
+  - @procore-oss/backstage-plugin-announcements-common@0.2.4
+
+## 0.9.1
+
+### Patch Changes
+
+- 9937f08: - Adds missing backstage metadata to package.json
+- Updated dependencies [9937f08]
+  - @procore-oss/backstage-plugin-search-backend-module-announcements@0.2.3
+  - @procore-oss/backstage-plugin-announcements-common@0.2.3
+
+## 0.9.0
+
+### Minor Changes
+
+- 6089647: Bug Report: Announcement category cannot be deleted in certain scenarios
+- 6089647: Able to delete Announcement Categories for following benefits:-
+
+  1. If created by mistake, a user can delete that
+  2. Categories doesn't get cluttered
+
+## 0.8.0
+
+### Minor Changes
+
+- b4e2ed3: Able to delete Announcement Categories for following benefits:-
+
+  1. If created by mistake, a user can delete that
+  2. Categories doesn't get cluttered
+
+## 0.7.0
+
+### Minor Changes
+
+- d1f456b: Bug Fix: Creating a category with a different slug and title will prevent the announcement from being created #351
+
 ## 0.6.4
 
 ### Patch Changes

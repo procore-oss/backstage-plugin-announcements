@@ -5,6 +5,7 @@ import {
   AnnouncementsFilters,
   Announcement,
 } from '@procore-oss/backstage-plugin-announcements-common';
+import slugify from 'slugify';
 
 const announcementsTable = 'announcements';
 
@@ -13,11 +14,11 @@ type AnnouncementUpsert = Omit<Announcement, 'category' | 'created_at'> & {
   created_at: DateTime;
 };
 
-export type DbAnnouncement = Omit<Announcement, 'category'> & {
+type DbAnnouncement = Omit<Announcement, 'category'> & {
   category?: string;
 };
 
-export type DbAnnouncementWithCategory = DbAnnouncement & {
+type DbAnnouncementWithCategory = DbAnnouncement & {
   category_slug?: string;
   category_title?: string;
 };
@@ -47,7 +48,11 @@ const announcementUpsertToDB = (
 ): DbAnnouncement => {
   return {
     id: announcement.id,
-    category: announcement.category,
+    category: announcement.category
+      ? slugify(announcement.category, {
+          lower: true,
+        })
+      : announcement.category,
     title: announcement.title,
     excerpt: announcement.excerpt,
     body: announcement.body,
@@ -117,7 +122,10 @@ export class AnnouncementsDatabase {
     }
 
     return {
-      count: countResult && countResult.total ? countResult.total : 0,
+      count:
+        countResult && countResult.total
+          ? parseInt(countResult.total.toString(), 10)
+          : 0,
       results: (await queryBuilder.select()).map(DBToAnnouncementWithCategory),
     };
   }

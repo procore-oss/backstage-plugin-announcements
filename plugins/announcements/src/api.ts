@@ -140,6 +140,10 @@ export class AnnouncementsClient implements AnnouncementsApi {
     return this.fetch<Category[]>('/categories');
   }
 
+  async deleteCategory(slug: string): Promise<void> {
+    return this.delete(`/categories/${slug}`, { method: 'DELETE' });
+  }
+
   async createCategory(request: CreateCategoryRequest): Promise<void> {
     await this.fetch<Category>(`/categories`, {
       method: 'POST',

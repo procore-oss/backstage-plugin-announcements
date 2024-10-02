@@ -7,9 +7,9 @@ import {
   TableColumn,
   ErrorPanel,
 } from '@backstage/core-components';
-import { Button, IconButton, makeStyles } from '@material-ui/core';
-import AddIcon from '@material-ui/icons/Add';
-import DeleteIcon from '@material-ui/icons/Delete';
+import makeStyles from '@mui/styles/makeStyles';
+import AddIcon from '@mui/icons-material/Add';
+import DeleteIcon from '@mui/icons-material/Delete';
 import { NewCategoryDialog } from '../NewCategoryDialog';
 import { useCategories } from '@procore-oss/backstage-plugin-announcements-react';
 import { Category } from '@procore-oss/backstage-plugin-announcements-common';
@@ -18,6 +18,8 @@ import { alertApiRef, useApi } from '@backstage/core-plugin-api';
 import { announcementsApiRef } from '@procore-oss/backstage-plugin-announcements-react';
 import { DeleteCategoryDialog } from './DeleteCategoryDialog';
 import { ResponseError } from '@backstage/errors';
+import IconButton from '@mui/material/IconButton';
+import Button from '@mui/material/Button';
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -91,7 +93,7 @@ const CategoriesTable = () => {
       field: 'actions',
       render: category => {
         return (
-          <IconButton onClick={() => openDeleteDialog(category)}>
+          <IconButton onClick={() => openDeleteDialog(category)} size="large">
             <DeleteIcon />
           </IconButton>
         );

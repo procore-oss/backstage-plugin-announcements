@@ -33,7 +33,7 @@ export const AnnouncementForm = ({
 }: AnnouncementFormProps) => {
   const classes = useStyles();
   const identityApi = useApi(identityApiRef);
-  
+
   const [form, setForm] = React.useState({
     ...initialData,
     category: initialData.category?.slug,
@@ -41,6 +41,12 @@ export const AnnouncementForm = ({
   const [loading, setLoading] = useState(false);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    // console.log({
+    //   func: 'handleChange',
+    //   id: event.target.id,
+    //   value: event.target.value,
+    // });
+
     setForm({
       ...form,
       [event.target.id]: event.target.value,
@@ -48,14 +54,14 @@ export const AnnouncementForm = ({
   };
 
   const handleChangeActive = (event: React.ChangeEvent<HTMLInputElement>) => {
-    console.log({
-      name: event.target.name,
-      checked: event.target.checked,
-    })
+    // console.log({
+    //   name: event.target.name,
+    //   checked: event.target.checked,
+    // })
 
     setForm({
       ...form,
-      [event.target.name]: event.target.checked
+      [event.target.name]: event.target.checked,
     });
   };
 
@@ -75,7 +81,7 @@ export const AnnouncementForm = ({
     setLoading(false);
   };
 
-console.log({form})
+  // console.log({form})
 
   return (
     <InfoCard

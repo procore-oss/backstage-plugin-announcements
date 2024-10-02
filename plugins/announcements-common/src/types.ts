@@ -24,6 +24,7 @@ export type AnnouncementsFilters = {
   offset?: number;
   category?: string;
   page?: number;
+  active?: boolean;
 };
 
 export type AnnouncementSignal = {

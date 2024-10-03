@@ -49,11 +49,6 @@ export const CreateAnnouncementPage = (props: CreateAnnouncementPageProps) => {
         }
       }
 
-      console.log({
-        ...request,
-        category: request.category?.toLowerCase(),
-      });
-
       await announcementsApi.createAnnouncement({
         ...request,
         category: request.category?.toLowerCase(),

@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
-
+import makeStyles from '@mui/styles/makeStyles';
 import { Page, Header, Content } from '@backstage/core-components';
-import { makeStyles } from '@material-ui/core/styles';
 import { AnnouncementsContent } from '../AnnouncementsContent';
 import { CategoriesContent } from '../CategoriesContent';
 import Tab from '@mui/material/Tab';
 import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
+import { RequirePermission } from '@backstage/plugin-permission-react';
+import { announcementCreatePermission } from '@procore-oss/backstage-plugin-announcements-common';
 
 const useStyles = makeStyles(() => ({
   tabPanel: {
@@ -15,6 +16,12 @@ const useStyles = makeStyles(() => ({
     paddingRight: '0px',
   },
 }));
+
+type AdminPortalProps = {
+  themeId?: string;
+  title?: string;
+  subtitle?: string;
+};
 
 const AdminPortalContent = () => {
   const classes = useStyles();
@@ -40,16 +47,20 @@ const AdminPortalContent = () => {
 };
 
 /** @public */
-export const AdminPortal = () => {
+export const AdminPortal = (props?: AdminPortalProps) => {
+  const { title, subtitle, themeId } = props ?? {};
+
   return (
-    <Page themeId="tool">
+    <Page themeId={themeId ?? 'tool'}>
       <Header
-        title="Admin Portal for Announcements"
-        subtitle="Manage announcements and categories"
+        title={title ?? 'Admin Portal for Announcements'}
+        subtitle={subtitle ?? 'Manage announcements and categories'}
       />
-      <Content>
-        <AdminPortalContent />
-      </Content>
+      <RequirePermission permission={announcementCreatePermission}>
+        <Content>
+          <AdminPortalContent />
+        </Content>
+      </RequirePermission>
     </Page>
   );
 };

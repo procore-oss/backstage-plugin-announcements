@@ -5,8 +5,8 @@ export const rootRouteRef = createRouteRef({
 });
 
 export const announcementAdminRouteRef = createSubRouteRef({
-  id: 'announcements/create',
-  path: '/create',
+  id: 'announcements/admin',
+  path: '/admin',
   parent: rootRouteRef,
 });
 

@@ -1,53 +1,57 @@
 import React, { useState } from 'react';
-
 import {
   ErrorPanel,
   Progress,
   Table,
   TableColumn,
 } from '@backstage/core-components';
-
-import Typography from '@material-ui/core/Typography';
-import { Theme, makeStyles } from '@material-ui/core/styles';
-
 import {
   CreateCategoryRequest,
   announcementsApiRef,
   useCategories,
 } from '@procore-oss/backstage-plugin-announcements-react';
-import { Category } from '@procore-oss/backstage-plugin-announcements-common';
-import { NewCategoryDialog } from '../../NewCategoryDialog';
+import {
+  announcementCreatePermission,
+  announcementDeletePermission,
+  Category,
+} from '@procore-oss/backstage-plugin-announcements-common';
 import Button from '@mui/material/Button';
-import { Grid } from '@material-ui/core';
 import { CategoriesForm } from '../../CategoriesForm';
 import { useApi, alertApiRef } from '@backstage/core-plugin-api';
-
-const useStyles = makeStyles((theme: Theme) => ({
-  errorBox: {
-    color: theme.palette.status.error,
-    backgroundColor: theme.palette.errorBackground,
-    padding: '1em',
-    margin: '1em',
-    border: `1px solid ${theme.palette.status.error}`,
-  },
-  errorTitle: {
-    width: '100%',
-    fontWeight: 'bold',
-  },
-  successMessage: {
-    background: theme.palette.infoBackground,
-    color: theme.palette.infoText,
-    padding: theme.spacing(2),
-  },
-}));
+import Typography from '@mui/material/Typography';
+import Grid from '@mui/material/Grid';
+import {
+  RequirePermission,
+  usePermission,
+} from '@backstage/plugin-permission-react';
+import IconButton from '@mui/material/IconButton';
+import DeleteIcon from '@mui/icons-material/Delete';
+import { useDeleteCategoryDialogState } from '../../CategoriesPage/useDeleteCategoryDialogState';
+import { ResponseError } from '@backstage/errors';
+import { DeleteCategoryDialog } from '../../CategoriesPage/DeleteCategoryDialog';
 
 export const CategoriesContent = () => {
-  const classes = useStyles();
   const [showNewCategoryForm, setShowNewCategoryForm] = useState(false);
-  const [newCategoryDialogOpen, setNewCategoryDialogOpen] = useState(false);
-  const { categories, loading, error, retry } = useCategories();
+  const { categories, loading, error, retry: refresh } = useCategories();
   const announcementsApi = useApi(announcementsApiRef);
   const alertApi = useApi(alertApiRef);
+
+  const {
+    isOpen: isDeleteDialogOpen,
+    open: openDeleteDialog,
+    close: closeDeleteDialog,
+    category: categoryToDelete,
+  } = useDeleteCategoryDialogState();
+
+  const { loading: loadingCreatePermission, allowed: canCreateCategory } =
+    usePermission({
+      permission: announcementCreatePermission,
+    });
+
+  const { loading: loadingDeletePermission, allowed: canDeleteAnnouncement } =
+    usePermission({
+      permission: announcementDeletePermission,
+    });
 
   const onSubmit = async (request: CreateCategoryRequest) => {
     const { title } = request;
@@ -59,7 +63,7 @@ export const CategoriesContent = () => {
 
       alertApi.post({ message: `${title} created`, severity: 'success' });
 
-      retry();
+      refresh();
     } catch (err) {
       alertApi.post({ message: (err as Error).message, severity: 'error' });
     }
@@ -69,9 +73,25 @@ export const CategoriesContent = () => {
     setShowNewCategoryForm(!showNewCategoryForm);
   };
 
-  const onNewCategoryDialogClose = () => {
-    setNewCategoryDialogOpen(false);
-    retry();
+  const onCancelDelete = () => {
+    closeDeleteDialog();
+  };
+
+  const onConfirmDelete = async () => {
+    closeDeleteDialog();
+
+    try {
+      await announcementsApi.deleteCategory(categoryToDelete!.slug);
+
+      alertApi.post({ message: 'Category deleted.', severity: 'success' });
+    } catch (err) {
+      alertApi.post({
+        message: (err as ResponseError).body.error.message,
+        severity: 'error',
+      });
+    }
+
+    refresh();
   };
 
   if (loading) {
@@ -81,51 +101,72 @@ export const CategoriesContent = () => {
     return <ErrorPanel error={error} />;
   }
 
-  const columns: TableColumn[] = [
+  const columns: TableColumn<Category>[] = [
     {
       title: <Typography>Title</Typography>,
       sorting: true,
       field: 'title',
-      render: (rowData: Category | {}) => (rowData as Category).title,
+      render: rowData => rowData.title,
     },
     {
       title: <Typography>Slug</Typography>,
       sorting: true,
       field: 'slug',
-      render: (rowData: Category | {}) => (rowData as Category).slug,
+      render: rowData => rowData.slug,
+    },
+    {
+      title: <Typography>Actions</Typography>,
+      render: rowData => {
+        return (
+          <>
+            <IconButton
+              aria-label="delete"
+              disabled={loadingDeletePermission || !canDeleteAnnouncement}
+              onClick={() => openDeleteDialog(rowData)}
+            >
+              <DeleteIcon fontSize="small" data-testid="delete-icon" />
+            </IconButton>
+          </>
+        );
+      },
     },
   ];
 
   return (
-    <Grid container>
-      <Grid item xs={12}>
-        <Button variant="contained" onClick={() => onCreateButtonClick()}>
-          {showNewCategoryForm ? 'Close' : 'Create category'}
-        </Button>
-      </Grid>
+    <RequirePermission permission={announcementCreatePermission}>
+      <Grid container>
+        <Grid item xs={12}>
+          <Button
+            disabled={loadingCreatePermission || !canCreateCategory}
+            variant="contained"
+            onClick={() => onCreateButtonClick()}
+          >
+            {showNewCategoryForm ? 'Cancel' : 'Create category'}
+          </Button>
+        </Grid>
 
-      <Grid item xs={12}>
         {showNewCategoryForm && (
-          <CategoriesForm initialData={{} as Category} onSubmit={onSubmit} />
+          <Grid item xs={12}>
+            <CategoriesForm initialData={{} as Category} onSubmit={onSubmit} />
+          </Grid>
         )}
-      </Grid>
 
-      <Grid item xs={12}>
-        <Table
-          options={{ pageSize: 20, search: true }}
-          columns={columns}
-          data={categories ?? []}
-          emptyContent={
-            <Typography className={classes.successMessage}>
-              No categories found
-            </Typography>
-          }
+        <Grid item xs={12}>
+          <Table
+            title="Categories"
+            options={{ pageSize: 20, search: true }}
+            columns={columns}
+            data={categories ?? []}
+            emptyContent={<Typography p={2}>No categories found</Typography>}
+          />
+        </Grid>
+
+        <DeleteCategoryDialog
+          open={isDeleteDialogOpen}
+          onCancel={onCancelDelete}
+          onConfirm={onConfirmDelete}
         />
       </Grid>
-      <NewCategoryDialog
-        open={newCategoryDialogOpen}
-        onClose={onNewCategoryDialogClose}
-      />
-    </Grid>
+    </RequirePermission>
   );
 };

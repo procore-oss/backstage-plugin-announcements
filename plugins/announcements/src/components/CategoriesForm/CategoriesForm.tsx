@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { InfoCard } from '@backstage/core-components';
-import { Button, makeStyles, TextField } from '@material-ui/core';
 import { CreateCategoryRequest } from '@procore-oss/backstage-plugin-announcements-react';
 import { Category } from '@procore-oss/backstage-plugin-announcements-common';
+import makeStyles from '@mui/styles/makeStyles';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
 
 const useStyles = makeStyles(theme => ({
   formRoot: {

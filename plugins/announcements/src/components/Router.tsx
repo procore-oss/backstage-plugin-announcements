@@ -17,7 +17,7 @@ import { AnnouncementPage } from './AnnouncementPage';
 import { CreateAnnouncementPage } from './CreateAnnouncementPage';
 import { EditAnnouncementPage } from './EditAnnouncementPage';
 import { CategoriesPage } from './CategoriesPage';
-import { AdminPortal } from './Admin/AdminPortal/AdminPortal';
+import { AdminPortal } from './Admin';
 
 type RouterProps = {
   themeId?: string;
@@ -65,7 +65,7 @@ export const Router = (props: RouterProps) => {
       <Route
         path={`${announcementAdminRouteRef.path}`}
         element={
-          <RequirePermission permission={announcementUpdatePermission}>
+          <RequirePermission permission={announcementCreatePermission}>
             <AdminPortal />
           </RequirePermission>
         }

@@ -2,10 +2,12 @@ import React from 'react';
 import MDEditor from '@uiw/react-md-editor';
 import { InfoCard } from '@backstage/core-components';
 import { identityApiRef, useApi } from '@backstage/core-plugin-api';
-import { Button, makeStyles, TextField } from '@material-ui/core';
+import makeStyles from '@mui/styles/makeStyles';
 import { CreateAnnouncementRequest } from '@procore-oss/backstage-plugin-announcements-react';
 import { Announcement } from '@procore-oss/backstage-plugin-announcements-common';
 import CategoryInput from './CategoryInput';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
 
 const useStyles = makeStyles(theme => ({
   formRoot: {
@@ -50,12 +52,6 @@ export const AnnouncementForm = ({
         publisher: userIdentity.userEntityRef,
       },
     };
-
-    console.log({
-      userIdentity,
-      form,
-      createRequest,
-    });
 
     await onSubmit(createRequest);
     setLoading(false);

@@ -11,7 +11,6 @@ import {
   catalogApiRef,
   entityRouteRef,
 } from '@backstage/plugin-catalog-react';
-import { Grid, Typography } from '@material-ui/core';
 import {
   announcementsPlugin,
   AnnouncementsPage,
@@ -21,6 +20,8 @@ import {
 import { AnnouncementsTimeline } from '../src/components/AnnouncementsTimeline';
 import { AdminPortal } from '../src/components/Admin';
 import { signalsPlugin } from '@backstage/plugin-signals';
+import Grid from '@mui/material/Grid';
+import Typography from '@mui/material/Typography';
 
 const mockCatalogApi = {
   getEntityByRef: async (entityRef: string) => {

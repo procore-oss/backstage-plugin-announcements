@@ -91,7 +91,7 @@ Nicely display announcements search results:
 // packages/app/src/components/search/SearchPage.tsx
 
 import { AnnouncementSearchResultListItem } from '@procore-oss/backstage-plugin-announcements';
-import RecordVoiceOverIcon from '@material-ui/icons/RecordVoiceOver';
+import RecordVoiceOverIcon from '@mui/icons-material/RecordVoiceOver';
 
 // ...
 <SearchType.Accordion

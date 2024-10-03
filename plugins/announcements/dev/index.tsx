@@ -17,7 +17,7 @@ import {
   AnnouncementsCard,
   NewAnnouncementBanner,
 } from '../src/plugin';
-import { AnnouncementsTimeline } from '../src/components/AnnouncementsTimeline';
+import { AnnouncementsTimeline, AdminPortal } from '../src/components';
 import { signalsPlugin } from '@backstage/plugin-signals';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
@@ -72,6 +72,11 @@ createDevApp()
     element: <AnnouncementsPage cardOptions={{ titleLength: 50 }} />,
     title: 'Announcements',
     path: '/announcements',
+  })
+  .addPage({
+    element: <AdminPortal />,
+    title: 'Admin Portal',
+    path: '/admin',
   })
   .addPage({
     element: <CatalogEntityPage />,

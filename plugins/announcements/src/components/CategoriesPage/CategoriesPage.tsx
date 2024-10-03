@@ -7,7 +7,6 @@ import {
   TableColumn,
   ErrorPanel,
 } from '@backstage/core-components';
-import makeStyles from '@mui/styles/makeStyles';
 import AddIcon from '@mui/icons-material/Add';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { NewCategoryDialog } from '../NewCategoryDialog';
@@ -19,23 +18,9 @@ import { announcementsApiRef } from '@procore-oss/backstage-plugin-announcements
 import { DeleteCategoryDialog } from './DeleteCategoryDialog';
 import { ResponseError } from '@backstage/errors';
 import IconButton from '@mui/material/IconButton';
-import Button from '@mui/material/Button';
-
-const useStyles = makeStyles(theme => ({
-  container: {
-    width: 850,
-  },
-  empty: {
-    padding: theme.spacing(1),
-    display: 'flex',
-    justifyContent: 'center',
-    flexDirection: 'column',
-    textAlign: 'center',
-  },
-}));
+import Typography from '@mui/material/Typography';
 
 const CategoriesTable = () => {
-  const classes = useStyles();
   const [newCategoryDialogOpen, setNewCategoryDialogOpen] = useState(false);
   const announcementsApi = useApi(announcementsApiRef);
   const alertApi = useApi(alertApiRef);
@@ -117,20 +102,7 @@ const CategoriesTable = () => {
             onClick: _event => setNewCategoryDialogOpen(true),
           },
         ]}
-        emptyContent={
-          <div className={classes.empty}>
-            <p>No category was created yet.</p>
-            <p>
-              <Button
-                color="primary"
-                variant="outlined"
-                onClick={() => setNewCategoryDialogOpen(true)}
-              >
-                Add category
-              </Button>
-            </p>
-          </div>
-        }
+        emptyContent={<Typography p={2}>No categories found</Typography>}
       />
       <NewCategoryDialog
         open={newCategoryDialogOpen}

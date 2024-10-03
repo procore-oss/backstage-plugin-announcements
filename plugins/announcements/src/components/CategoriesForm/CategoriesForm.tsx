@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
 import { InfoCard } from '@backstage/core-components';
 import { CreateCategoryRequest } from '@procore-oss/backstage-plugin-announcements-react';
-import { Category } from '@procore-oss/backstage-plugin-announcements-common';
+import {
+  announcementCreatePermission,
+  Category,
+} from '@procore-oss/backstage-plugin-announcements-common';
 import makeStyles from '@mui/styles/makeStyles';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+import { usePermission } from '@backstage/plugin-permission-react';
 
 const useStyles = makeStyles(theme => ({
   formRoot: {
@@ -26,6 +30,11 @@ export const CategoriesForm = ({
   const classes = useStyles();
   const [form, setForm] = useState(initialData);
   const [loading, setLoading] = useState(false);
+
+  const { loading: loadingCreatePermission, allowed: canCreateCategory } =
+    usePermission({
+      permission: announcementCreatePermission,
+    });
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setForm({
@@ -59,7 +68,9 @@ export const CategoriesForm = ({
           variant="contained"
           color="primary"
           type="submit"
-          disabled={loading || !form}
+          disabled={
+            loading || !form || loadingCreatePermission || !canCreateCategory
+          }
         >
           Submit
         </Button>

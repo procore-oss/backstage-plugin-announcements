@@ -89,7 +89,7 @@ export class AnnouncementsDatabase {
   async announcements(
     request: AnnouncementsFilters,
   ): Promise<AnnouncementModelsList> {
-    const { category, offset, max } = request;
+    const { category, offset, max, active } = request;
 
     const countQueryBuilder = this.db<DbAnnouncement>(announcementsTable).count<
       Record<string, number>
@@ -100,7 +100,6 @@ export class AnnouncementsDatabase {
     }
 
     const countResult = await countQueryBuilder.first();
-
     const queryBuilder = this.db<DbAnnouncementWithCategory>(announcementsTable)
       .select(
         'id',
@@ -125,6 +124,9 @@ export class AnnouncementsDatabase {
     if (max) {
       queryBuilder.limit(max);
     }
+    if (active) {
+      queryBuilder.where('active', active);
+    }
 
     const results = (await queryBuilder.select()).map(
       DBToAnnouncementWithCategory,
@@ -140,11 +142,8 @@ export class AnnouncementsDatabase {
      * based on the results we have, as the count query will not
      * take into account the filter (i.e., limit and offset).
      */
-    if (max || offset) {
+    if (max || offset || active) {
       count = results.length;
-    }
-    if (request.active) {
-      queryBuilder.where('active', true);
     }
 
     return {

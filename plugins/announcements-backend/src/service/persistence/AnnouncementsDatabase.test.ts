@@ -318,6 +318,7 @@ describe('AnnouncementsDatabase', () => {
         excerpt: 'excerpt3',
         body: 'body3',
         created_at: DateTime.fromISO('2023-10-26T15:28:08.539Z'),
+        active: true,
       });
 
       await store.insertAnnouncement({
@@ -327,6 +328,7 @@ describe('AnnouncementsDatabase', () => {
         excerpt: 'excerpt4',
         body: 'body4',
         created_at: DateTime.fromISO('2023-10-26T15:28:08.539Z'),
+        active: true,
       });
 
       const announcements = await store.announcements({
@@ -342,6 +344,78 @@ describe('AnnouncementsDatabase', () => {
             title: 'title4',
             excerpt: 'excerpt4',
             body: 'body4',
+            category: undefined,
+            created_at: timestampToDateTime('2023-10-26T15:28:08.539Z'),
+            active: 1,
+          },
+        ],
+      });
+    });
+
+    it('active', async () => {
+      await store.insertAnnouncement({
+        id: 'id',
+        publisher: 'publisher',
+        title: 'title',
+        excerpt: 'excerpt',
+        body: 'body',
+        created_at: DateTime.fromISO('2023-10-26T15:28:08.539Z'),
+        active: false,
+      });
+
+      await store.insertAnnouncement({
+        id: 'id2',
+        publisher: 'publisher2',
+        title: 'title2',
+        excerpt: 'excerpt2',
+        body: 'body2',
+        created_at: DateTime.fromISO('2023-10-26T15:28:08.539Z'),
+        active: true,
+      });
+
+      await store.insertAnnouncement({
+        id: 'id3',
+        publisher: 'publisher3',
+        title: 'title3',
+        excerpt: 'excerpt3',
+        body: 'body3',
+        created_at: DateTime.fromISO('2023-10-26T15:28:08.539Z'),
+        active: false,
+      });
+
+      await store.insertAnnouncement({
+        id: 'id4',
+        publisher: 'publisher4',
+        title: 'title4',
+        excerpt: 'excerpt4',
+        body: 'body4',
+        created_at: DateTime.fromISO('2023-10-26T15:28:08.539Z'),
+        active: true,
+      });
+
+      const announcements = await store.announcements({
+        active: true,
+      });
+
+      expect(announcements).toEqual({
+        count: 2,
+        results: [
+          {
+            id: 'id4',
+            publisher: 'publisher4',
+            title: 'title4',
+            excerpt: 'excerpt4',
+            body: 'body4',
+            category: undefined,
+            created_at: timestampToDateTime('2023-10-26T15:28:08.539Z'),
+            active: 1,
+          },
+          {
+            id: 'id2',
+            publisher: 'publisher2',
+            title: 'title2',
+            excerpt: 'excerpt2',
+            body: 'body2',
             category: undefined,
             created_at: timestampToDateTime('2023-10-26T15:28:08.539Z'),
             active: 1,

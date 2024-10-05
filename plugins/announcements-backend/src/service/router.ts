@@ -223,6 +223,7 @@ export async function createRouter(
             body: req.body.body,
             publisher: req.body.publisher,
             category: req.body.category,
+            active: req.body.active,
           },
         });
 

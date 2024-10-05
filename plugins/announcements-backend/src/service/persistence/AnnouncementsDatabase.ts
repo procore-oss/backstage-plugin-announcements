@@ -65,23 +65,6 @@ const announcementUpsertToDB = (
 const DBToAnnouncementWithCategory = (
   announcementDb: DbAnnouncementWithCategory,
 ): AnnouncementModel => {
-  const model = {
-    id: announcementDb.id,
-    category:
-      announcementDb.category && announcementDb.category_title
-        ? {
-            slug: announcementDb.category,
-            title: announcementDb.category_title,
-          }
-        : undefined,
-    title: announcementDb.title,
-    excerpt: announcementDb.excerpt,
-    body: announcementDb.body,
-    publisher: announcementDb.publisher,
-    created_at: timestampToDateTime(announcementDb.created_at),
-    active: announcementDb.active ?? false,
-  };
-
   return {
     id: announcementDb.id,
     category:
@@ -181,11 +164,6 @@ export class AnnouncementsDatabase {
   async insertAnnouncement(
     announcement: AnnouncementUpsert,
   ): Promise<AnnouncementModel> {
-    const model = {
-      ...announcement,
-      active: announcement.active ?? false,
-    };
-
     await this.db<DbAnnouncement>(announcementsTable).insert(
       announcementUpsertToDB(announcement),
     );

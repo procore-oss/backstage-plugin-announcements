@@ -61,6 +61,7 @@ describe('AnnouncementsDatabase', () => {
       body: 'body',
       category: undefined,
       created_at: timestampToDateTime('2023-10-26T15:28:08.539Z'),
+      active: 1,
     });
   });
 
@@ -88,6 +89,7 @@ describe('AnnouncementsDatabase', () => {
           body: 'body',
           category: undefined,
           created_at: timestampToDateTime('2023-10-26T15:28:08.539Z'),
+          active: 1,
         },
       ],
     });
@@ -111,7 +113,7 @@ describe('AnnouncementsDatabase', () => {
       excerpt: 'excerpt2',
       body: 'body2',
       created_at: DateTime.fromISO('2023-10-26T15:28:08.539Z'),
-      active: true,
+      active: false,
     });
 
     const announcements = await store.announcements({});
@@ -127,6 +129,7 @@ describe('AnnouncementsDatabase', () => {
           body: 'body2',
           category: undefined,
           created_at: timestampToDateTime('2023-10-26T15:28:08.539Z'),
+          active: 0,
         },
       ],
     });
@@ -226,6 +229,7 @@ describe('AnnouncementsDatabase', () => {
               title: 'Category',
             },
             created_at: timestampToDateTime('2023-10-26T15:28:08.539Z'),
+            active: 1,
           },
           {
             id: 'id',
@@ -238,6 +242,7 @@ describe('AnnouncementsDatabase', () => {
               title: 'Category',
             },
             created_at: timestampToDateTime('2023-10-26T15:28:08.539Z'),
+            active: 1,
           },
         ],
       });
@@ -279,6 +284,7 @@ describe('AnnouncementsDatabase', () => {
             body: 'body',
             category: undefined,
             created_at: timestampToDateTime('2023-10-26T15:28:08.539Z'),
+            active: 1,
           },
         ],
       });
@@ -320,6 +326,7 @@ describe('AnnouncementsDatabase', () => {
             body: 'body2',
             category: undefined,
             created_at: timestampToDateTime('2023-10-26T15:28:08.539Z'),
+            active: 1,
           },
         ],
       });

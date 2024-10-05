@@ -124,16 +124,8 @@ export class AnnouncementsDatabase {
       queryBuilder.limit(request.max);
     }
     if (request.active) {
-      console.log({
-        status: request.active,
-      });
       queryBuilder.where('active', true);
     }
-
-    const results = await queryBuilder.select();
-    const refined = results.map(DBToAnnouncementWithCategory);
-
-    console.log({ results, refined });
 
     return {
       count:

@@ -109,8 +109,6 @@ export async function createRouter(
         query: { category, max, page, active },
       } = req;
 
-      console.log({ category, max, page, active });
-
       const results = await persistenceContext.announcementsStore.announcements(
         {
           category,
@@ -119,8 +117,6 @@ export async function createRouter(
           active,
         },
       );
-
-      console.log({ results, count: results.count });
 
       return res.json(results);
     },

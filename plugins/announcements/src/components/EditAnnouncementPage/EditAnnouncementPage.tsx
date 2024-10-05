@@ -6,13 +6,13 @@ import {
   useApi,
   useRouteRefParams,
 } from '@backstage/core-plugin-api';
-import { Alert } from '@material-ui/lab';
 import { AnnouncementForm } from '../AnnouncementForm';
 import { announcementEditRouteRef } from '../../routes';
 import {
   announcementsApiRef,
   CreateAnnouncementRequest,
 } from '@procore-oss/backstage-plugin-announcements-react';
+import Alert from '@mui/material/Alert';
 
 type EditAnnouncementPageProps = {
   themeId: string;
@@ -33,12 +33,6 @@ export const EditAnnouncementPage = (props: EditAnnouncementPageProps) => {
 
   const onSubmit = async (request: CreateAnnouncementRequest) => {
     try {
-      console.log({
-        msg: 'onSubmit',
-        func: 'await announcementsApi.updateAnnouncement(id, request)',
-        id,
-        request
-      })
       await announcementsApi.updateAnnouncement(id, request);
       alertApi.post({ message: 'Announcement updated.', severity: 'success' });
     } catch (err) {

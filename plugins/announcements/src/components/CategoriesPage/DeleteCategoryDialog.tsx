@@ -1,5 +1,8 @@
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogTitle from '@mui/material/DialogTitle';
 import React from 'react';
-import { Button, Dialog, DialogActions, DialogTitle } from '@material-ui/core';
 
 type DeleteCategoryDialogProps = {
   open: boolean;
@@ -13,11 +16,8 @@ export const DeleteCategoryDialog = (props: DeleteCategoryDialogProps) => {
   return (
     <Dialog open={open} onClose={onCancel}>
       <DialogTitle>Are you sure you want to delete this category?</DialogTitle>
-
       <DialogActions>
-        <Button onClick={onCancel} color="default">
-          Cancel
-        </Button>
+        <Button onClick={onCancel}>Cancel</Button>
 
         <Button onClick={onConfirm} color="secondary">
           Delete

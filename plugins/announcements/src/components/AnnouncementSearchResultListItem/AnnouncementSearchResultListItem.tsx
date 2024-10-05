@@ -6,14 +6,12 @@ import {
   ResultHighlight,
 } from '@backstage/plugin-search-common';
 import { HighlightedSearchResultText } from '@backstage/plugin-search-react';
-import {
-  Divider,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
-  makeStyles,
-} from '@material-ui/core';
-import RecordVoiceOverIcon from '@material-ui/icons/RecordVoiceOver';
+import makeStyles from '@mui/styles/makeStyles';
+import Divider from '@mui/material/Divider';
+import ListItem from '@mui/material/ListItem';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import RecordVoiceOverIcon from '@mui/icons-material/RecordVoiceOver';
 
 const useStyles = makeStyles({
   createdAt: {

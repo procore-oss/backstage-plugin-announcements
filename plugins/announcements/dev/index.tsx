@@ -11,15 +11,16 @@ import {
   catalogApiRef,
   entityRouteRef,
 } from '@backstage/plugin-catalog-react';
-import { Grid, Typography } from '@material-ui/core';
 import {
   announcementsPlugin,
   AnnouncementsPage,
   AnnouncementsCard,
   NewAnnouncementBanner,
 } from '../src/plugin';
-import { AnnouncementsTimeline } from '../src/components/AnnouncementsTimeline';
+import { AnnouncementsTimeline, AdminPortal } from '../src/components';
 import { signalsPlugin } from '@backstage/plugin-signals';
+import Grid from '@mui/material/Grid';
+import Typography from '@mui/material/Typography';
 
 const mockCatalogApi = {
   getEntityByRef: async (entityRef: string) => {
@@ -71,6 +72,11 @@ createDevApp()
     element: <AnnouncementsPage cardOptions={{ titleLength: 50 }} />,
     title: 'Announcements',
     path: '/announcements',
+  })
+  .addPage({
+    element: <AdminPortal />,
+    title: 'Admin Portal',
+    path: '/admin',
   })
   .addPage({
     element: <CatalogEntityPage />,

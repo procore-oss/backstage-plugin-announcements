@@ -6,6 +6,7 @@ import {
   announcementUpdatePermission,
 } from '@procore-oss/backstage-plugin-announcements-common';
 import {
+  announcementAdminRouteRef,
   announcementCreateRouteRef,
   announcementEditRouteRef,
   announcementViewRouteRef,
@@ -16,6 +17,7 @@ import { AnnouncementPage } from './AnnouncementPage';
 import { CreateAnnouncementPage } from './CreateAnnouncementPage';
 import { EditAnnouncementPage } from './EditAnnouncementPage';
 import { CategoriesPage } from './CategoriesPage';
+import { AdminPortal } from './Admin';
 
 type RouterProps = {
   themeId?: string;
@@ -57,6 +59,14 @@ export const Router = (props: RouterProps) => {
         element={
           <RequirePermission permission={announcementUpdatePermission}>
             <EditAnnouncementPage {...propsWithDefaults} />
+          </RequirePermission>
+        }
+      />
+      <Route
+        path={`${announcementAdminRouteRef.path}`}
+        element={
+          <RequirePermission permission={announcementCreatePermission}>
+            <AdminPortal />
           </RequirePermission>
         }
       />

@@ -1,5 +1,11 @@
 # @procore-oss/backstage-plugin-announcements-react
 
+## 0.4.6
+
+### Patch Changes
+
+- 58a4cc2: Migrate from Material UI v4 to v5.
+
 ## 0.4.5
 
 ### Patch Changes

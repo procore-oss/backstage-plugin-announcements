@@ -36,6 +36,10 @@ Find [installation instructions](./docs/index.md#installation) in our documentat
 
 ![Announcements search results](./docs/images/announcements_search.png)
 
+### Admin Portal
+
+![Announcements admin portal](./docs/images/announcements_admin_portal.png)
+
 ## License
 
 This library is under the [MIT](LICENSE.md) license.

@@ -1,5 +1,50 @@
 # @procore-oss/backstage-plugin-announcements
 
+## 0.11.1
+
+### Patch Changes
+
+- aad9d99: fix: `AdminPortal` was not available for export.
+
+  Taking the opportunity to update `AdminPortal` to `AnnouncementsAdminPortal` and make available for export
+
+  ```tsx
+    import { AnnouncementsAdminPortal } from '@procore-oss/backstage-plugin-announcements';
+
+    // default
+    <AnnouncementsAdminPortal />
+
+    // supports optional props
+    <AnnouncementsAdminPortal
+      title='my title'
+      subtitle='my subtitle'
+      themeId='my theme'
+    >
+  ```
+
+## 0.11.0
+
+### Minor Changes
+
+- 46b4b23: New announcement portal dedicated to managing annoucements and categories.
+
+  ```tsx
+  import {AdminPortal} from '@procore-oss/backstage-plugin-announcements';
+
+  // default
+  <AdminPortal />
+
+  // supports optional props
+  <AdminPortal title='my title' subtitle='my subtitle' themeId='my theme'>
+
+  ```
+
+### Patch Changes
+
+- 58a4cc2: Migrate from Material UI v4 to v5.
+- Updated dependencies [58a4cc2]
+  - @procore-oss/backstage-plugin-announcements-react@0.4.6
+
 ## 0.10.5
 
 ### Patch Changes

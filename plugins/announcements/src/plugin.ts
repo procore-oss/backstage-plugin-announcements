@@ -51,6 +51,14 @@ export const AnnouncementsPage = announcementsPlugin.provide(
   }),
 );
 
+export const AnnouncementsAdminPortal = announcementsPlugin.provide(
+  createRoutableExtension({
+    name: 'AnnouncementsAdminPortal',
+    component: () => import('./components/Admin').then(m => m.AdminPortal),
+    mountPoint: rootRouteRef,
+  }),
+);
+
 export const AnnouncementsTimeline = announcementsPlugin.provide(
   createComponentExtension({
     name: 'AnnouncementsTimeline',

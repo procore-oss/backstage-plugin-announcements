@@ -259,7 +259,7 @@ describe('AnnouncementsDatabase', () => {
       });
 
       expect(announcements).toEqual({
-        count: 2,
+        count: 1,
         results: [
           {
             id: 'id',
@@ -293,19 +293,37 @@ describe('AnnouncementsDatabase', () => {
         created_at: DateTime.fromISO('2023-10-26T15:28:08.539Z'),
       });
 
+      await store.insertAnnouncement({
+        id: 'id3',
+        publisher: 'publisher3',
+        title: 'title3',
+        excerpt: 'excerpt3',
+        body: 'body3',
+        created_at: DateTime.fromISO('2023-10-26T15:28:08.539Z'),
+      });
+
+      await store.insertAnnouncement({
+        id: 'id4',
+        publisher: 'publisher4',
+        title: 'title4',
+        excerpt: 'excerpt4',
+        body: 'body4',
+        created_at: DateTime.fromISO('2023-10-26T15:28:08.539Z'),
+      });
+
       const announcements = await store.announcements({
         max: 1,
       });
 
       expect(announcements).toEqual({
-        count: 2,
+        count: 1,
         results: [
           {
-            id: 'id2',
-            publisher: 'publisher2',
-            title: 'title2',
-            excerpt: 'excerpt2',
-            body: 'body2',
+            id: 'id4',
+            publisher: 'publisher4',
+            title: 'title4',
+            excerpt: 'excerpt4',
+            body: 'body4',
             category: undefined,
             created_at: timestampToDateTime('2023-10-26T15:28:08.539Z'),
           },

@@ -1,5 +1,27 @@
 # @procore-oss/backstage-plugin-announcements
 
+## 0.11.1
+
+### Patch Changes
+
+- aad9d99: fix: `AdminPortal` was not available for export.
+
+  Taking the opportunity to update `AdminPortal` to `AnnouncementsAdminPortal` and make available for export
+
+  ```tsx
+    import { AnnouncementsAdminPortal } from '@procore-oss/backstage-plugin-announcements';
+
+    // default
+    <AnnouncementsAdminPortal />
+
+    // supports optional props
+    <AnnouncementsAdminPortal
+      title='my title'
+      subtitle='my subtitle'
+      themeId='my theme'
+    >
+  ```
+
 ## 0.11.0
 
 ### Minor Changes

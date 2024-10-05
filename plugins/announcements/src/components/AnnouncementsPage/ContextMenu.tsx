@@ -14,6 +14,7 @@ import {
   announcementAdminRouteRef,
   categoriesListRouteRef,
 } from '../../routes';
+import Box from '@mui/material/Box';
 
 const useStyles = makeStyles({
   button: {
@@ -37,7 +38,7 @@ export function ContextMenu() {
   };
 
   return (
-    <>
+    <Box data-testid="announcements-context-menu">
       <IconButton
         aria-label="more"
         aria-controls="long-menu"
@@ -72,6 +73,6 @@ export function ContextMenu() {
           </MenuItem>
         </MenuList>
       </Popover>
-    </>
+    </Box>
   );
 }

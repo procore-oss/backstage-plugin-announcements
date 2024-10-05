@@ -312,6 +312,7 @@ type AnnouncementsPageProps = {
   category?: string;
   buttonOptions?: AnnouncementCreateButtonProps;
   cardOptions?: AnnouncementCardProps;
+  hideContextMenu?: boolean;
 };
 
 export const AnnouncementsPage = (props: AnnouncementsPageProps) => {
@@ -321,10 +322,12 @@ export const AnnouncementsPage = (props: AnnouncementsPageProps) => {
   const { loading: loadingCreatePermission, allowed: canCreate } =
     usePermission({ permission: announcementCreatePermission });
 
+  const { hideContextMenu } = props;
+
   return (
     <Page themeId={props.themeId}>
       <Header title={props.title} subtitle={props.subtitle}>
-        <ContextMenu />
+        {!hideContextMenu && <ContextMenu />}
       </Header>
 
       <Content>

@@ -24,6 +24,7 @@ type RouterProps = {
   title?: string;
   subtitle?: string;
   category?: string;
+  hideContextMenu?: boolean;
   cardOptions?: {
     titleLength: number | undefined;
   };

@@ -115,9 +115,12 @@ type NewAnnouncementBannerProps = {
   variant?: 'block' | 'floating';
   max?: number;
   category?: string;
+  active?: boolean;
 };
 
 export const NewAnnouncementBanner = (props: NewAnnouncementBannerProps) => {
+  const { max, category, active, variant } = props;
+
   const announcementsApi = useApi(announcementsApiRef);
 
   const [signaledAnnouncement, setSignaledAnnouncement] = useState<
@@ -125,8 +128,9 @@ export const NewAnnouncementBanner = (props: NewAnnouncementBannerProps) => {
   >();
 
   const { announcements, loading, error } = useAnnouncements({
-    max: props.max || 1,
-    category: props.category,
+    max: max ?? 1,
+    category,
+    active,
   });
   const lastSeen = announcementsApi.lastSeenDate();
 
@@ -170,7 +174,7 @@ export const NewAnnouncementBanner = (props: NewAnnouncementBannerProps) => {
         <AnnouncementBanner
           key={announcement.id}
           announcement={announcement}
-          variant={props.variant}
+          variant={variant}
         />
       ))}
     </>

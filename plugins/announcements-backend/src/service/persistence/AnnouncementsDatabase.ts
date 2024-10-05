@@ -79,7 +79,7 @@ const DBToAnnouncementWithCategory = (
     body: announcementDb.body,
     publisher: announcementDb.publisher,
     created_at: timestampToDateTime(announcementDb.created_at),
-    active: announcementDb.active ?? false,
+    active: announcementDb.active,
   };
 };
 
@@ -123,6 +123,17 @@ export class AnnouncementsDatabase {
     if (request.max) {
       queryBuilder.limit(request.max);
     }
+    if (request.active) {
+      console.log({
+        status: request.active,
+      });
+      queryBuilder.where('active', true);
+    }
+
+    const results = await queryBuilder.select();
+    const refined = results.map(DBToAnnouncementWithCategory);
+
+    console.log({ results, refined });
 
     return {
       count:

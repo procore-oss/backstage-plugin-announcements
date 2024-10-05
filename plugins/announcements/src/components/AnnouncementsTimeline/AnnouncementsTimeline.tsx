@@ -37,6 +37,11 @@ export type AnnouncementsTimelineProps = {
    * Default: '425px'
    */
   timelineMinWidth?: string;
+  /**
+   * Whether to only show active announcements.
+   * Default: false
+   */
+  hideInactive?: boolean;
 };
 
 /**
@@ -55,6 +60,11 @@ const DEFAULT_TIMELINE_WIDTH = '425px';
 const DEFAULT_RESULTS_MAX = 10;
 
 /**
+ * Default setting for only displaying active annoucenments.
+ */
+const DEFAULT_INACTIVE = false;
+
+/**
  * Timeline of most recent announcements.
  *
  * @param options - The options for the announcements timeline.
@@ -64,11 +74,13 @@ export const AnnouncementsTimeline = ({
   maxResults = DEFAULT_RESULTS_MAX,
   timelineAlignment = DEFAULT_TIMELINE_ALIGNMENT,
   timelineMinWidth = DEFAULT_TIMELINE_WIDTH,
+  hideInactive = DEFAULT_INACTIVE,
 }: AnnouncementsTimelineProps) => {
   const viewAnnouncementLink = useRouteRef(announcementViewRouteRef);
 
   const { announcements, loading, error } = useAnnouncements({
     max: maxResults,
+    active: hideInactive,
   });
 
   if (loading) {

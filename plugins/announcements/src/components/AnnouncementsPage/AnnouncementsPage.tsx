@@ -206,10 +206,12 @@ const AnnouncementsGrid = ({
   maxPerPage,
   category,
   cardTitleLength,
+  active,
 }: {
   maxPerPage: number;
   category?: string;
   cardTitleLength?: number;
+  active?: boolean;
 }) => {
   const classes = useStyles();
   const announcementsApi = useApi(announcementsApiRef);
@@ -230,6 +232,7 @@ const AnnouncementsGrid = ({
       max: maxPerPage,
       page: page,
       category,
+      active,
     },
     { dependencies: [maxPerPage, page, category] },
   );
@@ -304,7 +307,7 @@ type AnnouncementCreateButtonProps = {
   name?: string;
 };
 
-type AnnouncementsPageProps = {
+export type AnnouncementsPageProps = {
   themeId: string;
   title: string;
   subtitle?: ReactNode;
@@ -312,6 +315,7 @@ type AnnouncementsPageProps = {
   category?: string;
   buttonOptions?: AnnouncementCreateButtonProps;
   cardOptions?: AnnouncementCardProps;
+  hideInactive?: boolean;
 };
 
 export const AnnouncementsPage = (props: AnnouncementsPageProps) => {
@@ -320,6 +324,8 @@ export const AnnouncementsPage = (props: AnnouncementsPageProps) => {
   const newAnnouncementLink = useRouteRef(announcementCreateRouteRef);
   const { loading: loadingCreatePermission, allowed: canCreate } =
     usePermission({ permission: announcementCreatePermission });
+
+  const active = props.hideInactive ? true : false;
 
   return (
     <Page themeId={props.themeId}>
@@ -347,6 +353,7 @@ export const AnnouncementsPage = (props: AnnouncementsPageProps) => {
           maxPerPage={props.maxPerPage ?? 10}
           category={props.category ?? queryParams.get('category') ?? undefined}
           cardTitleLength={props.cardOptions?.titleLength}
+          active={active}
         />
       </Content>
     </Page>

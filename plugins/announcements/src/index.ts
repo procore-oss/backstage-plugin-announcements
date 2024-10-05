@@ -15,3 +15,5 @@ export type AnnouncementsApi = AnnouncementsApi_;
  * @deprecated Use `announcementsApiRef` from `@procore-oss/backstage-plugin-announcements-react` instead
  */
 export const announcementsApiRef = announcementsApiRef_;
+
+export { AnnouncementsContent } from './components';

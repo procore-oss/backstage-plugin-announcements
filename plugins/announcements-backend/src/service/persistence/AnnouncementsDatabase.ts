@@ -89,12 +89,14 @@ export class AnnouncementsDatabase {
   async announcements(
     request: AnnouncementsFilters,
   ): Promise<AnnouncementModelsList> {
+    const { category, offset, max } = request;
+
     const countQueryBuilder = this.db<DbAnnouncement>(announcementsTable).count<
       Record<string, number>
     >('id', { as: 'total' });
 
-    if (request.category) {
-      countQueryBuilder.where('category', request.category);
+    if (category) {
+      countQueryBuilder.where('category', category);
     }
 
     const countResult = await countQueryBuilder.first();
@@ -114,25 +116,40 @@ export class AnnouncementsDatabase {
       .orderBy('created_at', 'desc')
       .leftJoin('categories', 'announcements.category', 'categories.slug');
 
-    if (request.category) {
-      queryBuilder.where('category', request.category);
+    if (category) {
+      queryBuilder.where('category', category);
     }
-    if (request.offset) {
-      queryBuilder.offset(request.offset);
+    if (offset) {
+      queryBuilder.offset(offset);
     }
-    if (request.max) {
-      queryBuilder.limit(request.max);
+    if (max) {
+      queryBuilder.limit(max);
+    }
+
+    const results = (await queryBuilder.select()).map(
+      DBToAnnouncementWithCategory,
+    );
+
+    let count =
+      countResult && countResult.total
+        ? parseInt(countResult.total.toString(), 10)
+        : 0;
+
+    /*
+     * If we have a filter, we need to calculate the count
+     * based on the results we have, as the count query will not
+     * take into account the filter (i.e., limit and offset).
+     */
+    if (max || offset) {
+      count = results.length;
     }
     if (request.active) {
       queryBuilder.where('active', true);
     }
 
     return {
-      count:
-        countResult && countResult.total
-          ? parseInt(countResult.total.toString(), 10)
-          : 0,
-      results: (await queryBuilder.select()).map(DBToAnnouncementWithCategory),
+      count,
+      results,
     };
   }
 

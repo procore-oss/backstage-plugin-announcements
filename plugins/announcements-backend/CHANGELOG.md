@@ -1,5 +1,33 @@
 # @procore-oss/backstage-plugin-announcements-backend
 
+## 0.10.4
+
+### Patch Changes
+
+- a16f8f9: Fixes an issue with the announcements count returning the incorrect value when filters are applied.
+
+  For example, if there are 2 total announcements in the database, and you request a `max` of 1 announcement, the count would still return 2.
+
+  ```ts
+  // before
+  {
+    count: 2,
+    announcements: [mostRecentAnnouncement]
+  }
+
+
+  // after
+  {
+    count: 1,
+    announcements: [mostRecentAnnouncement]
+  }
+  ```
+
+- cfda065: Adds the ability to activate and deactivate an announcement. This should not be a breaking change. All existing announcements will backfill to `active: true`.
+- Updated dependencies [cfda065]
+  - @procore-oss/backstage-plugin-announcements-common@0.2.8
+  - @procore-oss/backstage-plugin-search-backend-module-announcements@0.3.3
+
 ## 0.10.3
 
 ### Patch Changes

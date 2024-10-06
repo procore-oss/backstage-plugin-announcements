@@ -1,5 +1,21 @@
 # @procore-oss/backstage-plugin-announcements-common
 
+## 0.2.8
+
+### Patch Changes
+
+- cfda065: Adds the ability to filter to only show active announcements
+
+  This should not be a breaking change. The `<AnnouncementsPage />` component now accepts an optional `hideInactive` prop that will hide inactive announcements. The default behavior is to show all announcements, or in other words, `hideInactive: false`.
+
+  ```tsx
+   <AnnouncementsPage
+    title="Announcements"
+    ...
+    hideInactive
+  />
+  ```
+
 ## 0.2.7
 
 ### Patch Changes

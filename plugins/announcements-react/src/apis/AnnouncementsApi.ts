@@ -16,6 +16,7 @@ export interface AnnouncementsApi {
     max?: number;
     page?: number;
     category?: string;
+    active?: boolean;
   }): Promise<AnnouncementsList>;
   announcementByID(id: string): Promise<Announcement>;
 

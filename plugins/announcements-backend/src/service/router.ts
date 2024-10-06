@@ -38,6 +38,7 @@ interface AnnouncementRequest {
   title: string;
   excerpt: string;
   body: string;
+  active: boolean;
 }
 
 interface CategoryRequest {
@@ -52,6 +53,13 @@ type RouterOptions = {
   persistenceContext: PersistenceContext;
   events?: EventsService;
   signals?: SignalsService;
+};
+
+type GetAnnouncementsQueryParams = {
+  category?: string;
+  page?: number;
+  max?: number;
+  active?: boolean;
 };
 
 export async function createRouter(
@@ -96,22 +104,17 @@ export async function createRouter(
    ****************/
   router.get(
     '/announcements',
-    async (
-      req: Request<
-        {},
-        {},
-        {},
-        { category?: string; page?: number; max?: number }
-      >,
-      res,
-    ) => {
+    async (req: Request<{}, {}, {}, GetAnnouncementsQueryParams>, res) => {
+      const {
+        query: { category, max, page, active },
+      } = req;
+
       const results = await persistenceContext.announcementsStore.announcements(
         {
-          category: req.query.category,
-          max: req.query.max,
-          offset: req.query.page
-            ? (req.query.page - 1) * (req.query.max ?? 10)
-            : undefined,
+          category,
+          max,
+          offset: page ? (page - 1) * (max ?? 10) : undefined,
+          active,
         },
       );
 
@@ -205,10 +208,13 @@ export async function createRouter(
         throw new NotAllowedError('Unauthorized');
       }
 
+      const {
+        params: { id },
+        body: { title, excerpt, body, publisher, category, active },
+      } = req;
+
       const initialAnnouncement =
-        await persistenceContext.announcementsStore.announcementByID(
-          req.params.id,
-        );
+        await persistenceContext.announcementsStore.announcementByID(id);
       if (!initialAnnouncement) {
         return res.status(404).end();
       }
@@ -217,11 +223,12 @@ export async function createRouter(
         await persistenceContext.announcementsStore.updateAnnouncement({
           ...initialAnnouncement,
           ...{
-            title: req.body.title,
-            excerpt: req.body.excerpt,
-            body: req.body.body,
-            publisher: req.body.publisher,
-            category: req.body.category,
+            title,
+            excerpt,
+            body,
+            publisher,
+            category,
+            active,
           },
         });
 

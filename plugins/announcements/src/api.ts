@@ -88,10 +88,12 @@ export class AnnouncementsClient implements AnnouncementsApi {
     max,
     page,
     category,
+    active,
   }: {
     max?: number;
     page?: number;
     category?: string;
+    active?: boolean;
   }): Promise<AnnouncementsList> {
     const params = new URLSearchParams();
     if (category) {
@@ -102,6 +104,9 @@ export class AnnouncementsClient implements AnnouncementsApi {
     }
     if (page) {
       params.append('page', page.toString());
+    }
+    if (active) {
+      params.append('active', active.toString());
     }
 
     return this.fetch<AnnouncementsList>(`/announcements?${params.toString()}`);

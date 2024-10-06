@@ -206,10 +206,12 @@ const AnnouncementsGrid = ({
   maxPerPage,
   category,
   cardTitleLength,
+  active,
 }: {
   maxPerPage: number;
   category?: string;
   cardTitleLength?: number;
+  active?: boolean;
 }) => {
   const classes = useStyles();
   const announcementsApi = useApi(announcementsApiRef);
@@ -230,6 +232,7 @@ const AnnouncementsGrid = ({
       max: maxPerPage,
       page: page,
       category,
+      active,
     },
     { dependencies: [maxPerPage, page, category] },
   );
@@ -304,7 +307,7 @@ type AnnouncementCreateButtonProps = {
   name?: string;
 };
 
-type AnnouncementsPageProps = {
+export type AnnouncementsPageProps = {
   themeId: string;
   title: string;
   subtitle?: ReactNode;
@@ -313,6 +316,7 @@ type AnnouncementsPageProps = {
   buttonOptions?: AnnouncementCreateButtonProps;
   cardOptions?: AnnouncementCardProps;
   hideContextMenu?: boolean;
+  hideInactive?: boolean;
 };
 
 export const AnnouncementsPage = (props: AnnouncementsPageProps) => {
@@ -322,11 +326,21 @@ export const AnnouncementsPage = (props: AnnouncementsPageProps) => {
   const { loading: loadingCreatePermission, allowed: canCreate } =
     usePermission({ permission: announcementCreatePermission });
 
-  const { hideContextMenu } = props;
+  const {
+    hideContextMenu,
+    hideInactive,
+    themeId,
+    title,
+    subtitle,
+    buttonOptions,
+    maxPerPage,
+    category,
+    cardOptions,
+  } = props;
 
   return (
-    <Page themeId={props.themeId}>
-      <Header title={props.title} subtitle={props.subtitle}>
+    <Page themeId={themeId}>
+      <Header title={title} subtitle={subtitle}>
         {!hideContextMenu && <ContextMenu />}
       </Header>
 
@@ -339,17 +353,16 @@ export const AnnouncementsPage = (props: AnnouncementsPageProps) => {
               color="primary"
               variant="contained"
             >
-              {props.buttonOptions
-                ? `New ${props.buttonOptions.name}`
-                : 'New announcement'}
+              {buttonOptions ? `New ${buttonOptions.name}` : 'New announcement'}
             </LinkButton>
           )}
         </ContentHeader>
 
         <AnnouncementsGrid
-          maxPerPage={props.maxPerPage ?? 10}
-          category={props.category ?? queryParams.get('category') ?? undefined}
-          cardTitleLength={props.cardOptions?.titleLength}
+          maxPerPage={maxPerPage ?? 10}
+          category={category ?? queryParams.get('category') ?? undefined}
+          cardTitleLength={cardOptions?.titleLength}
+          active={hideInactive ? true : false}
         />
       </Content>
     </Page>

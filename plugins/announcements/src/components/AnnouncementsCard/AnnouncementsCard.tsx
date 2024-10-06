@@ -36,6 +36,7 @@ type AnnouncementsCardOpts = {
   title?: string;
   max?: number;
   category?: string;
+  active?: boolean;
   variant?: InfoCardVariants;
 };
 
@@ -43,6 +44,7 @@ export const AnnouncementsCard = ({
   title,
   max,
   category,
+  active,
   variant = 'gridItem',
 }: AnnouncementsCardOpts) => {
   const classes = useStyles();
@@ -55,6 +57,7 @@ export const AnnouncementsCard = ({
   const { announcements, loading, error } = useAnnouncements({
     max: max || 5,
     category,
+    active,
   });
 
   const { announcementCreatePermission } = announcementEntityPermissions;

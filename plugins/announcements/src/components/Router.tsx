@@ -12,7 +12,7 @@ import {
   announcementViewRouteRef,
   categoriesListRouteRef,
 } from '../routes';
-import { AnnouncementsPage } from './AnnouncementsPage';
+import { AnnouncementsPage, AnnouncementsPageProps } from './AnnouncementsPage';
 import { AnnouncementPage } from './AnnouncementPage';
 import { CreateAnnouncementPage } from './CreateAnnouncementPage';
 import { EditAnnouncementPage } from './EditAnnouncementPage';
@@ -31,12 +31,14 @@ type RouterProps = {
   buttonOptions?: {
     name: string | undefined;
   };
+  hideInactive?: boolean;
 };
 
 export const Router = (props: RouterProps) => {
-  const propsWithDefaults = {
+  const propsWithDefaults: AnnouncementsPageProps = {
     themeId: 'home',
     title: 'Announcements',
+    hideInactive: false,
     ...props,
   };
 

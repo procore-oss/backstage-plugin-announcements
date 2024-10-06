@@ -58,6 +58,7 @@ const announcementUpsertToDB = (
     body: announcement.body,
     publisher: announcement.publisher,
     created_at: announcement.created_at.toSQL()!,
+    active: announcement.active,
   };
 };
 
@@ -78,6 +79,7 @@ const DBToAnnouncementWithCategory = (
     body: announcementDb.body,
     publisher: announcementDb.publisher,
     created_at: timestampToDateTime(announcementDb.created_at),
+    active: announcementDb.active,
   };
 };
 
@@ -87,7 +89,7 @@ export class AnnouncementsDatabase {
   async announcements(
     request: AnnouncementsFilters,
   ): Promise<AnnouncementModelsList> {
-    const { category, offset, max } = request;
+    const { category, offset, max, active } = request;
 
     const countQueryBuilder = this.db<DbAnnouncement>(announcementsTable).count<
       Record<string, number>
@@ -98,7 +100,6 @@ export class AnnouncementsDatabase {
     }
 
     const countResult = await countQueryBuilder.first();
-
     const queryBuilder = this.db<DbAnnouncementWithCategory>(announcementsTable)
       .select(
         'id',
@@ -109,6 +110,7 @@ export class AnnouncementsDatabase {
         'category',
         'created_at',
         'categories.title as category_title',
+        'active',
       )
       .orderBy('created_at', 'desc')
       .leftJoin('categories', 'announcements.category', 'categories.slug');
@@ -121,6 +123,9 @@ export class AnnouncementsDatabase {
     }
     if (max) {
       queryBuilder.limit(max);
+    }
+    if (active) {
+      queryBuilder.where('active', active);
     }
 
     const results = (await queryBuilder.select()).map(
@@ -137,7 +142,7 @@ export class AnnouncementsDatabase {
      * based on the results we have, as the count query will not
      * take into account the filter (i.e., limit and offset).
      */
-    if (max || offset) {
+    if (max || offset || active) {
       count = results.length;
     }
 
@@ -148,22 +153,22 @@ export class AnnouncementsDatabase {
   }
 
   async announcementByID(id: string): Promise<AnnouncementModel | undefined> {
-    const dbAnnouncement = await this.db<DbAnnouncementWithCategory>(
-      announcementsTable,
-    )
-      .select(
-        'id',
-        'publisher',
-        'announcements.title',
-        'excerpt',
-        'body',
-        'category',
-        'created_at',
-        'categories.title as category_title',
-      )
-      .leftJoin('categories', 'announcements.category', 'categories.slug')
-      .where('id', id)
-      .first();
+    const dbAnnouncement: DbAnnouncementWithCategory =
+      await this.db<DbAnnouncementWithCategory>(announcementsTable)
+        .select(
+          'id',
+          'publisher',
+          'announcements.title',
+          'excerpt',
+          'body',
+          'category',
+          'created_at',
+          'categories.title as category_title',
+          'active',
+        )
+        .leftJoin('categories', 'announcements.category', 'categories.slug')
+        .where('id', id)
+        .first();
     if (!dbAnnouncement) {
       return undefined;
     }
@@ -182,7 +187,13 @@ export class AnnouncementsDatabase {
       announcementUpsertToDB(announcement),
     );
 
-    return (await this.announcementByID(announcement.id))!;
+    const newAnnouncement = await this.announcementByID(announcement.id);
+
+    if (!newAnnouncement) {
+      throw new Error('Failed to insert announcement');
+    }
+
+    return newAnnouncement;
   }
 
   async updateAnnouncement(

@@ -170,6 +170,12 @@ export const AnnouncementsContent = () => {
       render: rowData => rowData.category?.title ?? '',
     },
     {
+      title: <Typography>Status</Typography>,
+      sorting: true,
+      field: 'category',
+      render: rowData => (rowData.active ? 'Active' : 'Inactive'),
+    },
+    {
       title: <Typography>Actions</Typography>,
       render: rowData => {
         return (

@@ -1,5 +1,12 @@
 # @procore-oss/backstage-plugin-announcements-node
 
+## 0.3.3
+
+### Patch Changes
+
+- Updated dependencies [cfda065]
+  - @procore-oss/backstage-plugin-announcements-common@0.2.8
+
 ## 0.3.2
 
 ### Patch Changes

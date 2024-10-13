@@ -1,5 +1,33 @@
 # @procore-oss/backstage-plugin-announcements
 
+## 0.11.2
+
+### Patch Changes
+
+- e3b9e01: Add the ability to hide the context menu via a `hideContextMenu` boolean property.
+
+  The menu to access creating categories now includes a link to access the admin portal. However, the menu appears by default on the announcements page, and you may not want it visible to end users. Permissions are in place once a user lands on the admin portal, but it would be better to hide the menu altogether.
+
+- cfda065: Adds the ability to filter to only show active announcements
+
+  This should not be a breaking change. The `<AnnouncementsPage />` component now accepts an optional `hideInactive` prop that will hide inactive announcements. The default behavior is to show all announcements, or in other words, `hideInactive: false`.
+
+  ```tsx
+   <AnnouncementsPage
+    title="Announcements"
+    ...
+    hideInactive
+  />
+  ```
+
+- 977774e: Add a link from the context menu to admin portal, so users can leverage feature without the need to import a separate component.
+
+  It is still possible to import the `AnnouncementsAdminPortal` component and use it as before.
+
+- Updated dependencies [cfda065]
+  - @procore-oss/backstage-plugin-announcements-common@0.2.8
+  - @procore-oss/backstage-plugin-announcements-react@0.4.7
+
 ## 0.11.1
 
 ### Patch Changes

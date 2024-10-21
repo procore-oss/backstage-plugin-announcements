@@ -68,7 +68,7 @@
     "@mui/icons-material": "^6.1.1",
     "@mui/lab": "5.0.0-alpha.173",
     "@mui/material": "^5.14.18",
-    "@mui/styles": "^5.14.18",
+    "@mui/styles": "^6.1.4",
     "@procore-oss/backstage-plugin-announcements-common": "workspace:^",
     "@procore-oss/backstage-plugin-announcements-react": "workspace:^",
     "@uiw/react-md-editor": "^4.0.3",

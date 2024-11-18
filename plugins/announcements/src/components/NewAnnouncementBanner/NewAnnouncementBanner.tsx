@@ -19,38 +19,52 @@ import Snackbar from '@mui/material/Snackbar';
 import SnackbarContent from '@mui/material/SnackbarContent';
 import IconButton from '@mui/material/IconButton';
 import Alert from '@mui/material/Alert';
+import { useTheme } from '@mui/material/styles';
 
-const useStyles = makeStyles(theme => ({
-  // showing on top, as a block
-  blockPositioning: {
-    padding: theme.spacing(0),
-    position: 'relative',
-    marginBottom: theme.spacing(4),
-    marginTop: -theme.spacing(3),
-    zIndex: 'unset',
-  },
-  // showing on top, as a floating alert
-  floatingPositioning: {},
-  icon: {
-    fontSize: 20,
-  },
-  bannerIcon: {
-    fontSize: 20,
-    marginRight: '0.5rem',
-  },
-  content: {
-    width: '100%',
-    maxWidth: 'inherit',
-    flexWrap: 'nowrap',
-    backgroundColor: theme.palette.banner.info,
-    display: 'flex',
-    alignItems: 'center',
-    color: theme.palette.banner.text,
-    '& a': {
-      color: theme.palette.banner.link,
+const useStyles = makeStyles(theme => {
+  const currentTheme = useTheme();
+
+  return {
+    // showing on top, as a block
+    blockPositioning: {
+      padding: theme?.spacing?.(0) ?? currentTheme.spacing(0) ?? 0,
+      position: 'relative',
+      marginBottom: theme?.spacing?.(4) ?? currentTheme.spacing(4) ?? 32,
+      marginTop: theme?.spacing?.(3) ?? currentTheme.spacing(3) ?? -24,
+      zIndex: 'unset',
     },
-  },
-}));
+    // showing on top, as a floating alert
+    floatingPositioning: {},
+    icon: {
+      fontSize: 20,
+    },
+    bannerIcon: {
+      fontSize: 20,
+      marginRight: '0.5rem',
+    },
+    content: {
+      width: '100%',
+      maxWidth: 'inherit',
+      flexWrap: 'nowrap',
+      backgroundColor:
+        theme?.palette?.banner?.info ??
+        currentTheme.palette?.banner?.info ??
+        '#f0f0f0',
+      display: 'flex',
+      alignItems: 'center',
+      color:
+        theme?.palette?.banner?.text ??
+        currentTheme.palette?.banner?.text ??
+        '#000000',
+      '& a': {
+        color:
+          theme?.palette?.banner?.link ??
+          currentTheme.palette?.banner?.link ??
+          '#0068c8',
+      },
+    },
+  };
+});
 
 type AnnouncementBannerProps = {
   announcement: Announcement;

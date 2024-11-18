@@ -11,14 +11,19 @@ import Button from '@mui/material/Button';
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
+import { useTheme } from '@mui/material/styles';
 
-const useStyles = makeStyles(theme => ({
-  formRoot: {
-    '& > *': {
-      margin: theme.spacing(1),
+const useStyles = makeStyles(theme => {
+  const currentTheme = useTheme();
+
+  return {
+    formRoot: {
+      '& > *': {
+        margin: theme.spacing ?? currentTheme.spacing(1) ?? '8px',
+      },
     },
-  },
-}));
+  };
+});
 
 type AnnouncementFormProps = {
   initialData: Announcement;

@@ -12,6 +12,7 @@ import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import RecordVoiceOverIcon from '@mui/icons-material/RecordVoiceOver';
+import { useAnnouncementsTranslation } from '@procore-oss/backstage-plugin-announcements-react';
 
 const useStyles = makeStyles({
   createdAt: {
@@ -43,6 +44,7 @@ export const AnnouncementSearchResultListItem = ({
   highlight,
 }: AnnouncementSearchResultProps) => {
   const classes = useStyles();
+  const { t } = useAnnouncementsTranslation();
 
   if (!result) {
     return null;
@@ -66,7 +68,7 @@ export const AnnouncementSearchResultListItem = ({
   const excerpt = (
     <>
       <span className={classes.createdAt}>
-        Published{' '}
+        {`${t('announcementSearchResultListItem.published')} `}
         <span title={document.createdAt}>
           {DateTime.fromISO(document.createdAt).toRelative()}
         </span>
@@ -88,7 +90,9 @@ export const AnnouncementSearchResultListItem = ({
   return (
     <>
       <ListItem alignItems="center">
-        <ListItemIcon title="Announcement">
+        <ListItemIcon
+          title={t('announcementSearchResultListItem.announcement')}
+        >
           <RecordVoiceOverIcon />
         </ListItemIcon>
         <ListItemText

@@ -8,6 +8,7 @@ import { AnnouncementForm } from '../AnnouncementForm';
 import {
   CreateAnnouncementRequest,
   announcementsApiRef,
+  useAnnouncementsTranslation,
   useCategories,
 } from '@procore-oss/backstage-plugin-announcements-react';
 import {
@@ -27,12 +28,13 @@ export const CreateAnnouncementPage = (props: CreateAnnouncementPageProps) => {
   const alertApi = useApi(alertApiRef);
   const navigate = useNavigate();
   const { categories } = useCategories();
+  const { t } = useAnnouncementsTranslation();
 
   const onSubmit = async (request: CreateAnnouncementRequest) => {
     const { category } = request;
 
     const slugs = categories.map((c: Category) => c.slug);
-    let alertMsg = 'Announcement created.';
+    let alertMsg = t('createAnnouncementPage.alertMessage') as string;
 
     try {
       if (category) {
@@ -41,7 +43,7 @@ export const CreateAnnouncementPage = (props: CreateAnnouncementPageProps) => {
         });
         if (slugs.indexOf(categorySlug) === -1) {
           alertMsg = alertMsg.replace('.', '');
-          alertMsg = `${alertMsg} with new category ${category}.`;
+          alertMsg = `${alertMsg} ${t('createAnnouncementPage.alertMessageWithNewCategory')} ${category}.`;
 
           await announcementsApi.createCategory({
             title: category,

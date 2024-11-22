@@ -8,6 +8,7 @@ import { announcementViewRouteRef } from '../../routes';
 import {
   announcementsApiRef,
   useAnnouncements,
+  useAnnouncementsTranslation,
 } from '@procore-oss/backstage-plugin-announcements-react';
 import {
   Announcement,
@@ -61,6 +62,7 @@ const AnnouncementBanner = (props: AnnouncementBannerProps) => {
   const classes = useStyles();
   const announcementsApi = useApi(announcementsApiRef);
   const viewAnnouncementLink = useRouteRef(announcementViewRouteRef);
+  const { t } = useAnnouncementsTranslation();
   const [bannerOpen, setBannerOpen] = useState(true);
   const variant = props.variant || 'block';
   const announcement = props.announcement;
@@ -98,7 +100,7 @@ const AnnouncementBanner = (props: AnnouncementBannerProps) => {
         action={[
           <IconButton
             key="dismiss"
-            title="Mark as seen"
+            title={t('newAnnouncementBanner.markAsSeen')}
             color="inherit"
             onClick={handleClick}
             size="large"

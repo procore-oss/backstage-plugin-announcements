@@ -2,7 +2,10 @@ import * as React from 'react';
 import TextField from '@mui/material/TextField';
 import Autocomplete, { createFilterOptions } from '@mui/material/Autocomplete';
 import { Category } from '@procore-oss/backstage-plugin-announcements-common';
-import { useCategories } from '@procore-oss/backstage-plugin-announcements-react';
+import {
+  useAnnouncementsTranslation,
+  useCategories,
+} from '@procore-oss/backstage-plugin-announcements-react';
 import CircularProgress from '@mui/material/CircularProgress';
 
 type CategoryInputProps = {
@@ -33,11 +36,14 @@ type CategoryInputProps = {
 
 const filter = createFilterOptions<Category>();
 
-function prepareCategoryFromInput(inputCategory: Category | string): string {
+function prepareCategoryFromInput(
+  inputCategory: Category | string,
+  localizedCreate?: string,
+): string {
   return (
     typeof inputCategory === 'string' ? inputCategory : inputCategory.title
   )
-    .replace('Create ', '')
+    .replace(localizedCreate ? `${localizedCreate} ` : 'Create ', '')
     .replaceAll('"', '');
 }
 
@@ -47,6 +53,7 @@ export default function CategoryInput({
   initialValue,
 }: CategoryInputProps) {
   const { categories, loading: categoriesLoading } = useCategories();
+  const { t } = useAnnouncementsTranslation();
 
   return (
     <Autocomplete
@@ -58,7 +65,10 @@ export default function CategoryInput({
           return;
         }
 
-        const newCategory = prepareCategoryFromInput(newValue);
+        const newCategory = prepareCategoryFromInput(
+          newValue,
+          t('announcementForm.categoryInput.create'),
+        );
         setForm({ ...form, category: newCategory });
       }}
       filterOptions={(options, params) => {
@@ -74,7 +84,7 @@ export default function CategoryInput({
         );
         if (inputValue !== '' && !isExisting) {
           filtered.push({
-            title: `Create "${inputValue}"`,
+            title: `${t('announcementForm.categoryInput.create')} "${inputValue}"`,
             slug: inputValue.toLowerCase(),
           });
         }
@@ -96,7 +106,7 @@ export default function CategoryInput({
         <TextField
           {...params}
           id="category"
-          label="Category"
+          label={t('announcementForm.categoryInput.label')}
           variant="outlined"
           fullWidth
           InputProps={{

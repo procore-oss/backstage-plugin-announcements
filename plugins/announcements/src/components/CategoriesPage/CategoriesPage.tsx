@@ -10,7 +10,10 @@ import {
 import AddIcon from '@mui/icons-material/Add';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { NewCategoryDialog } from '../NewCategoryDialog';
-import { useCategories } from '@procore-oss/backstage-plugin-announcements-react';
+import {
+  useAnnouncementsTranslation,
+  useCategories,
+} from '@procore-oss/backstage-plugin-announcements-react';
 import { Category } from '@procore-oss/backstage-plugin-announcements-common';
 import { useDeleteCategoryDialogState } from './useDeleteCategoryDialogState';
 import { alertApiRef, useApi } from '@backstage/core-plugin-api';
@@ -33,6 +36,7 @@ const CategoriesTable = () => {
     close: closeDeleteDialog,
     category: categoryToDelete,
   } = useDeleteCategoryDialogState();
+  const { t } = useAnnouncementsTranslation();
 
   if (error) {
     return <ErrorPanel error={error} />;
@@ -52,7 +56,10 @@ const CategoriesTable = () => {
     try {
       await announcementsApi.deleteCategory(categoryToDelete!.slug);
 
-      alertApi.post({ message: 'Category deleted.', severity: 'success' });
+      alertApi.post({
+        message: t('categoriesTable.categoryDeleted'),
+        severity: 'success',
+      });
     } catch (err) {
       alertApi.post({
         message: (err as ResponseError).body.error.message,
@@ -65,16 +72,16 @@ const CategoriesTable = () => {
 
   const columns: TableColumn<Category>[] = [
     {
-      title: 'Slug',
+      title: t('categoriesTable.slug'),
       field: 'slug',
       highlight: true,
     },
     {
-      title: 'Title',
+      title: t('categoriesTable.title'),
       field: 'title',
     },
     {
-      title: 'Actions',
+      title: t('categoriesTable.actions'),
       field: 'actions',
       render: category => {
         return (
@@ -97,12 +104,16 @@ const CategoriesTable = () => {
         actions={[
           {
             icon: () => <AddIcon />,
-            tooltip: 'Add',
+            tooltip: t('categoriesTable.addTooltip'),
             isFreeAction: true,
             onClick: _event => setNewCategoryDialogOpen(true),
           },
         ]}
-        emptyContent={<Typography p={2}>No categories found</Typography>}
+        emptyContent={
+          <Typography p={2}>
+            {t('categoriesTable.noCategoriesFound')}
+          </Typography>
+        }
       />
       <NewCategoryDialog
         open={newCategoryDialogOpen}
@@ -122,9 +133,13 @@ type CategoriesPageProps = {
 };
 
 export const CategoriesPage = (props: CategoriesPageProps) => {
+  const { t } = useAnnouncementsTranslation();
   return (
     <Page themeId={props.themeId}>
-      <Header title="Categories" subtitle="Manage announcement categories" />
+      <Header
+        title={t('categoriesPage.title')}
+        subtitle={t('categoriesPage.subtitle')}
+      />
 
       <Content>
         <CategoriesTable />

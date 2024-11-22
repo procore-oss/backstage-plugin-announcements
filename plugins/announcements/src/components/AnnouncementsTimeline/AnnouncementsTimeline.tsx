@@ -13,7 +13,10 @@ import { Link } from 'react-router-dom';
 import Stack from '@mui/material/Stack';
 import { DateTime } from 'luxon';
 import { announcementViewRouteRef } from '../../routes';
-import { useAnnouncements } from '@procore-oss/backstage-plugin-announcements-react';
+import {
+  useAnnouncements,
+  useAnnouncementsTranslation,
+} from '@procore-oss/backstage-plugin-announcements-react';
 import { Progress } from '@backstage/core-components';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
@@ -82,14 +85,16 @@ export const AnnouncementsTimeline = ({
     max: maxResults,
     active: hideInactive,
   });
+  const { t } = useAnnouncementsTranslation();
 
   if (loading) {
     return <Progress />;
   }
 
-  if (!announcements || announcements.count === 0) return <>No announcements</>;
+  if (!announcements || announcements.count === 0)
+    return t('announcementsTimeline.noAnnouncements');
 
-  if (error) return <>Error: {error.message}</>;
+  if (error) return `${t('announcementsTimeline.error')}: ${error.message}`;
 
   return (
     <Stack

@@ -92,9 +92,10 @@ export const AnnouncementsTimeline = ({
   }
 
   if (!announcements || announcements.count === 0)
-    return t('announcementsTimeline.noAnnouncements');
+    return <>{t('announcementsTimeline.noAnnouncements')}</>;
 
-  if (error) return `${t('announcementsTimeline.error')}: ${error.message}`;
+  if (error)
+    return <>{`${t('announcementsTimeline.error')}: ${error.message}`}</>;
 
   return (
     <Stack

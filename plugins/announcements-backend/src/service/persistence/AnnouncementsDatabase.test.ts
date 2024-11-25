@@ -265,7 +265,7 @@ describe('AnnouncementsDatabase', () => {
         title: 'title2',
         excerpt: 'excerpt2',
         body: 'body2',
-        created_at: DateTime.fromISO('2023-10-26T15:28:08.539Z'),
+        created_at: DateTime.fromISO('2023-10-26T15:28:09.539Z'),
         active: true,
       });
 
@@ -274,7 +274,7 @@ describe('AnnouncementsDatabase', () => {
       });
 
       expect(announcements).toEqual({
-        count: 1,
+        count: 2,
         results: [
           {
             id: 'id',
@@ -336,7 +336,7 @@ describe('AnnouncementsDatabase', () => {
       });
 
       expect(announcements).toEqual({
-        count: 1,
+        count: 4,
         results: [
           {
             id: 'id4',

@@ -91,15 +91,31 @@ export class AnnouncementsDatabase {
   ): Promise<AnnouncementModelsList> {
     const { category, offset, max, active } = request;
 
-    const countQueryBuilder = this.db<DbAnnouncement>(announcementsTable).count<
-      Record<string, number>
-    >('id', { as: 'total' });
+    // Filter the query by states
+    // Used for both the result query and the count query
+    const filterState = <TRecord extends {}, TResult>(
+      qb: Knex.QueryBuilder<TRecord, TResult>,
+    ) => {
+      if (category) {
+        qb.where('category', category);
+      }
+      if (active) {
+        qb.where('active', active);
+      }
+    };
 
-    if (category) {
-      countQueryBuilder.where('category', category);
-    }
+    // Filter the page (offset + max). Used only for the result query
+    const filterRange = <TRecord extends {}, TResult>(
+      qb: Knex.QueryBuilder<TRecord, TResult>,
+    ) => {
+      if (offset) {
+        qb.offset(offset);
+      }
+      if (max) {
+        qb.limit(max);
+      }
+    };
 
-    const countResult = await countQueryBuilder.first();
     const queryBuilder = this.db<DbAnnouncementWithCategory>(announcementsTable)
       .select(
         'id',
@@ -114,37 +130,21 @@ export class AnnouncementsDatabase {
       )
       .orderBy('created_at', 'desc')
       .leftJoin('categories', 'announcements.category', 'categories.slug');
-
-    if (category) {
-      queryBuilder.where('category', category);
-    }
-    if (offset) {
-      queryBuilder.offset(offset);
-    }
-    if (max) {
-      queryBuilder.limit(max);
-    }
-    if (active) {
-      queryBuilder.where('active', active);
-    }
-
+    filterState(queryBuilder);
+    filterRange(queryBuilder);
     const results = (await queryBuilder.select()).map(
       DBToAnnouncementWithCategory,
     );
 
-    let count =
+    const countQueryBuilder = this.db<DbAnnouncement>(announcementsTable).count<
+      Record<string, number>
+    >('id', { as: 'total' });
+    filterState(countQueryBuilder);
+    const countResult = await countQueryBuilder.first();
+    const count =
       countResult && countResult.total
         ? parseInt(countResult.total.toString(), 10)
         : 0;
-
-    /*
-     * If we have a filter, we need to calculate the count
-     * based on the results we have, as the count query will not
-     * take into account the filter (i.e., limit and offset).
-     */
-    if (max || offset || active) {
-      count = results.length;
-    }
 
     return {
       count,

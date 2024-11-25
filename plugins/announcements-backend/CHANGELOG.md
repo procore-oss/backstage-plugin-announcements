@@ -1,5 +1,11 @@
 # @procore-oss/backstage-plugin-announcements-backend
 
+## 0.10.5
+
+### Patch Changes
+
+- 11cacf9: Fixed the returned 'count' on DB queries. This solves the issue with pagination not working.
+
 ## 0.10.4
 
 ### Patch Changes

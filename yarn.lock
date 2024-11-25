@@ -8312,6 +8312,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/cookie@npm:^0.6.0":
+  version: 0.6.0
+  resolution: "@types/cookie@npm:0.6.0"
+  checksum: 10c0/5b326bd0188120fb32c0be086b141b1481fec9941b76ad537f9110e10d61ee2636beac145463319c71e4be67a17e85b81ca9e13ceb6e3bb63b93d16824d6c149
+  languageName: node
+  linkType: hard
+
 "@types/cookiejar@npm:^2.1.5":
   version: 2.1.5
   resolution: "@types/cookiejar@npm:2.1.5"
@@ -11619,6 +11626,13 @@ __metadata:
   version: 0.4.2
   resolution: "cookie@npm:0.4.2"
   checksum: 10c0/beab41fbd7c20175e3a2799ba948c1dcc71ef69f23fe14eeeff59fc09f50c517b0f77098db87dbb4c55da802f9d86ee86cdc1cd3efd87760341551838d53fca2
+  languageName: node
+  linkType: hard
+
+"cookie@npm:^1.0.1":
+  version: 1.0.2
+  resolution: "cookie@npm:1.0.2"
+  checksum: 10c0/fd25fe79e8fbcfcaf6aa61cd081c55d144eeeba755206c058682257cb38c4bd6795c6620de3f064c740695bb65b7949ebb1db7a95e4636efb8357a335ad3f54b
   languageName: node
   linkType: hard
 
@@ -22675,7 +22689,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-router@npm:6.26.2, react-router@npm:^6.26.2":
+"react-router@npm:6.26.2":
   version: 6.26.2
   resolution: "react-router@npm:6.26.2"
   dependencies:
@@ -22683,6 +22697,24 @@ __metadata:
   peerDependencies:
     react: ">=16.8"
   checksum: 10c0/0d15a39b419c99fb5ccad76388bfc4ee2b01323b3b1b694595a9f9ea28e1fbeea25486b5398f5d3d93922f5c6a9aa751b6bb27419488d85279f6ca5ff9e0a6bb
+  languageName: node
+  linkType: hard
+
+"react-router@npm:^7.0.1":
+  version: 7.0.1
+  resolution: "react-router@npm:7.0.1"
+  dependencies:
+    "@types/cookie": "npm:^0.6.0"
+    cookie: "npm:^1.0.1"
+    set-cookie-parser: "npm:^2.6.0"
+    turbo-stream: "npm:2.4.0"
+  peerDependencies:
+    react: ">=18"
+    react-dom: ">=18"
+  peerDependenciesMeta:
+    react-dom:
+      optional: true
+  checksum: 10c0/aac4c9989ae6b9cf989b5ddcda88f505ba0704a4e4b37ae04c819c2bd02f080361f9eb1793695e3ecf41080d91b79aee454c3163b586d1b19ceca13f6eacec0e
   languageName: node
   linkType: hard
 
@@ -23692,7 +23724,7 @@ __metadata:
     prettier: "npm:^3.3.3"
     react: "npm:^18.3.1"
     react-dom: "npm:^18.3.1"
-    react-router: "npm:^6.26.2"
+    react-router: "npm:^7.0.1"
     react-router-dom: "npm:^6.26.2"
     typescript: "npm:~5.6.2"
   languageName: unknown
@@ -24007,6 +24039,13 @@ __metadata:
   version: 2.7.0
   resolution: "set-cookie-parser@npm:2.7.0"
   checksum: 10c0/5ccb2d0389bda27631d57e44644319f0b77200e7c8bd1515824eb83dbd2d351864a29581f7e7f977a5aeb83c3ec9976e69b706a80ac654152fd26353011ffef4
+  languageName: node
+  linkType: hard
+
+"set-cookie-parser@npm:^2.6.0":
+  version: 2.7.1
+  resolution: "set-cookie-parser@npm:2.7.1"
+  checksum: 10c0/060c198c4c92547ac15988256f445eae523f57f2ceefeccf52d30d75dedf6bff22b9c26f756bd44e8e560d44ff4ab2130b178bd2e52ef5571bf7be3bd7632d9a
   languageName: node
   linkType: hard
 
@@ -25697,6 +25736,13 @@ __metadata:
   dependencies:
     safe-buffer: "npm:^5.0.1"
   checksum: 10c0/4c7a1b813e7beae66fdbf567a65ec6d46313643753d0beefb3c7973d66fcec3a1e7f39759f0a0b4465883499c6dc8b0750ab8b287399af2e583823e40410a17a
+  languageName: node
+  linkType: hard
+
+"turbo-stream@npm:2.4.0":
+  version: 2.4.0
+  resolution: "turbo-stream@npm:2.4.0"
+  checksum: 10c0/e68b2569f1f16e6e9633d090c6024b2ae9f0e97bfeacb572451ca3732e120ebbb546f3bc4afc717c46cb57b5aea6104e04ef497f9912eef6a7641e809518e98a
   languageName: node
   linkType: hard
 

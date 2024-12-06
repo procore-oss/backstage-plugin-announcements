@@ -12,14 +12,19 @@ import makeStyles from '@mui/styles/makeStyles';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { usePermission } from '@backstage/plugin-permission-react';
+import { useTheme } from '@mui/material/styles';
 
-const useStyles = makeStyles(theme => ({
-  formRoot: {
-    '& > *': {
-      margin: theme.spacing(1),
+const useStyles = makeStyles(theme => {
+  const currentTheme = useTheme();
+
+  return {
+    formRoot: {
+      '& > *': {
+        margin: theme?.spacing?.(1) ?? currentTheme.spacing(1) ?? '8px',
+      },
     },
-  },
-}));
+  };
+});
 
 export type CategoriesFormProps = {
   initialData: Category;

@@ -53,19 +53,26 @@ import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
 import CardContent from '@mui/material/CardContent';
 import Pagination from '@mui/material/Pagination';
+import { useTheme } from '@mui/material/styles';
 
-const useStyles = makeStyles(theme => ({
-  cardHeader: {
-    color: theme.palette.text.primary,
-    fontSize: '1.5rem',
-  },
-  pagination: {
-    display: 'flex',
-    justifyContent: 'center',
-    marginTop: theme.spacing(4),
-  },
-}));
+const useStyles = makeStyles(theme => {
+  const currentTheme = useTheme();
 
+  return {
+    cardHeader: {
+      color:
+        theme?.palette?.text?.primary ||
+        currentTheme?.palette?.text?.primary ||
+        '#000',
+      fontSize: '1.5rem',
+    },
+    pagination: {
+      display: 'flex',
+      justifyContent: 'center',
+      marginTop: theme?.spacing?.(4) || currentTheme?.spacing?.(4) || 32,
+    },
+  };
+});
 /**
  * Truncate text to a given length and add ellipsis
  * @param text the text to truncate

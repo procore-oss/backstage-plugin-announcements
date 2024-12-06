@@ -66,7 +66,7 @@
     "@backstage/plugin-signals-react": "^0.0.7",
     "@material-ui/icons": "^4.11.3",
     "@mui/icons-material": "^6.1.1",
-    "@mui/lab": "5.0.0-alpha.173",
+    "@mui/lab": "5.0.0-alpha.174",
     "@mui/material": "^5.14.18",
     "@mui/styles": "^5.14.18",
     "@procore-oss/backstage-plugin-announcements-common": "workspace:^",

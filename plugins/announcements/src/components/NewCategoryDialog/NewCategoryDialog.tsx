@@ -1,6 +1,9 @@
 import React from 'react';
 import { alertApiRef, useApi } from '@backstage/core-plugin-api';
-import { announcementsApiRef } from '@procore-oss/backstage-plugin-announcements-react';
+import {
+  announcementsApiRef,
+  useAnnouncementsTranslation,
+} from '@procore-oss/backstage-plugin-announcements-react';
 import Dialog from '@mui/material/Dialog';
 import DialogTitle from '@mui/material/DialogTitle';
 import DialogContent from '@mui/material/DialogContent';
@@ -15,6 +18,7 @@ type NewCategoryDialogProps = {
 
 export const NewCategoryDialog = (props: NewCategoryDialogProps) => {
   const announcementsApi = useApi(announcementsApiRef);
+  const { t } = useAnnouncementsTranslation();
   const alertApi = useApi(alertApiRef);
 
   const [title, setTitle] = React.useState('');
@@ -28,7 +32,10 @@ export const NewCategoryDialog = (props: NewCategoryDialogProps) => {
       await announcementsApi.createCategory({
         title,
       });
-      alertApi.post({ message: 'Category created.', severity: 'success' });
+      alertApi.post({
+        message: t('newCategoryDialog.createdMessage'),
+        severity: 'success',
+      });
       props.onClose();
     } catch (err) {
       alertApi.post({ message: (err as Error).message, severity: 'error' });
@@ -41,12 +48,12 @@ export const NewCategoryDialog = (props: NewCategoryDialogProps) => {
 
   return (
     <Dialog open={props.open} onClose={onClose}>
-      <DialogTitle>New category</DialogTitle>
+      <DialogTitle>{t('newCategoryDialog.newCategory')}</DialogTitle>
       <DialogContent>
         <TextField
           margin="normal"
           id="title"
-          label="Title"
+          label={t('newCategoryDialog.title')}
           value={title}
           onChange={handleChange}
           type="text"
@@ -54,10 +61,10 @@ export const NewCategoryDialog = (props: NewCategoryDialogProps) => {
         />
       </DialogContent>
       <DialogActions>
-        <Button onClick={onClose}>Cancel</Button>
+        <Button onClick={onClose}>{t('newCategoryDialog.cancelButton')}</Button>
 
         <Button onClick={onConfirm} color="primary">
-          Create
+          {t('newCategoryDialog.createButton')}
         </Button>
       </DialogActions>
     </Dialog>

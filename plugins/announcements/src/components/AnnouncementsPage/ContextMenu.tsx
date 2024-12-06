@@ -15,6 +15,7 @@ import {
   categoriesListRouteRef,
 } from '../../routes';
 import Box from '@mui/material/Box';
+import { useAnnouncementsTranslation } from '@procore-oss/backstage-plugin-announcements-react';
 
 const useStyles = makeStyles({
   button: {
@@ -28,6 +29,7 @@ export function ContextMenu() {
   const announcementsLink = useRouteRef(announcementAdminRouteRef);
   const categoriesLink = useRouteRef(categoriesListRouteRef);
   const navigate = useNavigate();
+  const { t } = useAnnouncementsTranslation();
 
   const onOpen = (event: React.SyntheticEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
@@ -63,13 +65,15 @@ export function ContextMenu() {
             <ListItemIcon>
               <Description fontSize="small" />
             </ListItemIcon>
-            <ListItemText primary="Admin" />
+            <ListItemText primary={t('announcementsPage.contextMenu.admin')} />
           </MenuItem>
           <MenuItem onClick={() => navigate(categoriesLink())}>
             <ListItemIcon>
               <Description fontSize="small" />
             </ListItemIcon>
-            <ListItemText primary="Categories" />
+            <ListItemText
+              primary={t('announcementsPage.contextMenu.categories')}
+            />
           </MenuItem>
         </MenuList>
       </Popover>

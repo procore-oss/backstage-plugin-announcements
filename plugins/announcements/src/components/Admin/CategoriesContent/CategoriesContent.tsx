@@ -8,6 +8,7 @@ import {
 import {
   CreateCategoryRequest,
   announcementsApiRef,
+  useAnnouncementsTranslation,
   useCategories,
 } from '@procore-oss/backstage-plugin-announcements-react';
 import {
@@ -35,6 +36,7 @@ export const CategoriesContent = () => {
   const { categories, loading, error, retry: refresh } = useCategories();
   const announcementsApi = useApi(announcementsApiRef);
   const alertApi = useApi(alertApiRef);
+  const { t } = useAnnouncementsTranslation();
 
   const {
     isOpen: isDeleteDialogOpen,
@@ -61,7 +63,10 @@ export const CategoriesContent = () => {
         title,
       });
 
-      alertApi.post({ message: `${title} created`, severity: 'success' });
+      alertApi.post({
+        message: `${title} ${t('admin.categoriesContent.createdMessage')}`,
+        severity: 'success',
+      });
 
       refresh();
     } catch (err) {
@@ -83,7 +88,10 @@ export const CategoriesContent = () => {
     try {
       await announcementsApi.deleteCategory(categoryToDelete!.slug);
 
-      alertApi.post({ message: 'Category deleted.', severity: 'success' });
+      alertApi.post({
+        message: t('admin.categoriesContent.table.categoryDeleted'),
+        severity: 'success',
+      });
     } catch (err) {
       alertApi.post({
         message: (err as ResponseError).body.error.message,
@@ -103,19 +111,23 @@ export const CategoriesContent = () => {
 
   const columns: TableColumn<Category>[] = [
     {
-      title: <Typography>Title</Typography>,
+      title: (
+        <Typography>{t('admin.categoriesContent.table.title')}</Typography>
+      ),
       sorting: true,
       field: 'title',
       render: rowData => rowData.title,
     },
     {
-      title: <Typography>Slug</Typography>,
+      title: <Typography>{t('admin.categoriesContent.table.slug')}</Typography>,
       sorting: true,
       field: 'slug',
       render: rowData => rowData.slug,
     },
     {
-      title: <Typography>Actions</Typography>,
+      title: (
+        <Typography>{t('admin.categoriesContent.table.actions')}</Typography>
+      ),
       render: rowData => {
         return (
           <>
@@ -141,7 +153,9 @@ export const CategoriesContent = () => {
             variant="contained"
             onClick={() => onCreateButtonClick()}
           >
-            {showNewCategoryForm ? 'Cancel' : 'Create category'}
+            {showNewCategoryForm
+              ? t('admin.categoriesContent.cancelButton')
+              : t('admin.categoriesContent.createButton')}
           </Button>
         </Grid>
 
@@ -157,7 +171,11 @@ export const CategoriesContent = () => {
             options={{ pageSize: 20, search: true }}
             columns={columns}
             data={categories ?? []}
-            emptyContent={<Typography p={2}>No categories found</Typography>}
+            emptyContent={
+              <Typography p={2}>
+                {t('admin.categoriesContent.table.noCategoriesFound')}
+              </Typography>
+            }
           />
         </Grid>
 

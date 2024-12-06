@@ -12,6 +12,7 @@ import PreviewIcon from '@mui/icons-material/Preview';
 import {
   announcementsApiRef,
   CreateAnnouncementRequest,
+  useAnnouncementsTranslation,
   useCategories,
 } from '@procore-oss/backstage-plugin-announcements-react';
 import {
@@ -41,6 +42,7 @@ export const AnnouncementsContent = () => {
   const announcementsApi = useApi(announcementsApiRef);
   const navigate = useNavigate();
   const { categories } = useCategories();
+  const { t } = useAnnouncementsTranslation();
 
   const { loading: loadingCreatePermission, allowed: canCreateAnnouncement } =
     usePermission({
@@ -107,7 +109,7 @@ export const AnnouncementsContent = () => {
     const { category } = request;
 
     const slugs = categories.map((c: Category) => c.slug);
-    let alertMsg = 'Announcement created.';
+    let alertMsg = t('admin.announecementsContent.alertMessage') as string;
 
     try {
       if (category) {
@@ -116,7 +118,9 @@ export const AnnouncementsContent = () => {
         });
         if (slugs.indexOf(categorySlug) === -1) {
           alertMsg = alertMsg.replace('.', '');
-          alertMsg = `${alertMsg} with new category ${category}.`;
+          alertMsg = `${alertMsg} ${t(
+            'admin.announecementsContent.alertMessage',
+          )} ${category}.`;
 
           await announcementsApi.createCategory({
             title: category,
@@ -146,37 +150,58 @@ export const AnnouncementsContent = () => {
 
   const columns: TableColumn<Announcement>[] = [
     {
-      title: <Typography>Title</Typography>,
+      title: (
+        <Typography>{t('admin.announecementsContent.table.title')}</Typography>
+      ),
       sorting: true,
       field: 'title',
       render: rowData => rowData.title,
     },
     {
-      title: <Typography>Body</Typography>,
+      title: (
+        <Typography>{t('admin.announecementsContent.table.body')}</Typography>
+      ),
       sorting: true,
       field: 'body',
       render: rowData => rowData.body,
     },
     {
-      title: <Typography>Publisher</Typography>,
+      title: (
+        <Typography>
+          {t('admin.announecementsContent.table.publisher')}
+        </Typography>
+      ),
       sorting: true,
       field: 'publisher',
       render: rowData => rowData.publisher,
     },
     {
-      title: <Typography>Category</Typography>,
+      title: (
+        <Typography>
+          {t('admin.announecementsContent.table.category')}
+        </Typography>
+      ),
       sorting: true,
       field: 'category',
       render: rowData => rowData.category?.title ?? '',
     },
     {
-      title: <Typography>Status</Typography>,
+      title: (
+        <Typography>{t('admin.announecementsContent.table.status')}</Typography>
+      ),
       sorting: true,
       field: 'category',
-      render: rowData => (rowData.active ? 'Active' : 'Inactive'),
+      render: rowData =>
+        rowData.active
+          ? t('admin.announecementsContent.table.active')
+          : t('admin.announecementsContent.table.inactive'),
     },
     {
-      title: <Typography>Actions</Typography>,
+      title: (
+        <Typography>
+          {t('admin.announecementsContent.table.actions')}
+        </Typography>
+      ),
       render: rowData => {
         return (
           <>
@@ -217,7 +242,9 @@ export const AnnouncementsContent = () => {
             variant="contained"
             onClick={() => onCreateButtonClick()}
           >
-            {showCreateAnnouncementForm ? 'Cancel' : 'Create Announcement'}
+            {showCreateAnnouncementForm
+              ? t('admin.announecementsContent.cancelButton')
+              : t('admin.announecementsContent.createButton')}
           </Button>
         </Grid>
 
@@ -232,11 +259,15 @@ export const AnnouncementsContent = () => {
 
         <Grid item xs={12}>
           <Table
-            title="Announcements"
+            title={t('admin.announecementsContent.announcements')}
             options={{ pageSize: 20, search: true }}
             columns={columns}
             data={announcements?.results ?? []}
-            emptyContent={<Typography p={2}>No announcements found</Typography>}
+            emptyContent={
+              <Typography p={2}>
+                {t('admin.announecementsContent.noAnnouncementsFound')}
+              </Typography>
+            }
           />
 
           <DeleteAnnouncementDialog

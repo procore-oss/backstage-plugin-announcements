@@ -9,6 +9,7 @@ import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 import { RequirePermission } from '@backstage/plugin-permission-react';
 import { announcementCreatePermission } from '@procore-oss/backstage-plugin-announcements-common';
+import { useAnnouncementsTranslation } from '@procore-oss/backstage-plugin-announcements-react';
 
 const useStyles = makeStyles(() => ({
   tabPanel: {
@@ -26,6 +27,7 @@ type AdminPortalProps = {
 const AdminPortalContent = () => {
   const classes = useStyles();
   const [tab, setTab] = useState('announcements');
+  const { t } = useAnnouncementsTranslation();
   const handleChange = (_event: React.ChangeEvent<{}>, tabValue: string) => {
     setTab(tabValue);
   };
@@ -33,8 +35,14 @@ const AdminPortalContent = () => {
   return (
     <TabContext value={tab}>
       <TabList onChange={handleChange}>
-        <Tab label="Announcements" value="announcements" />
-        <Tab label="Categories" value="categories" />
+        <Tab
+          label={t('admin.adminPortal.announcementsLabels')}
+          value="announcements"
+        />
+        <Tab
+          label={t('admin.adminPortal.categoriesLabel')}
+          value="categories"
+        />
       </TabList>
       <TabPanel value="announcements" className={classes.tabPanel}>
         <AnnouncementsContent />
@@ -49,12 +57,13 @@ const AdminPortalContent = () => {
 /** @public */
 export const AdminPortal = (props?: AdminPortalProps) => {
   const { title, subtitle, themeId } = props ?? {};
+  const { t } = useAnnouncementsTranslation();
 
   return (
     <Page themeId={themeId ?? 'tool'}>
       <Header
-        title={title ?? 'Admin Portal for Announcements'}
-        subtitle={subtitle ?? 'Manage announcements and categories'}
+        title={title ?? t('admin.adminPortal.title')}
+        subtitle={subtitle ?? t('admin.adminPortal.title')}
       />
       <RequirePermission permission={announcementCreatePermission}>
         <Content>

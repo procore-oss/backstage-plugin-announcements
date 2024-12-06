@@ -3,7 +3,10 @@ import MDEditor from '@uiw/react-md-editor';
 import { InfoCard } from '@backstage/core-components';
 import { identityApiRef, useApi } from '@backstage/core-plugin-api';
 import makeStyles from '@mui/styles/makeStyles';
-import { CreateAnnouncementRequest } from '@procore-oss/backstage-plugin-announcements-react';
+import {
+  CreateAnnouncementRequest,
+  useAnnouncementsTranslation,
+} from '@procore-oss/backstage-plugin-announcements-react';
 import { Announcement } from '@procore-oss/backstage-plugin-announcements-common';
 import CategoryInput from './CategoryInput';
 import TextField from '@mui/material/TextField';
@@ -31,6 +34,7 @@ export const AnnouncementForm = ({
 }: AnnouncementFormProps) => {
   const classes = useStyles();
   const identityApi = useApi(identityApiRef);
+  const { t } = useAnnouncementsTranslation();
 
   const [form, setForm] = React.useState({
     ...initialData,
@@ -70,13 +74,17 @@ export const AnnouncementForm = ({
 
   return (
     <InfoCard
-      title={initialData.title ? `Edit announcement` : 'New announcement'}
+      title={
+        initialData.title
+          ? t('announcementForm.editAnnouncement')
+          : t('announcementForm.newAnnouncement')
+      }
     >
       <form className={classes.formRoot} onSubmit={handleSubmit}>
         <TextField
           id="title"
           type="text"
-          label="Title"
+          label={t('announcementForm.title')}
           value={form.title}
           onChange={handleChange}
           variant="outlined"
@@ -91,7 +99,7 @@ export const AnnouncementForm = ({
         <TextField
           id="excerpt"
           type="text"
-          label="Excerpt"
+          label={t('announcementForm.excerpt')}
           value={form.excerpt}
           onChange={handleChange}
           variant="outlined"
@@ -112,7 +120,7 @@ export const AnnouncementForm = ({
                 onChange={handleChangeActive}
               />
             }
-            label="Active"
+            label={t('announcementForm.active')}
           />
         </FormGroup>
         <Button
@@ -121,7 +129,7 @@ export const AnnouncementForm = ({
           type="submit"
           disabled={loading || !form.body}
         >
-          Submit
+          {t('announcementForm.submit')}
         </Button>
       </form>
     </InfoCard>

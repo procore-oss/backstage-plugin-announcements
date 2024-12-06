@@ -1,5 +1,11 @@
 # @procore-oss/backstage-plugin-announcements-common
 
+## 0.2.9
+
+### Patch Changes
+
+- 7ff1e6c: Bump backstage from 1.31.2 to 1.33.5
+
 ## 0.2.8
 
 ### Patch Changes

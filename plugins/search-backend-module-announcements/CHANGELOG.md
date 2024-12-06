@@ -1,5 +1,14 @@
 # @procore-oss/backstage-plugin-search-backend-module-announcements
 
+## 0.3.4
+
+### Patch Changes
+
+- 7ff1e6c: Bump backstage from 1.31.2 to 1.33.5
+- Updated dependencies [7ff1e6c]
+  - @procore-oss/backstage-plugin-announcements-common@0.2.9
+  - @procore-oss/backstage-plugin-announcements-node@0.3.4
+
 ## 0.3.3
 
 ### Patch Changes

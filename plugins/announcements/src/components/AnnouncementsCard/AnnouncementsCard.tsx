@@ -19,6 +19,7 @@ import {
 import {
   announcementsApiRef,
   useAnnouncements,
+  useAnnouncementsTranslation,
 } from '@procore-oss/backstage-plugin-announcements-react';
 import Alert from '@mui/material/Alert';
 import List from '@mui/material/List';
@@ -53,6 +54,7 @@ export const AnnouncementsCard = ({
   const viewAnnouncementLink = useRouteRef(announcementViewRouteRef);
   const createAnnouncementLink = useRouteRef(announcementCreateRouteRef);
   const lastSeen = announcementsApi.lastSeenDate();
+  const { t } = useAnnouncementsTranslation();
 
   const { announcements, loading, error } = useAnnouncements({
     max: max || 5,
@@ -73,12 +75,12 @@ export const AnnouncementsCard = ({
 
   const deepLink = {
     link: announcementsLink(),
-    title: 'See all',
+    title: t('announcementsCard.seeAll'),
   };
 
   return (
     <InfoCard
-      title={title || 'Announcements'}
+      title={title || t('announcementsCard.announcements')}
       variant={variant}
       deepLink={deepLink}
     >
@@ -89,7 +91,7 @@ export const AnnouncementsCard = ({
               {lastSeen < DateTime.fromISO(announcement.created_at) && (
                 <ListItemIcon
                   className={classes.newAnnouncementIcon}
-                  title="New"
+                  title={t('announcementsCard.new')}
                 >
                   <NewReleasesIcon />
                 </ListItemIcon>
@@ -106,8 +108,7 @@ export const AnnouncementsCard = ({
                     {DateTime.fromISO(announcement.created_at).toRelative()}
                     {announcement.category && (
                       <>
-                        {' '}
-                        in{' '}
+                        {` ${t('announcementsCard.in')} `}
                         <Link
                           to={`${announcementsLink()}?category=${
                             announcement.category.slug
@@ -127,8 +128,11 @@ export const AnnouncementsCard = ({
         {announcements.count === 0 && !loadingPermission && canAdd && (
           <ListItem>
             <ListItemText>
-              No announcements yet, want to{' '}
-              <Link to={createAnnouncementLink()}>add one</Link>?
+              {`${t('announcementsCard.noAnnouncements')} `}
+              <Link to={createAnnouncementLink()}>
+                {t('announcementsCard.addOne')}
+              </Link>
+              ?
             </ListItemText>
           </ListItem>
         )}

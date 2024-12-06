@@ -42,6 +42,7 @@ import { ContextMenu } from './ContextMenu';
 import {
   announcementsApiRef,
   useAnnouncements,
+  useAnnouncementsTranslation,
 } from '@procore-oss/backstage-plugin-announcements-react';
 import Tooltip from '@mui/material/Tooltip';
 import IconButton from '@mui/material/IconButton';
@@ -96,6 +97,7 @@ const AnnouncementCard = ({
   const viewAnnouncementLink = useRouteRef(announcementViewRouteRef);
   const editAnnouncementLink = useRouteRef(announcementEditRouteRef);
   const entityLink = useRouteRef(entityRouteRef);
+  const { t } = useAnnouncementsTranslation();
 
   const publisherRef = parseEntityRef(announcement.publisher);
   const title = (
@@ -114,7 +116,7 @@ const AnnouncementCard = ({
   );
   const subTitle = (
     <>
-      By{' '}
+      {t('announcementsPage.card.by')}{' '}
       <EntityPeekAheadPopover entityRef={announcement.publisher}>
         <Link to={entityLink(publisherRef)}>
           <EntityDisplayName entityRef={announcement.publisher} hideIcon />
@@ -123,7 +125,7 @@ const AnnouncementCard = ({
       {announcement.category && (
         <>
           {' '}
-          in{' '}
+          {t('announcementsPage.card.in')}{' '}
           <Link
             to={`${announcementsLink()}?category=${announcement.category.slug}`}
           >
@@ -181,7 +183,7 @@ const AnnouncementCard = ({
               <ListItemIcon>
                 <EditIcon />
               </ListItemIcon>
-              EDIT
+              {t('announcementsPage.card.edit')}
             </MenuItem>
           )}
           {!loadingDeletePermission && canDelete && (
@@ -189,7 +191,7 @@ const AnnouncementCard = ({
               <ListItemIcon>
                 <DeleteIcon />
               </ListItemIcon>
-              DELETE
+              {t('announcementsPage.card.delete')}
             </MenuItem>
           )}
         </Menu>
@@ -244,6 +246,8 @@ const AnnouncementsGrid = ({
     { dependencies: [maxPerPage, page, category] },
   );
 
+  const { t } = useAnnouncementsTranslation();
+
   const {
     isOpen: isDeleteDialogOpen,
     open: openDeleteDialog,
@@ -266,7 +270,10 @@ const AnnouncementsGrid = ({
     try {
       await announcementsApi.deleteAnnouncementByID(announcementToDelete!.id);
 
-      alertApi.post({ message: 'Announcement deleted.', severity: 'success' });
+      alertApi.post({
+        message: t('announcementsPage.grid.announcementDeleted'),
+        severity: 'success',
+      });
     } catch (err) {
       alertApi.post({ message: (err as Error).message, severity: 'error' });
     }
@@ -332,6 +339,7 @@ export const AnnouncementsPage = (props: AnnouncementsPageProps) => {
   const newAnnouncementLink = useRouteRef(announcementCreateRouteRef);
   const { loading: loadingCreatePermission, allowed: canCreate } =
     usePermission({ permission: announcementCreatePermission });
+  const { t } = useAnnouncementsTranslation();
 
   const {
     hideContextMenu,
@@ -360,7 +368,9 @@ export const AnnouncementsPage = (props: AnnouncementsPageProps) => {
               color="primary"
               variant="contained"
             >
-              {buttonOptions ? `New ${buttonOptions.name}` : 'New announcement'}
+              {buttonOptions
+                ? `${t('announcementsPage.genericNew')} ${buttonOptions.name}`
+                : t('announcementsPage.newAnnouncement')}
             </LinkButton>
           )}
         </ContentHeader>

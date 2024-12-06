@@ -11,6 +11,7 @@ import { announcementEditRouteRef } from '../../routes';
 import {
   announcementsApiRef,
   CreateAnnouncementRequest,
+  useAnnouncementsTranslation,
 } from '@procore-oss/backstage-plugin-announcements-react';
 import Alert from '@mui/material/Alert';
 
@@ -27,6 +28,7 @@ export const EditAnnouncementPage = (props: EditAnnouncementPageProps) => {
   const { value, loading, error } = useAsync(async () =>
     announcementsApi.announcementByID(id),
   );
+  const { t } = useAnnouncementsTranslation();
 
   let title = props.title;
   let content: React.ReactNode = <Progress />;
@@ -34,7 +36,10 @@ export const EditAnnouncementPage = (props: EditAnnouncementPageProps) => {
   const onSubmit = async (request: CreateAnnouncementRequest) => {
     try {
       await announcementsApi.updateAnnouncement(id, request);
-      alertApi.post({ message: 'Announcement updated.', severity: 'success' });
+      alertApi.post({
+        message: t('editAnnouncementPage.updatedMessage'),
+        severity: 'success',
+      });
     } catch (err) {
       alertApi.post({ message: (err as Error).message, severity: 'error' });
     }
@@ -45,9 +50,13 @@ export const EditAnnouncementPage = (props: EditAnnouncementPageProps) => {
   } else if (error) {
     content = <Alert severity="error">{error.message}</Alert>;
   } else if (!value) {
-    content = <Alert severity="error">Unable to find announcement</Alert>;
+    content = (
+      <Alert severity="error">
+        {t('editAnnouncementPage.notFoundMessage')}
+      </Alert>
+    );
   } else {
-    title = `Edit "${value.title}" – ${title}`;
+    title = `${t('editAnnouncementPage.edit')} "${value.title}" – ${title}`;
     content = <AnnouncementForm initialData={value} onSubmit={onSubmit} />;
   }
 

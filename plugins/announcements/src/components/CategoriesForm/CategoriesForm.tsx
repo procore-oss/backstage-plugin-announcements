@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { InfoCard } from '@backstage/core-components';
-import { CreateCategoryRequest } from '@procore-oss/backstage-plugin-announcements-react';
+import {
+  CreateCategoryRequest,
+  useAnnouncementsTranslation,
+} from '@procore-oss/backstage-plugin-announcements-react';
 import {
   announcementCreatePermission,
   Category,
@@ -35,6 +38,7 @@ export const CategoriesForm = ({
   const classes = useStyles();
   const [form, setForm] = useState(initialData);
   const [loading, setLoading] = useState(false);
+  const { t } = useAnnouncementsTranslation();
 
   const { loading: loadingCreatePermission, allowed: canCreateCategory } =
     usePermission({
@@ -57,12 +61,18 @@ export const CategoriesForm = ({
   };
 
   return (
-    <InfoCard title={initialData.title ? `Edit category` : 'New category'}>
+    <InfoCard
+      title={
+        initialData.title
+          ? t('categoriesForm.editCategory')
+          : t('categoriesForm.newCategory')
+      }
+    >
       <form className={classes.formRoot} onSubmit={handleSubmit}>
         <TextField
           id="title"
           type="text"
-          label="Title"
+          label={t('categoriesForm.titleLabel')}
           value={form.title}
           onChange={handleChange}
           variant="outlined"
@@ -77,7 +87,7 @@ export const CategoriesForm = ({
             loading || !form || loadingCreatePermission || !canCreateCategory
           }
         >
-          Submit
+          {t('categoriesForm.submit')}
         </Button>
       </form>
     </InfoCard>

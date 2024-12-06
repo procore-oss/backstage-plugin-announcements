@@ -4,6 +4,7 @@ import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogTitle from '@mui/material/DialogTitle';
 import { announcementDeletePermission } from '@procore-oss/backstage-plugin-announcements-common';
+import { useAnnouncementsTranslation } from '@procore-oss/backstage-plugin-announcements-react';
 import React from 'react';
 
 type DeleteAnnouncementDialogProps = {
@@ -21,21 +22,20 @@ export const DeleteAnnouncementDialog = (
     usePermission({
       permission: announcementDeletePermission,
     });
+  const { t } = useAnnouncementsTranslation();
 
   return (
     <Dialog open={open} onClose={onCancel}>
-      <DialogTitle>
-        Are you sure you want to delete this announcement?
-      </DialogTitle>
+      <DialogTitle>{t('deleteDialog.title')}</DialogTitle>
       <DialogActions>
-        <Button onClick={onCancel}>Cancel</Button>
+        <Button onClick={onCancel}>{t('deleteDialog.cancel')}</Button>
 
         <Button
           disabled={loadingDeletePermission || !canDeleteAnnouncement}
           onClick={onConfirm}
           color="secondary"
         >
-          Delete
+          {t('deleteDialog.delete')}
         </Button>
       </DialogActions>
     </Dialog>

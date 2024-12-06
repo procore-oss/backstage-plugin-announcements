@@ -1,5 +1,17 @@
 # @procore-oss/backstage-plugin-announcements-react
 
+## 0.5.0
+
+### Minor Changes
+
+- e44fb0c: Adds internacionalization following Backstage's guidelines
+
+### Patch Changes
+
+- 7ff1e6c: Bump backstage from 1.31.2 to 1.33.5
+- Updated dependencies [7ff1e6c]
+  - @procore-oss/backstage-plugin-announcements-common@0.2.9
+
 ## 0.4.7
 
 ### Patch Changes

@@ -1,5 +1,15 @@
 # @procore-oss/backstage-plugin-announcements-backend
 
+## 0.10.6
+
+### Patch Changes
+
+- 7ff1e6c: Bump backstage from 1.31.2 to 1.33.5
+- 21228b4: Set proper `metadata.action` for the event triggered when an announcement is deleted.
+- Updated dependencies [7ff1e6c]
+  - @procore-oss/backstage-plugin-search-backend-module-announcements@0.3.4
+  - @procore-oss/backstage-plugin-announcements-common@0.2.9
+
 ## 0.10.5
 
 ### Patch Changes

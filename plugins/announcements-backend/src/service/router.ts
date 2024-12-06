@@ -16,6 +16,7 @@ import {
   announcementEntityPermissions,
   EVENTS_TOPIC_ANNOUNCEMENTS,
   EVENTS_ACTION_CREATE_ANNOUNCEMENT,
+  EVENTS_ACTION_DELETE_ANNOUNCEMENT,
   EVENTS_ACTION_UPDATE_ANNOUNCEMENT,
   EVENTS_ACTION_CREATE_CATEGORY,
   EVENTS_ACTION_DELETE_CATEGORY,
@@ -161,7 +162,7 @@ export async function createRouter(
           eventPayload: {
             announcement,
           },
-          metadata: { action: EVENTS_ACTION_DELETE_CATEGORY },
+          metadata: { action: EVENTS_ACTION_DELETE_ANNOUNCEMENT },
         });
       }
 

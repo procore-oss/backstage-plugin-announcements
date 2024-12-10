@@ -5,17 +5,19 @@ import {
   createRoutableExtension,
   discoveryApiRef,
   errorApiRef,
-  identityApiRef,
   fetchApiRef,
+  identityApiRef,
 } from '@backstage/core-plugin-api';
+import { createCardExtension } from '@backstage/plugin-home-react';
 import {
   createSearchResultListItemExtension,
   SearchResultListItemExtensionProps,
 } from '@backstage/plugin-search-react';
+import { announcementsApiRef } from '@procore-oss/backstage-plugin-announcements-react';
 import { AnnouncementsClient } from './api';
+import { AnnouncementsCardOpts } from './components/AnnouncementsCard/Content';
 import { AnnouncementSearchResultProps } from './components/AnnouncementSearchResultListItem';
 import { rootRouteRef } from './routes';
-import { announcementsApiRef } from '@procore-oss/backstage-plugin-announcements-react';
 
 export const announcementsPlugin = createPlugin({
   id: 'announcements',
@@ -69,12 +71,10 @@ export const AnnouncementsTimeline = announcementsPlugin.provide(
 );
 
 export const AnnouncementsCard = announcementsPlugin.provide(
-  createComponentExtension({
+  createCardExtension<AnnouncementsCardOpts>({
     name: 'AnnouncementsCard',
-    component: {
-      lazy: () =>
-        import('./components/AnnouncementsCard').then(m => m.AnnouncementsCard),
-    },
+    title: 'Announcements',
+    components: () => import('./components/AnnouncementsCard'),
   }),
 );
 

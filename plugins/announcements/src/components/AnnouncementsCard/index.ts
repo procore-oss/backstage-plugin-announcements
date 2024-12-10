@@ -1,1 +1,1 @@
-export { AnnouncementsCard } from './AnnouncementsCard';
+export { Content } from './Content';

@@ -1,53 +1,46 @@
-import React from 'react';
-import { DateTime } from 'luxon';
-import { usePermission } from '@backstage/plugin-permission-react';
-import {
-  InfoCard,
-  InfoCardVariants,
-  Link,
-  Progress,
-} from '@backstage/core-components';
+import { Link, Progress } from '@backstage/core-components';
 import { useApi, useRouteRef } from '@backstage/core-plugin-api';
-import { announcementEntityPermissions } from '@procore-oss/backstage-plugin-announcements-common';
-import makeStyles from '@mui/styles/makeStyles';
+import { usePermission } from '@backstage/plugin-permission-react';
 import NewReleasesIcon from '@mui/icons-material/NewReleases';
-import {
-  announcementCreateRouteRef,
-  announcementViewRouteRef,
-  rootRouteRef,
-} from '../../routes';
+import Alert from '@mui/material/Alert';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import makeStyles from '@mui/styles/makeStyles';
+import { announcementEntityPermissions } from '@procore-oss/backstage-plugin-announcements-common';
 import {
   announcementsApiRef,
   useAnnouncements,
   useAnnouncementsTranslation,
 } from '@procore-oss/backstage-plugin-announcements-react';
-import Alert from '@mui/material/Alert';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
+import { DateTime } from 'luxon';
+import React from 'react';
+import {
+  announcementCreateRouteRef,
+  announcementViewRouteRef,
+  rootRouteRef,
+} from '../../routes';
 
 const useStyles = makeStyles({
   newAnnouncementIcon: {
     minWidth: '36px',
   },
+  buttonWrapper: {
+    display: 'flex',
+    justifyContent: 'flex-end',
+  },
 });
 
-type AnnouncementsCardOpts = {
-  title?: string;
+export type AnnouncementsCardOpts = {
   max?: number;
   category?: string;
   active?: boolean;
-  variant?: InfoCardVariants;
 };
 
-export const AnnouncementsCard = ({
-  title,
-  max,
-  category,
-  active,
-  variant = 'gridItem',
-}: AnnouncementsCardOpts) => {
+export const Content = ({ max, category, active }: AnnouncementsCardOpts) => {
   const classes = useStyles();
   const announcementsApi = useApi(announcementsApiRef);
   const announcementsLink = useRouteRef(rootRouteRef);
@@ -73,17 +66,8 @@ export const AnnouncementsCard = ({
     return <Alert severity="error">{error.message}</Alert>;
   }
 
-  const deepLink = {
-    link: announcementsLink(),
-    title: t('announcementsCard.seeAll'),
-  };
-
   return (
-    <InfoCard
-      title={title || t('announcementsCard.announcements')}
-      variant={variant}
-      deepLink={deepLink}
-    >
+    <>
       <List dense>
         {announcements.results.map(announcement => (
           <ListItem key={announcement.id}>
@@ -137,6 +121,12 @@ export const AnnouncementsCard = ({
           </ListItem>
         )}
       </List>
-    </InfoCard>
+
+      <Box className={classes.buttonWrapper}>
+        <Button href={announcementsLink()}>
+          {t('announcementsCard.seeAll')}
+        </Button>
+      </Box>
+    </>
   );
 };

@@ -1,5 +1,24 @@
 # @procore-oss/backstage-plugin-announcements
 
+## 0.12.0
+
+### Minor Changes
+
+- 55a2084: Fixes issues when theme object is empty. To solve this issue fallbacks are provided:
+
+  - theme provided from mui useTheme function,
+  - if previous fallback is not working hardcoded value is used.
+
+- e44fb0c: Adds internacionalization following Backstage's guidelines
+
+### Patch Changes
+
+- 7ff1e6c: Bump backstage from 1.31.2 to 1.33.5
+- Updated dependencies [7ff1e6c]
+- Updated dependencies [e44fb0c]
+  - @procore-oss/backstage-plugin-announcements-common@0.2.9
+  - @procore-oss/backstage-plugin-announcements-react@0.5.0
+
 ## 0.11.2
 
 ### Patch Changes

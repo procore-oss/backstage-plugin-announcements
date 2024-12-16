@@ -1,12 +1,11 @@
 import * as React from 'react';
-import TextField from '@mui/material/TextField';
-import Autocomplete, { createFilterOptions } from '@mui/material/Autocomplete';
 import { Category } from '@procore-oss/backstage-plugin-announcements-common';
 import {
   useAnnouncementsTranslation,
   useCategories,
 } from '@procore-oss/backstage-plugin-announcements-react';
-import CircularProgress from '@mui/material/CircularProgress';
+import { Autocomplete, createFilterOptions } from '@material-ui/lab';
+import { CircularProgress, TextField } from '@material-ui/core';
 
 type CategoryInputProps = {
   setForm: (
@@ -100,7 +99,7 @@ export default function CategoryInput({
         // Value selected with enter, right from the input
         return prepareCategoryFromInput(option);
       }}
-      renderOption={(props, option) => <li {...props}>{option.title}</li>}
+      renderOption={(option, state) => <li {...state}>{option.title}</li>}
       freeSolo
       renderInput={params => (
         <TextField

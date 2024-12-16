@@ -4,12 +4,14 @@ import {
   announcementsApiRef,
   useAnnouncementsTranslation,
 } from '@procore-oss/backstage-plugin-announcements-react';
-import Dialog from '@mui/material/Dialog';
-import DialogTitle from '@mui/material/DialogTitle';
-import DialogContent from '@mui/material/DialogContent';
-import TextField from '@mui/material/TextField';
-import DialogActions from '@mui/material/DialogActions';
-import Button from '@mui/material/Button';
+import {
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  TextField,
+} from '@material-ui/core';
 
 type NewCategoryDialogProps = {
   open: boolean;

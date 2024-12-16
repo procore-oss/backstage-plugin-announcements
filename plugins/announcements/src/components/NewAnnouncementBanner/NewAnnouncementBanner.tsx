@@ -16,7 +16,6 @@ import {
 import { useSignal } from '@backstage/plugin-signals-react';
 import {
   makeStyles,
-  useTheme,
   Snackbar,
   SnackbarContent,
   IconButton,
@@ -25,15 +24,13 @@ import Close from '@material-ui/icons/Close';
 import { Alert } from '@material-ui/lab';
 
 const useStyles = makeStyles(theme => {
-  const currentTheme = useTheme();
-
   return {
     // showing on top, as a block
     blockPositioning: {
-      padding: theme?.spacing?.(0) ?? currentTheme.spacing(0) ?? 0,
+      padding: theme?.spacing?.(0) ?? 0,
       position: 'relative',
-      marginBottom: theme?.spacing?.(4) ?? currentTheme.spacing(4) ?? 32,
-      marginTop: theme?.spacing?.(3) ?? currentTheme.spacing(3) ?? -24,
+      marginBottom: theme?.spacing?.(4) ?? 32,
+      marginTop: theme?.spacing?.(3) ?? -24,
       zIndex: 'unset',
     },
     // showing on top, as a floating alert
@@ -49,21 +46,12 @@ const useStyles = makeStyles(theme => {
       width: '100%',
       maxWidth: 'inherit',
       flexWrap: 'nowrap',
-      backgroundColor:
-        theme?.palette?.banner?.info ??
-        currentTheme.palette?.banner?.info ??
-        '#f0f0f0',
+      backgroundColor: theme?.palette?.banner?.info ?? '#f0f0f0',
       display: 'flex',
       alignItems: 'center',
-      color:
-        theme?.palette?.banner?.text ??
-        currentTheme.palette?.banner?.text ??
-        '#000000',
+      color: theme?.palette?.banner?.text ?? '#000000',
       '& a': {
-        color:
-          theme?.palette?.banner?.link ??
-          currentTheme.palette?.banner?.link ??
-          '#0068c8',
+        color: theme?.palette?.banner?.link ?? '#0068c8',
       },
     },
   };

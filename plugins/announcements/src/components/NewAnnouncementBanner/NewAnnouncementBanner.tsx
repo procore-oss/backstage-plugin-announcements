@@ -2,8 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { DateTime } from 'luxon';
 import { Link } from '@backstage/core-components';
 import { useApi, useRouteRef } from '@backstage/core-plugin-api';
-import makeStyles from '@mui/styles/makeStyles';
-import Close from '@mui/icons-material/Close';
 import { announcementViewRouteRef } from '../../routes';
 import {
   announcementsApiRef,
@@ -16,11 +14,15 @@ import {
   SIGNALS_CHANNEL_ANNOUNCEMENTS,
 } from '@procore-oss/backstage-plugin-announcements-common';
 import { useSignal } from '@backstage/plugin-signals-react';
-import Snackbar from '@mui/material/Snackbar';
-import SnackbarContent from '@mui/material/SnackbarContent';
-import IconButton from '@mui/material/IconButton';
-import Alert from '@mui/material/Alert';
-import { useTheme } from '@mui/material/styles';
+import {
+  makeStyles,
+  useTheme,
+  Snackbar,
+  SnackbarContent,
+  IconButton,
+} from '@material-ui/core';
+import Close from '@material-ui/icons/Close';
+import { Alert } from '@material-ui/lab';
 
 const useStyles = makeStyles(theme => {
   const currentTheme = useTheme();
@@ -117,7 +119,6 @@ const AnnouncementBanner = (props: AnnouncementBannerProps) => {
             title={t('newAnnouncementBanner.markAsSeen')}
             color="inherit"
             onClick={handleClick}
-            size="large"
           >
             <Close className={classes.icon} />
           </IconButton>,

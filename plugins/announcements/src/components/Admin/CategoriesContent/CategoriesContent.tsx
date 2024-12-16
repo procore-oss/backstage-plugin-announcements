@@ -16,20 +16,17 @@ import {
   announcementDeletePermission,
   Category,
 } from '@procore-oss/backstage-plugin-announcements-common';
-import Button from '@mui/material/Button';
 import { CategoriesForm } from '../../CategoriesForm';
 import { useApi, alertApiRef } from '@backstage/core-plugin-api';
-import Typography from '@mui/material/Typography';
-import Grid from '@mui/material/Grid';
 import {
   RequirePermission,
   usePermission,
 } from '@backstage/plugin-permission-react';
-import IconButton from '@mui/material/IconButton';
-import DeleteIcon from '@mui/icons-material/Delete';
 import { useDeleteCategoryDialogState } from '../../CategoriesPage/useDeleteCategoryDialogState';
 import { ResponseError } from '@backstage/errors';
 import { DeleteCategoryDialog } from '../../CategoriesPage/DeleteCategoryDialog';
+import { Button, Grid, IconButton, Typography } from '@material-ui/core';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 export const CategoriesContent = () => {
   const [showNewCategoryForm, setShowNewCategoryForm] = useState(false);
@@ -130,15 +127,13 @@ export const CategoriesContent = () => {
       ),
       render: rowData => {
         return (
-          <>
-            <IconButton
-              aria-label="delete"
-              disabled={loadingDeletePermission || !canDeleteAnnouncement}
-              onClick={() => openDeleteDialog(rowData)}
-            >
-              <DeleteIcon fontSize="small" data-testid="delete-icon" />
-            </IconButton>
-          </>
+          <IconButton
+            aria-label="delete"
+            disabled={loadingDeletePermission || !canDeleteAnnouncement}
+            onClick={() => openDeleteDialog(rowData)}
+          >
+            <DeleteIcon fontSize="small" data-testid="delete-icon" />
+          </IconButton>
         );
       },
     },
@@ -172,7 +167,7 @@ export const CategoriesContent = () => {
             columns={columns}
             data={categories ?? []}
             emptyContent={
-              <Typography p={2}>
+              <Typography style={{ padding: 2 }}>
                 {t('admin.categoriesContent.table.noCategoriesFound')}
               </Typography>
             }

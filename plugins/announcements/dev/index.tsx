@@ -19,8 +19,7 @@ import {
 } from '../src/plugin';
 import { AnnouncementsTimeline, AdminPortal } from '../src/components';
 import { signalsPlugin } from '@backstage/plugin-signals';
-import Grid from '@mui/material/Grid';
-import Typography from '@mui/material/Typography';
+import { Grid, Typography } from '@material-ui/core';
 
 const mockCatalogApi = {
   getEntityByRef: async (entityRef: string) => {

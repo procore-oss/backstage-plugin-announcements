@@ -6,13 +6,15 @@ import {
   ResultHighlight,
 } from '@backstage/plugin-search-common';
 import { HighlightedSearchResultText } from '@backstage/plugin-search-react';
-import makeStyles from '@mui/styles/makeStyles';
-import Divider from '@mui/material/Divider';
-import ListItem from '@mui/material/ListItem';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import RecordVoiceOverIcon from '@mui/icons-material/RecordVoiceOver';
 import { useAnnouncementsTranslation } from '@procore-oss/backstage-plugin-announcements-react';
+import {
+  makeStyles,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  Divider,
+} from '@material-ui/core';
+import RecordVoiceOverIcon from '@material-ui/icons/RecordVoiceOver';
 
 const useStyles = makeStyles({
   createdAt: {

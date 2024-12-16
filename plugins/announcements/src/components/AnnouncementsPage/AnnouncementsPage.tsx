@@ -25,11 +25,9 @@ import {
   EntityPeekAheadPopover,
   entityRouteRef,
 } from '@backstage/plugin-catalog-react';
-import Alert from '@mui/material/Alert';
-import DeleteIcon from '@mui/icons-material/Delete';
-import EditIcon from '@mui/icons-material/Edit';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
-import makeStyles from '@mui/styles/makeStyles';
+import DeleteIcon from '@material-ui/icons/Delete';
+import EditIcon from '@material-ui/icons/Edit';
+import MoreVertIcon from '@material-ui/icons/MoreVert';
 import {
   announcementCreateRouteRef,
   announcementEditRouteRef,
@@ -44,16 +42,19 @@ import {
   useAnnouncements,
   useAnnouncementsTranslation,
 } from '@procore-oss/backstage-plugin-announcements-react';
-import Tooltip from '@mui/material/Tooltip';
-import IconButton from '@mui/material/IconButton';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import Card from '@mui/material/Card';
-import CardHeader from '@mui/material/CardHeader';
-import CardContent from '@mui/material/CardContent';
-import Pagination from '@mui/material/Pagination';
-import { useTheme } from '@mui/material/styles';
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  IconButton,
+  ListItemIcon,
+  makeStyles,
+  Menu,
+  MenuItem,
+  Tooltip,
+  useTheme,
+} from '@material-ui/core';
+import { Alert, Pagination } from '@material-ui/lab';
 
 const useStyles = makeStyles(theme => {
   const currentTheme = useTheme();
@@ -168,7 +169,6 @@ const AnnouncementCard = ({
             data-testid="announcement-edit-menu"
             aria-label="more"
             onClick={handleOpenEditMenu}
-            size="large"
           >
             <MoreVertIcon />
           </IconButton>

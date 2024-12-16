@@ -2,19 +2,21 @@ import React, { useState } from 'react';
 import MDEditor from '@uiw/react-md-editor';
 import { InfoCard } from '@backstage/core-components';
 import { identityApiRef, useApi } from '@backstage/core-plugin-api';
-import makeStyles from '@mui/styles/makeStyles';
 import {
   CreateAnnouncementRequest,
   useAnnouncementsTranslation,
 } from '@procore-oss/backstage-plugin-announcements-react';
 import { Announcement } from '@procore-oss/backstage-plugin-announcements-common';
 import CategoryInput from './CategoryInput';
-import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
-import FormGroup from '@mui/material/FormGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Switch from '@mui/material/Switch';
-import { useTheme } from '@mui/material/styles';
+import {
+  makeStyles,
+  useTheme,
+  TextField,
+  FormGroup,
+  FormControlLabel,
+  Switch,
+  Button,
+} from '@material-ui/core';
 
 const useStyles = makeStyles(theme => {
   const currentTheme = useTheme();

@@ -52,25 +52,19 @@ import {
   Menu,
   MenuItem,
   Tooltip,
-  useTheme,
 } from '@material-ui/core';
 import { Alert, Pagination } from '@material-ui/lab';
 
 const useStyles = makeStyles(theme => {
-  const currentTheme = useTheme();
-
   return {
     cardHeader: {
-      color:
-        theme?.palette?.text?.primary ||
-        currentTheme?.palette?.text?.primary ||
-        '#000',
+      color: theme?.palette?.text?.primary || '#000',
       fontSize: '1.5rem',
     },
     pagination: {
       display: 'flex',
       justifyContent: 'center',
-      marginTop: theme?.spacing?.(4) || currentTheme?.spacing?.(4) || 32,
+      marginTop: theme?.spacing?.(4) || 32,
     },
   };
 });

@@ -10,7 +10,6 @@ import { Announcement } from '@procore-oss/backstage-plugin-announcements-common
 import CategoryInput from './CategoryInput';
 import {
   makeStyles,
-  useTheme,
   TextField,
   FormGroup,
   FormControlLabel,
@@ -19,12 +18,10 @@ import {
 } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => {
-  const currentTheme = useTheme();
-
   return {
     formRoot: {
       '& > *': {
-        margin: theme.spacing ?? currentTheme.spacing(1) ?? '8px',
+        margin: theme.spacing ?? '8px',
       },
     },
   };

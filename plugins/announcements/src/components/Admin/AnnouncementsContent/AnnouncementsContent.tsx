@@ -6,9 +6,6 @@ import {
   TableColumn,
 } from '@backstage/core-components';
 import { alertApiRef, useApi } from '@backstage/core-plugin-api';
-import EditIcon from '@mui/icons-material/Edit';
-import DeleteIcon from '@mui/icons-material/Delete';
-import PreviewIcon from '@mui/icons-material/Preview';
 import {
   announcementsApiRef,
   CreateAnnouncementRequest,
@@ -26,16 +23,16 @@ import { useAsyncRetry } from 'react-use';
 import { useDeleteAnnouncementDialogState } from '../../AnnouncementsPage/useDeleteAnnouncementDialogState';
 import { DeleteAnnouncementDialog } from '../../AnnouncementsPage/DeleteAnnouncementDialog';
 import { useNavigate } from 'react-router-dom';
-import Button from '@mui/material/Button';
 import { AnnouncementForm } from '../../AnnouncementForm';
 import slugify from 'slugify';
-import Grid from '@mui/material/Grid';
-import Typography from '@mui/material/Typography';
-import IconButton from '@mui/material/IconButton';
 import {
   RequirePermission,
   usePermission,
 } from '@backstage/plugin-permission-react';
+import { Button, Grid, IconButton, Typography } from '@material-ui/core';
+import DeleteIcon from '@material-ui/icons/Delete';
+import EditIcon from '@material-ui/icons/Edit';
+import PreviewIcon from '@material-ui/icons/Visibility';
 
 export const AnnouncementsContent = () => {
   const alertApi = useApi(alertApiRef);
@@ -264,7 +261,7 @@ export const AnnouncementsContent = () => {
             columns={columns}
             data={announcements?.results ?? []}
             emptyContent={
-              <Typography p={2}>
+              <Typography style={{ padding: 2 }}>
                 {t('admin.announecementsContent.noAnnouncementsFound')}
               </Typography>
             }

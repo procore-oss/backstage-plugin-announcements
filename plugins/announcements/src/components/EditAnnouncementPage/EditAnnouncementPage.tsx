@@ -13,7 +13,7 @@ import {
   CreateAnnouncementRequest,
   useAnnouncementsTranslation,
 } from '@procore-oss/backstage-plugin-announcements-react';
-import Alert from '@mui/material/Alert';
+import { Alert } from '@material-ui/lab';
 
 type EditAnnouncementPageProps = {
   themeId: string;

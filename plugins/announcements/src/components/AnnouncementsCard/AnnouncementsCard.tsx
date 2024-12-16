@@ -9,8 +9,6 @@ import {
 } from '@backstage/core-components';
 import { useApi, useRouteRef } from '@backstage/core-plugin-api';
 import { announcementEntityPermissions } from '@procore-oss/backstage-plugin-announcements-common';
-import makeStyles from '@mui/styles/makeStyles';
-import NewReleasesIcon from '@mui/icons-material/NewReleases';
 import {
   announcementCreateRouteRef,
   announcementViewRouteRef,
@@ -21,11 +19,15 @@ import {
   useAnnouncements,
   useAnnouncementsTranslation,
 } from '@procore-oss/backstage-plugin-announcements-react';
-import Alert from '@mui/material/Alert';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
+import {
+  makeStyles,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+} from '@material-ui/core';
+import { Alert } from '@material-ui/lab';
+import NewReleasesIcon from '@material-ui/icons/NewReleases';
 
 const useStyles = makeStyles({
   newAnnouncementIcon: {

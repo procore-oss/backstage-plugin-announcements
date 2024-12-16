@@ -1,21 +1,23 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useRouteRef } from '@backstage/core-plugin-api';
-import IconButton from '@mui/material/IconButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import MenuItem from '@mui/material/MenuItem';
-import MenuList from '@mui/material/MenuList';
-import Popover from '@mui/material/Popover';
-import makeStyles from '@mui/styles/makeStyles';
-import Description from '@mui/icons-material/Description';
-import MoreVert from '@mui/icons-material/MoreVert';
 import {
   announcementAdminRouteRef,
   categoriesListRouteRef,
 } from '../../routes';
-import Box from '@mui/material/Box';
 import { useAnnouncementsTranslation } from '@procore-oss/backstage-plugin-announcements-react';
+import {
+  makeStyles,
+  Box,
+  IconButton,
+  Popover,
+  MenuList,
+  MenuItem,
+  ListItemIcon,
+  ListItemText,
+} from '@material-ui/core';
+import MoreVert from '@material-ui/icons/MoreVert';
+import Description from '@material-ui/icons/Description';
 
 const useStyles = makeStyles({
   button: {
@@ -49,7 +51,6 @@ export function ContextMenu() {
         data-testid="menu-button"
         color="inherit"
         className={classes.button}
-        size="large"
       >
         <MoreVert />
       </IconButton>

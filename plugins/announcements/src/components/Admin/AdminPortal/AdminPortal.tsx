@@ -1,15 +1,12 @@
 import React, { useState } from 'react';
-import makeStyles from '@mui/styles/makeStyles';
 import { Page, Header, Content } from '@backstage/core-components';
 import { AnnouncementsContent } from '../AnnouncementsContent';
 import { CategoriesContent } from '../CategoriesContent';
-import Tab from '@mui/material/Tab';
-import TabContext from '@mui/lab/TabContext';
-import TabList from '@mui/lab/TabList';
-import TabPanel from '@mui/lab/TabPanel';
 import { RequirePermission } from '@backstage/plugin-permission-react';
 import { announcementCreatePermission } from '@procore-oss/backstage-plugin-announcements-common';
 import { useAnnouncementsTranslation } from '@procore-oss/backstage-plugin-announcements-react';
+import { makeStyles, Tab } from '@material-ui/core';
+import { TabContext, TabList, TabPanel } from '@material-ui/lab';
 
 const useStyles = makeStyles(() => ({
   tabPanel: {

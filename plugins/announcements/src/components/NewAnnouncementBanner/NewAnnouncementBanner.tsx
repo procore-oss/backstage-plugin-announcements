@@ -2,8 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { DateTime } from 'luxon';
 import { Link } from '@backstage/core-components';
 import { useApi, useRouteRef } from '@backstage/core-plugin-api';
-import makeStyles from '@mui/styles/makeStyles';
-import Close from '@mui/icons-material/Close';
 import { announcementViewRouteRef } from '../../routes';
 import {
   announcementsApiRef,
@@ -16,22 +14,23 @@ import {
   SIGNALS_CHANNEL_ANNOUNCEMENTS,
 } from '@procore-oss/backstage-plugin-announcements-common';
 import { useSignal } from '@backstage/plugin-signals-react';
-import Snackbar from '@mui/material/Snackbar';
-import SnackbarContent from '@mui/material/SnackbarContent';
-import IconButton from '@mui/material/IconButton';
-import Alert from '@mui/material/Alert';
-import { useTheme } from '@mui/material/styles';
+import {
+  makeStyles,
+  Snackbar,
+  SnackbarContent,
+  IconButton,
+} from '@material-ui/core';
+import Close from '@material-ui/icons/Close';
+import { Alert } from '@material-ui/lab';
 
 const useStyles = makeStyles(theme => {
-  const currentTheme = useTheme();
-
   return {
     // showing on top, as a block
     blockPositioning: {
-      padding: theme?.spacing?.(0) ?? currentTheme.spacing(0) ?? 0,
+      padding: theme?.spacing?.(0) ?? 0,
       position: 'relative',
-      marginBottom: theme?.spacing?.(4) ?? currentTheme.spacing(4) ?? 32,
-      marginTop: theme?.spacing?.(3) ?? currentTheme.spacing(3) ?? -24,
+      marginBottom: theme?.spacing?.(4) ?? 32,
+      marginTop: theme?.spacing?.(3) ?? -24,
       zIndex: 'unset',
     },
     // showing on top, as a floating alert
@@ -47,21 +46,12 @@ const useStyles = makeStyles(theme => {
       width: '100%',
       maxWidth: 'inherit',
       flexWrap: 'nowrap',
-      backgroundColor:
-        theme?.palette?.banner?.info ??
-        currentTheme.palette?.banner?.info ??
-        '#f0f0f0',
+      backgroundColor: theme?.palette?.banner?.info ?? '#f0f0f0',
       display: 'flex',
       alignItems: 'center',
-      color:
-        theme?.palette?.banner?.text ??
-        currentTheme.palette?.banner?.text ??
-        '#000000',
+      color: theme?.palette?.banner?.text ?? '#000000',
       '& a': {
-        color:
-          theme?.palette?.banner?.link ??
-          currentTheme.palette?.banner?.link ??
-          '#0068c8',
+        color: theme?.palette?.banner?.link ?? '#0068c8',
       },
     },
   };
@@ -117,7 +107,6 @@ const AnnouncementBanner = (props: AnnouncementBannerProps) => {
             title={t('newAnnouncementBanner.markAsSeen')}
             color="inherit"
             onClick={handleClick}
-            size="large"
           >
             <Close className={classes.icon} />
           </IconButton>,

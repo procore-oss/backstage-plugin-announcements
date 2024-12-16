@@ -8,19 +8,14 @@ import {
   announcementCreatePermission,
   Category,
 } from '@procore-oss/backstage-plugin-announcements-common';
-import makeStyles from '@mui/styles/makeStyles';
-import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
 import { usePermission } from '@backstage/plugin-permission-react';
-import { useTheme } from '@mui/material/styles';
+import { Button, makeStyles, TextField } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => {
-  const currentTheme = useTheme();
-
   return {
     formRoot: {
       '& > *': {
-        margin: theme?.spacing?.(1) ?? currentTheme.spacing(1) ?? '8px',
+        margin: theme?.spacing?.(1) ?? '8px',
       },
     },
   };

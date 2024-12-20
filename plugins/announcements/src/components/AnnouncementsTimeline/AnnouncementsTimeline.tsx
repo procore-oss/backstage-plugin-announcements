@@ -1,16 +1,6 @@
 import { useRouteRef } from '@backstage/core-plugin-api';
-import {
-  Timeline,
-  TimelineItem,
-  TimelineContent,
-  TimelineOppositeContent,
-  TimelineConnector,
-  TimelineDot,
-  TimelineSeparator,
-} from '@mui/lab';
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Stack from '@mui/material/Stack';
 import { DateTime } from 'luxon';
 import { announcementViewRouteRef } from '../../routes';
 import {
@@ -18,8 +8,17 @@ import {
   useAnnouncementsTranslation,
 } from '@procore-oss/backstage-plugin-announcements-react';
 import { Progress } from '@backstage/core-components';
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
+import {
+  Timeline,
+  TimelineItem,
+  TimelineConnector,
+  TimelineDot,
+  TimelineSeparator,
+  TimelineOppositeContent,
+  TimelineContent,
+} from '@material-ui/lab';
+import { Box, Typography } from '@material-ui/core';
+import Stack from '@mui/material/Stack';
 
 /**
  * Props for the AnnouncementsTimeline component.
@@ -105,7 +104,7 @@ export const AnnouncementsTimeline = ({
       spacing={0}
     >
       <Box sx={{ minWidth: timelineMinWidth }}>
-        <Timeline position={timelineAlignment}>
+        <Timeline align={timelineAlignment}>
           {announcements.results.map(a => (
             <TimelineItem key={`ti-${a.id}`}>
               <TimelineOppositeContent

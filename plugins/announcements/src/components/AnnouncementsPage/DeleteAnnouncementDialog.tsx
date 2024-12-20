@@ -1,8 +1,5 @@
 import { usePermission } from '@backstage/plugin-permission-react';
-import Button from '@mui/material/Button';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogTitle from '@mui/material/DialogTitle';
+import { Button, Dialog, DialogActions, DialogTitle } from '@material-ui/core';
 import { announcementDeletePermission } from '@procore-oss/backstage-plugin-announcements-common';
 import { useAnnouncementsTranslation } from '@procore-oss/backstage-plugin-announcements-react';
 import React from 'react';

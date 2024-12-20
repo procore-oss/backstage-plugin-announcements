@@ -1,12 +1,9 @@
 import React from 'react';
-
 import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { TestApiProvider } from '@backstage/test-utils';
-
+import { TestApiProvider, renderInTestApp } from '@backstage/test-utils';
 import CategoryInput from './CategoryInput';
 import { announcementsApiRef } from '@procore-oss/backstage-plugin-announcements-react';
-import { renderInTestApp } from '@backstage/test-utils';
 
 const categories = [
   { title: 'Hello', slug: 'hello' },

@@ -1,5 +1,11 @@
 # @procore-oss/backstage-plugin-announcements
 
+## 0.13.0
+
+### Minor Changes
+
+- d773dcb: This release reverts the MUI v5 upgrade. The plugins will stay on version 4.x until there is a better understanding of the impact of the upgrade.
+
 ## 0.12.0
 
 ### Minor Changes

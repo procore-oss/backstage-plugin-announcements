@@ -1,5 +1,12 @@
 # @procore-oss/backstage-plugin-announcements
 
+## 0.13.1
+
+### Patch Changes
+
+- Updated dependencies [698f6c8]
+  - @procore-oss/backstage-plugin-announcements-react@0.5.1
+
 ## 0.13.0
 
 ### Minor Changes

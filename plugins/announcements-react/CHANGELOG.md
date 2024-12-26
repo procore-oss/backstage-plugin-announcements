@@ -1,5 +1,11 @@
 # @procore-oss/backstage-plugin-announcements-react
 
+## 0.5.1
+
+### Patch Changes
+
+- 698f6c8: add missing announcementsTranslationRef export necessary for internationalization
+
 ## 0.5.0
 
 ### Minor Changes

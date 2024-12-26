@@ -3,7 +3,6 @@ export * from './plugin';
 import {
   announcementsApiRef as announcementsApiRef_,
   AnnouncementsApi as AnnouncementsApi_,
-  translationRef as translationRef_,
 } from '@procore-oss/backstage-plugin-announcements-react';
 
 /**
@@ -16,8 +15,3 @@ export type AnnouncementsApi = AnnouncementsApi_;
  * @deprecated Use `announcementsApiRef` from `@procore-oss/backstage-plugin-announcements-react` instead
  */
 export const announcementsApiRef = announcementsApiRef_;
-
-/**
- * @public
- */
-export const announcementsTranslationRef = translationRef_;

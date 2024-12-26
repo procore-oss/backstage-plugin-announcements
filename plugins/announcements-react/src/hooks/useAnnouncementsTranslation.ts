@@ -1,6 +1,6 @@
 import { useTranslationRef } from '@backstage/core-plugin-api/alpha';
-import { translationRef } from '../translation';
+import { announcementsTranslationRef } from '../translation';
 
 export const useAnnouncementsTranslation = () => {
-  return useTranslationRef(translationRef);
+  return useTranslationRef(announcementsTranslationRef);
 };

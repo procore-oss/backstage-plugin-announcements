@@ -10,7 +10,7 @@ The plugins within this repository have been migrated to [backstage/community-re
   - [@backstage-community/plugin-announcements-react](https://www.npmjs.com/package/@backstage-community/plugin-announcements-react)
   - [@backstage-community/plugin-announcements-node](https://www.npmjs.com/package/@backstage-community/plugin-announcements-node)
 
-  The code for the announcements plugins can be found [here](https://github.com/backstage/community-plugins/tree/main/workspaces/announcements). Looking to contribute or help maintain? Check out the [contributing guide](https://github.com/backstage/community-plugins/blob/main/CONTRIBUTING.md) in the community plugins repository.
+Looking to contribute or help maintain? Check out the [contributing guide](https://github.com/backstage/community-plugins/blob/main/CONTRIBUTING.md) in the community plugins repository.
 
 
 ## Overview

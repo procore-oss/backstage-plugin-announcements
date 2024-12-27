@@ -1,5 +1,9 @@
 # Announcements plugin for Backstage
 
+This package is deprecated and no longer maintained. Please use the `@backstage-community/plugin-announcements-common` package instead.
+
+---
+
 The Announcements plugin is a frontend, backend, and common plugin that manages and displays announcements within Backstage.
 
 This plugin provides:

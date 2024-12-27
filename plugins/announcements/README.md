@@ -1,5 +1,9 @@
 # backstage-plugin-announcements
 
+This package is deprecated and no longer maintained. Please use the `@backstage-community/plugin-announcements` package instead.
+
+---
+
 This is the frontend for the Announcements plugin. This plugin provides:
 
 - a component to display the latest announcements, for example on a homepage

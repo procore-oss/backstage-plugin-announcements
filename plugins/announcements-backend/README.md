@@ -1,5 +1,9 @@
 # backstage-plugin-announcements-backend
 
+This package is deprecated and no longer maintained. Please use the `@backstage-community/plugin-announcements-backend` package instead.
+
+---
+
 This is the backend for the Announcements plugin. This plugin provides:
 
 - REST APIs for managing announcements and categories

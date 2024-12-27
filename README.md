@@ -1,5 +1,18 @@
 # Announcements plugin for Backstage
 
+The plugins within this repository have been migrated to [backstage/community-repos](https://github.com/backstage/community-plugins). You can find the code under the new announcements [workspace](https://github.com/backstage/community-plugins/tree/main/workspaces/announcements).
+
+  All plugins are perserved at version 0.1.1, and the new packages are available at the following locations:
+
+  - [@backstage-community/plugin-announcements](https://www.npmjs.com/package/@backstage-community/plugin-announcements)
+  - [@backstage-community/plugin-announcements-backend](https://www.npmjs.com/package/@backstage-community/plugin-announcements-backend)
+  - [@backstage-community/plugin-announcements-common](https://www.npmjs.com/package/@backstage-community/plugin-announcements-common)
+  - [@backstage-community/plugin-announcements-react](https://www.npmjs.com/package/@backstage-community/plugin-announcements-react)
+  - [@backstage-community/plugin-announcements-node](https://www.npmjs.com/package/@backstage-community/plugin-announcements-node)
+
+  The code for the announcements plugins can be found [here](https://github.com/backstage/community-plugins/tree/main/workspaces/announcements). Looking to contribute or help maintain? Check out the [contributing guide](https://github.com/backstage/community-plugins/blob/main/CONTRIBUTING.md) in the community plugins repository.
+
+
 ## Overview
 
 The Announcements plugin manages and displays announcements within Backstage.
